@@ -116,7 +116,7 @@ export default function AIChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-5 sm:bottom-6 right-5 sm:right-6 z-[9998] flex flex-col-reverse items-end gap-3">
+    <div className="fixed bottom-20 sm:bottom-24 right-5 sm:right-6 z-[45] flex flex-col-reverse items-end gap-3">
       {/* Chat Panel */}
       <AnimatePresence>
         {isOpen && (

@@ -46,7 +46,7 @@ export default function NavProgressDots() {
   }
 
   return (
-    <div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-4">
+    <div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center">
       <div className="flex flex-col items-center gap-3 bg-[rgba(17,17,17,0.6)] backdrop-blur-md rounded-full px-2 py-4 border border-[#242424]/50">
         {sections.map((section) => {
           const isActive = activeSection === section.id

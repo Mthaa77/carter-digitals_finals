@@ -113,16 +113,11 @@ export default function BBBEECalculator() {
           transition={{ duration: 0.6 }}
           className="mb-12 md:mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-10 bg-[var(--cd-gold)]" />
-            <span className="text-[var(--cd-gold)] font-mono text-sm tracking-widest uppercase">
-              B-BBEE Tool
-            </span>
-          </div>
-          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-3">
+          <span className="section-label inline-block">B-BBEE Tool</span>
+          <h2 className="section-heading text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight">
             B-BBEE Supplier Score Estimator
           </h2>
-          <p className="text-[var(--cd-text-muted)] text-lg max-w-3xl leading-relaxed">
+          <p className="text-[var(--cd-text-muted)] text-lg max-w-3xl leading-relaxed mt-3">
             Under South Africa&apos;s B-BBEE framework, procuring from a Level 1 supplier like
             Carter Digitals earns your company{' '}
             <span className="text-[var(--cd-gold)] font-semibold">135%</span> of the procurement
@@ -196,6 +191,7 @@ export default function BBBEECalculator() {
                     focus:ring-[var(--cd-gold)]/20 focus:ring-[3px]
                     [&[data-state=open]]:border-[var(--cd-gold)]
                   "
+                  aria-label="Select your company's B-BBEE level"
                 >
                   <SelectValue placeholder="Select your level" />
                 </SelectTrigger>

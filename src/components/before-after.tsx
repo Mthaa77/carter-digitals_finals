@@ -204,6 +204,12 @@ export default function BeforeAfter() {
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-cd-gold bg-cd-bg/90 backdrop-blur-sm flex items-center justify-center cursor-col-resize touch-none shadow-lg shadow-cd-gold/20 transition-shadow duration-300 ${isActive ? 'shadow-[0_0_20px_rgba(201,168,76,0.4)]' : 'drag-handle-idle'}`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleMouseDown}
+                role="slider"
+                aria-label="Drag to compare before and after"
+                aria-valuenow={Math.round(sliderPos)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                tabIndex={0}
               >
                 {/* Arrows */}
                 <div className="flex items-center gap-1">

@@ -109,18 +109,17 @@ export default function Hero() {
       <div ref={grainRef} className="absolute inset-0 grain-overlay will-change-transform" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-8"
+          className="space-y-5 sm:space-y-8"
         >
           {/* H1 */}
           <motion.h1
             variants={itemVariants}
-            className="font-display font-bold text-cd-text leading-[1.05] tracking-tight relative"
-            style={{ fontSize: 'var(--text-hero)' }}
+            className="font-display font-bold text-cd-text leading-[1.05] tracking-tight relative text-3xl sm:text-5xl lg:text-6xl"
           >
             {/* Animated gradient glow behind headline */}
             <span
@@ -141,7 +140,7 @@ export default function Hero() {
           {/* Sub text */}
           <motion.p
             variants={itemVariants}
-            className="max-w-2xl mx-auto text-cd-text-muted text-base sm:text-xl leading-relaxed font-sans"
+            className="max-w-2xl mx-auto text-cd-text-muted text-sm sm:text-xl leading-relaxed font-sans"
           >
             Carter Digitals is a 100% Black-owned B-BBEE Level 1 agency from
             Soshanguve, Pretoria. Premium websites and business tools for SMEs
@@ -155,14 +154,14 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="btn-press btn-glow-gold group inline-flex items-center gap-2 px-8 py-4 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-lg"
+              className="btn-press btn-primary inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-cd-gold text-cd-bg font-semibold rounded-lg hover:bg-cd-gold/90 hover:shadow-cd-gold/30 transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base sm:text-lg"
             >
               Get a Free Quote
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
             </a>
             <a
               href="#portfolio"
-              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-gold/30 text-cd-gold font-medium rounded-lg hover:border-cd-gold hover:bg-cd-gold/10 hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
+              className="btn-press btn-secondary inline-flex items-center gap-2 px-7 py-3.5 border border-cd-gold/40 text-cd-gold font-medium rounded-lg hover:bg-cd-gold/5 hover:border-cd-gold hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
             >
               See Our Work
             </a>
@@ -171,12 +170,12 @@ export default function Hero() {
           {/* Badge strip - glassmorphism */}
           <motion.div
             variants={itemVariants}
-            className="glass-card rounded-xl px-6 py-3 flex flex-wrap items-center justify-center gap-4 sm:gap-6 border-t border-t-cd-gold/20"
+            className="glass-card rounded-xl px-4 py-2 sm:px-6 sm:py-3 flex flex-wrap items-center justify-center gap-3 sm:gap-6 border-t border-t-cd-gold/20"
           >
             {badgeItems.map((badge, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2 text-sm text-cd-text font-medium"
+                className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-cd-text font-medium"
               >
                 <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cd-gold/10 text-lg">{badge.emoji}</span>
                 <span className="font-medium">{badge.label}</span>
@@ -194,7 +193,7 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 relative"
+          className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 relative"
         >
           {/* Radial gradient glow behind counter row */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
@@ -204,9 +203,9 @@ export default function Hero() {
           {counterItems.map((item, i) => (
             <div
               key={i}
-              className="glass-card hover-lift rounded-xl p-6 text-center group hover:border-cd-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.12)] transition-[border-color,box-shadow] duration-300"
+              className="glass-card hover-lift rounded-xl p-4 sm:p-6 text-center group hover:border-cd-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.12)] transition-[border-color,box-shadow] duration-300"
             >
-              <div className="font-display text-3xl sm:text-4xl font-bold text-cd-gold mb-2">
+              <div className="font-display text-2xl sm:text-4xl font-bold text-cd-gold mb-1 sm:mb-2">
                 <AnimatedCounter
                   target={item.value}
                   suffix={item.suffix}
@@ -224,7 +223,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <a
         href="#why-carter"
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-cd-gold animate-bounce"
+        className="absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-cd-gold animate-bounce"
         aria-label="Scroll to explore"
       >
         <ChevronDown size={24} />

@@ -103,7 +103,7 @@ export default function Portfolio() {
 
   return (
     <>
-      <section id="portfolio" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
+      <section id="portfolio" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -113,7 +113,8 @@ export default function Portfolio() {
             transition={{ duration: 0.6 }}
             className="text-center mb-14 md:mb-20"
           >
-            <h2 className="font-display text-[var(--text-h2)] font-semibold text-[#F0EFE8] tracking-tight">
+            <span className="section-label inline-block">Portfolio</span>
+            <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
               Work That Speaks for Itself.
             </h2>
             <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
@@ -134,9 +135,9 @@ export default function Portfolio() {
               <motion.div
                 key={project.client}
                 variants={cardVariants}
-                className={`group hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 border-l-[3px] border-l-[#C9A84C]/30 hover:border-l-[#C9A84C] hover:scale-[1.01] ${
+                className={`group hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 border-l-[3px] border-l-[#C9A84C]/30 hover:border-l-[#C9A84C] hover:scale-[1.01] max-w-full ${
                   project.isComingSoon
-                    ? 'border-2 border-dashed border-[#7A6330]/50 hover:border-[#C9A84C]/60'
+                    ? 'border-2 border-dashed border-[#7A6330]/50 hover:border-[#C9A84C]/60 coming-soon-shimmer'
                     : 'border border-[#242424] hover:border-[#3A3A3A] cursor-pointer'
                 }`}
                 onClick={() => openModal(project)}
@@ -205,10 +206,10 @@ export default function Portfolio() {
                         e.stopPropagation()
                         openModal(project)
                       }}
-                      className="inline-flex items-center text-sm font-medium text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200 font-sans group/link"
+                      className="link-underline inline-flex items-center text-sm font-semibold text-[#C9A84C] hover:text-[#E8CA7A] transition-colors duration-200 font-sans group/link py-1"
                     >
                       View Case Study
-                      <ArrowUpRight className="ml-1 w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                      <ArrowUpRight className="ml-1.5 w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                     </button>
                   )}
                 </div>

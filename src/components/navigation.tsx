@@ -29,7 +29,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'trust-badges', 'team', 'clients', 'quick-stats', 'stats', 'achievements', 'services', 'compare', 'showcase-gallery', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'roi-calculator', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'trust-badges', 'team', 'clients', 'quick-stats', 'stats', 'achievements', 'services', 'tech-stack', 'compare', 'showcase-gallery', 'gallery', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'roi-calculator', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -134,7 +134,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="btn-press ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10 shadow-[0_0_15px_rgba(201,168,76,0.15)]"
+                className="btn-press btn-primary ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-semibold rounded-lg hover:bg-cd-gold/90 hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10"
               >
                 Get a Quote
               </a>
@@ -195,7 +195,7 @@ export default function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: navItems.length * 0.08, duration: 0.4 }}
-                className="mt-4 px-8 py-3.5 bg-cd-gold text-cd-bg text-lg font-bold rounded-lg hover:bg-cd-gold-light transition-colors duration-300"
+                className="mt-4 btn-press btn-primary px-8 py-3.5 bg-cd-gold text-cd-bg text-lg font-semibold rounded-lg hover:bg-cd-gold/90 transition-colors duration-300"
               >
                 Get a Quote
               </motion.a>

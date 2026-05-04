@@ -70,7 +70,7 @@ export default function ROICalculator() {
               {/* Monthly Revenue Slider */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-cd-text font-medium font-sans text-sm">
+                  <label htmlFor="roi-monthly-revenue" className="text-cd-text font-medium font-sans text-sm">
                     Monthly Revenue
                   </label>
                   <span className="font-mono text-cd-gold font-bold text-lg">
@@ -79,12 +79,14 @@ export default function ROICalculator() {
                 </div>
                 <input
                   type="range"
+                  id="roi-monthly-revenue"
                   min={5000}
                   max={500000}
                   step={5000}
                   value={monthlyRevenue}
                   onChange={(e) => setMonthlyRevenue(Number(e.target.value))}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                  aria-label="Monthly Revenue"
                   style={{
                     background: `linear-gradient(to right, #C9A84C 0%, #C9A84C ${((monthlyRevenue - 5000) / (500000 - 5000)) * 100}%, #242424 ${((monthlyRevenue - 5000) / (500000 - 5000)) * 100}%, #242424 100%)`,
                   }}
@@ -98,7 +100,7 @@ export default function ROICalculator() {
               {/* Traffic Increase Slider */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-cd-text font-medium font-sans text-sm">
+                  <label htmlFor="roi-traffic-increase" className="text-cd-text font-medium font-sans text-sm">
                     Expected Traffic Increase
                   </label>
                   <span className="font-mono text-cd-gold font-bold text-lg">
@@ -107,12 +109,14 @@ export default function ROICalculator() {
                 </div>
                 <input
                   type="range"
+                  id="roi-traffic-increase"
                   min={10}
                   max={300}
                   step={5}
                   value={trafficIncrease}
                   onChange={(e) => setTrafficIncrease(Number(e.target.value))}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                  aria-label="Expected Traffic Increase"
                   style={{
                     background: `linear-gradient(to right, #C9A84C 0%, #C9A84C ${((trafficIncrease - 10) / (300 - 10)) * 100}%, #242424 ${((trafficIncrease - 10) / (300 - 10)) * 100}%, #242424 100%)`,
                   }}

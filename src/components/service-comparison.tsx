@@ -58,7 +58,7 @@ export default function ServiceComparison() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="compare" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
+    <section id="compare" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-5xl mx-auto" ref={ref}>
         {/* Section Header */}
         <motion.div
@@ -67,7 +67,8 @@ export default function ServiceComparison() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14 md:mb-20"
         >
-          <h2 className="font-display text-[var(--text-h2)] font-semibold text-[#F0EFE8] tracking-tight">
+          <span className="section-label inline-block">Compare</span>
+          <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
             Compare Our Services
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
@@ -81,11 +82,11 @@ export default function ServiceComparison() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="glass-card rounded-2xl overflow-hidden"
+          className="glass-card rounded-2xl overflow-hidden max-w-full"
         >
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full">
+          <div className="hidden md:block overflow-x-auto max-w-full">
+            <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b border-[#242424]">
                   <th className="text-left py-5 px-6 text-[#C8C8C0] text-sm font-sans font-medium">
@@ -94,7 +95,7 @@ export default function ServiceComparison() {
                   {services.map((service) => (
                     <th
                       key={service.key}
-                      className="text-center py-5 px-6 font-display font-semibold text-base"
+                      className="text-center py-5 px-6 font-display font-semibold text-base w-[140px]"
                       style={{ color: service.color }}
                     >
                       {service.name}
@@ -110,13 +111,13 @@ export default function ServiceComparison() {
                       i % 2 === 0 ? 'bg-[rgba(255,255,255,0.01)]' : ''
                     }`}
                   >
-                    <td className="py-4 px-6 text-[#F0EFE8] text-sm font-sans">
+                    <td className="py-5 px-6 text-[#F0EFE8] text-sm font-sans">
                       {feature.name}
                     </td>
                     {services.map((service) => (
                       <td
                         key={service.key}
-                        className="py-4 px-6 text-center"
+                        className="py-5 px-6 text-center w-[140px]"
                       >
                         <div className="flex justify-center">
                           <FeatureIcon

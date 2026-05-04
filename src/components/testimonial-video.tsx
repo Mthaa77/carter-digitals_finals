@@ -68,6 +68,7 @@ export default function TestimonialVideo() {
                 className="relative w-full aspect-video rounded-xl overflow-hidden border border-cd-border group cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
+                aria-label={`Play video testimonial from ${video.name}, ${video.company}`}
               >
                 {/* Placeholder background gradient */}
                 <div

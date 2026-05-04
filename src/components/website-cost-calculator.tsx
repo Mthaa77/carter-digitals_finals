@@ -106,16 +106,11 @@ export default function WebsiteCostCalculator() {
           transition={{ duration: 0.6 }}
           className="mb-12 md:mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-10 bg-[var(--cd-gold)]" />
-            <span className="text-[var(--cd-gold)] font-mono text-sm tracking-widest uppercase">
-              Free Tool
-            </span>
-          </div>
-          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-3">
+          <span className="section-label inline-block">Free Tool</span>
+          <h2 className="section-heading text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight">
             Website Cost Calculator
           </h2>
-          <p className="text-[var(--cd-text-muted)] text-lg max-w-2xl">
+          <p className="text-[var(--cd-text-muted)] text-lg max-w-2xl mt-3">
             Get an instant estimate based on your requirements. No email required — just honest numbers.
           </p>
         </motion.div>
@@ -151,6 +146,7 @@ export default function WebsiteCostCalculator() {
                 min={1}
                 max={20}
                 step={1}
+                aria-label="Number of Pages"
                 className="w-full [&_[data-slot=slider-track]]:bg-[var(--cd-border)] [&_[data-slot=slider-track]]:h-2 [&_[data-slot=slider-range]]:bg-[var(--cd-gold)] [&_[data-slot=slider-thumb]]:w-5 [&_[data-slot=slider-thumb]]:h-5 [&_[data-slot=slider-thumb]]:border-[var(--cd-gold)] [&_[data-slot=slider-thumb]]:bg-[var(--cd-elevated)] [&_[data-slot=slider-thumb]]:shadow-[0_0_12px_rgba(201,168,76,0.3)] [&_[data-slot=slider-thumb]]:hover:shadow-[0_0_20px_rgba(201,168,76,0.5)]"
               />
 

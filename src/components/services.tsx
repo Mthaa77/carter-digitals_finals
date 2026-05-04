@@ -80,7 +80,8 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14 md:mb-20"
         >
-          <h2 className="font-display text-[var(--text-h2)] font-semibold text-[#F0EFE8] tracking-tight">
+          <span className="section-label inline-block">Our Services</span>
+          <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
             What We Build
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
@@ -132,7 +133,7 @@ export default function Services() {
                 </p>
 
                 {/* Description */}
-                <p className="text-[#C8C8C0] text-sm leading-relaxed mb-6 font-sans">
+                <p className="text-[#D8D8D0] text-sm leading-relaxed mb-6 font-sans">
                   {service.description}
                 </p>
 
@@ -144,6 +145,7 @@ export default function Services() {
                   }}
                   className="flex items-center gap-1.5 text-sm font-medium text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200 mb-3 font-sans"
                   aria-expanded={isExpanded}
+                  aria-label={`Toggle ${service.title} features list`}
                 >
                   What&apos;s Included
                   <ChevronDown

@@ -58,7 +58,7 @@ export default function Footer() {
           >
             <a
               href="#contact"
-              className="btn-glow-gold btn-press inline-flex items-center justify-center px-8 py-3.5 bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-200 shadow-lg shadow-cd-gold/15"
+              className="btn-press btn-primary inline-flex items-center justify-center px-8 py-3.5 bg-[#C9A84C] hover:bg-[#C9A84C]/90 text-[#080808] font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-200 shadow-lg shadow-cd-gold/15"
             >
               Start Your Project
             </a>

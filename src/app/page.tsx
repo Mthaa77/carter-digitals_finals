@@ -43,16 +43,21 @@ import TrustBadges from '@/components/trust-badges'
 import AnimatedStats from '@/components/animated-stats'
 import ProjectShowcase from '@/components/project-showcase'
 import FloatingTestimonial from '@/components/floating-testimonial'
+import SkipNav from '@/components/skip-nav'
+import ImageGallery from '@/components/image-gallery'
+import TechStack from '@/components/tech-stack'
+import ActivityFeed from '@/components/activity-feed'
 
 export default function Home() {
   return (
     <>
+      <SkipNav />
       <PageLoader />
       <CustomCursor />
       <Navigation />
       <NavProgressDots />
       <BackToTopBar />
-      <main className="min-h-screen flex flex-col bg-[#080808]">
+      <main id="main-content" className="min-h-screen flex flex-col bg-[#080808]">
         <ParticleBg />
         <Hero />
         <ClientMarquee />
@@ -72,9 +77,13 @@ export default function Home() {
         <SectionDivider />
         <Services />
         <SectionDivider />
+        <TechStack />
+        <SectionDivider />
         <ServiceComparison />
         <SectionDivider />
         <ProjectShowcase />
+        <SectionDivider />
+        <ImageGallery />
         <SectionDivider />
         <Portfolio />
         <SectionDivider />
@@ -116,6 +125,7 @@ export default function Home() {
       <SocialProof />
       <CookieConsent />
       <FloatingTestimonial />
+      <ActivityFeed />
     </>
   )
 }

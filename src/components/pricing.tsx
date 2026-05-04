@@ -163,16 +163,11 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           className="mb-8 md:mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-10 bg-[var(--cd-gold)]" />
-            <span className="text-[var(--cd-gold)] font-mono text-sm tracking-widest uppercase">
-              Pricing
-            </span>
-          </div>
-          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-3">
+          <span className="section-label inline-block">Pricing</span>
+          <h2 className="section-heading text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight">
             Transparent Pricing. No Surprises.
           </h2>
-          <p className="text-[var(--cd-text-muted)] text-lg">
+          <p className="text-[var(--cd-text-muted)] text-lg mt-3">
             Real prices. Real work. No hidden fees.
           </p>
         </motion.div>

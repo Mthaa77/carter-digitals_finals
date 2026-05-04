@@ -1854,3 +1854,243 @@ Unresolved Issues / Next Steps:
 - Could add a "Book a Call" scheduling integration (Calendly)
 - Service card hover glow could still be more visible (0.08 → 0.15)
 - "Scroll to explore" could be more prominent
+
+---
+Task ID: 14-b
+Agent: Feature Builder
+Task: Build 4 new feature components and integrate them into the page
+
+Work Log:
+
+### Feature 1: Skip Navigation Link (skip-nav.tsx)
+- Created `src/components/skip-nav.tsx` with 'use client' directive
+- "Skip to main content" link that is visually hidden (sr-only) but appears on focus
+- On focus: fixed position, top-4 left-4, z-[100], gold bg (#C9A84C), dark text (#080808), rounded-lg, font-semibold
+- Added `id="main-content"` to the `<main>` element in page.tsx
+- Placed as the very first element in the page (before PageLoader)
+- WCAG 2.1 accessibility requirement fulfilled
+
+### Feature 2: Scroll-Reveal Image Gallery (image-gallery.tsx)
+- Created `src/components/image-gallery.tsx` with 'use client' directive
+- Section ID: "gallery"
+- 6 gallery items in responsive grid: 3-col desktop (lg:grid-cols-3), 2-col tablet (sm:grid-cols-2), 1-col mobile
+- Items: "Soshanguve SOS Website", "Direla Bakgatla Portal", "Block L Dashboard", "Tshwane SME Landing", "Gauteng Business App", "Custom Analytics"
+- Each item has dark gradient placeholder with SVG grid pattern overlay, category badge, and title
+- Hover effects: gold border (border-cd-gold/40), scale 1.02, category badge glows gold with shadow, "View Project" overlay
+- Staggered reveal animation using Framer Motion useInView + containerVariants/cardVariants (0.12s stagger)
+- Glass card container with section label "Our Work" and heading "Project Gallery"
+- Placed between ProjectShowcase and Portfolio with SectionDivider
+
+### Feature 3: Interactive Skills/Tech Stack Display (tech-stack.tsx)
+- Created `src/components/tech-stack.tsx` with 'use client' directive
+- Section ID: "tech-stack"
+- 8 technologies with animated progress bars: Next.js (95%), React (95%), TypeScript (90%), Google Cloud (85%), Tailwind CSS (95%), Prisma (80%), Figma (90%), Vercel (85%)
+- Each tech has: colored circle icon placeholder (with glow), name, percentage label, and animated gold gradient progress bar
+- Desktop: 2-column grid (4 per column), Mobile: single column
+- Progress bars fill with gold gradient animation when scrolled into view (1.2s duration, ease-out, 0.2s delay)
+- Glass card container with section label "Our Stack" and heading "Technology We Trust"
+- Placed between Services and ServiceComparison with SectionDivider
+
+### Feature 4: Live Notification/Activity Feed (activity-feed.tsx)
+- Created `src/components/activity-feed.tsx` with 'use client' directive
+- Small fixed widget: bottom-16 left-4 z-40, max-width 280px
+- Desktop only (hidden on mobile via `hidden md:block`)
+- 6 rotating notifications with emoji prefixes:
+  - "🔒 New project started in Soshanguve"
+  - "📊 Dashboard deployed for Pretoria SME"
+  - "🇿🇦 B-BBEE certificate renewed"
+  - "⚡ Website launched: 2hr turnaround"
+  - "📈 SEO client hit page 1 on Google"
+  - "🤝 New partnership with Gauteng SME Hub"
+- Each notification shows for 4 seconds with slide-in/slide-out animation (AnimatePresence)
+- Subtle glass-card styling with "Recent Activity" label and animated gold dot
+- Progress dots indicator (active dot elongated in gold)
+- Dismissible with X button (persists in localStorage via state initializer function)
+- Added as floating element alongside FloatingTestimonial
+
+### Integration Changes:
+1. `src/app/page.tsx`:
+   - Added SkipNav as the very first element (before PageLoader)
+   - Added `id="main-content"` to the `<main>` tag
+   - Added ImageGallery between ProjectShowcase and Portfolio with SectionDivider
+   - Added TechStack between Services and ServiceComparison with SectionDivider
+   - Added ActivityFeed as a floating element after FloatingTestimonial
+   - Added 4 new imports: SkipNav, ImageGallery, TechStack, ActivityFeed
+
+2. `src/components/navigation.tsx`:
+   - Added 'tech-stack' and 'gallery' to sectionIds array
+
+### Bug Fix:
+- Fixed ESLint error in activity-feed.tsx: Changed from useEffect + setState for localStorage to state initializer function `getInitialDismissed()` to avoid "set-state-in-effect" lint rule
+
+Stage Summary:
+- 4 new feature components created and integrated
+- SkipNav: WCAG 2.1 accessibility compliance
+- ImageGallery: 6-item responsive grid with scroll-reveal animations
+- TechStack: 8 technologies with animated gold progress bars
+- ActivityFeed: Desktop-only rotating notification widget with localStorage dismiss
+- Navigation section tracking updated with 'tech-stack' and 'gallery'
+- ESLint: 0 errors, Site: HTTP 200, No runtime errors
+
+Current Page Structure:
+SkipNav → PageLoader → CustomCursor → Navigation → NavProgressDots → BackToTopBar → main#main-content → ParticleBg → Hero → ClientMarquee → ClientLogos → WhyCarter → TrustBadges → Team → StatsTicker → QuickStatsBar → AnimatedStats → Services → TechStack → ServiceComparison → ProjectShowcase → ImageGallery → Portfolio → Testimonials → TestimonialVideo → BeforeAfter → Process → FreeTools → ROICalculator → ProjectEstimator → Calculators → CarterStory → CompanyTimeline → Pricing → FAQ → BlogPreview → ContactForm → Newsletter → Footer → WhatsAppButton → AIChatWidget → ScrollToTop → SocialProof → CookieConsent → FloatingTestimonial → ActivityFeed
+
+---
+Task ID: 14-a
+Agent: Bug Fix & Styling Agent
+Task: Fix 4 critical bugs and apply 12 styling improvements
+
+Work Log:
+
+### Critical Bug Fixes (4 items)
+
+1. **Mobile right-side overflow** — globals.css, service-comparison.tsx, portfolio.tsx:
+   - globals.css: Added `max-width: 100vw` rule for `main, section, header, footer, nav, div` elements
+   - service-comparison.tsx: Added `overflow-hidden` to section, `max-w-full` to glass card container, `overflow-x-auto max-w-full` to desktop table wrapper, `min-w-[600px]` to table, `w-[140px]` to header/data columns for fixed-width icon alignment
+   - portfolio.tsx: Added `overflow-hidden` to section, `max-w-full` to card containers
+
+2. **9 buttons without accessible text** — Added aria-labels across 4 components:
+   - before-after.tsx: Added `role="slider"`, `aria-label="Drag to compare before and after"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `tabIndex={0}` to drag handle div
+   - testimonial-video.tsx: Added `aria-label="Play video testimonial from {name}, {company}"` to 2 play buttons
+   - project-estimator.tsx: Added `aria-label="Select {service.title} service..."` to 3 service selection buttons; Added `aria-label` with state and `aria-pressed` to 6 feature toggle buttons
+   - services.tsx: Added `aria-label="Toggle {service.title} features list"` to 3 "What's Included" buttons
+
+3. **4 form inputs without labels** — Added proper labels and aria-labels:
+   - roi-calculator.tsx: Added `htmlFor` + `id` attributes linking labels to range inputs; Added `aria-label` attributes to both range sliders
+   - website-cost-calculator.tsx: Added `aria-label="Number of Pages"` to Slider component
+   - bbbee-calculator.tsx: Added `aria-label="Select your company's B-BBEE level"` to SelectTrigger
+
+4. **Cookie/chat widget overlap** — ai-chat-widget.tsx, cookie-consent.tsx:
+   - ai-chat-widget.tsx: Changed z-index from `z-[9998]` to `z-[45]`, adjusted bottom position from `bottom-5/6` to `bottom-20/24` so it sits above cookie banner
+   - cookie-consent.tsx: Added `fixed-bottom-safe` class for iOS safe area insets; Cookie banner stays at `z-50`
+
+### Styling Improvements (12 items)
+
+1. **Standardize button system** — globals.css + 3 components:
+   - Added `.btn-primary` (gold filled, font-semibold, hover:bg-cd-gold/90) and `.btn-secondary` (gold border/40, gold text, hover:bg-cd-gold/5) CSS utility classes
+   - hero.tsx: Updated both CTAs to use btn-primary/btn-secondary
+   - navigation.tsx: Updated "Get a Quote" to btn-primary with font-semibold
+   - footer.tsx: Updated "Start Your Project" CTA to btn-primary
+
+2. **Service card description contrast** — services.tsx:
+   - Changed description text from `text-[#C8C8C0]` to `text-[#D8D8D0]` (brighter)
+
+3. **Pricing comparison table spacing** — service-comparison.tsx:
+   - Increased row padding from `py-4` to `py-5`, added `w-[140px]` fixed-width columns for icon alignment
+
+4. **"View Case Study" links** — portfolio.tsx:
+   - Changed from `text-[#C8C8C0] font-medium` to `text-[#C9A84C] font-semibold`, added `link-underline` class, increased arrow margin, added `py-1` for larger click target
+
+5. **Cookie banner text on mobile** — cookie-consent.tsx:
+   - Increased mobile text from `text-[11px]` to `text-xs`, changed "Privacy" to "Privacy Policy", added `underline-offset-2 text-xs font-medium` for better contrast
+
+6. **Typography scale tightening** — globals.css:
+   - Changed `--text-h3` minimum from `1.125rem` to `1.25rem`
+   - Added `h3, .h3-style` rule with `font-weight: 600` and `line-height: 1.3`
+
+7. **Focus indicators** — globals.css:
+   - Added `*:focus-visible { outline: 2px solid var(--cd-gold); outline-offset: 2px; }`
+   - Added `*:focus:not(:focus-visible) { outline: none; }` to remove non-keyboard outlines
+
+8. **Gold accent shade consistency** — Verified all gold hex values are `#C9A84C` (cd-gold). `#E8CA7A` and `#7A6330` used intentionally for gradients. No inconsistencies found.
+
+9. **Portfolio "Coming Soon" card** — globals.css + portfolio.tsx:
+   - Added `@keyframes coming-soon-shimmer` and `.coming-soon-shimmer` class with subtle gold shimmer animation
+   - Applied to Coming Soon card in portfolio.tsx
+
+10. **Section heading consistency** — Updated 7 sections to use `section-label` + `section-heading`:
+    - services.tsx, portfolio.tsx, testimonials.tsx, service-comparison.tsx, pricing.tsx, website-cost-calculator.tsx, bbbee-calculator.tsx
+
+11. **Footer link hover** — Already applied `link-underline` class in previous rounds (verified)
+
+12. **Nav progress dots alignment** — nav-progress-dots.tsx:
+    - Changed outer container from `gap-4` to no gap, keeping inner `gap-3` for even spacing
+
+Stage Summary:
+- 4 critical bug fixes (mobile overflow, aria-labels, form labels, cookie/chat overlap)
+- 12 styling improvements (button system, contrast, spacing, links, typography, focus, shimmer, headings, dots)
+- New CSS utilities: .btn-primary, .btn-secondary, .coming-soon-shimmer, :focus-visible, h3 styling
+- ESLint: 0 errors, Site: HTTP 200
+
+---
+Task ID: 14
+Agent: Cron Review Agent (Round 8)
+Task: QA testing, critical bug fixes, comprehensive styling improvements, and new feature additions
+
+Work Log:
+- Read worklog.md and assessed current project status (38+ components, VLM score 8.3/10 from Round 7)
+- Performed QA testing via agent-browser with desktop (1440×900) and mobile (375×812) viewports
+- Initial VLM score: 7.4/10 — identified critical mobile and accessibility issues
+- Identified critical bugs: mobile right-side overflow, 9 buttons without aria-labels, 4 form inputs without labels, no skip-nav link, cookie/chat widget overlap
+- Identified styling gaps: inconsistent button system, low service card contrast, cramped pricing table, small touch targets on mobile cookie banner, hero not fully visible on mobile above fold
+- Identified feature gaps: no skip navigation, no project gallery, no tech stack display, no activity feed
+- Dispatched 2 parallel subagents (Task 14-a: bug fixes + styling, Task 14-b: new features)
+- Additional manual fixes after subagent work
+
+### Bug Fixes (4 items):
+1. **Mobile right-side overflow** — Added max-width: 100vw to main/section/header/footer/nav/div in globals.css, overflow-hidden + max-w-full to service-comparison and portfolio cards, fixed-width columns in comparison table
+2. **9 buttons without accessible text** — Added aria-label to: before-after drag handle (role="slider"), testimonial-video play buttons, project-estimator service/feature buttons, services "What's Included" toggle buttons
+3. **4 form inputs without labels** — Added htmlFor+id linking and aria-label to: roi-calculator range inputs, website-cost-calculator slider, bbbee-calculator select
+4. **Cookie/chat widget overlap** — Adjusted z-index (chat z-45 vs cookie z-50), repositioned chat widget bottom-20/24
+
+### Styling Improvements (18 items):
+1. **Standardized button system** — Created .btn-primary and .btn-secondary CSS classes, applied across hero CTAs and nav
+2. **Service card description contrast** — Changed from #C8C8C0 to #D8D8D0 (brighter)
+3. **Pricing comparison table spacing** — Increased row padding py-4→py-5, fixed-width w-[140px] columns
+4. **"View Case Study" links** — font-semibold text-cd-gold with link-underline class
+5. **Cookie banner mobile redesign** — New 2-row layout with larger text (text-sm), bigger touch targets (min-h-[44px]), larger dismiss button (min-w-[36px] min-h-[36px])
+6. **Cookie banner mobile text** — "Privacy Policy" now text-sm font-semibold (was text-xs), Cookie icon w-4 h-4 (was w-3.5 h-3.5)
+7. **Typography scale tightening** — h3 min to 1.25rem with font-weight: 600
+8. **Focus indicators** — Added *:focus-visible { outline: 2px solid var(--cd-gold); outline-offset: 2px; }
+9. **Gold accent shade consistency** — Verified all gold uses #C9A84C
+10. **Portfolio "Coming Soon" card** — Added .coming-soon-shimmer animation
+11. **Section heading consistency** — Updated 7 sections to use section-label + section-heading classes
+12. **Footer link hover** — Verified link-underline class applied
+13. **Nav progress dots alignment** — Fixed gap spacing
+14. **Hero mobile optimization** — Reduced py-24→py-16 on mobile, h1 text-3xl sm:text-5xl lg:text-6xl, subtext text-sm sm:text-xl, space-y-5 sm:space-y-8, CTA px-6 py-3 sm:px-8 sm:py-4, counter row mt-10 sm:mt-20 with smaller cards
+15. **Hero badge strip mobile** — Smaller padding px-4 py-2 sm:px-6 sm:py-3, gap-3 sm:gap-6, text-xs sm:text-sm
+16. **Hero counter cards mobile** — p-4 sm:p-6, text-2xl sm:text-4xl, mb-1 sm:mb-2
+17. **Hero scroll indicator mobile** — bottom-6 sm:bottom-12
+18. **Hero CTA buttons mobile** — Responsive sizing px-6 py-3 → px-8 py-4, text-base → text-lg
+
+### New Features (4 components):
+1. **Skip Navigation Link** (skip-nav.tsx): WCAG 2.1 accessibility, sr-only with gold focus state, links to #main-content
+2. **Image Gallery** (image-gallery.tsx): 6 gallery items in responsive grid (3×2/2×3/1×6), dark gradient placeholders with SVG patterns, hover gold border + scale + "View Project" overlay, staggered Framer Motion reveal, section ID "gallery"
+3. **Tech Stack Display** (tech-stack.tsx): 8 technologies with animated gold gradient progress bars, colored circle icon placeholders with glow, desktop 2-column / mobile 1-column grid, fills on scroll via whileInView, section ID "tech-stack"
+4. **Activity Feed** (activity-feed.tsx): Fixed bottom-left widget (desktop only), 6 rotating notifications with emojis, 4-second auto-rotation, AnimatePresence slide-in/out, glass-card styling, dismissible with X (localStorage), z-40
+
+### Page Layout Updated:
+- Added SkipNav as first element (before PageLoader)
+- Added id="main-content" to <main> tag
+- Added TechStack between Services and ServiceComparison with SectionDivider
+- Added ImageGallery between ProjectShowcase and Portfolio with SectionDivider
+- Added ActivityFeed as floating element after FloatingTestimonial
+- Navigation sectionIds updated with 'tech-stack' and 'gallery'
+
+### VLM Quality Score Progression:
+- Round 1: 3/10 → Round 2: 6/10 → Round 3: 7/10 → Round 7: 8.3/10 → Round 8 (initial): 7.4/10 → Round 8 (final): 8.0/10
+
+Stage Summary:
+- 4 critical bug fixes applied (mobile overflow, aria-labels, form labels, cookie/chat overlap)
+- 18 styling improvements including comprehensive mobile optimization
+- 4 new feature components created and integrated
+- Mobile hero now fully visible above fold on 375px viewport
+- Cookie banner mobile touch targets now meet 44px minimum
+- Accessibility improved: skip-nav link, focus-visible indicators, form labels
+- ESLint: 0 errors, Site: HTTP 200, No runtime errors
+
+Current Project Status:
+- Website now has 42+ components with rich interactivity and premium styling
+- Full page: SkipNav → PageLoader → Navigation(with ThemeToggle) → NavProgressDots → BackToTopBar → Hero(typing+parallax+mobile-optimized) → ClientMarquee → ClientLogos → WhyCarter(stagger) → TrustBadges → Team → StatsTicker → QuickStatsBar → AnimatedStats → Services → TechStack → ServiceComparison → ProjectShowcase → ImageGallery → Portfolio → Testimonials(carousel+quotes) → TestimonialVideo → BeforeAfter(drag glow) → Process(animated connectors) → FreeTools → ROICalculator → ProjectEstimator → Calculators → CarterStory(candle glow) → CompanyTimeline → Pricing(toggle) → FAQ(chevron) → BlogPreview → ContactForm → Newsletter(bounce icon) → Footer
+- Interactive features: AI Chat, ROI Calculator, Cost Calculator, B-BBEE Estimator, Project Estimator Wizard, Before/After Slider, Contact Form, Newsletter, FAQ Accordion, Portfolio Modal, Service Detail Modal, Cookie Consent (improved mobile), Scroll-to-Top, Back-to-Top Progress Bar, Testimonial Carousel, Page Loader, Hero Typing, Ambient Particles, Floating Testimonial, Pricing Toggle, Theme Toggle, Nav Progress Dots, Activity Feed, Image Gallery, Tech Stack
+- VLM Quality Score: 8.0/10 (Desktop: 8.2/10, Mobile: 7.5/10)
+
+Unresolved Issues / Next Steps:
+- Contact form API could integrate with email service (Resend/SendGrid) for actual delivery
+- Performance optimization (Lighthouse audit, image optimization, lazy loading)
+- Could add Google Analytics / Tag Manager integration
+- Could add actual blog article pages with dynamic routes
+- Could add a "Book a Call" scheduling integration (Calendly)
+- Mobile hero could still be further optimized for very small viewports
+- Card text truncation on mobile could be improved with better responsive typography
+- Placeholder gallery images could be replaced with real project screenshots

@@ -210,6 +210,7 @@ export default function ProjectEstimator() {
                     className="glass-card rounded-xl p-6 text-left group cursor-pointer transition-[border-color,box-shadow] duration-300 hover:border-cd-gold/40"
                     whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.98 }}
+                    aria-label={`Select ${service.title} service starting from ${formatPrice(service.basePrice)}`}
                   >
                     <div className="w-14 h-14 rounded-lg bg-cd-gold/10 flex items-center justify-center text-cd-gold mb-4 group-hover:bg-cd-gold/20 transition-colors duration-300">
                       {service.icon}
@@ -255,6 +256,8 @@ export default function ProjectEstimator() {
                             : 'border-cd-border bg-cd-surface/50 hover:border-cd-border-glow'
                         }`}
                         whileTap={{ scale: 0.97 }}
+                        aria-label={`${selectedFeatures.has(i) ? 'Remove' : 'Add'} ${feature.name} feature, +${formatPrice(feature.price)}`}
+                        aria-pressed={selectedFeatures.has(i)}
                       >
                         <div
                           className={`w-5 h-5 rounded flex items-center justify-center shrink-0 transition-colors duration-300 ${

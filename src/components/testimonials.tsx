@@ -18,7 +18,8 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14 md:mb-20"
         >
-          <h2 className="font-display text-[var(--text-h2)] font-semibold text-[#F0EFE8] tracking-tight">
+          <span className="section-label inline-block">Testimonials</span>
+          <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
             What Our Clients Say
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
