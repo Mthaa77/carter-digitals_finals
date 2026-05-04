@@ -86,7 +86,7 @@ export default function Hero() {
       <div className="absolute inset-0 grain-overlay" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -171,7 +171,7 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 sm:mt-28 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 relative"
+          className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 relative"
         >
           {/* Radial gradient glow behind counter row */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
@@ -205,7 +205,7 @@ export default function Hero() {
         aria-label="Scroll to explore"
       >
         <ChevronDown size={24} />
-        <span className="text-cd-text-muted text-xs font-sans">Scroll to explore</span>
+        <span className="text-cd-gold/70 text-xs font-sans">Scroll to explore</span>
       </a>
 
       {/* Bottom fade */}

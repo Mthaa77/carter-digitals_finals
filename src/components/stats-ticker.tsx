@@ -58,7 +58,7 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
           : ''
       }`}
     >
-      <span className="font-display text-4xl sm:text-5xl font-bold text-cd-gold tabular-nums">
+      <span className="font-display text-4xl sm:text-5xl font-bold text-cd-gold tabular-nums text-glow-gold">
         {stat.prefix}
         {count}
         {stat.suffix}

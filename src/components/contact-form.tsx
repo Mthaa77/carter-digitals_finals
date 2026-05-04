@@ -35,10 +35,10 @@ type ContactFormValues = z.infer<typeof contactSchema>
 
 // ── Shared input styles ─────────────────────────────────────────────────────
 const inputStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus:ring-2 focus:ring-cd-gold/30 focus:border-cd-gold/50 focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200'
 
 const selectTriggerStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200 [&>svg]:text-[#777]'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus:ring-2 focus:ring-cd-gold/30 focus:border-cd-gold/50 focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200 [&>svg]:text-[#777]'
 
 // ── Component ───────────────────────────────────────────────────────────────
 export default function ContactForm() {
@@ -370,7 +370,7 @@ export default function ContactForm() {
               href="https://wa.me/27724026893?text=Hi%20Carter%20Digitals%2C%20I%27d%20like%20to%20discuss%20a%20project"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] font-display font-semibold text-sm transition-colors duration-200 w-fit"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-cd-gold/10 hover:bg-cd-gold/20 text-cd-gold font-display font-semibold text-sm transition-colors duration-200 w-fit"
             >
               <MessageCircle className="w-4 h-4" />
               Chat on WhatsApp

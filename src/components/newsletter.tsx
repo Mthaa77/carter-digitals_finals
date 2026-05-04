@@ -100,7 +100,7 @@ export default function Newsletter() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto px-6 py-3 bg-cd-gold text-[#080808] font-bold text-sm rounded-lg hover:bg-cd-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans"
+                className="w-full sm:w-auto px-6 py-3 bg-cd-gold text-[#080808] font-bold text-sm rounded-lg hover:bg-cd-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans btn-glow-gold btn-press"
               >
                 {isLoading ? 'Subscribing...' : 'Subscribe'}
               </button>

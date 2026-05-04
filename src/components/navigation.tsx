@@ -28,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'team', 'clients', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'trust-badges', 'team', 'clients', 'stats', 'achievements', 'services', 'compare', 'showcase-gallery', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'roi-calculator', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -112,7 +112,7 @@ export default function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={`link-underline relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md hover:bg-cd-gold/5 ${
+                    className={`link-underline relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md hover:bg-cd-gold/5 focus-visible:outline-2 focus-visible:outline-cd-gold focus-visible:outline-offset-2 ${
                       isActive
                         ? 'text-cd-gold'
                         : 'text-cd-text-muted hover:text-cd-text'
@@ -158,9 +158,9 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-cd-bg/98 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 bg-cd-bg/95 backdrop-blur-2xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-4">
+            <div className="flex flex-col items-center justify-center h-full gap-5">
               {/* Gold accent line at top */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cd-gold-dim via-cd-gold to-cd-gold-dim" />
 

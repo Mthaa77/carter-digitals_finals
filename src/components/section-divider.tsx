@@ -27,7 +27,7 @@ export default function SectionDivider({ className = '' }: SectionDividerProps) 
         initial={{ opacity: 0, scale: 0 }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
         transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
-        className="mx-2 w-2 h-2 rotate-45 bg-[#C9A84C] shrink-0"
+        className="mx-2 w-2 h-2 rotate-45 bg-[#C9A84C] shrink-0 shadow-[0_0_8px_rgba(201,168,76,0.15)]"
       />
       <motion.div
         initial={{ opacity: 0, scaleX: 0.3 }}

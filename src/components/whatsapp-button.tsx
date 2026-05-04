@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999]">
+    <div className="fixed bottom-20 right-6 z-[9999]">
       <a
         href="https://wa.me/27724026893?text=Hi%20Carter%20Digitals%2C%20I%27d%20like%20to%20discuss%20a%20project"
         target="_blank"
@@ -23,7 +23,7 @@ export default function WhatsAppButton() {
 
         {/* Button */}
         <motion.span
-          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/20"
+          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-cd-gold shadow-lg shadow-cd-gold/20"
           whileHover={{ scale: 1.12 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 400, damping: 20 }}

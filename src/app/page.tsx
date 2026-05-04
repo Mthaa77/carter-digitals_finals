@@ -36,6 +36,10 @@ import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
 import ParticleBg from '@/components/particle-bg'
 import ScrollProgress from '@/components/scroll-progress'
+import ROICalculator from '@/components/roi-calculator'
+import TrustBadges from '@/components/trust-badges'
+import AnimatedStats from '@/components/animated-stats'
+import ProjectShowcase from '@/components/project-showcase'
 
 export default function Home() {
   return (
@@ -52,13 +56,19 @@ export default function Home() {
         <SectionDivider />
         <WhyCarter />
         <SectionDivider />
+        <TrustBadges />
+        <SectionDivider />
         <Team />
         <SectionDivider />
         <StatsTicker />
         <SectionDivider />
+        <AnimatedStats />
+        <SectionDivider />
         <Services />
         <SectionDivider />
         <ServiceComparison />
+        <SectionDivider />
+        <ProjectShowcase />
         <SectionDivider />
         <Portfolio />
         <SectionDivider />
@@ -71,6 +81,8 @@ export default function Home() {
         <Process />
         <SectionDivider />
         <FreeTools />
+        <SectionDivider />
+        <ROICalculator />
         <SectionDivider />
         <ProjectEstimator />
         <WebsiteCostCalculator />

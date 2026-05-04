@@ -100,7 +100,7 @@ export default function Services() {
               <motion.div
                 key={service.title}
                 variants={cardVariants}
-                className="glass-card rounded-xl p-6 md:p-8 group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 hover:border-l-[3px] hover:border-l-[#C9A84C]"
+                className="glass-card rounded-xl p-6 md:p-8 group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 hover:border-l-[3px] hover:border-l-[#C9A84C] hover:border-t-2 hover:border-t-cd-gold/40"
               >
                 {/* Icon */}
                 <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-lg bg-[rgba(201,168,76,0.08)] border border-[#242424] group-hover:border-[#7A6330] transition-colors duration-300">

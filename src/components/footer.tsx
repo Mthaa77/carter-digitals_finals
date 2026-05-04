@@ -69,7 +69,7 @@ export default function Footer() {
       </section>
 
       {/* Top border - subtle gold tint */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#7A6330]/40 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#7A6330]/60 to-transparent" />
 
       {/* Footer Main */}
       <div className="bg-[#0A0A0A] py-16 md:py-20">

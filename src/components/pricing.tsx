@@ -143,7 +143,7 @@ export default function Pricing() {
               className={`
                 glass-card rounded-xl p-6 flex flex-col relative transition-all duration-300
                 ${plan.highlighted
-                  ? 'border-cd-gold/30 shadow-[0_0_40px_rgba(201,168,76,0.08)] ring-1 ring-cd-gold/20 md:scale-105 md:-mt-3 md:mb-[-12px]'
+                  ? 'animated-border-gold border-cd-gold/30 shadow-[0_0_40px_rgba(201,168,76,0.08)] ring-1 ring-cd-gold/20 md:scale-105 md:-mt-3 md:mb-[-12px]'
                   : 'hover:border-cd-gold/20'
                 }
               `}

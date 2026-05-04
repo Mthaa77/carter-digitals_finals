@@ -94,7 +94,7 @@ export default function Process() {
         >
           <div className="relative">
             {/* Connecting line */}
-            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-cd-gold/50 to-transparent" />
+            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-cd-gold/70 to-transparent" />
 
             <div className="grid grid-cols-5 gap-4">
               {phases.map((phase, index) => (
@@ -157,7 +157,7 @@ export default function Process() {
 
                 {/* Connecting line */}
                 {index < phases.length - 1 && (
-                  <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-cd-gold/50 to-cd-gold/10" />
+                  <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-cd-gold/70 to-cd-gold/20" />
                 )}
               </div>
 
