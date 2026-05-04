@@ -194,13 +194,16 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#9A9A92] font-sans text-sm">
-            &copy; 2026 Carter Digitals (Pty) Ltd
-          </p>
-          <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#7A6330]" />
-            B-BBEE Level 1
-          </span>
+          <div className="flex items-center gap-3">
+            <p className="text-cd-text-dim font-sans text-sm">
+              &copy; 2026 Carter Digitals (Pty) Ltd
+            </p>
+            <span className="text-cd-gold-dim text-xs" aria-hidden="true">●</span>
+            <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#7A6330]" />
+              B-BBEE Level 1
+            </span>
+          </div>
         </div>
       </div>
     </footer>

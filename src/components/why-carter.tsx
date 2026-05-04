@@ -58,7 +58,7 @@ const cardVariants = {
 
 export default function WhyCarter() {
   return (
-    <section id="why-carter" className="relative py-24 sm:py-32 bg-cd-bg">
+    <section id="why-carter" className="relative py-20 md:py-28 bg-cd-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <motion.div

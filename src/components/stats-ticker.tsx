@@ -72,7 +72,7 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
 
 export default function StatsTicker() {
   return (
-    <section id="stats" className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#0A0A0A]">
+    <section id="stats" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#0A0A0A]">
       <div className="max-w-6xl mx-auto">
         <div className="glass-card rounded-xl flex flex-col sm:flex-row">
           {stats.map((stat, i) => (

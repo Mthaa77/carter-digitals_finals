@@ -29,9 +29,13 @@ import AIChatWidget from '@/components/ai-chat-widget'
 import CustomCursor from '@/components/custom-cursor'
 import ScrollToTop from '@/components/scroll-to-top'
 import CookieConsent from '@/components/cookie-consent'
+import Team from '@/components/team'
+import ClientLogos from '@/components/client-logos'
+import SocialProof from '@/components/social-proof'
 import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
 import ParticleBg from '@/components/particle-bg'
+import ScrollProgress from '@/components/scroll-progress'
 
 export default function Home() {
   return (
@@ -39,12 +43,16 @@ export default function Home() {
       <PageLoader />
       <CustomCursor />
       <Navigation />
+      <ScrollProgress />
       <main className="min-h-screen flex flex-col bg-[#080808]">
         <ParticleBg />
         <Hero />
         <ClientMarquee />
+        <ClientLogos />
         <SectionDivider />
         <WhyCarter />
+        <SectionDivider />
+        <Team />
         <SectionDivider />
         <StatsTicker />
         <SectionDivider />
@@ -87,6 +95,7 @@ export default function Home() {
       <WhatsAppButton />
       <AIChatWidget />
       <ScrollToTop />
+      <SocialProof />
       <CookieConsent />
     </>
   )

@@ -56,7 +56,7 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="process" className="relative py-20 sm:py-28 overflow-hidden" ref={ref}>
+    <section id="process" className="relative py-20 md:py-28 overflow-hidden" ref={ref}>
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"

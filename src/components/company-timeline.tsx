@@ -55,7 +55,7 @@ export default function CompanyTimeline() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="timeline" className="relative py-20 sm:py-28 overflow-hidden">
+    <section id="timeline" className="relative py-20 md:py-28 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"

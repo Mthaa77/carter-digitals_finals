@@ -215,20 +215,34 @@ export default function AIChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Floating Button */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-[#1A1A1A] border border-[#242424] flex items-center justify-center shadow-lg shadow-black/30 hover:border-cd-gold/50 transition-all duration-300"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
-      >
-        {isOpen ? (
-          <X className="w-5 h-5 text-cd-gold" />
-        ) : (
-          <MessageCircle className="w-5 h-5 text-cd-gold" />
-        )}
-      </motion.button>
+      {/* Floating Button + Tooltip */}
+      <div className="relative flex items-center">
+        <AnimatePresence>
+          {!isOpen && (
+            <motion.span
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ duration: 0.2 }}
+              className="absolute right-full mr-3 whitespace-nowrap text-xs font-medium text-cd-text-muted bg-cd-surface/90 border border-cd-border rounded-lg px-3 py-1.5 pointer-events-none"
+            >
+              Chat with Carter AI
+            </motion.span>
+          )}
+        </AnimatePresence>
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-14 h-14 rounded-full bg-[#1A1A1A] border border-[#242424] flex items-center justify-center shadow-lg shadow-black/30 hover:border-cd-gold/60 hover:scale-110 transition-all duration-300"
+          whileTap={{ scale: 0.95 }}
+          aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
+        >
+          {isOpen ? (
+            <X className="w-5 h-5 text-cd-gold" />
+          ) : (
+            <MessageCircle className="w-5 h-5 text-cd-gold" />
+          )}
+        </motion.button>
+      </div>
     </div>
   )
 }

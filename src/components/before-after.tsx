@@ -42,7 +42,7 @@ export default function BeforeAfter() {
   )
 
   return (
-    <section id="showcase" className="relative py-20 sm:py-28 overflow-hidden">
+    <section id="showcase" className="relative py-20 md:py-28 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"

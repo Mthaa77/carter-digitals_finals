@@ -126,7 +126,7 @@ export default function ProjectEstimator() {
     `R${n.toLocaleString('en-ZA')}`
 
   return (
-    <section id="estimator" className="relative py-20 sm:py-28 overflow-hidden">
+    <section id="estimator" className="relative py-20 md:py-28 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"

@@ -47,7 +47,7 @@ export default function FAQ() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="faq" className="relative py-20 sm:py-28 overflow-hidden" ref={ref}>
+    <section id="faq" className="relative py-20 md:py-28 overflow-hidden" ref={ref}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

@@ -930,3 +930,211 @@ Stage Summary:
 - Navigation section tracking updated
 - Sticky footer preserved (min-h-screen flex flex-col + mt-auto)
 - ESLint: 0 errors, Site: HTTP 200
+
+---
+Task ID: 14-b
+Agent: Feature Builder Agent
+Task: Build 3 new feature components (Team, Client Logos, Social Proof)
+
+Work Log:
+
+1. **Team Section** (`src/components/team.tsx`):
+   - Section ID: "team"
+   - Header: "The People Behind Carter Digitals" with gold accent on "Carter Digitals"
+   - Subtitle: "Small team. Big results. 100% South African."
+   - 3 team member cards in responsive grid (1 col mobile, 3 col desktop)
+   - Each card: circular avatar with gold gradient + initials, name (bold text-cd-text), role (text-cd-gold font-mono text-sm), bio (text-cd-text-muted text-sm line-clamp-2), LinkedIn social icon
+   - Team members: Thabo Molefe (TM), Lerato Radebe (LR), Dineo Khumalo (DK)
+   - Glass-card + glass-card-hover styling
+   - Framer Motion stagger animation on scroll
+
+2. **Client Logos Section** (`src/components/client-logos.tsx`):
+   - Section ID: "clients"
+   - Header: "Trusted by South African Businesses" with gold accent line
+   - Subtitle: "From Soshanguve to Sandton, businesses choose Carter Digitals."
+   - 6 client logo placeholders as glass cards with abbreviations in gold
+   - Clients: SOS, DB, BLT, TSM, GB, CD (Carter Digitals self)
+   - Grid: 3 cols mobile, 6 cols desktop, square-ish aspect ratio
+   - Hover scale effect (1.05) with border color transition
+   - Framer Motion fade-in + scale animation
+
+3. **Social Proof Popup** (`src/components/social-proof.tsx`):
+   - Fixed bottom-left corner (bottom-24 left-6 z-40) above scroll-to-top button
+   - 4 rotating messages with emojis: Pretoria quote, Gauteng SME newsletter, pricing views, B-BBEE project
+   - Randomized message order via Fisher-Yates shuffle
+   - 10 second delay before first appearance
+   - Each notification visible for 5 seconds, then slides out
+   - Auto-cycles every 8 seconds
+   - Glass-card styled box with emoji, message text, "Just now" timestamp
+   - Framer Motion slide-in/slide-out (x: -120 → 0)
+   - Desktop only (hidden md:block)
+
+4. **Page Layout Update** (`src/app/page.tsx`):
+   - Added ClientLogos right after ClientMarquee (between ClientMarquee and SectionDivider)
+   - Added Team between WhyCarter and StatsTicker (after WhyCarter's SectionDivider, before StatsTicker's SectionDivider)
+   - Added SocialProof after ScrollToTop in the bottom floating section
+
+5. **Navigation Update** (`src/components/navigation.tsx`):
+   - Added 'team' and 'clients' to sectionIds array (after 'why-carter')
+
+Stage Summary:
+- 3 new feature components created: Team, ClientLogos, SocialProof
+- All components use 'use client' directive and Framer Motion animations
+- All follow Soshanguve Steel design system (dark bg, gold accents, glassmorphism cards)
+- Page layout updated with correct component ordering
+- Navigation section tracking updated with team and clients IDs
+- Footer stays sticky (min-h-screen flex flex-col + mt-auto preserved)
+- ESLint: 0 errors, Site: HTTP 200, compiling cleanly
+
+---
+Task ID: 14-a
+Agent: Styling Polish Agent
+Task: Apply 11+ styling improvements based on VLM feedback (7/10 score)
+
+Work Log:
+
+### 1. Scroll Progress Bar (CRITICAL)
+- Created `/home/z/my-project/src/components/scroll-progress.tsx`
+  - 'use client' component with useState + useEffect scroll listener
+  - Calculates progress: `(scrollY / (scrollHeight - innerHeight)) * 100`
+  - Thin 3px gold bar fixed at top of viewport (z-[60])
+  - Uses `position: fixed; top: 0; left: 0;` with `bg-cd-gold`
+  - Framer Motion for smooth width animation via style prop
+  - Exported as default
+- Added `<ScrollProgress />` in page.tsx right after `<Navigation />`
+
+### 2. Chat Widget Tooltip + Hover Enhancement
+- In `ai-chat-widget.tsx`:
+  - Added tooltip "Chat with Carter AI" that appears on hover over the floating button
+  - Tooltip positioned to the left of button using `absolute right-full mr-3`
+  - Framer Motion AnimatePresence for tooltip fade-in/out
+  - Added `hover:scale-110` to the floating button (replacing whileHover)
+  - Added `hover:border-cd-gold/60` to the floating button (was hover:border-cd-gold/50)
+  - Wrapped button + tooltip in a `relative flex items-center` div
+
+### 3. Testimonial Arrow Visibility
+- In `testimonial-carousel.tsx`:
+  - Changed arrow button background from `glass-card` to `bg-cd-surface/80 border border-cd-border`
+  - Added `hover:bg-cd-gold/10 hover:border-cd-gold/30` for hover feedback
+  - Changed arrow size from `w-10 h-10` to `w-12 h-12`
+  - Changed `transition-colors` to `transition-all` for full hover effect
+
+### 4. Cookie Banner Polish
+- In `cookie-consent.tsx`:
+  - Decline button: changed from `px-8 py-3 text-base` to `px-6 py-2 text-sm` (smaller/more subtle)
+  - Decline button: changed text color from `text-cd-text-muted` to `text-cd-text-dim` (visual de-emphasis)
+  - Privacy policy link: already had `text-cd-gold hover:text-cd-gold-light` (verified present)
+
+### 5. Button Consistency - .btn-primary-gold Utility
+- In `globals.css`:
+  - Added `.btn-primary-gold` class with: inline-flex, centered, gap-0.5rem, px-0.75rem 1.5rem, font-bold, text-sm, rounded-0.5rem, bg-cd-gold, text-cd-bg, transition-all 0.3s
+  - Hover: bg-cd-gold-light + box-shadow gold glow
+  - Active: scale(0.97)
+
+### 6. Hero Badge Icons Enhancement
+- In `hero.tsx`:
+  - Wrapped each badge emoji in `<span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cd-gold/10 text-lg">`
+  - Creates a prominent circular icon container with subtle gold background
+  - Text label remains outside the icon circle
+
+### 7. Navigation Link Hover Verification
+- Verified `navigation.tsx` already has:
+  - `hover:text-cd-gold hover:bg-cd-gold/5 rounded-md` on desktop nav links ✓
+  - `h-[3px] bg-cd-gold` active indicator ✓
+
+### 8. Glass Card Hover Transition Smooth
+- In `globals.css`:
+  - Added `transition: border-color 0.3s ease, box-shadow 0.3s ease;` to `.glass-card` base class
+  - Ensures smooth visual transition when hovering (not just will-change)
+
+### 9. Section Spacing Consistency
+- Updated all sections to use consistent `py-20 md:py-28` padding:
+  - `why-carter.tsx`: `py-24 sm:py-32` → `py-20 md:py-28`
+  - `stats-ticker.tsx`: `py-16 md:py-20` → `py-20 md:py-28`
+  - `faq.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `process.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `company-timeline.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `project-estimator.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `testimonial-video.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `before-after.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `client-logos.tsx`: `py-20 sm:py-28` → `py-20 md:py-28`
+  - `team.tsx`: `py-24 sm:py-32` → `py-20 md:py-28`
+
+### 10. Footer Bottom Bar Enhancement
+- In `footer.tsx`:
+  - Added gold dot separator (●) between copyright and B-BBEE Level 1 text using `text-cd-gold-dim text-xs`
+  - Changed copyright text from `text-[#9A9A92]` to `text-cd-text-dim`
+  - Wrapped both elements in a single flex row for better alignment
+
+### 11. Pricing Card Hover Effects
+- In `pricing.tsx`:
+  - Changed non-highlighted card hover from `hover:border-[#3A3A3A]` to `hover:border-cd-gold/20`
+  - All pricing cards now have `transition-all duration-300` and gold-tinted hover borders
+  - Business tier already has special treatment (verified: `border-cd-gold/30`, `ring-1 ring-cd-gold/20`)
+
+Stage Summary:
+- All 11 styling improvements implemented successfully
+- 1 new utility component: ScrollProgress (scroll progress bar)
+- 1 new CSS utility class: .btn-primary-gold
+- 10 section components updated for consistent spacing (py-20 md:py-28)
+- Enhanced interactive feedback across chat widget, testimonials, pricing, and cookie banner
+- ESLint: 0 errors, Site: HTTP 200
+
+---
+Task ID: 14
+Agent: Cron Review Agent (Round 7)
+Task: QA testing, styling improvements, and 3 new feature components
+
+Work Log:
+- Read worklog.md and assessed current project status (26+ sections, VLM score 7.5/10)
+- Performed QA testing via agent-browser with desktop viewport
+- Used VLM to visually analyze hero and mid-page screenshots — scored 7/10 with specific feedback
+- Key issues: no scroll progress bar, interactive feedback too subtle, chat widget lacks tooltip, testimonial arrows hard to see, cookie banner needs polish, button consistency
+- Dispatched 2 parallel subagents (Task 14-a: 11 styling improvements, Task 14-b: 3 new features)
+
+### 11 Styling Improvements:
+1. **Scroll Progress Bar** (NEW component: scroll-progress.tsx): 3px gold bar fixed at top (z-[60]), fills 0-100% based on scroll, Framer Motion animation
+2. **Chat Widget Tooltip + Hover**: Added "Chat with Carter AI" tooltip on hover, hover:scale-110, hover:border-cd-gold/60
+3. **Testimonial Arrow Visibility**: Changed from glass-card to bg-cd-surface/80 with border, added hover:bg-cd-gold/10, increased size w-10→w-12
+4. **Cookie Banner Polish**: Decline button now smaller (px-6 py-2 text-sm) with text-cd-text-dim, privacy policy link uses text-cd-gold
+5. **Button Consistency**: New .btn-primary-gold utility class in globals.css with gold bg, hover glow, active scale
+6. **Hero Badge Icons**: Each emoji wrapped in w-8 h-8 rounded-full bg-cd-gold/10 circular container
+7. **Navigation Link Hover**: Verified hover:text-cd-gold hover:bg-cd-gold/5 and h-[3px] bg-cd-gold active indicator
+8. **Glass Card Transition**: Added smooth transition: border-color 0.3s ease, box-shadow 0.3s ease to .glass-card base
+9. **Section Spacing Consistency**: Updated 10 sections to uniform py-20 md:py-28
+10. **Footer Bottom Bar**: Added gold dot (●) separator between copyright and B-BBEE text, copyright uses text-cd-text-dim
+11. **Pricing Card Hover**: All cards now have hover:border-cd-gold/20 for gold-tinted hover
+
+### 3 New Feature Components:
+1. **Team Section** (team.tsx): 3 team member cards with gold gradient avatar circles, names, roles (font-mono), bios, LinkedIn icons, glass-card styling, stagger animation
+2. **Client Logos** (client-logos.tsx): 6 client abbreviation cards (SOS, DB, BLT, TSM, GB, CD) in 3-col/6-col responsive grid, hover scale, fade-in animation
+3. **Social Proof Popup** (social-proof.tsx): Rotating notification messages (4 variants), fixed bottom-left, desktop only, 10s delay, 5s visible, 8s cycle, Framer Motion slide-in/out
+
+### Page Layout Updated:
+- Added ClientLogos after ClientMarquee
+- Added Team between WhyCarter and StatsTicker
+- Added SocialProof after ScrollToTop
+- Added ScrollProgress after Navigation
+- Navigation sectionIds updated with 'team' and 'clients'
+
+### VLM Quality Score: 7.5/10 (maintained, but foundation stronger for next round)
+
+Stage Summary:
+- 11 styling improvements including scroll progress bar, chat tooltip, cookie polish
+- 3 new interactive feature components (Team, Client Logos, Social Proof)
+- 1 new utility component (Scroll Progress Bar)
+- ESLint: 0 errors, Site: HTTP 200, No runtime errors
+
+Current Project Status:
+- Website now has 29+ sections with rich interactivity
+- Full page: PageLoader → ScrollProgress → Navigation → Hero(typing) → ClientMarquee → ClientLogos → WhyCarter → Team → StatsTicker → Services → ServiceComparison → Portfolio → Testimonials(carousel) → TestimonialVideo → BeforeAfter → Process → FreeTools → ProjectEstimator → Calculators → CarterStory → CompanyTimeline → Pricing → FAQ → BlogPreview → ContactForm → Newsletter → Footer
+- Interactive features: AI Chat, Cost Calculator, B-BBEE Estimator, Project Estimator Wizard, Before/After Slider, Contact Form, Newsletter, FAQ Accordion, Portfolio Modal, Cookie Consent, Scroll-to-Top, Testimonial Carousel, Page Loader, Hero Typing, Ambient Particles, Video Testimonials, Team Section, Client Logos, Social Proof Popup, Scroll Progress Bar
+- VLM Quality Score: 7.5/10 (Text: 8/10, Polish: 8/10, Color: 8/10, Hierarchy: 7/10, Layout: 7/10, Interactive: 6/10)
+
+Unresolved Issues / Next Steps:
+- Interactive hover feedback still rated 6/10 by VLM — need more visible hover states globally
+- VLM notes cookie banner and "1 Issue" notification (dev tools indicator) as polish issues
+- Some sections perceived as empty — need more visual content in those areas
+- Contact form API could integrate with email service for actual delivery
+- Performance optimization (Lighthouse audit, lazy loading)
+- Minor: Residual FM borderColor warning from CSS hover transitions (harmless)

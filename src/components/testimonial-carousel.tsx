@@ -118,14 +118,14 @@ export default function TestimonialCarousel() {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 w-12 h-12 rounded-full bg-cd-surface/80 border border-cd-border flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] hover:bg-cd-gold/10 hover:border-cd-gold/30 transition-all duration-300 z-10"
         aria-label="Previous testimonial"
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={next}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 w-12 h-12 rounded-full bg-cd-surface/80 border border-cd-border flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] hover:bg-cd-gold/10 hover:border-cd-gold/30 transition-all duration-300 z-10"
         aria-label="Next testimonial"
       >
         <ChevronRight size={20} />

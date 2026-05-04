@@ -28,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'team', 'clients', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {

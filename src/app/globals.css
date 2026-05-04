@@ -175,6 +175,7 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--cd-border);
   will-change: border-color;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
@@ -368,5 +369,28 @@
 
 /* Button active/press state */
 .btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Primary gold button */
+.btn-primary-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--cd-gold);
+  color: var(--cd-bg);
+  transition: all 0.3s ease;
+}
+.btn-primary-gold:hover {
+  background-color: var(--cd-gold-light);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.25);
+}
+.btn-primary-gold:active {
   transform: scale(0.97);
 }

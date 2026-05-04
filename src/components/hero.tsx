@@ -155,7 +155,7 @@ export default function Hero() {
                 key={i}
                 className="flex items-center gap-2 text-sm text-cd-text font-medium"
               >
-                <span className="text-lg">{badge.emoji}</span>
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cd-gold/10 text-lg">{badge.emoji}</span>
                 <span className="font-medium">{badge.label}</span>
                 {i < badgeItems.length - 1 && (
                   <span className="hidden sm:inline text-cd-border ml-4">|</span>

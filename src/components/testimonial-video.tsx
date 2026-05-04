@@ -25,7 +25,7 @@ export default function TestimonialVideo() {
   }
 
   return (
-    <section id="video-testimonials" className="relative py-20 sm:py-28 overflow-hidden">
+    <section id="video-testimonials" className="relative py-20 md:py-28 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"
