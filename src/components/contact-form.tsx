@@ -115,7 +115,7 @@ export default function ContactForm() {
           </h2>
           {/* Gold accent line */}
           <div className="mx-auto mb-6 h-[3px] w-16 rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
-          <p className="text-[#888880] font-sans text-base max-w-md mx-auto">
+          <p className="text-[#B8B8B0] font-sans text-base max-w-md mx-auto">
             Tell us about your project. We reply within 4 business hours.
           </p>
         </motion.div>
@@ -136,7 +136,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-[#888880] font-sans text-sm">
+                <Label htmlFor="name" className="text-[#B8B8B0] font-sans text-sm">
                   Name <span className="text-[#C9A84C]">*</span>
                 </Label>
                 <Input
@@ -153,7 +153,7 @@ export default function ContactForm() {
 
               {/* Business Name */}
               <div className="space-y-2">
-                <Label htmlFor="businessName" className="text-[#888880] font-sans text-sm">
+                <Label htmlFor="businessName" className="text-[#B8B8B0] font-sans text-sm">
                   Business Name <span className="text-[#C9A84C]">*</span>
                 </Label>
                 <Input
@@ -175,7 +175,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-[#888880] font-sans text-sm">
+                <Label htmlFor="email" className="text-[#B8B8B0] font-sans text-sm">
                   Email <span className="text-[#C9A84C]">*</span>
                 </Label>
                 <Input
@@ -193,7 +193,7 @@ export default function ContactForm() {
 
               {/* Phone */}
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-[#888880] font-sans text-sm">
+                <Label htmlFor="phone" className="text-[#B8B8B0] font-sans text-sm">
                   Phone <span className="text-[#C9A84C]">*</span>
                 </Label>
                 <Input
@@ -214,7 +214,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {/* Service */}
               <div className="space-y-2">
-                <Label className="text-[#888880] font-sans text-sm">Service</Label>
+                <Label className="text-[#B8B8B0] font-sans text-sm">Service</Label>
                 <Select onValueChange={(value) => setValue('service', value)}>
                   <SelectTrigger className={selectTriggerStyles}>
                     <SelectValue placeholder="Select a service" />
@@ -256,7 +256,7 @@ export default function ContactForm() {
 
               {/* Budget */}
               <div className="space-y-2">
-                <Label className="text-[#888880] font-sans text-sm">Budget Range</Label>
+                <Label className="text-[#B8B8B0] font-sans text-sm">Budget Range</Label>
                 <Select onValueChange={(value) => setValue('budget', value)}>
                   <SelectTrigger className={selectTriggerStyles}>
                     <SelectValue placeholder="Select a budget range" />
@@ -294,7 +294,7 @@ export default function ContactForm() {
             {/* Row 4 — Message */}
             <div className="mb-8">
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-[#888880] font-sans text-sm">
+                <Label htmlFor="message" className="text-[#B8B8B0] font-sans text-sm">
                   Tell us about your project
                 </Label>
                 <Textarea
@@ -328,7 +328,7 @@ export default function ContactForm() {
               </Button>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap items-center gap-4 text-[#555550] text-xs font-sans">
+              <div className="flex flex-wrap items-center gap-4 text-[#8A8A82] text-xs font-sans">
                 <span className="flex items-center gap-1.5">
                   🔒 Your info is private
                 </span>
@@ -363,7 +363,7 @@ export default function ContactForm() {
                 Prefer to chat?
               </h3>
             </div>
-            <p className="text-[#888880] font-sans text-sm mb-5">
+            <p className="text-[#B8B8B0] font-sans text-sm mb-5">
               Message us on WhatsApp for a faster response.
             </p>
             <a
@@ -385,7 +385,7 @@ export default function ContactForm() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                <span className="text-[#888880] font-sans text-sm">
+                <span className="text-[#B8B8B0] font-sans text-sm">
                   Soshanguve, Pretoria, Gauteng
                 </span>
               </li>
@@ -393,7 +393,7 @@ export default function ContactForm() {
                 <Phone className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                 <a
                   href="tel:0724026893"
-                  className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                  className="text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
                 >
                   072 402 6893
                 </a>
@@ -402,14 +402,14 @@ export default function ContactForm() {
                 <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                 <a
                   href="mailto:info@carterdigitals.co.za"
-                  className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                  className="text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
                 >
                   info@carterdigitals.co.za
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                <span className="text-[#888880] font-sans text-sm">
+                <span className="text-[#B8B8B0] font-sans text-sm">
                   We reply within 4 business hours
                 </span>
               </li>

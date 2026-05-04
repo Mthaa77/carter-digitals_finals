@@ -72,7 +72,7 @@ export default function Newsletter() {
           </h2>
 
           {/* Subtext */}
-          <p className="text-[#888880] text-lg max-w-lg mx-auto font-sans mb-10">
+          <p className="text-[#B8B8B0] text-lg max-w-lg mx-auto font-sans mb-10">
             Get business tips, web design insights, and South African SME
             resources. No spam. Unsubscribe anytime.
           </p>
@@ -116,7 +116,7 @@ export default function Newsletter() {
               <p className="text-[#F0EFE8] font-display font-semibold text-lg">
                 You&apos;re in! 🎉
               </p>
-              <p className="text-[#888880] text-sm font-sans">
+              <p className="text-[#B8B8B0] text-sm font-sans">
                 Welcome aboard. We&apos;ll send you the good stuff.
               </p>
             </motion.div>

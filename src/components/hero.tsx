@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink, Trophy, Zap, ChevronDown } from 'lucide-react'
+import HeroTyping from '@/components/hero-typing'
 
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -110,15 +111,14 @@ export default function Hero() {
               We Build Websites{' '}
               <br className="hidden sm:block" />
               That{' '}
-              <span className="gold-gradient-text text-glow-gold">Make Money.</span>
+              <HeroTyping />
             </span>
           </motion.h1>
 
           {/* Sub text */}
           <motion.p
             variants={itemVariants}
-            className="max-w-2xl mx-auto text-cd-text-muted text-lg sm:text-xl leading-relaxed font-sans"
-            style={{ fontSize: 'var(--text-body-lg)' }}
+            className="max-w-2xl mx-auto text-cd-text-muted text-base sm:text-xl leading-relaxed font-sans"
           >
             Carter Digitals is a 100% Black-owned B-BBEE Level 1 agency from
             Soshanguve, Pretoria. Premium websites and business tools for SMEs
@@ -132,7 +132,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="btn-press group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
+              className="btn-press btn-glow-gold group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
             >
               Get a Free Quote
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -148,7 +148,7 @@ export default function Hero() {
           {/* Badge strip - glassmorphism */}
           <motion.div
             variants={itemVariants}
-            className="glass-card rounded-xl px-6 py-3 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+            className="glass-card rounded-xl px-6 py-3 flex flex-wrap items-center justify-center gap-4 sm:gap-6 border-t border-t-cd-gold/20"
           >
             {badgeItems.map((badge, i) => (
               <div
@@ -171,8 +171,13 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 sm:mt-28 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
+          className="mt-20 sm:mt-28 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 relative"
         >
+          {/* Radial gradient glow behind counter row */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+            <div className="w-[80%] h-[80%] rounded-full bg-cd-gold blur-[100px] opacity-[0.04]" />
+          </div>
+
           {counterItems.map((item, i) => (
             <div
               key={i}

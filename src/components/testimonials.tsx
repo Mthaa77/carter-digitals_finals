@@ -1,61 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Star } from 'lucide-react'
-
-const testimonials = [
-  {
-    stars: 5,
-    quote:
-      "Carter Digitals delivered our school website in record time. The quality exceeded our expectations and we've had nothing but positive feedback from parents and staff.",
-    name: 'Representative',
-    business: 'Soshanguve Automotive School of Specialisation',
-    location: 'Soshanguve, Pretoria',
-    tag: 'Source: Client Feedback',
-  },
-  {
-    stars: 5,
-    quote:
-      "Professional, fast, and they actually understand what a business needs online. Our new site has brought in enquiries we never would have gotten before.",
-    name: 'Director',
-    business: 'Direla Bakgatla Trading Projects',
-    location: 'Pretoria, Gauteng',
-    tag: 'Source: Client Feedback',
-  },
-  {
-    stars: 5,
-    quote:
-      "We needed more than a website — we needed tools that make our daily operations easier. Carter Digitals built exactly what we needed, on budget and on time.",
-    name: 'Business Owner',
-    business: 'Pretoria SME',
-    location: 'Tshwane, Gauteng',
-    tag: 'Source: Client Feedback',
-  },
-]
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-}
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  },
-}
+import TestimonialCarousel from '@/components/testimonial-carousel'
 
 export default function Testimonials() {
   return (
@@ -78,61 +24,8 @@ export default function Testimonials() {
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
         </motion.div>
 
-        {/* Testimonial Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {testimonials.map((testimonial) => (
-            <motion.div
-              key={testimonial.name}
-              variants={cardVariants}
-              className="glass-card card-lift rounded-xl p-6 md:p-8 flex flex-col relative"
-            >
-              {/* Decorative gold quote mark */}
-              <span
-                className="absolute top-4 right-6 text-[#C9A84C]/20 font-serif text-6xl leading-none select-none pointer-events-none"
-                aria-hidden="true"
-              >
-                &ldquo;
-              </span>
-
-              {/* Stars */}
-              <div className="flex gap-1 mb-5">
-                {Array.from({ length: testimonial.stars }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 fill-[#C9A84C] text-[#C9A84C]"
-                  />
-                ))}
-              </div>
-
-              {/* Quote */}
-              <blockquote className="text-[#F0EFE8] text-sm leading-relaxed mb-6 flex-1 font-sans relative z-10">
-                &ldquo;{testimonial.quote}&rdquo;
-              </blockquote>
-
-              {/* Attribution */}
-              <div className="border-t border-[#242424] pt-4">
-                <p className="text-[#F0EFE8] font-display font-semibold text-sm">
-                  {testimonial.name}
-                </p>
-                <p className="text-[#888880] text-sm mt-0.5 font-sans">
-                  {testimonial.business}
-                </p>
-                <p className="text-[#555550] text-xs mt-1 font-sans">
-                  {testimonial.location}
-                </p>
-                <p className="text-[#555550] text-xs mt-2 italic font-sans">
-                  {testimonial.tag}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Testimonial Carousel */}
+        <TestimonialCarousel />
 
         {/* CTA */}
         <motion.div

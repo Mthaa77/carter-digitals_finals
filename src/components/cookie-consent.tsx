@@ -71,13 +71,13 @@ export default function CookieConsent() {
               <div className="flex items-center gap-4 shrink-0">
                 <button
                   onClick={handleDecline}
-                  className="px-5 py-2.5 text-sm font-medium text-cd-text-muted border border-cd-border rounded-lg hover:border-cd-text-muted hover:text-cd-text transition-all duration-300"
+                  className="px-8 py-3 text-base font-medium text-cd-text-muted border border-cd-border rounded-lg hover:border-cd-text-muted hover:text-cd-text transition-all duration-300"
                 >
                   Decline
                 </button>
                 <button
                   onClick={handleAccept}
-                  className="px-5 py-2.5 text-sm font-bold bg-cd-gold text-cd-bg rounded-lg hover:bg-cd-gold-light transition-all duration-300 shadow-lg shadow-cd-gold/15"
+                  className="px-8 py-3 text-base font-bold bg-cd-gold text-cd-bg rounded-lg hover:bg-cd-gold-light transition-all duration-300 shadow-lg shadow-cd-gold/15"
                 >
                   Accept
                 </button>

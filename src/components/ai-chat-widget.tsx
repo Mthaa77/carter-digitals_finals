@@ -143,7 +143,7 @@ export default function AIChatWidget() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-md text-[#888880] hover:text-[#F0EFE8] hover:bg-[#242424] transition-colors duration-200"
+                className="p-1 rounded-md text-[#B8B8B0] hover:text-[#F0EFE8] hover:bg-[#242424] transition-colors duration-200"
                 aria-label="Close chat"
               >
                 <X className="w-4 h-4" />
@@ -218,7 +218,7 @@ export default function AIChatWidget() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-[#1A1A1A] border border-[#C9A84C]/40 flex items-center justify-center shadow-lg shadow-black/30 hover:border-cd-gold/70 transition-all duration-300"
+        className="w-14 h-14 rounded-full bg-[#1A1A1A] border border-[#242424] flex items-center justify-center shadow-lg shadow-black/30 hover:border-cd-gold/50 transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}

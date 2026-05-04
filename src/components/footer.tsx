@@ -59,7 +59,7 @@ export default function Footer() {
               href="https://wa.me/27724026893?text=Hi%20Carter%20Digitals%2C%20I%27d%20like%20to%20discuss%20a%20project"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+              className="link-underline inline-flex items-center gap-2 text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
             >
               <MessageCircle className="w-4 h-4" />
               Prefer to chat? Message us on WhatsApp.
@@ -90,22 +90,22 @@ export default function Footer() {
                   <span className="text-[#C9A84C]">Digitals</span>
                 </span>
               </div>
-              <p className="text-[#888880] font-sans text-sm leading-relaxed max-w-xs">
+              <p className="text-[#B8B8B0] font-sans text-base leading-relaxed max-w-xs">
                 Built in Soshanguve. For businesses that refuse to be invisible.
               </p>
 
               {/* Social media links */}
               <div className="flex items-center gap-4 mt-5">
-                <a href="#" aria-label="Facebook" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="Facebook" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="Instagram" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="Instagram" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="LinkedIn" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="LinkedIn" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="X / Twitter" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="X / Twitter" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Twitter className="w-5 h-5" />
                 </a>
               </div>
@@ -113,7 +113,7 @@ export default function Footer() {
 
             {/* Column 2 - Quick Links */}
             <div>
-              <h3 className="font-display text-sm font-semibold text-[#F0EFE8] uppercase tracking-wider mb-5">
+              <h3 className="font-display text-sm font-bold text-[#F0EFE8] uppercase tracking-wider mb-5">
                 Quick Links
               </h3>
               <ul className="space-y-3">
@@ -121,7 +121,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                      className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                     >
                       {link.label}
                     </a>
@@ -132,7 +132,7 @@ export default function Footer() {
 
             {/* Column 3 - Services */}
             <div>
-              <h3 className="font-display text-sm font-semibold text-[#F0EFE8] uppercase tracking-wider mb-5">
+              <h3 className="font-display text-sm font-bold text-[#F0EFE8] uppercase tracking-wider mb-5">
                 Services
               </h3>
               <ul className="space-y-3">
@@ -140,7 +140,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                      className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                     >
                       {link.label}
                     </a>
@@ -151,13 +151,13 @@ export default function Footer() {
 
             {/* Column 4 - Contact */}
             <div>
-              <h3 className="font-display text-sm font-semibold text-[#F0EFE8] uppercase tracking-wider mb-5">
+              <h3 className="font-display text-sm font-bold text-[#F0EFE8] uppercase tracking-wider mb-5">
                 Contact
               </h3>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#888880] font-sans text-sm">
+                  <span className="text-[#B8B8B0] font-sans text-base">
                     Soshanguve, Pretoria, Gauteng
                   </span>
                 </li>
@@ -165,7 +165,7 @@ export default function Footer() {
                   <Phone className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                   <a
                     href="tel:0724026893"
-                    className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                    className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                   >
                     072 402 6893
                   </a>
@@ -174,14 +174,14 @@ export default function Footer() {
                   <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                   <a
                     href="mailto:info@carterdigitals.co.za"
-                    className="text-[#888880] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
+                    className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                   >
                     info@carterdigitals.co.za
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Clock className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#888880] font-sans text-sm">
+                  <span className="text-[#B8B8B0] font-sans text-base">
                     We reply within 4 business hours
                   </span>
                 </li>
@@ -194,7 +194,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#555550] font-sans text-xs">
+          <p className="text-[#8A8A82] font-sans text-sm">
             &copy; 2026 Carter Digitals (Pty) Ltd
           </p>
           <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">

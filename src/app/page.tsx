@@ -6,6 +6,7 @@ import ClientMarquee from '@/components/client-marquee'
 import WhyCarter from '@/components/why-carter'
 import StatsTicker from '@/components/stats-ticker'
 import Services from '@/components/services'
+import ServiceComparison from '@/components/service-comparison'
 import Portfolio from '@/components/portfolio'
 import Testimonials from '@/components/testimonials'
 import FreeTools from '@/components/free-tools'
@@ -25,13 +26,17 @@ import CustomCursor from '@/components/custom-cursor'
 import ScrollToTop from '@/components/scroll-to-top'
 import CookieConsent from '@/components/cookie-consent'
 import SectionDivider from '@/components/section-divider'
+import PageLoader from '@/components/page-loader'
+import ParticleBg from '@/components/particle-bg'
 
 export default function Home() {
   return (
     <>
+      <PageLoader />
       <CustomCursor />
       <Navigation />
-      <main className="min-h-screen bg-[#080808]">
+      <main className="min-h-screen flex flex-col bg-[#080808]">
+        <ParticleBg />
         <Hero />
         <ClientMarquee />
         <SectionDivider />
@@ -40,6 +45,8 @@ export default function Home() {
         <StatsTicker />
         <SectionDivider />
         <Services />
+        <SectionDivider />
+        <ServiceComparison />
         <SectionDivider />
         <Portfolio />
         <SectionDivider />
@@ -61,7 +68,9 @@ export default function Home() {
         <SectionDivider />
         <ContactForm />
         <Newsletter />
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
       </main>
       <WhatsAppButton />
       <AIChatWidget />

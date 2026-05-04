@@ -65,7 +65,7 @@ export default function PortfolioModal({
             {project.services.map((service) => (
               <span
                 key={service}
-                className="inline-block px-3 py-1 text-xs font-medium text-[#888880] border border-[#242424] rounded-full bg-[#0D0D0D] font-sans"
+                className="inline-block px-3 py-1 text-xs font-medium text-[#B8B8B0] border border-[#242424] rounded-full bg-[#0D0D0D] font-sans"
               >
                 {service}
               </span>
@@ -74,7 +74,7 @@ export default function PortfolioModal({
 
           {/* Key Result */}
           <div className="bg-cd-gold/5 border border-cd-gold/20 rounded-lg px-4 py-3">
-            <span className="text-xs text-[#888880] font-sans uppercase tracking-wider">
+            <span className="text-xs text-[#B8B8B0] font-sans uppercase tracking-wider">
               Key Result
             </span>
             <p className="text-cd-gold font-display font-semibold text-lg mt-1">

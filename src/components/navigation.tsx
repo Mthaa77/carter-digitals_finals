@@ -28,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -112,7 +112,7 @@ export default function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-md ${
+                    className={`link-underline relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md hover:bg-cd-gold/5 ${
                       isActive
                         ? 'text-cd-gold'
                         : 'text-cd-text-muted hover:text-cd-text'
@@ -132,7 +132,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="btn-press ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10"
+                className="btn-press ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10 shadow-[0_0_15px_rgba(201,168,76,0.15)]"
               >
                 Get a Quote
               </a>
@@ -160,7 +160,10 @@ export default function Navigation() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-cd-bg/98 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-2">
+            <div className="flex flex-col items-center justify-center h-full gap-4">
+              {/* Gold accent line at top */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cd-gold-dim via-cd-gold to-cd-gold-dim" />
+
               {navItems.map((item, i) => {
                 const sectionId = item.href.replace('#', '')
                 const isActive = activeSection === sectionId

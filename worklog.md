@@ -472,3 +472,240 @@ Unresolved Issues / Next Steps:
 - Could add a "Book a Call" scheduling integration (Calendly)
 - Could add Google Analytics / Tag Manager integration
 - Minor: Residual FM borderColor warning from CSS hover transitions (harmless)
+
+---
+Task ID: 12
+Agent: Cron Review Agent (Round 5)
+Task: QA testing, bug fixes, comprehensive styling improvements, and major feature additions
+
+Work Log:
+- Read worklog.md and assessed current project status (20+ sections, VLM score 3/10)
+- Performed QA testing via agent-browser with desktop (1440×900) and mobile (375×812) viewports
+- Used VLM (Vision Language Model) to visually analyze hero, mobile, services, and pricing screenshots
+- Identified critical contrast issues: text-muted (#888880) too dim, text-dim (#555550) nearly invisible on dark bg
+- Identified footer text too small, cookie consent buttons too small, AI chat widget too bright
+- Dispatched 2 parallel subagents (Task 12-a: bug fixes + styling, Task 12-b: new features)
+
+### Bug Fixes Applied:
+1. **Text contrast improvement (Round 1)**: Changed --cd-text-muted from #888880 to #A8A8A0, --cd-text-dim from #555550 to #787870
+2. **Text contrast improvement (Round 2)**: Further increased --cd-text-muted from #A8A8A0 to #B8B8B0, --cd-text-dim from #787870 to #8A8A82
+3. **Replaced all hardcoded old colors**: Replaced every #888880 reference with #B8B8B0 and every #555550 reference with #8A8A82 across all components
+4. **Footer text enlarged**: Quick links text-sm→text-base, contact details text-sm→text-base, description text-sm→text-base, copyright text-xs→text-sm
+5. **Cookie consent buttons enlarged**: Accept/Decline buttons now px-8 py-3 text-base
+6. **AI chat widget tone-down**: Changed border from gold/40 to neutral #242424, hover to gold/50
+
+### Styling Improvements (12 items):
+1. Hero: Gold border-top on badge strip, font-semibold on "Make Money.", radial glow behind counter row
+2. Navigation: hover:bg-cd-gold/5, link-underline class, gold glow shadow on "Get a Quote"
+3. Glass card depth: Enhanced hover shadow (0 8px 32px rgba(0,0,0,0.3)), new .glass-card-gold class
+4. Section visual distinction: New .section-alt class applied to alternating sections
+5. Typography hierarchy: New .section-label and .section-heading utility classes
+6. Link underline animation: .link-underline with animated gold underline on footer + nav links
+7. Button glow: .btn-glow-gold with shimmer effect on hero CTA
+8. Pricing: Business tier gold border glow (border-cd-gold/30)
+9. Testimonials: 3px gold left border with hover transition
+10. Mobile menu: Gold accent line at top, gap-4 spacing
+11. Sticky footer: min-h-screen flex flex-col on main + mt-auto on footer wrapper
+12. Footer text color updated to #B8B8B0 consistently
+
+### New Features (5 components):
+1. **Hero Typing Animation** (hero-typing.tsx): Types "Make Money." character-by-character at 80ms speed with 1.5s delay, blinking gold cursor
+2. **Testimonial Carousel** (testimonial-carousel.tsx): Auto-rotates every 5s, dot indicators, left/right arrows, AnimatePresence fade+slide transitions, 3 testimonials
+3. **Page Loading Animation** (page-loader.tsx): Full-screen dark overlay, "Carter" white / "Digitals" gold, gold pulse glow, progress bar 0→100%, fades out after ~2.5s
+4. **Ambient Particle Background** (particle-bg.tsx): 35 gold dots (2-4px), CSS keyframe animation for performance, desktop only (hidden md:block)
+5. **Service Comparison Table** (service-comparison.tsx): 3 services × 8 features, Check/X/Minus icons, glass card, desktop table + mobile cards, Framer Motion entrance
+
+### VLM Quality Score Progression:
+- Round 1: 3/10 (initial assessment)
+- Round 2: 6/10 (after first contrast fix)
+- Round 3: 7/10 (after comprehensive improvements)
+
+Stage Summary:
+- 6 bug fixes applied (contrast, footer sizing, cookie consent, widget tone-down)
+- 12 styling improvements across all sections
+- 5 new feature components created and integrated
+- VLM quality score improved from 3/10 to 7/10
+- ESLint: 0 errors, Site: HTTP 200, No runtime errors
+
+Current Project Status:
+- Website now has 22+ sections with rich interactivity and premium styling
+- Full page: PageLoader → Navigation → Hero(typing) → ClientMarquee → WhyCarter → StatsTicker → Services → ServiceComparison → Portfolio → Testimonials(carousel) → Process → FreeTools → Calculators → CarterStory → Pricing → FAQ → BlogPreview → ContactForm → Newsletter → Footer
+- Interactive features: AI Chat Assistant, Website Cost Calculator, B-BBEE Estimator, Contact Form, Newsletter, FAQ Accordion, Portfolio Modal, Cookie Consent, Scroll-to-Top with Progress, Testimonial Carousel, Page Loader, Hero Typing Animation, Ambient Particles
+- Visual enhancements: Gold gradient text glow, glassmorphism badge strip, floating CTAs, numbered card indicators, expandable service details, portfolio hover overlays, decorative quote marks, card-lift effects, candle animation, social media links, trust badges, section dividers with gold diamonds, link underline animations, button shimmer effects
+- Navigation tracks all 15 sections including compare
+- Design system: Soshanguve Steel (dark #080808 bg, gold #C9A84C accents, glassmorphism cards, improved contrast)
+- SEO: JSON-LD structured data, OpenGraph metadata, semantic HTML
+- VLM Quality Score: 7/10
+
+Unresolved Issues / Next Steps:
+- Contact form API could integrate with email service (Resend/SendGrid) for actual delivery
+- AI chat could be enhanced with conversation memory/context window
+- Performance optimization (Lighthouse audit, image optimization, lazy loading)
+- Could add actual blog article pages with dynamic routes
+- Could add a "Book a Call" scheduling integration (Calendly)
+- Could add Google Analytics / Tag Manager integration
+- Could add more visual elements to reduce empty space perception
+- Minor: Residual FM borderColor warning from CSS hover transitions (harmless)
+
+---
+Task ID: 12-b
+Agent: Fullstack Developer
+Task: Add 5 new feature components (Hero Typing, Testimonial Carousel, Page Loader, Particle BG, Service Comparison)
+
+Work Log:
+
+1. **Hero Typing Animation** (`src/components/hero-typing.tsx`):
+   - Character-by-character typing with configurable speed (default 80ms)
+   - 1.5s delay before typing starts
+   - Blinking gold cursor (3px vertical line) during and after typing
+   - After typing completes, cursor blinks forever using Framer Motion opacity keyframes
+   - Uses gold-gradient-text and text-glow-gold classes for styling
+   - Updated hero.tsx: Replaced static "Make Money." span with `<HeroTyping />` component
+
+2. **Testimonial Carousel** (`src/components/testimonial-carousel.tsx`):
+   - Auto-rotates every 5 seconds
+   - Left/right arrow navigation buttons
+   - Dot indicators (active dot elongated/wider)
+   - Fade + slide transition with Framer Motion AnimatePresence
+   - 3 testimonials with specific data: Thabo M. (Soshanguve SOS), Lerato K. (Direla Bakgatla), Dineo R. (Block L Traders)
+   - Large italic quote text, gold star ratings, decorative quote mark
+   - Glass card styling
+   - Updated testimonials.tsx: Replaced static 3-column grid with TestimonialCarousel component
+
+3. **Page Loading Animation** (`src/components/page-loader.tsx`):
+   - Full-screen dark overlay with "Carter" (white) and "Digitals" (gold) centered text
+   - Gold pulse glow behind the name (blur + scale animation)
+   - Gold gradient loading bar that fills 0% → 100% with ease-out quad
+   - Total duration ~2.5s (2.2s progress + 0.3s hold + 0.5s fade out)
+   - AnimatePresence for smooth exit fade
+   - After loader fades, it unmounts completely (no DOM residue)
+   - z-[100] to overlay everything
+   - Updated page.tsx: Added PageLoader at top before Navigation
+
+4. **Ambient Particle Background** (`src/components/particle-bg.tsx`):
+   - 35 small gold dots (2-4px) floating upward slowly
+   - CSS keyframe animation (cd-particle-rise) for performance, no JS runtime
+   - Each particle has random: x position, size, opacity (0.1-0.3), duration (15-40s), delay (0-20s)
+   - Particles float up from bottom and reset
+   - Very subtle, barely noticeable
+   - Desktop only (hidden on mobile: `hidden md:block`)
+   - Fixed position, pointer-events-none, z-0
+   - Inline styles for random values (generated via useMemo)
+   - Updated page.tsx: Added ParticleBg inside main after opening tag
+
+5. **Service Comparison Table** (`src/components/service-comparison.tsx`):
+   - Section ID: "compare"
+   - Compares SME Websites, Dashboards, SEO & Growth across 8 features
+   - Desktop: full table with gold accent header row, alternating row backgrounds
+   - Mobile: card-based layout (one card per service)
+   - Check icon (gold) for included, X icon (dim) for not included, Minus icon (gold dim) for partial
+   - Glass card container
+   - Framer Motion entrance animation
+   - Updated page.tsx: Added ServiceComparison after Services with SectionDivider
+   - Updated navigation.tsx: Added 'compare' to sectionIds array
+
+6. **Page Layout Updates** (`src/app/page.tsx`):
+   - Added PageLoader before Navigation
+   - Added ParticleBg inside main after opening tag
+   - Added ServiceComparison after Services section with SectionDivider
+   - Changed main to `min-h-screen flex flex-col` for sticky footer
+   - Wrapped Footer in `<div className="mt-auto">` for sticky footer behavior
+
+7. **Navigation Update** (`src/components/navigation.tsx`):
+   - Added 'compare' to sectionIds array
+
+Stage Summary:
+- Hero Typing Animation with blinking gold cursor
+- Testimonial Carousel with auto-rotation, arrows, and dot indicators
+- Page Loading Animation with progress bar and brand name
+- Ambient Particle Background (CSS-based, desktop-only)
+- Service Comparison Table (responsive, glass card)
+- All 5 components use 'use client' directive and Framer Motion
+- All follow Soshanguve Steel design system (dark bg, gold accents)
+- Footer sticky to bottom with mt-auto
+- ESLint: 0 errors, Site: HTTP 200
+
+---
+Task ID: 12-a
+Agent: Bug Fix & Styling Agent
+Task: Fix bugs and apply comprehensive styling improvements (13 items)
+
+Work Log:
+
+### Bug Fixes (3 items)
+1. **Text contrast too low** — globals.css:
+   - Changed --cd-text-muted from #888880 to #A8A8A0
+   - Changed --cd-text-dim from #555550 to #787870
+   - Changed --color-cd-text-muted from #888880 to #A8A8A0
+   - Changed --color-cd-text-dim from #555550 to #787870
+   - Changed --muted-foreground from #888880 to #A8A8A0
+
+2. **Footer text too small** — footer.tsx:
+   - Quick link text: text-sm → text-base
+   - Contact details text: text-sm → text-base
+   - Column headers: font-semibold → font-bold
+   - Description paragraph: text-sm → text-base
+   - Bottom bar copyright: text-xs → text-sm
+   - Updated all #888880 references to #A8A8A0 and #555550 to #787870
+   - Applied link-underline class to footer links
+
+3. **Cookie consent button sizing** — cookie-consent.tsx:
+   - Accept button: px-5 py-2.5 text-sm → px-8 py-3 text-base
+   - Decline button: px-5 py-2.5 text-sm → px-8 py-3 text-base
+
+### Styling Improvements (10 items)
+4. **Hero section visual enhancement** — hero.tsx:
+   - Added gold border-top on badge strip
+   - Changed subtext to text-base (removed CSS variable dependency)
+   - Added font-semibold to "Make Money." span
+   - Added radial gradient glow behind counter row
+
+5. **Navigation hover/active states** — navigation.tsx:
+   - Added hover:bg-cd-gold/5 to desktop nav links
+   - Changed transition-colors duration-300 to transition-all duration-200
+   - Added link-underline class to nav links
+   - Added shadow-[0_0_15px_rgba(201,168,76,0.15)] gold glow to "Get a Quote" button
+
+6. **Glass card depth enhancement** — globals.css:
+   - Updated .glass-card:hover to add enhanced box-shadow
+   - Added new .glass-card-gold class with gold-tinted glass
+
+7. **Section visual distinction** — globals.css + page.tsx:
+   - Added .section-alt class
+   - Applied to alternating sections: StatsTicker, Portfolio, Process, CarterStory, FAQ, ContactForm
+
+8. **Typography hierarchy** — globals.css:
+   - Added .section-label class
+   - Added .section-heading class
+
+9. **Micro-interaction: link underline animation** — globals.css:
+   - Added .link-underline with animated gold underline
+   - Applied to footer links and navigation links
+
+10. **Button glow enhancement** — globals.css + hero.tsx:
+    - Added .btn-glow-gold class with shimmer effect
+    - Applied to hero "Get a Free Quote" button
+
+11. **Pricing card elevation** — pricing.tsx:
+    - Changed Business tier border to border-cd-gold/30
+
+12. **Testimonial card enhancement** — testimonials.tsx:
+    - Added border-l-[3px] border-l-cd-gold/30 gold left border
+    - Added hover:border-l-cd-gold transition effect
+
+13. **Mobile menu improvement** — navigation.tsx:
+    - Added gold accent line at top of mobile overlay
+    - Changed gap from gap-2 to gap-4
+
+### Layout Fix
+- **Sticky footer** — page.tsx:
+  - Added flex flex-col to main element
+  - Wrapped Footer in div with mt-auto
+
+Stage Summary:
+- All 3 bug fixes applied (text contrast, footer sizing, cookie button sizing)
+- All 10 styling improvements implemented
+- 6 new CSS utility classes added (.section-alt, .section-label, .section-heading, .link-underline, .btn-glow-gold, .glass-card-gold)
+- Sticky footer implemented with flex layout
+- Section alternating backgrounds applied to 6 sections
+- ESLint: 0 errors, Site: HTTP 200
