@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Eye } from 'lucide-react'
 
 const projects = [
   {
@@ -11,6 +11,7 @@ const projects = [
     keyResult: 'Delivered in 11 days',
     description:
       'A fast, professional web presence for one of Soshanguve\'s leading educational institutions.',
+    isComingSoon: false,
   },
   {
     client: 'Direla Bakgatla Trading Projects (Pty) Ltd',
@@ -19,6 +20,7 @@ const projects = [
     keyResult: 'Now ranked on Google',
     description:
       'Corporate web infrastructure for a growing security and trading company.',
+    isComingSoon: false,
   },
   {
     client: 'Your Business Here',
@@ -27,6 +29,7 @@ const projects = [
     keyResult: 'Could be yours',
     description:
       "We're building new projects every month. Your success story could be next.",
+    isComingSoon: true,
   },
 ]
 
@@ -113,7 +116,11 @@ export default function Portfolio() {
             <motion.div
               key={project.client}
               variants={cardVariants}
-              className="group rounded-xl overflow-hidden border border-[#242424] bg-gradient-to-br from-[#131313] to-[#1A1A1A] hover:border-[#3A3A3A] transition-all duration-300"
+              className={`group rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 ${
+                project.isComingSoon
+                  ? 'border-2 border-dashed border-[#7A6330]/50 hover:border-[#C9A84C]/60'
+                  : 'border border-[#242424] hover:border-[#3A3A3A]'
+              }`}
             >
               {/* Image Placeholder */}
               <div className="relative h-44 bg-[#0D0D0D] overflow-hidden">
@@ -121,11 +128,24 @@ export default function Portfolio() {
                 {/* Dark overlay gradient at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#131313] to-transparent" />
                 {/* Industry badge */}
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-3 left-3 z-10">
                   <span className="inline-block px-2.5 py-1 text-xs font-medium text-[#7A6330] border border-[#7A6330]/30 rounded-md bg-[rgba(122,99,48,0.08)] font-sans">
                     {project.industry}
                   </span>
                 </div>
+
+                {/* Hover overlay with project name and View button */}
+                {!project.isComingSoon && (
+                  <div className="absolute inset-0 bg-[#080808]/80 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    <p className="text-[#F0EFE8] font-display font-semibold text-sm text-center px-4 mb-3 line-clamp-2">
+                      {project.client}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#C9A84C] text-[#080808] font-semibold text-xs">
+                      <Eye className="w-3.5 h-3.5" />
+                      View
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Card Content */}

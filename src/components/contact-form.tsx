@@ -308,7 +308,7 @@ export default function ContactForm() {
             </div>
 
             {/* Submit */}
-            <div className="flex justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start gap-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -326,6 +326,21 @@ export default function ContactForm() {
                   </>
                 )}
               </Button>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap items-center gap-4 text-[#555550] text-xs font-sans">
+                <span className="flex items-center gap-1.5">
+                  🔒 Your info is private
+                </span>
+                <span className="text-[#242424]">|</span>
+                <span className="flex items-center gap-1.5">
+                  ⚡ Reply in 4 hours
+                </span>
+                <span className="text-[#242424]">|</span>
+                <span className="flex items-center gap-1.5">
+                  🇿🇦 100% SA-owned
+                </span>
+              </div>
             </div>
           </form>
         </motion.div>

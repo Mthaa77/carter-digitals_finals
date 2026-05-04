@@ -9,6 +9,7 @@ interface WhyCard {
   title: string
   body: string
   tag: string
+  number: string
 }
 
 const cards: WhyCard[] = [
@@ -17,24 +18,28 @@ const cards: WhyCard[] = [
     title: 'Your Procurement Spend Qualifies',
     body: "We're 100% Black-owned and B-BBEE Level 1. Your supplier development spend works here. We're on the right list.",
     tag: 'B-BBEE Level 1',
+    number: '01',
   },
   {
     icon: Cloud,
     title: 'Not WordPress. Not Guesswork.',
     body: 'Next.js, Firebase, Vertex AI, Google Cloud. We build for speed, scale, and the future — not whatever a theme builder allows.',
     tag: 'GCP-Powered Stack',
+    number: '02',
   },
   {
     icon: LayoutDashboard,
     title: 'Beyond Websites',
     body: 'Booking systems. Stock trackers. Staff portals. Quote generators. We build the internal tools that actually run your business.',
     tag: 'Business Tools',
+    number: '03',
   },
   {
     icon: MapPin,
     title: 'From Soshanguve. For You.',
     body: "We didn't fly in from Cape Town. We built Carter Digitals in Block L. We know what Pretoria SMEs actually need — because we are one.",
     tag: 'Pretoria Roots',
+    number: '04',
   },
 ]
 
@@ -82,25 +87,33 @@ export default function WhyCarter() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
-                className="glass-card rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold transition-all duration-500 cursor-default"
+                className="glass-card rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold transition-all duration-500 cursor-default relative overflow-hidden"
               >
+                {/* Numbered indicator */}
+                <span className="absolute top-4 right-4 font-mono text-xs text-cd-text-dim/40 select-none">
+                  {card.number}
+                </span>
+
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-cd-gold/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
                 {/* Tag */}
-                <span className="inline-block text-xs font-mono font-medium text-cd-gold-dim uppercase tracking-wider mb-4">
+                <span className="inline-block text-xs font-mono font-medium text-cd-gold-dim uppercase tracking-wider mb-4 relative z-10">
                   {card.tag}
                 </span>
 
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-lg bg-cd-gold/10 flex items-center justify-center mb-5 group-hover:bg-cd-gold/20 transition-colors duration-300">
+                <div className="w-12 h-12 rounded-lg bg-cd-gold/10 flex items-center justify-center mb-5 group-hover:bg-cd-gold/20 transition-colors duration-300 relative z-10">
                   <Icon className="w-6 h-6 text-cd-gold" />
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-lg font-semibold text-cd-text mb-3 group-hover:text-cd-gold-light transition-colors duration-300">
+                <h3 className="font-display text-lg font-semibold text-cd-text mb-3 group-hover:text-cd-gold-light transition-colors duration-300 relative z-10">
                   {card.title}
                 </h3>
 
                 {/* Body */}
-                <p className="text-cd-text-muted text-sm leading-relaxed font-sans">
+                <p className="text-cd-text-muted text-sm leading-relaxed font-sans relative z-10">
                   {card.body}
                 </p>
               </motion.div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageCircle, Phone, Mail, Clock, MapPin } from 'lucide-react'
+import { MessageCircle, Phone, Mail, Clock, MapPin, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
 import Image from 'next/image'
 
 const quickLinks = [
@@ -93,6 +93,22 @@ export default function Footer() {
               <p className="text-[#888880] font-sans text-sm leading-relaxed max-w-xs">
                 Built in Soshanguve. For businesses that refuse to be invisible.
               </p>
+
+              {/* Social media links */}
+              <div className="flex items-center gap-4 mt-5">
+                <a href="#" aria-label="Facebook" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="#" aria-label="Instagram" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="#" aria-label="LinkedIn" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="#" aria-label="X / Twitter" className="text-[#888880] hover:text-[#C9A84C] transition-colors duration-200">
+                  <Twitter className="w-5 h-5" />
+                </a>
+              </div>
             </div>
 
             {/* Column 2 - Quick Links */}
@@ -179,7 +195,7 @@ export default function Footer() {
       <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#555550] font-sans text-xs">
-            &copy; 2025 Carter Digitals (Pty) Ltd
+            &copy; 2026 Carter Digitals (Pty) Ltd
           </p>
           <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">
             <span className="inline-block w-2 h-2 rounded-full bg-[#7A6330]" />

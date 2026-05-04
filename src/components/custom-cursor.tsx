@@ -112,8 +112,8 @@ export default function CustomCursor() {
             borderRadius: isHovering ? '50%' : '50%',
             borderWidth: isHovering ? 2 : 0,
             borderStyle: 'solid',
-            borderColor: isHovering ? '#C9A84C' : 'transparent',
-            backgroundColor: isHovering ? 'transparent' : '#C9A84C',
+            borderColor: isHovering ? '#C9A84C' : 'rgba(201,168,76,0)',
+            backgroundColor: isHovering ? 'rgba(201,168,76,0)' : '#C9A84C',
           }}
           transition={{
             type: 'spring',

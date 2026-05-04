@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Globe, LayoutDashboard, TrendingUp } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Globe, LayoutDashboard, TrendingUp, ChevronDown, Check } from 'lucide-react'
 
 const services = [
   {
@@ -12,6 +13,7 @@ const services = [
       'Mobile-first, SEO-optimised websites that load fast and convert visitors into customers. From R7,950.',
     cta: 'Website Packages →',
     href: '#pricing',
+    features: ['Custom Design', 'Mobile-First', 'SEO Setup', 'Contact Form', 'WhatsApp CTA', 'Analytics'],
   },
   {
     icon: LayoutDashboard,
@@ -21,6 +23,7 @@ const services = [
       'Booking systems, stock trackers, staff portals, and quote generators. Custom tools built around your workflows. From R15,000.',
     cta: 'See What We Build →',
     href: '#portfolio',
+    features: ['Staff Portals', 'Booking Systems', 'Stock Trackers', 'Quote Generators', 'Role-Based Access'],
   },
   {
     icon: TrendingUp,
@@ -30,6 +33,7 @@ const services = [
       "Google Ads management, SEO content, and local search optimisation. We don't just build sites — we make sure people find them.",
     cta: 'Growth Packages →',
     href: '#pricing',
+    features: ['Google Ads', 'Local SEO', 'Content Strategy', 'Monthly Reports', 'Keyword Research'],
   },
 ]
 
@@ -58,6 +62,8 @@ const cardVariants = {
 }
 
 export default function Services() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+
   return (
     <section id="services" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -87,8 +93,9 @@ export default function Services() {
           viewport={{ once: true, margin: '-60px' }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {services.map((service) => {
+          {services.map((service, index) => {
             const Icon = service.icon
+            const isExpanded = expandedIndex === index
             return (
               <motion.div
                 key={service.title}
@@ -114,6 +121,39 @@ export default function Services() {
                 <p className="text-[#888880] text-sm leading-relaxed mb-6 font-sans">
                   {service.description}
                 </p>
+
+                {/* What's Included Toggle */}
+                <button
+                  onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                  className="flex items-center gap-1.5 text-sm font-medium text-[#888880] hover:text-[#C9A84C] transition-colors duration-200 mb-3 font-sans"
+                  aria-expanded={isExpanded}
+                >
+                  What&apos;s Included
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="space-y-2 mb-4">
+                        {service.features.map((feature) => (
+                          <li key={feature} className="flex items-center gap-2 text-sm text-[#888880] font-sans">
+                            <Check className="w-3.5 h-3.5 text-[#C9A84C] shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* CTA Link */}
                 <a

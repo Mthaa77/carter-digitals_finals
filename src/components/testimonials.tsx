@@ -90,8 +90,16 @@ export default function Testimonials() {
             <motion.div
               key={testimonial.name}
               variants={cardVariants}
-              className="glass-card rounded-xl p-6 md:p-8 flex flex-col"
+              className="glass-card card-lift rounded-xl p-6 md:p-8 flex flex-col relative"
             >
+              {/* Decorative gold quote mark */}
+              <span
+                className="absolute top-4 right-6 text-[#C9A84C]/20 font-serif text-6xl leading-none select-none pointer-events-none"
+                aria-hidden="true"
+              >
+                &ldquo;
+              </span>
+
               {/* Stars */}
               <div className="flex gap-1 mb-5">
                 {Array.from({ length: testimonial.stars }).map((_, i) => (
@@ -103,7 +111,7 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-[#F0EFE8] text-sm leading-relaxed mb-6 flex-1 font-sans">
+              <blockquote className="text-[#F0EFE8] text-sm leading-relaxed mb-6 flex-1 font-sans relative z-10">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
 

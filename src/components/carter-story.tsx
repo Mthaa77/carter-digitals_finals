@@ -20,10 +20,25 @@ export default function CarterStory() {
           className="gold-accent-left max-w-3xl mx-auto md:mx-0"
         >
           {/* Heading */}
-          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-8">
+          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-4 flex items-center gap-3 flex-wrap">
+            <span
+              className="inline-block"
+              style={{ animation: 'flame 2s ease-in-out infinite' }}
+              aria-hidden="true"
+            >
+              🕯️
+            </span>
             Why We&apos;re Called{' '}
             <span className="text-[var(--cd-gold)]">Carter</span> Digitals
           </h2>
+
+          {/* Since 2021 badge */}
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--cd-gold-bg)] border border-[var(--cd-gold-dim)]/30 text-[var(--cd-gold)] font-mono text-xs tracking-wider">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--cd-gold)]" />
+              Since 2021
+            </span>
+          </div>
 
           {/* Story Copy */}
           <div className="space-y-5 mb-10">

@@ -90,7 +90,7 @@ export default function BlogPreview() {
             <motion.article
               key={post.title}
               variants={cardVariants}
-              className="group glass-card rounded-xl p-6 flex flex-col border-l-[3px] border-l-[var(--cd-gold)] transition-all duration-300 hover:border-[#3A3A3A] hover:border-l-[var(--cd-gold)]"
+              className="group glass-card rounded-xl p-6 flex flex-col border-l-[3px] border-l-[var(--cd-gold)] transition-all duration-300 hover:border-[#3A3A3A] hover:border-l-[var(--cd-gold)] hover:rotate-1"
             >
               {/* Category Badge */}
               <span className="inline-flex self-start items-center rounded-md bg-[var(--cd-gold-bg)] border border-[var(--cd-gold-dim)] text-[var(--cd-gold-dim)] font-mono text-[11px] tracking-wider px-2.5 py-1 mb-4">

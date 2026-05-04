@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#story' },
   { label: 'Services', href: '#services' },
+  { label: 'Process', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Blog', href: '#blog' },
@@ -27,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'services', 'portfolio', 'testimonials', 'tools', 'story', 'pricing', 'blog', 'contact']
+  const sectionIds = ['home', 'why-carter', 'services', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {

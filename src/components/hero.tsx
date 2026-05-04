@@ -7,7 +7,7 @@ import { ArrowRight, ExternalLink, Trophy, Zap } from 'lucide-react'
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(target)
 
   useEffect(() => {
     if (!isInView) return
@@ -95,13 +95,23 @@ export default function Hero() {
           {/* H1 */}
           <motion.h1
             variants={itemVariants}
-            className="font-display font-bold text-cd-text leading-[1.05] tracking-tight"
+            className="font-display font-bold text-cd-text leading-[1.05] tracking-tight relative"
             style={{ fontSize: 'var(--text-hero)' }}
           >
-            We Build Websites{' '}
-            <br className="hidden sm:block" />
-            That{' '}
-            <span className="gold-gradient-text">Make Money.</span>
+            {/* Animated gradient glow behind headline */}
+            <span
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              style={{ animation: 'gradient-glow 4s ease-in-out infinite' }}
+              aria-hidden="true"
+            >
+              <span className="w-[80%] h-[60%] rounded-full bg-cd-gold blur-[80px] opacity-20" />
+            </span>
+            <span className="relative">
+              We Build Websites{' '}
+              <br className="hidden sm:block" />
+              That{' '}
+              <span className="gold-gradient-text text-glow-gold">Make Money.</span>
+            </span>
           </motion.h1>
 
           {/* Sub text */}
@@ -123,6 +133,7 @@ export default function Hero() {
             <a
               href="#contact"
               className="group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
+              style={{ animation: 'float 3s ease-in-out infinite' }}
             >
               Get a Free Quote
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -130,15 +141,16 @@ export default function Hero() {
             <a
               href="#portfolio"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold transition-all duration-300 text-base"
+              style={{ animation: 'float 3s ease-in-out infinite 0.5s' }}
             >
               See Our Work
             </a>
           </motion.div>
 
-          {/* Badge strip */}
+          {/* Badge strip - glassmorphism */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-4"
+            className="glass-card rounded-xl px-6 py-3 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
           >
             {badgeItems.map((badge, i) => (
               <div
@@ -166,7 +178,7 @@ export default function Hero() {
           {counterItems.map((item, i) => (
             <div
               key={i}
-              className="glass-card rounded-xl p-6 text-center group hover:border-l-cd-gold transition-all duration-300"
+              className="glass-card rounded-xl p-6 text-center group hover:border-l-cd-gold hover:border-t-2 hover:border-t-cd-gold transition-all duration-300"
             >
               <div className="font-display text-3xl sm:text-4xl font-bold text-cd-gold mb-2">
                 <AnimatedCounter

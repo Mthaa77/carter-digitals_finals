@@ -134,7 +134,7 @@ export default function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10 items-start"
         >
           {plans.map((plan) => (
             <motion.div
@@ -143,7 +143,7 @@ export default function Pricing() {
               className={`
                 glass-card rounded-xl p-6 flex flex-col relative transition-all duration-300
                 ${plan.highlighted
-                  ? 'border-[var(--cd-gold-dim)] shadow-[0_0_30px_rgba(201,168,76,0.1)]'
+                  ? 'border-[var(--cd-gold-dim)] shadow-[0_0_30px_rgba(201,168,76,0.1)] md:scale-105 md:-mt-3 md:mb-[-12px]'
                   : 'hover:border-[#3A3A3A]'
                 }
               `}
@@ -168,11 +168,21 @@ export default function Pricing() {
               </p>
 
               {/* Price */}
-              <div className="mb-6">
+              <div className="mb-2">
                 <span className="font-display text-[var(--cd-text)] font-bold text-3xl">
                   {plan.price}
                 </span>
               </div>
+
+              {/* Best Value note for Business plan */}
+              {plan.highlighted && (
+                <p className="text-[#C9A84C] text-xs font-medium mb-4 flex items-center gap-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C9A84C]" />
+                  Best Value — most features per rand
+                </p>
+              )}
+
+              {!plan.highlighted && <div className="mb-4" />}
 
               {/* Features */}
               <ul className="space-y-2.5 mb-8 flex-1">
@@ -192,7 +202,7 @@ export default function Pricing() {
               {/* CTA */}
               {plan.isOutline ? (
                 <a
-                  href="#"
+                  href="#contact"
                   className="inline-flex items-center justify-center gap-2 h-10 rounded-lg border border-[var(--cd-gold)] text-[var(--cd-gold)] font-medium text-sm transition-all duration-300 hover:bg-[var(--cd-gold-bg)]"
                 >
                   {plan.cta}
@@ -200,7 +210,7 @@ export default function Pricing() {
                 </a>
               ) : (
                 <a
-                  href="#"
+                  href="#contact"
                   className={`
                     inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--cd-gold)] text-[#080808] font-medium text-sm transition-all duration-300 hover:bg-[var(--cd-gold-light)]
                     ${plan.highlighted ? 'h-11 px-6' : 'h-10 px-4'}

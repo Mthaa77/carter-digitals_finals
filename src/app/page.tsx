@@ -2,6 +2,7 @@
 
 import Navigation from '@/components/navigation'
 import Hero from '@/components/hero'
+import ClientMarquee from '@/components/client-marquee'
 import WhyCarter from '@/components/why-carter'
 import Services from '@/components/services'
 import Portfolio from '@/components/portfolio'
@@ -11,12 +12,15 @@ import WebsiteCostCalculator from '@/components/website-cost-calculator'
 import BBBEECalculator from '@/components/bbbee-calculator'
 import CarterStory from '@/components/carter-story'
 import Pricing from '@/components/pricing'
+import Process from '@/components/process'
+import FAQ from '@/components/faq'
 import BlogPreview from '@/components/blog-preview'
 import ContactForm from '@/components/contact-form'
 import Footer from '@/components/footer'
 import WhatsAppButton from '@/components/whatsapp-button'
 import CustomCursor from '@/components/custom-cursor'
 import ScrollToTop from '@/components/scroll-to-top'
+import CookieConsent from '@/components/cookie-consent'
 import SectionDivider from '@/components/section-divider'
 
 export default function Home() {
@@ -26,6 +30,7 @@ export default function Home() {
       <Navigation />
       <main className="min-h-screen bg-[#080808]">
         <Hero />
+        <ClientMarquee />
         <SectionDivider />
         <WhyCarter />
         <SectionDivider />
@@ -35,6 +40,8 @@ export default function Home() {
         <SectionDivider />
         <Testimonials />
         <SectionDivider />
+        <Process />
+        <SectionDivider />
         <FreeTools />
         <WebsiteCostCalculator />
         <BBBEECalculator />
@@ -43,6 +50,8 @@ export default function Home() {
         <SectionDivider />
         <Pricing />
         <SectionDivider />
+        <FAQ />
+        <SectionDivider />
         <BlogPreview />
         <SectionDivider />
         <ContactForm />
@@ -50,6 +59,7 @@ export default function Home() {
       </main>
       <WhatsAppButton />
       <ScrollToTop />
+      <CookieConsent />
     </>
   )
 }
