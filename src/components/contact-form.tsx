@@ -312,7 +312,7 @@ export default function ContactForm() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="btn-press bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

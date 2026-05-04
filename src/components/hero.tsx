@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, ExternalLink, Trophy, Zap } from 'lucide-react'
+import { ArrowRight, ExternalLink, Trophy, Zap, ChevronDown } from 'lucide-react'
 
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -132,16 +132,14 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
-              style={{ animation: 'float 3s ease-in-out infinite' }}
+              className="btn-press group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
             >
               Get a Free Quote
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
             </a>
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold transition-all duration-300 text-base"
-              style={{ animation: 'float 3s ease-in-out infinite 0.5s' }}
+              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
             >
               See Our Work
             </a>
@@ -178,7 +176,7 @@ export default function Hero() {
           {counterItems.map((item, i) => (
             <div
               key={i}
-              className="glass-card rounded-xl p-6 text-center group hover:border-l-cd-gold hover:border-t-2 hover:border-t-cd-gold transition-all duration-300"
+              className="glass-card rounded-xl p-6 text-center group hover:border-l-cd-gold hover:border-t-2 hover:border-t-cd-gold transition-[border-color,box-shadow] duration-300"
             >
               <div className="font-display text-3xl sm:text-4xl font-bold text-cd-gold mb-2">
                 <AnimatedCounter
@@ -194,6 +192,16 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <a
+        href="#why-carter"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-cd-gold animate-bounce"
+        aria-label="Scroll to explore"
+      >
+        <ChevronDown size={24} />
+        <span className="text-cd-text-muted text-xs font-sans">Scroll to explore</span>
+      </a>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cd-bg to-transparent z-10 pointer-events-none" />

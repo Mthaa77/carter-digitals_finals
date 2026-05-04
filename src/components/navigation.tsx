@@ -28,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'services', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'contact']
+  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -132,7 +132,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-bold rounded-lg hover:bg-cd-gold-light transition-colors duration-300 shadow-lg shadow-cd-gold/10"
+                className="btn-press ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10"
               >
                 Get a Quote
               </a>
@@ -141,7 +141,7 @@ export default function Navigation() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-cd-text-muted hover:text-cd-text transition-colors"
+              className="md:hidden p-3 text-cd-text-muted hover:text-cd-text transition-colors"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}

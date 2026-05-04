@@ -4,6 +4,7 @@ import Navigation from '@/components/navigation'
 import Hero from '@/components/hero'
 import ClientMarquee from '@/components/client-marquee'
 import WhyCarter from '@/components/why-carter'
+import StatsTicker from '@/components/stats-ticker'
 import Services from '@/components/services'
 import Portfolio from '@/components/portfolio'
 import Testimonials from '@/components/testimonials'
@@ -16,8 +17,10 @@ import Process from '@/components/process'
 import FAQ from '@/components/faq'
 import BlogPreview from '@/components/blog-preview'
 import ContactForm from '@/components/contact-form'
+import Newsletter from '@/components/newsletter'
 import Footer from '@/components/footer'
 import WhatsAppButton from '@/components/whatsapp-button'
+import AIChatWidget from '@/components/ai-chat-widget'
 import CustomCursor from '@/components/custom-cursor'
 import ScrollToTop from '@/components/scroll-to-top'
 import CookieConsent from '@/components/cookie-consent'
@@ -33,6 +36,8 @@ export default function Home() {
         <ClientMarquee />
         <SectionDivider />
         <WhyCarter />
+        <SectionDivider />
+        <StatsTicker />
         <SectionDivider />
         <Services />
         <SectionDivider />
@@ -55,9 +60,11 @@ export default function Home() {
         <BlogPreview />
         <SectionDivider />
         <ContactForm />
+        <Newsletter />
         <Footer />
       </main>
       <WhatsAppButton />
+      <AIChatWidget />
       <ScrollToTop />
       <CookieConsent />
     </>
