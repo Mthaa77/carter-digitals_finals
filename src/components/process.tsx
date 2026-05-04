@@ -94,7 +94,7 @@ export default function Process() {
         >
           <div className="relative">
             {/* Connecting line */}
-            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-cd-gold/30 to-transparent" />
+            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-cd-gold/50 to-transparent" />
 
             <div className="grid grid-cols-5 gap-4">
               {phases.map((phase, index) => (
@@ -106,7 +106,7 @@ export default function Process() {
                   {/* Numbered circle */}
                   <div className="relative mb-6">
                     <div
-                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500"
+                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500 group-hover:shadow-[0_0_12px_rgba(201,168,76,0.2)]"
                     >
                       <span className="font-display text-xl font-bold text-cd-gold">
                         {phase.number}
@@ -148,7 +148,7 @@ export default function Process() {
               <div className="flex flex-col items-center">
                 {/* Numbered circle */}
                 <div className="relative z-10">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500 group-hover:shadow-[0_0_12px_rgba(201,168,76,0.2)]">
                     <span className="font-display text-lg sm:text-xl font-bold text-cd-gold">
                       {phase.number}
                     </span>
@@ -157,7 +157,7 @@ export default function Process() {
 
                 {/* Connecting line */}
                 {index < phases.length - 1 && (
-                  <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-cd-gold/30 to-cd-gold/10" />
+                  <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-cd-gold/50 to-cd-gold/10" />
                 )}
               </div>
 

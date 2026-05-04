@@ -72,7 +72,7 @@ export default function Newsletter() {
           </h2>
 
           {/* Subtext */}
-          <p className="text-[#B8B8B0] text-lg max-w-lg mx-auto font-sans mb-10">
+          <p className="text-[#C8C8C0] text-lg max-w-lg mx-auto font-sans mb-10">
             Get business tips, web design insights, and South African SME
             resources. No spam. Unsubscribe anytime.
           </p>
@@ -93,7 +93,7 @@ export default function Newsletter() {
                     setError('')
                   }}
                   placeholder="your@email.com"
-                  className="w-full bg-[#131313] border border-[#242424] rounded-lg pl-10 pr-4 py-3 text-sm text-[#F0EFE8] placeholder:text-[#666] focus:outline-none focus:border-cd-gold/50 transition-colors duration-200 font-sans"
+                  className="w-full h-12 bg-[#131313] border border-[#242424] rounded-lg pl-10 pr-4 text-sm text-[#F0EFE8] placeholder:text-[#666] focus:outline-none focus:border-cd-gold/50 focus:ring-2 focus:ring-cd-gold/30 transition-colors duration-200 font-sans"
                   disabled={isLoading}
                 />
               </div>
@@ -116,7 +116,7 @@ export default function Newsletter() {
               <p className="text-[#F0EFE8] font-display font-semibold text-lg">
                 You&apos;re in! 🎉
               </p>
-              <p className="text-[#B8B8B0] text-sm font-sans">
+              <p className="text-[#C8C8C0] text-sm font-sans">
                 Welcome aboard. We&apos;ll send you the good stuff.
               </p>
             </motion.div>

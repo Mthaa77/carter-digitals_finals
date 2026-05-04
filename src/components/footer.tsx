@@ -25,7 +25,7 @@ export default function Footer() {
   return (
     <footer className="relative">
       {/* Footer CTA Section */}
-      <section className="relative bg-[#080808] py-20 md:py-28 overflow-hidden">
+      <section className="relative bg-[#080808] py-20 md:py-28 overflow-hidden" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(201, 168, 76, 0.03) 0%, transparent 70%), #080808' }}>
         {/* Subtle background glow */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-[#C9A84C] blur-[150px] opacity-[0.07]" />
@@ -59,7 +59,7 @@ export default function Footer() {
               href="https://wa.me/27724026893?text=Hi%20Carter%20Digitals%2C%20I%27d%20like%20to%20discuss%20a%20project"
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline inline-flex items-center gap-2 text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+              className="link-underline inline-flex items-center gap-2 text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
             >
               <MessageCircle className="w-4 h-4" />
               Prefer to chat? Message us on WhatsApp.
@@ -90,22 +90,22 @@ export default function Footer() {
                   <span className="text-[#C9A84C]">Digitals</span>
                 </span>
               </div>
-              <p className="text-[#B8B8B0] font-sans text-base leading-relaxed max-w-xs">
+              <p className="text-[#C8C8C0] font-sans text-base leading-relaxed max-w-xs">
                 Built in Soshanguve. For businesses that refuse to be invisible.
               </p>
 
               {/* Social media links */}
               <div className="flex items-center gap-4 mt-5">
-                <a href="#" aria-label="Facebook" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="Facebook" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="Instagram" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="Instagram" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="LinkedIn" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="LinkedIn" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="#" aria-label="X / Twitter" className="text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200">
+                <a href="#" aria-label="X / Twitter" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
                   <Twitter className="w-5 h-5" />
                 </a>
               </div>
@@ -121,7 +121,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+                      className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                     >
                       {link.label}
                     </a>
@@ -140,7 +140,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+                      className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                     >
                       {link.label}
                     </a>
@@ -157,7 +157,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#B8B8B0] font-sans text-base">
+                  <span className="text-[#C8C8C0] font-sans text-base">
                     Soshanguve, Pretoria, Gauteng
                   </span>
                 </li>
@@ -165,7 +165,7 @@ export default function Footer() {
                   <Phone className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                   <a
                     href="tel:0724026893"
-                    className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+                    className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                   >
                     072 402 6893
                   </a>
@@ -174,14 +174,14 @@ export default function Footer() {
                   <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                   <a
                     href="mailto:info@carterdigitals.co.za"
-                    className="link-underline text-[#B8B8B0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+                    className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                   >
                     info@carterdigitals.co.za
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Clock className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#B8B8B0] font-sans text-base">
+                  <span className="text-[#C8C8C0] font-sans text-base">
                     We reply within 4 business hours
                   </span>
                 </li>
@@ -194,7 +194,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#8A8A82] font-sans text-sm">
+          <p className="text-[#9A9A92] font-sans text-sm">
             &copy; 2026 Carter Digitals (Pty) Ltd
           </p>
           <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">

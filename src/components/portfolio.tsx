@@ -117,7 +117,7 @@ export default function Portfolio() {
               Work That Speaks for Itself.
             </h2>
             <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
-            <p className="mt-5 text-[#B8B8B0] text-lg max-w-xl mx-auto font-sans">
+            <p className="mt-5 text-[#C8C8C0] text-lg max-w-xl mx-auto font-sans">
               Real projects. Real results. No stock photos.
             </p>
           </motion.div>
@@ -179,7 +179,7 @@ export default function Portfolio() {
                     {project.services.map((service) => (
                       <span
                         key={service}
-                        className="inline-block px-2.5 py-0.5 text-xs font-medium text-[#B8B8B0] border border-[#242424] rounded-full bg-[#111111] font-sans"
+                        className="inline-block px-2.5 py-0.5 text-xs font-medium text-[#C8C8C0] border border-[#242424] rounded-full bg-[#111111] font-sans"
                       >
                         {service}
                       </span>
@@ -187,7 +187,7 @@ export default function Portfolio() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-[#B8B8B0] text-sm leading-relaxed mb-4 font-sans">
+                  <p className="text-[#C8C8C0] text-sm leading-relaxed mb-4 font-sans">
                     {project.description}
                   </p>
 
@@ -205,7 +205,7 @@ export default function Portfolio() {
                         e.stopPropagation()
                         openModal(project)
                       }}
-                      className="inline-flex items-center text-sm font-medium text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200 font-sans group/link"
+                      className="inline-flex items-center text-sm font-medium text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200 font-sans group/link"
                     >
                       View Case Study
                       <ArrowUpRight className="ml-1 w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />

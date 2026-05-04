@@ -86,7 +86,7 @@ export default function FAQ() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass-card rounded-xl border-0 px-6 data-[state=open]:border-l-[3px] data-[state=open]:border-l-cd-gold data-[state=open]:bg-[rgba(201,168,76,0.04)] transition-all duration-300 overflow-hidden"
+                className="glass-card rounded-xl border-0 px-6 data-[state=open]:border-l-4 data-[state=open]:border-l-cd-gold data-[state=open]:bg-[rgba(201,168,76,0.04)] data-[state=open]:shadow-[inset_4px_0_8px_rgba(201,168,76,0.05)] transition-all duration-300 overflow-hidden"
               >
                 <AccordionTrigger className="text-left text-base sm:text-lg font-display font-semibold text-cd-text hover:text-cd-gold hover:no-underline py-5 transition-colors duration-300 [&[data-state=open]>svg]:text-cd-gold">
                   {faq.question}

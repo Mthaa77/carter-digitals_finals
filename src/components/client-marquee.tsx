@@ -63,7 +63,7 @@ export default function ClientMarquee() {
                     font-display text-sm sm:text-base tracking-wide transition-opacity duration-300 hover:opacity-100 cursor-default
                     ${isTrust
                       ? 'text-cd-gold/50 font-semibold border border-cd-gold/15 rounded-full px-4 py-1.5'
-                      : 'text-[#8A8A82] opacity-60 font-medium'
+                      : 'text-[#9A9A92] opacity-60 font-medium'
                     }
                   `}
                 >

@@ -63,7 +63,7 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
         {count}
         {stat.suffix}
       </span>
-      <span className="mt-2 text-sm text-[#B8B8B0] font-sans text-center">
+      <span className="mt-2 text-sm text-[#C8C8C0] font-sans text-center">
         {stat.label}
       </span>
     </motion.div>

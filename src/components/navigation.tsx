@@ -28,7 +28,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'tools', 'process', 'story', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'stats', 'services', 'compare', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -122,7 +122,7 @@ export default function Navigation() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-2 right-2 h-0.5 bg-cd-gold rounded-full"
+                        className="absolute bottom-0 left-2 right-2 h-[3px] bg-cd-gold rounded-full"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}

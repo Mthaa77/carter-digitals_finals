@@ -143,7 +143,7 @@ export default function AIChatWidget() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-md text-[#B8B8B0] hover:text-[#F0EFE8] hover:bg-[#242424] transition-colors duration-200"
+                className="p-1 rounded-md text-[#C8C8C0] hover:text-[#F0EFE8] hover:bg-[#242424] transition-colors duration-200"
                 aria-label="Close chat"
               >
                 <X className="w-4 h-4" />

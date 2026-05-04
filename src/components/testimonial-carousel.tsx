@@ -107,7 +107,7 @@ export default function TestimonialCarousel() {
               <p className="text-[#C9A84C] font-display font-semibold text-base">
                 {testimonial.name}
               </p>
-              <p className="text-[#B8B8B0] text-sm mt-1 font-sans">
+              <p className="text-[#C8C8C0] text-sm mt-1 font-sans">
                 {testimonial.company}
               </p>
             </div>
@@ -118,14 +118,14 @@ export default function TestimonialCarousel() {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
         aria-label="Previous testimonial"
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={next}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 w-10 h-10 rounded-full glass-card flex items-center justify-center text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-300 z-10"
         aria-label="Next testimonial"
       >
         <ChevronRight size={20} />
@@ -143,7 +143,7 @@ export default function TestimonialCarousel() {
             className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
               i === current
                 ? 'bg-[#C9A84C] w-8'
-                : 'bg-[#8A8A82] hover:bg-[#B8B8B0]'
+                : 'bg-[#9A9A92] hover:bg-[#C8C8C0]'
             }`}
             aria-label={`Go to testimonial ${i + 1}`}
           />

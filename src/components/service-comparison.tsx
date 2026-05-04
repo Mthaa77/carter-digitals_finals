@@ -47,7 +47,7 @@ function FeatureIcon({ value }: { value: FeatureValue }) {
     case 'no':
       return (
         <span className="inline-flex items-center justify-center w-7 h-7 rounded-full">
-          <X size={14} className="text-[#8A8A82]" strokeWidth={2} />
+          <X size={14} className="text-[#9A9A92]" strokeWidth={2} />
         </span>
       )
   }
@@ -71,7 +71,7 @@ export default function ServiceComparison() {
             Compare Our Services
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
-          <p className="mt-4 text-[#B8B8B0] text-base max-w-xl mx-auto font-sans">
+          <p className="mt-4 text-[#C8C8C0] text-base max-w-xl mx-auto font-sans">
             Find the right package for your business needs
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export default function ServiceComparison() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[#242424]">
-                  <th className="text-left py-5 px-6 text-[#B8B8B0] text-sm font-sans font-medium">
+                  <th className="text-left py-5 px-6 text-[#C8C8C0] text-sm font-sans font-medium">
                     Feature
                   </th>
                   {services.map((service) => (

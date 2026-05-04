@@ -132,14 +132,14 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="btn-press btn-glow-gold group inline-flex items-center gap-2 px-7 py-3.5 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-base"
+              className="btn-press btn-glow-gold group inline-flex items-center gap-2 px-8 py-4 bg-cd-gold text-cd-bg font-bold rounded-lg hover:bg-cd-gold-light hover:shadow-cd-gold/30 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-cd-gold/20 text-lg"
             >
               Get a Free Quote
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
             </a>
             <a
               href="#portfolio"
-              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
+              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold hover:bg-cd-gold/5 hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
             >
               See Our Work
             </a>
@@ -153,10 +153,10 @@ export default function Hero() {
             {badgeItems.map((badge, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2 text-sm text-cd-text-muted"
+                className="flex items-center gap-2 text-sm text-cd-text font-medium"
               >
-                <span className="text-base">{badge.emoji}</span>
-                <span>{badge.label}</span>
+                <span className="text-lg">{badge.emoji}</span>
+                <span className="font-medium">{badge.label}</span>
                 {i < badgeItems.length - 1 && (
                   <span className="hidden sm:inline text-cd-border ml-4">|</span>
                 )}

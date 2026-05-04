@@ -10,11 +10,15 @@ import ServiceComparison from '@/components/service-comparison'
 import Portfolio from '@/components/portfolio'
 import Testimonials from '@/components/testimonials'
 import FreeTools from '@/components/free-tools'
+import ProjectEstimator from '@/components/project-estimator'
 import WebsiteCostCalculator from '@/components/website-cost-calculator'
 import BBBEECalculator from '@/components/bbbee-calculator'
 import CarterStory from '@/components/carter-story'
+import CompanyTimeline from '@/components/company-timeline'
 import Pricing from '@/components/pricing'
 import Process from '@/components/process'
+import TestimonialVideo from '@/components/testimonial-video'
+import BeforeAfter from '@/components/before-after'
 import FAQ from '@/components/faq'
 import BlogPreview from '@/components/blog-preview'
 import ContactForm from '@/components/contact-form'
@@ -52,13 +56,21 @@ export default function Home() {
         <SectionDivider />
         <Testimonials />
         <SectionDivider />
+        <TestimonialVideo />
+        <SectionDivider />
+        <BeforeAfter />
+        <SectionDivider />
         <Process />
         <SectionDivider />
         <FreeTools />
+        <SectionDivider />
+        <ProjectEstimator />
         <WebsiteCostCalculator />
         <BBBEECalculator />
         <SectionDivider />
         <CarterStory />
+        <SectionDivider />
+        <CompanyTimeline />
         <SectionDivider />
         <Pricing />
         <SectionDivider />

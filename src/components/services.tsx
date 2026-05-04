@@ -79,7 +79,7 @@ export default function Services() {
             What We Build
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
-          <p className="mt-5 text-[#B8B8B0] text-lg max-w-xl mx-auto font-sans">
+          <p className="mt-5 text-[#C8C8C0] text-lg max-w-xl mx-auto font-sans">
             From your first website to the internal tools that run your
             business.
           </p>
@@ -118,14 +118,14 @@ export default function Services() {
                 </p>
 
                 {/* Description */}
-                <p className="text-[#B8B8B0] text-sm leading-relaxed mb-6 font-sans">
+                <p className="text-[#C8C8C0] text-sm leading-relaxed mb-6 font-sans">
                   {service.description}
                 </p>
 
                 {/* What's Included Toggle */}
                 <button
                   onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                  className="flex items-center gap-1.5 text-sm font-medium text-[#B8B8B0] hover:text-[#C9A84C] transition-colors duration-200 mb-3 font-sans"
+                  className="flex items-center gap-1.5 text-sm font-medium text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200 mb-3 font-sans"
                   aria-expanded={isExpanded}
                 >
                   What&apos;s Included
@@ -145,7 +145,7 @@ export default function Services() {
                     >
                       <ul className="space-y-2 mb-4">
                         {service.features.map((feature) => (
-                          <li key={feature} className="flex items-center gap-2 text-sm text-[#B8B8B0] font-sans">
+                          <li key={feature} className="flex items-center gap-2 text-sm text-[#C8C8C0] font-sans">
                             <Check className="w-3.5 h-3.5 text-[#C9A84C] shrink-0" />
                             {feature}
                           </li>
