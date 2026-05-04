@@ -1,0 +1,60 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+
+export default function CarterStory() {
+  return (
+    <section id="story" className="relative bg-[#0A0A0A] py-20 md:py-28">
+      {/* Subtle gold divider above */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--cd-gold-dim)] to-transparent" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="gold-accent-left max-w-3xl mx-auto md:mx-0"
+        >
+          {/* Heading */}
+          <h2 className="font-display text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight mb-8">
+            Why We&apos;re Called{' '}
+            <span className="text-[var(--cd-gold)]">Carter</span> Digitals
+          </h2>
+
+          {/* Story Copy */}
+          <div className="space-y-5 mb-10">
+            <p className="text-[var(--cd-text)] text-lg leading-relaxed">
+              In April 2021, we lost a brother.{' '}
+              <span className="text-[var(--cd-gold)]">Carter</span> was one of
+              three friends from Soshanguve with a shared dream — to trade, to
+              build, to prove that where you come from doesn&apos;t limit where
+              you go.
+            </p>
+            <p className="text-[var(--cd-text)] text-lg leading-relaxed">
+              He never got to see what we built. But his name is on every
+              project we ship.
+            </p>
+            <p className="text-[var(--cd-text)] text-lg leading-relaxed">
+              <span className="text-[var(--cd-gold)]">Carter Digitals</span>{' '}
+              isn&apos;t just a company name. It&apos;s a promise kept.
+            </p>
+          </div>
+
+          {/* CTA Button */}
+          <motion.a
+            href="#"
+            whileHover={{ gap: '12px' }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[var(--cd-gold)] text-[var(--cd-gold)] font-medium text-sm transition-all duration-300 hover:bg-[var(--cd-gold-bg)] group"
+          >
+            Read Our Full Story
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

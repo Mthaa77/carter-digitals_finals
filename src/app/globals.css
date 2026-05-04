@@ -1,0 +1,244 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Carter Digitals Colors */
+  --color-cd-bg: #080808;
+  --color-cd-surface: #111111;
+  --color-cd-elevated: #1A1A1A;
+  --color-cd-border: #242424;
+  --color-cd-border-glow: #3A3A3A;
+  --color-cd-gold: #C9A84C;
+  --color-cd-gold-light: #E8CA7A;
+  --color-cd-gold-dim: #7A6330;
+  --color-cd-text: #F0EFE8;
+  --color-cd-text-muted: #888880;
+  --color-cd-text-dim: #555550;
+  --color-cd-success: #2A6B4A;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Carter Digitals Theme - Soshanguve Steel */
+  --background: #080808;
+  --foreground: #F0EFE8;
+  --card: #111111;
+  --card-foreground: #F0EFE8;
+  --popover: #111111;
+  --popover-foreground: #F0EFE8;
+  --primary: #C9A84C;
+  --primary-foreground: #080808;
+  --secondary: #1A1A1A;
+  --secondary-foreground: #F0EFE8;
+  --muted: #1A1A1A;
+  --muted-foreground: #888880;
+  --accent: #1A1A1A;
+  --accent-foreground: #F0EFE8;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #242424;
+  --input: #242424;
+  --ring: #C9A84C;
+  --chart-1: #C9A84C;
+  --chart-2: #2A6B4A;
+  --chart-3: #E8CA7A;
+  --chart-4: #7A6330;
+  --chart-5: #555550;
+  --sidebar: #111111;
+  --sidebar-foreground: #F0EFE8;
+  --sidebar-primary: #C9A84C;
+  --sidebar-primary-foreground: #080808;
+  --sidebar-accent: #1A1A1A;
+  --sidebar-accent-foreground: #F0EFE8;
+  --sidebar-border: #242424;
+  --sidebar-ring: #C9A84C;
+
+  /* Carter Digitals Design Tokens */
+  --cd-bg: #080808;
+  --cd-surface: #111111;
+  --cd-elevated: #1A1A1A;
+  --cd-border: #242424;
+  --cd-border-glow: #3A3A3A;
+  --cd-gold: #C9A84C;
+  --cd-gold-light: #E8CA7A;
+  --cd-gold-dim: #7A6330;
+  --cd-gold-bg: rgba(201, 168, 76, 0.08);
+  --cd-text: #F0EFE8;
+  --cd-text-muted: #888880;
+  --cd-text-dim: #555550;
+  --cd-success: #2A6B4A;
+  --cd-link: #C9A84C;
+
+  --cd-gradient-hero: radial-gradient(ellipse at 20% 50%, #1a1408 0%, #080808 60%);
+  --cd-gradient-gold: linear-gradient(90deg, #7A6330, #C9A84C, #E8CA7A, #C9A84C, #7A6330);
+  --cd-gradient-card: linear-gradient(135deg, #131313, #1A1A1A);
+
+  /* Type Scale */
+  --text-hero: clamp(2.75rem, 5.5vw + 0.5rem, 5.5rem);
+  --text-h1: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  --text-h2: clamp(1.5rem, 2.5vw + 0.25rem, 2.25rem);
+  --text-h3: clamp(1.125rem, 1.5vw, 1.5rem);
+  --text-body-lg: clamp(1.0625rem, 1.25vw, 1.1875rem);
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Grain overlay for premium feel */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grid lines behind hero */
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(36, 36, 36, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 36, 36, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Gold gradient text */
+.gold-gradient-text {
+  background: var(--cd-gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--cd-border);
+}
+
+.glass-card:hover {
+  border-color: var(--cd-border-glow);
+}
+
+/* Gold accent line */
+.gold-accent-left {
+  border-left: 3px solid var(--cd-gold);
+  padding-left: 1.5rem;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--cd-surface);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--cd-border-glow);
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--cd-gold-dim);
+}
+
+/* WhatsApp pulse */
+@keyframes whatsapp-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-pulse {
+  animation: whatsapp-pulse 3s ease-in-out infinite;
+}
+
+/* Gold shimmer animation */
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #7A6330, #C9A84C, #E8CA7A, #C9A84C, #7A6330);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 4s linear infinite;
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Horizontal scroll snap */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
