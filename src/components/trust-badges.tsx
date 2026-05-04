@@ -2,23 +2,23 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Shield, Cloud, Lock, Smartphone, Zap, Flag } from 'lucide-react'
+import { Shield, CheckCircle, Lock, Smartphone, Zap, Flag } from 'lucide-react'
 
 const badges = [
   {
     icon: Shield,
     emoji: '🛡️',
-    label: 'B-BBEE Level 1 Verified',
+    label: 'B-BBEE Level 1 — EME',
   },
   {
-    icon: Cloud,
-    emoji: '☁️',
-    label: 'Google Cloud Partner',
+    icon: CheckCircle,
+    emoji: '✅',
+    label: 'CSD Registered',
   },
   {
     icon: Lock,
     emoji: '🔒',
-    label: 'SSL on All Sites',
+    label: 'POPIA Compliant',
   },
   {
     icon: Smartphone,
@@ -28,12 +28,12 @@ const badges = [
   {
     icon: Zap,
     emoji: '⚡',
-    label: '99.9% Uptime',
+    label: '5–7 Day Delivery',
   },
   {
     icon: Flag,
     emoji: '🇿🇦',
-    label: '100% South African',
+    label: '100% Youth-Owned',
   },
 ]
 

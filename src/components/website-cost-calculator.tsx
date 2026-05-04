@@ -20,17 +20,17 @@ const FEATURES = [
 type FeatureId = (typeof FEATURES)[number]['id']
 
 const TIMELINE_OPTIONS = [
-  { value: 'urgent', label: 'Urgent', sublabel: '1 week', multiplier: 1.3 },
-  { value: 'standard', label: 'Standard', sublabel: '3 weeks', multiplier: 1.0 },
-  { value: 'flexible', label: 'Flexible', sublabel: '6+ weeks', multiplier: 0.9 },
+  { value: 'urgent', label: 'Urgent', sublabel: '5–7 days', multiplier: 1.3 },
+  { value: 'standard', label: 'Standard', sublabel: '2–3 weeks', multiplier: 1.0 },
+  { value: 'flexible', label: 'Flexible', sublabel: '4+ weeks', multiplier: 0.9 },
 ] as const
 
 type TimelineValue = (typeof TIMELINE_OPTIONS)[number]['value']
 
 function getPackage(price: number): { name: string; color: string } {
-  if (price < 10000) return { name: 'Starter', color: 'text-[var(--cd-text-muted)]' }
-  if (price < 17000) return { name: 'Business', color: 'text-[var(--cd-gold)]' }
-  if (price < 25000) return { name: 'Growth', color: 'text-[var(--cd-gold-light)]' }
+  if (price < 6000) return { name: 'Vula', color: 'text-[var(--cd-text-muted)]' }
+  if (price < 12000) return { name: 'Khula', color: 'text-[var(--cd-gold)]' }
+  if (price < 20000) return { name: 'Elevate', color: 'text-[var(--cd-gold-light)]' }
   return { name: 'Custom', color: 'text-[var(--cd-gold-light)]' }
 }
 
@@ -44,10 +44,10 @@ export default function WebsiteCostCalculator() {
   const [timeline, setTimeline] = useState<TimelineValue>('standard')
 
   const calculation = useMemo(() => {
-    // Base price: R7,950 covers first 5 pages, then R800 per additional page
+    // Base price: R3,999 covers first 4 pages, then R800 per additional page
     const pageCount = pages[0]
-    const basePrice = 7950
-    const additionalPages = Math.max(0, pageCount - 5)
+    const basePrice = 3999
+    const additionalPages = Math.max(0, pageCount - 4)
     const pageCost = additionalPages * 800
 
     // Feature costs
@@ -156,7 +156,7 @@ export default function WebsiteCostCalculator() {
               </div>
 
               <p className="text-[var(--cd-text-dim)] text-xs mt-3 font-sans">
-                First 5 pages included in base (R7,950). Additional pages: R800 each.
+                First 4 pages included in base (R3,999). Additional pages: R800 each.
               </p>
             </div>
 
@@ -314,7 +314,7 @@ export default function WebsiteCostCalculator() {
               {/* Breakdown */}
               <div className="space-y-2.5">
                 <div className="flex justify-between text-sm">
-                  <span className="text-[var(--cd-text-muted)] font-sans">Base (5 pages)</span>
+                  <span className="text-[var(--cd-text-muted)] font-sans">Base (4 pages)</span>
                   <span className="text-[var(--cd-text)] font-mono tabular-nums">R{formatCurrency(calculation.basePrice)}</span>
                 </div>
                 {calculation.pageCost > 0 && (
@@ -325,7 +325,7 @@ export default function WebsiteCostCalculator() {
                     className="flex justify-between text-sm"
                   >
                     <span className="text-[var(--cd-text-muted)] font-sans">
-                      Extra pages ({pages[0] - 5} × R800)
+                      Extra pages ({pages[0] - 4} × R800)
                     </span>
                     <span className="text-[var(--cd-text)] font-mono tabular-nums">
                       R{formatCurrency(calculation.pageCost)}

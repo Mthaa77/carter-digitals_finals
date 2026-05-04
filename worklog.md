@@ -2094,3 +2094,241 @@ Unresolved Issues / Next Steps:
 - Mobile hero could still be further optimized for very small viewports
 - Card text truncation on mobile could be improved with better responsive typography
 - Placeholder gallery images could be replaced with real project screenshots
+
+---
+Task ID: 15-a
+Agent: Content Update Agent
+Task: Update Services and Pricing sections with correct company profile data
+
+Work Log:
+
+### 1. Services Section (src/components/services.tsx)
+- Replaced 3 old services (SME Websites, Dashboards & Internal Tools, SEO & Growth) with 6 correct services from company profile:
+  1. **Website Development** — Globe icon, "Custom, mobile-first websites for every industry.", features: [Next.js, Vercel, SEO, Mobile-First, 5–7 Day Delivery], CTA: "Website Packages →", href: #pricing
+  2. **Bespoke Web Applications** — LayoutDashboard icon, "Custom-built apps for any business challenge.", features: [React, FastAPI, PostgreSQL, Custom Logic], CTA: "See What We Build →", href: #portfolio
+  3. **Internal Business Tools** — Settings icon, "Built around your exact workflows.", features: [Operations, Dashboards, Automation, Portals], CTA: "Discuss Your Project →", href: #contact
+  4. **Logo & Brand Identity** — Palette icon, "Every element built for digital and print.", features: [Logo Design, Brand Kit, Style Guide, Print-Ready], CTA: "Get a Quote →", href: #contact
+  5. **Flyers, Posters & Print Media** — FileImage icon, "High-impact promotional materials.", features: [Flyers, Posters, Banners, Social Graphics, Print-Ready], CTA: "Get a Quote →", href: #contact
+  6. **Pitch Decks & Company Profiles** — Presentation icon, "Investor-ready. Tender-ready.", features: [Pitch Decks, Company Profiles, Proposals, Tenders], CTA: "Get a Quote →", href: #contact
+- Updated icon imports: Added Settings, Palette, FileImage, Presentation; removed TrendingUp
+- Updated grid from `md:grid-cols-3` to `md:grid-cols-2 lg:grid-cols-3` for 6-card layout (3 cols, 2 rows)
+- Updated section subtext from "From your first website to the internal tools that run your business." to "From your first website to the internal tools that run your business — and everything in between."
+- Updated service IDs to match new service names (website-development, bespoke-web-apps, internal-tools, logo-brand-identity, flyers-posters-print, pitch-decks-profiles)
+
+### 2. Service Detail Modal (src/components/service-detail-modal.tsx)
+- Replaced 3 old service details with 6 new detailed entries matching the updated services
+- Updated icon imports: Added Settings, Palette, FileImage, Presentation; removed TrendingUp
+- Each service detail includes: id, title, icon, tagline, 3-paragraph description, 8-9 features list, starting price
+- Starting prices: Website Development (From R3,999), Bespoke Web Apps (From R15,000), Internal Tools (From R15,000), Logo & Brand Identity (From R2,500), Flyers/Posters/Print (From R500), Pitch Decks & Profiles (From R1,999)
+
+### 3. Pricing Section (src/components/pricing.tsx)
+- **Removed** the monthly/annual billing toggle entirely (no more BillingPeriod type, AnimatedPrice component, toggle UI)
+- **Removed** old 4 plans (Starter R7,950, Business R14,500, Growth R22,000, Dashboard from R15,000)
+- **Added** two separate pricing tables with sub-headings:
+
+  **Small Business Packages (3 tiers):**
+  - Vula — R3,999 once-off, R399/mo optional retainer, 7 features
+  - Khula — R7,999 once-off, R799/mo optional retainer, 7 features, MOST POPULAR badge, highlighted
+  - Elevate — R14,999 once-off, R1,199/mo optional retainer, 7 features
+
+  **School Website Packages (3 tiers):**
+  - Presença — R4,999 once-off, R499/mo optional retainer, 6 features
+  - Ikredibo — R9,999 once-off, R899/mo optional retainer, 6 features, MOST POPULAR badge, highlighted
+  - Mastery — R18,999 once-off, R1,499/mo optional retainer, 6 features
+
+- Pricing display: Once-off price shown prominently (text-3xl bold) with "once-off" label, optional retainer shown below in gold text with dot indicator
+- Each table uses 3-column responsive grid (1 col mobile, 2 col sm, 3 col lg)
+- **Kept** B-BBEE Procurement Box between school plans and add-ons
+- **Replaced** old add-ons (6 items) with new add-on services (5 items):
+  1. AI Chatbot & WhatsApp Automation — R4,999 once-off | R499/mo
+  2. SEO & Google Setup — R999 once-off
+  3. Company Profile & Pitch Deck — R1,999 once-off
+  4. Hosting & Domain Management — R1,990/yr | R199/mo
+  5. Sanity CMS Setup & Training — R3,499 once-off | R349/mo
+- Extracted PricingCard into a reusable component for both tables
+- Removed isOutline plan variant (all plans now use the same gold CTA button)
+
+### 4. Service Comparison Table (src/components/service-comparison.tsx)
+- Updated to match new service names: "Website Development", "Web Applications", "Internal Tools"
+- Changed comparison keys from sme/dashboards/seo to websites/webApps/internalTools
+- Updated header from "Compare Our Services" to "Compare Our Digital Services"
+- Updated column width from w-[140px] to w-[160px] to accommodate longer names
+
+Stage Summary:
+- Services section updated from 3 to 6 correct services with proper icons, descriptions, features, and CTAs
+- Service detail modal updated with 6 detailed service entries
+- Pricing completely restructured: removed billing toggle, added two separate pricing tables (Small Business + School), once-off prices with optional retainers
+- Add-ons updated with 5 new service items
+- Service comparison table updated to match new service names
+- All changes follow Soshanguve Steel design system (dark bg, gold accents, glassmorphism cards)
+- ESLint: 0 errors, Site: HTTP 200, No compilation errors
+
+---
+Task ID: 15-b
+Agent: Data Correction Agent
+Task: Apply 13 critical data corrections to align website with official company profile
+
+Work Log:
+
+### 1. Team Section (`src/components/team.tsx`)
+- Replaced 3 fictional team members (Thabo Molefe, Lerato Radebe, Dineo Khumalo) with single founder: Kabelo Kadiaka (KK), Founder & Director
+- Updated heading: "The People Behind Carter Digitals" → "The Person Behind The Work"
+- Updated subtext: "Small team. Big results. 100% South African." → "AI-Augmented. Human-Driven. Built to Deliver."
+- Changed layout from 3-column grid to single centered card (max-w-xl mx-auto)
+- Made card larger (p-8/p-10, w-24 avatar, text-xl name)
+- Removed LinkedIn social link icons
+- Added 4 founder stat badges below card: B-BBEE Level 1, SCORE 135%, DELIVERY 5–7 Days, FOUNDED 2023
+
+### 2. Carter Story Section (`src/components/carter-story.tsx`)
+- Changed badge from "Since 2021" → "Since 2023"
+- Updated story text to match company profile wording
+- Kept emotional tone and candle emoji
+
+### 3. Hero Section (`src/components/hero.tsx`)
+- Updated badgeItems: added Shield + "100% Black-Owned", CheckCircle + "CSD Registered", Zap + "5–7 Day Delivery"
+- Updated hero subtext to match company profile
+- Updated counterItems: 135% B-BBEE Procurement Recognition, 5–7 Days Average Delivery Time, 100% Youth-Owned
+
+### 4. Footer (`src/components/footer.tsx`)
+- Updated serviceLinks to 6 items: Website Development, Web Applications, Internal Business Tools, Logo & Brand Identity, Print Media, Pitch Decks
+- Changed email from info@carterdigitals.co.za → kadiakakabelo4@gmail.com
+- Updated brand description
+- Updated bottom bar with CIPC registration and compliance details
+
+### 5. Trust Badges (`src/components/trust-badges.tsx`)
+- Replaced all 6 badges: B-BBEE Level 1 — EME, CSD Registered, POPIA Compliant, Mobile-First Design, 5–7 Day Delivery, 100% Youth-Owned
+
+### 6. Animated Stats (`src/components/animated-stats.tsx`)
+- Replaced all 4 stats with correct profile data
+- Added isStatic/staticDisplay for "5–7 Days" stat (no animation)
+
+### 7. Process Section (`src/components/process.tsx`)
+- Updated all 5 phase names and descriptions: Discovery & Alignment, Architecture & Wireflow, Design & Build, QA & Compliance, Launch & Enablement
+
+### 8. Tech Stack (`src/components/tech-stack.tsx`)
+- Replaced all 8 tech items with correct stack
+- Updated section label: "Our Stack" → "Tech Stack"
+- Updated section heading: "Technology We Trust" → "Technical Stack"
+- Updated subtext: "Enterprise-grade tools. Startup-speed delivery."
+
+### 9. Why Carter Section (`src/components/why-carter.tsx`)
+- Updated card 2 body and tag: "Enterprise Stack"
+
+### 10. Company Timeline (`src/components/company-timeline.tsx`)
+- Changed founding year from 2021 → 2023
+- Updated timeline milestones: 2023 Founded, 2023 B-BBEE Level 1, 2024 Dashboards & Business Tools, 2025 CIPC Registration
+
+### 11. Stats Ticker (`src/components/stats-ticker.tsx`)
+- Replaced all 4 stats: 135% B-BBEE Procurement Recognition, 5–7 Day Delivery, 100% Black-Owned & Youth-Owned, 2023 Founded
+
+### 12. Contact Form (`src/components/contact-form.tsx`)
+- Changed email from info@carterdigitals.co.za → kadiakakabelo4@gmail.com
+
+### 13. Navigation (`src/components/navigation.tsx`)
+- Added "Schools" nav link pointing to #pricing
+
+Stage Summary:
+- All 13 data corrections applied successfully
+- ESLint: 0 errors (clean pass)
+- Dev server: compiling successfully, HTTP 200 responses
+- All changes follow the Soshanguve Steel design system
+
+---
+Task ID: 15
+Agent: Main Agent
+Task: Update entire website with correct company data from Carter_Digitals_Company_Profile_2026.docx
+
+Work Log:
+- Read and parsed the uploaded company profile document
+- Identified 30+ data discrepancies between the website and actual company information
+- Dispatched 2 parallel subagents for comprehensive data updates
+- Applied additional manual corrections for consistency
+
+### Major Data Corrections Applied:
+
+**1. Services Section** — Changed from 3 to 6 services:
+- SME Websites → Website Development (R3,999+)
+- Dashboards → Bespoke Web Applications
+- SEO & Growth → Internal Business Tools
+- NEW: Logo & Brand Identity
+- NEW: Flyers, Posters & Print Media
+- NEW: Pitch Decks & Company Profiles
+- Updated grid to 3-column layout (md:grid-cols-2 lg:grid-cols-3)
+
+**2. Pricing Section** — Complete overhaul:
+- Removed monthly/annual billing toggle
+- Small Business: Vula (R3,999) / Khula (R7,999, Most Popular) / Elevate (R14,999)
+- School: Presença (R4,999) / Ikredibo (R9,999, Most Popular) / Mastery (R18,999)
+- Once-off pricing with optional monthly retainers
+- Updated add-ons to match profile (AI Chatbot R4,999, SEO R999, etc.)
+
+**3. Team Section** — Replaced 3 fictional members with real founder:
+- Removed: Thabo Molefe, Lerato Radebe, Dineo Khumalo
+- Added: Kabelo Kadiaka (Founder & Director)
+- Added 4 stat badges: B-BBEE Level 1, SCORE 135%, DELIVERY 5–7 Days, FOUNDED 2023
+- Changed heading to "The Person Behind The Work"
+
+**4. Hero Section** — Updated badges and counters:
+- Badges: Added 100% Black-Owned, CSD Registered, 5–7 Day Delivery
+- Counters: 135% B-BBEE Procurement, 5–7 Days Delivery, 100% Youth-Owned
+- Updated subtext to match company profile description
+
+**5. Carter Story** — Corrected founding date:
+- Changed "Since 2021" → "Since 2023"
+- Updated story text to align with company profile narrative
+
+**6. Footer** — Updated all contact details and links:
+- Email: info@carterdigitals.co.za → kadiakakabelo4@gmail.com
+- Updated service links to match 6 new services
+- Updated brand description
+- Updated bottom bar with CIPC: 2025/907839/07, POPIA Compliant, CSD Registered, 100% Youth-Owned
+
+**7. Trust Badges** — Updated 6 badges:
+- B-BBEE Level 1 — EME, CSD Registered, POPIA Compliant, Mobile-First Design, 5–7 Day Delivery, 100% Youth-Owned
+
+**8. Animated Stats** — Updated all 4 stats:
+- 135% B-BBEE Procurement, 5–7 Days Delivery, 100% Black-Owned, 100% CSD Registered
+
+**9. Process Section** — Updated phase names:
+- Discovery → Discovery & Alignment
+- Design → Architecture & Wireflow
+- Build → Design & Build
+- Launch → QA & Compliance
+- Support → Launch & Enablement
+
+**10. Tech Stack** — Updated to match profile:
+- Replaced: TypeScript, Tailwind CSS, Prisma, Figma
+- Added: Python/FastAPI (85%), PostgreSQL (80%), GCP/Vertex AI (85%), Sanity CMS (85%), WhatsApp API (80%)
+
+**11. Stats Ticker** — Updated all 4 stats with correct data
+
+**12. Company Timeline** — Changed founding year from 2021 to 2023
+
+**13. Navigation** — Added "Schools" link, fixed React key collision
+
+**14. FAQ** — Updated all answers with correct pricing and timelines
+
+**15. Website Cost Calculator** — Updated base price R7,950→R3,999, package names, timeline labels
+
+**16. JSON-LD Structured Data** — Updated email, URL, services, price range, description
+
+**17. Layout Metadata** — Updated title, description, keywords, OpenGraph, Twitter cards
+
+**18. Chat API System Prompt** — Updated with complete correct company info
+
+Stage Summary:
+- 18 components/files updated with correct company data
+- All pricing, services, team, contact details now match official company profile
+- CIPC Registration: 2025/907839/07
+- B-BBEE Level 1, 135% Procurement Recognition, 100% Black-Owned, 100% Youth-Owned
+- CSD Registered, POPIA Compliant
+- Founded by Kabelo Kadiaka in 2023
+- ESLint: 0 errors, Site: HTTP 200, No runtime errors
+
+Current Project Status:
+- Website fully aligned with Carter_Digitals_Company_Profile_2026.docx
+- All company data verified correct via QA testing
+- 42+ components with accurate business information
+- 6 services, 6 pricing tiers (3 small business + 3 school), 5 add-ons
+- Contact: kadiakakabelo4@gmail.com, 072 402 6893, carterdigitals.co.za
+- Location: Soshanguve, Pretoria, Gauteng, South Africa

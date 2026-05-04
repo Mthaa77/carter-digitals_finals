@@ -8,13 +8,15 @@ interface StatItem {
   suffix: string
   prefix: string
   label: string
+  isStatic?: boolean
+  staticDisplay?: string
 }
 
 const stats: StatItem[] = [
-  { value: 47, suffix: '+', prefix: '', label: 'Projects Delivered' },
-  { value: 0, suffix: '', prefix: 'R', label: 'Spent on Templates' },
-  { value: 2, suffix: '+', prefix: '', label: 'Years Experience' },
-  { value: 135, suffix: '%', prefix: '', label: 'B-BBEE Recognition' },
+  { value: 135, suffix: '%', prefix: '', label: 'B-BBEE Procurement Recognition' },
+  { value: 5, suffix: '', prefix: '', label: 'Day Delivery', isStatic: true, staticDisplay: '5–7' },
+  { value: 100, suffix: '%', prefix: '', label: 'Black-Owned & Youth-Owned' },
+  { value: 2023, suffix: '', prefix: '', label: 'Founded' },
 ]
 
 function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
@@ -23,7 +25,7 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
   const [count, setCount] = useState(stat.value)
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView || stat.isStatic) return
 
     let start = 0
     const duration = 2000
@@ -43,7 +45,7 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
     }
 
     requestAnimationFrame(animate)
-  }, [isInView, stat.value])
+  }, [isInView, stat.value, stat.isStatic])
 
   return (
     <motion.div
@@ -59,9 +61,10 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
       }`}
     >
       <span className="font-display text-4xl sm:text-5xl font-bold text-cd-gold tabular-nums text-glow-gold">
-        {stat.prefix}
-        {count}
-        {stat.suffix}
+        {stat.isStatic
+          ? stat.staticDisplay
+          : `${stat.prefix}${count}${stat.suffix}`
+        }
       </span>
       <span className="mt-2 text-sm text-[#C8C8C0] font-sans text-center">
         {stat.label}

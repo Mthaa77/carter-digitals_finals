@@ -403,10 +403,10 @@ export default function ContactForm() {
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                 <a
-                  href="mailto:info@carterdigitals.co.za"
+                  href="mailto:kadiakakabelo4@gmail.com"
                   className="text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
                 >
-                  info@carterdigitals.co.za
+                  kadiakakabelo4@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">

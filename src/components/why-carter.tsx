@@ -23,8 +23,8 @@ const cards: WhyCard[] = [
   {
     icon: Cloud,
     title: 'Not WordPress. Not Guesswork.',
-    body: 'Next.js, Firebase, Vertex AI, Google Cloud. We build for speed, scale, and the future — not whatever a theme builder allows.',
-    tag: 'GCP-Powered Stack',
+    body: 'Next.js, React, Python/FastAPI, PostgreSQL, GCP/Vertex AI, Vercel. We build for speed, scale, and the future — not whatever a theme builder allows.',
+    tag: 'Enterprise Stack',
     number: '02',
   },
   {

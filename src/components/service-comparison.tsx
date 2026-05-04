@@ -8,26 +8,26 @@ type FeatureValue = 'yes' | 'no' | 'partial'
 
 interface Feature {
   name: string
-  sme: FeatureValue
-  dashboards: FeatureValue
-  seo: FeatureValue
+  websites: FeatureValue
+  webApps: FeatureValue
+  internalTools: FeatureValue
 }
 
 const features: Feature[] = [
-  { name: 'Custom Design', sme: 'yes', dashboards: 'yes', seo: 'partial' },
-  { name: 'Mobile Responsive', sme: 'yes', dashboards: 'yes', seo: 'yes' },
-  { name: 'SEO Optimized', sme: 'yes', dashboards: 'no', seo: 'yes' },
-  { name: 'Analytics Dashboard', sme: 'no', dashboards: 'yes', seo: 'yes' },
-  { name: 'CMS Access', sme: 'yes', dashboards: 'yes', seo: 'no' },
-  { name: 'Performance Monitoring', sme: 'no', dashboards: 'yes', seo: 'yes' },
-  { name: 'E-commerce Ready', sme: 'partial', dashboards: 'no', seo: 'no' },
-  { name: 'Priority Support', sme: 'no', dashboards: 'yes', seo: 'yes' },
+  { name: 'Custom Design', websites: 'yes', webApps: 'yes', internalTools: 'partial' },
+  { name: 'Mobile Responsive', websites: 'yes', webApps: 'yes', internalTools: 'yes' },
+  { name: 'SEO Optimized', websites: 'yes', webApps: 'no', internalTools: 'no' },
+  { name: 'Analytics Dashboard', websites: 'no', webApps: 'yes', internalTools: 'yes' },
+  { name: 'CMS Access', websites: 'yes', webApps: 'yes', internalTools: 'yes' },
+  { name: 'Performance Monitoring', websites: 'no', webApps: 'yes', internalTools: 'yes' },
+  { name: 'E-commerce Ready', websites: 'partial', webApps: 'yes', internalTools: 'no' },
+  { name: 'Priority Support', websites: 'no', webApps: 'yes', internalTools: 'yes' },
 ]
 
 const services = [
-  { key: 'sme' as const, name: 'SME Websites', color: '#C9A84C' },
-  { key: 'dashboards' as const, name: 'Dashboards', color: '#E8CA7A' },
-  { key: 'seo' as const, name: 'SEO & Growth', color: '#7A6330' },
+  { key: 'websites' as const, name: 'Website Development', color: '#C9A84C' },
+  { key: 'webApps' as const, name: 'Web Applications', color: '#E8CA7A' },
+  { key: 'internalTools' as const, name: 'Internal Tools', color: '#7A6330' },
 ]
 
 function FeatureIcon({ value }: { value: FeatureValue }) {
@@ -69,7 +69,7 @@ export default function ServiceComparison() {
         >
           <span className="section-label inline-block">Compare</span>
           <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
-            Compare Our Services
+            Compare Our Digital Services
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
           <p className="mt-4 text-[#C8C8C0] text-base max-w-xl mx-auto font-sans">
@@ -95,7 +95,7 @@ export default function ServiceComparison() {
                   {services.map((service) => (
                     <th
                       key={service.key}
-                      className="text-center py-5 px-6 font-display font-semibold text-base w-[140px]"
+                      className="text-center py-5 px-6 font-display font-semibold text-base w-[160px]"
                       style={{ color: service.color }}
                     >
                       {service.name}
@@ -117,7 +117,7 @@ export default function ServiceComparison() {
                     {services.map((service) => (
                       <td
                         key={service.key}
-                        className="py-5 px-6 text-center w-[140px]"
+                        className="py-5 px-6 text-center w-[160px]"
                       >
                         <div className="flex justify-center">
                           <FeatureIcon

@@ -15,10 +15,12 @@ const quickLinks = [
 ]
 
 const serviceLinks = [
-  { label: 'SME Websites', href: '#services' },
-  { label: 'Dashboards', href: '#services' },
-  { label: 'SEO & Growth', href: '#services' },
-  { label: 'Google Ads', href: '#services' },
+  { label: 'Website Development', href: '#services' },
+  { label: 'Web Applications', href: '#services' },
+  { label: 'Internal Business Tools', href: '#services' },
+  { label: 'Logo & Brand Identity', href: '#services' },
+  { label: 'Print Media', href: '#services' },
+  { label: 'Pitch Decks', href: '#services' },
 ]
 
 const socialLinks = [
@@ -98,7 +100,7 @@ export default function Footer() {
                 </span>
               </div>
               <p className="text-[#C8C8C0] font-sans text-base leading-relaxed max-w-xs">
-                Built in Soshanguve. For businesses that refuse to be invisible.
+                High-agility digital infrastructure &amp; AI-enabled solutions for South Africa&apos;s forward-thinking institutions.
               </p>
 
               {/* Social media links — larger touch targets */}
@@ -178,10 +180,10 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
                   <a
-                    href="mailto:info@carterdigitals.co.za"
+                    href="mailto:kadiakakabelo4@gmail.com"
                     className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
                   >
-                    info@carterdigitals.co.za
+                    kadiakakabelo4@gmail.com
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
@@ -204,13 +206,12 @@ export default function Footer() {
               &copy; 2026 Carter Digitals (Pty) Ltd
             </p>
             <span className="text-cd-gold-dim text-xs" aria-hidden="true">●</span>
-            <span className="inline-flex items-center gap-1.5 text-[#7A6330] font-mono text-xs font-medium tracking-wide">
-              <span className="inline-block w-2 h-2 rounded-full bg-[#7A6330]" />
-              B-BBEE Level 1
+            <span className="text-[#C8C8C0] font-sans text-xs">
+              CIPC: 2025/907839/07 · B-BBEE Level 1 — 135% Procurement · POPIA Compliant · CSD Registered · 100% Black-Owned · 100% Youth-Owned
             </span>
           </div>
           <p className="text-cd-text-dim font-sans text-xs">
-            Designed & built in Soshanguve, South Africa 🇿🇦
+            Designed &amp; built in Soshanguve, South Africa 🇿🇦
           </p>
         </div>
       </div>

@@ -14,7 +14,7 @@ const faqs = [
   {
     question: 'How much does a website cost in Pretoria?',
     answer:
-      'Our websites start from R7,950 for a 5-page starter site. Business sites with more features range from R14,500. Every project is scoped individually — no hidden fees.',
+      'Our Vula package starts at R3,999 once-off for up to 4 pages. The Khula package is R7,999 for up to 8 pages with AI chatbot. Our premium Elevate package is R14,999 with full CMS. School packages start at R4,999. Every project is scoped individually — no hidden fees.',
   },
   {
     question: 'What is B-BBEE Level 1 and why does it matter?',
@@ -24,7 +24,7 @@ const faqs = [
   {
     question: 'How long does it take to build a website?',
     answer:
-      'Most sites are delivered in 2–3 weeks. Urgent projects can be turned around in 1 week with a rush fee. Complex dashboards take 4–6 weeks depending on scope.',
+      'Production-ready websites are delivered in 5–7 business days. Complex web applications and dashboards take 2–4 weeks depending on scope. We move fast without cutting corners.',
   },
   {
     question: 'Do you use WordPress?',
@@ -34,12 +34,12 @@ const faqs = [
   {
     question: "What's included in the hosting?",
     answer:
-      '3–6 months of free hosting depending on your package. After that, hosting is R350/month which includes security updates, backups, and uptime monitoring.',
+      'Year 1 hosting and domain is free with all website packages. After that, hosting management is R199/month or R1,990/year which includes security updates, backups, and uptime monitoring.',
   },
   {
     question: 'Can I make changes after launch?',
     answer:
-      'Absolutely. We offer maintenance packages from R1,200/month, or you can request one-off updates anytime.',
+      'Absolutely. Optional monthly retainers are available starting from R399/month (Vula), R799/month (Khula), or R1,199/month (Elevate). You can also request one-off updates anytime.',
   },
 ]
 

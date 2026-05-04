@@ -12,6 +12,7 @@ const navItems = [
   { label: 'Services', href: '#services' },
   { label: 'Process', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'Schools', href: '#pricing' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Blog', href: '#blog' },
 ]
@@ -110,7 +111,7 @@ export default function Navigation() {
                 const isActive = activeSection === sectionId
                 return (
                   <a
-                    key={item.href}
+                    key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`link-underline relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md hover:bg-cd-gold/5 focus-visible:outline-2 focus-visible:outline-cd-gold focus-visible:outline-offset-2 ${
@@ -171,7 +172,7 @@ export default function Navigation() {
                 const isActive = activeSection === sectionId
                 return (
                   <motion.a
-                    key={item.href}
+                    key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
                     initial={{ opacity: 0, y: 30 }}

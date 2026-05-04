@@ -5,16 +5,10 @@ import { motion, useInView } from 'framer-motion'
 
 const milestones = [
   {
-    year: '2021',
+    year: '2023',
     title: 'Carter Digitals Founded',
     description:
       'Started in Soshanguve with a laptop and a vision: make premium web design accessible to SA SMEs.',
-  },
-  {
-    year: '2022',
-    title: 'First 10 Projects',
-    description:
-      'Delivered websites for local businesses in Soshanguve, Mabopane, and central Pretoria.',
   },
   {
     year: '2023',
@@ -27,6 +21,12 @@ const milestones = [
     title: 'Dashboards & Business Tools',
     description:
       'Expanded into business dashboards and internal tools, helping SMEs run smarter.',
+  },
+  {
+    year: '2025',
+    title: 'CIPC Registration',
+    description:
+      'Formally registered as Carter Digitals (Pty) Ltd — CIPC: 2025/907839/07. CSD registered and ready for government procurement.',
   },
 ]
 
@@ -96,7 +96,7 @@ export default function CompanyTimeline() {
           <div className="space-y-10 sm:space-y-12">
             {milestones.map((milestone, index) => (
               <motion.div
-                key={milestone.year}
+                key={`${milestone.year}-${index}`}
                 variants={itemVariants}
                 className="relative flex gap-5 sm:gap-6 md:gap-8 group"
               >

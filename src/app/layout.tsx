@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Carter Digitals | Web Design & Business Tools — Pretoria, Soshanguve",
+  title: "Carter Digitals | High-Agility Digital Infrastructure & AI-Enabled Solutions — Soshanguve, Pretoria",
   description:
-    "100% Black-owned B-BBEE Level 1 digital agency based in Soshanguve, Pretoria. We build SME websites, business dashboards, and internal tools that make your business run. From R7,950.",
+    "100% Black-owned, 100% Youth-owned, B-BBEE Level 1 digital services studio from Soshanguve, Pretoria. Websites, web apps, business tools, brand identity & more. From R3,999. 5–7 day delivery.",
   keywords: [
     "web design Pretoria",
     "Soshanguve web design",
@@ -34,26 +34,32 @@ export const metadata: Metadata = {
     "SME websites Pretoria",
     "Carter Digitals",
     "Next.js web design",
-    "digital agency Pretoria",
+    "digital services studio Pretoria",
+    "school websites South Africa",
+    "pitch decks Pretoria",
+    "brand identity Soshanguve",
+    "CSD registered supplier",
+    "100% Black-owned agency",
+    "100% Youth-owned agency",
   ],
   authors: [{ name: "Carter Digitals (Pty) Ltd" }],
   icons: {
     icon: "/carter-digitals-logo.png",
   },
   openGraph: {
-    title: "Carter Digitals | Web Design & Business Tools — Pretoria, Soshanguve",
+    title: "Carter Digitals | High-Agility Digital Infrastructure — Soshanguve, Pretoria",
     description:
-      "100% Black-owned B-BBEE Level 1 digital agency. Premium websites and business tools for SMEs done waiting to be seen.",
-    url: "https://www.carterdigitals.co.za",
+      "100% Black-owned, B-BBEE Level 1 digital services studio. Websites, web apps, business tools, brand identity. 5–7 day delivery. From R3,999.",
+    url: "https://carterdigitals.co.za",
     siteName: "Carter Digitals",
     type: "website",
     locale: "en_ZA",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Carter Digitals | Web Design & Business Tools",
+    title: "Carter Digitals | High-Agility Digital Infrastructure",
     description:
-      "100% Black-owned B-BBEE Level 1 digital agency from Soshanguve, Pretoria.",
+      "100% Black-owned, B-BBEE Level 1 digital services studio from Soshanguve, Pretoria. 5–7 day delivery.",
   },
 };
 

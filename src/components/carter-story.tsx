@@ -39,26 +39,26 @@ export default function CarterStory() {
             <span className="text-[var(--cd-gold)]">Carter</span> Digitals
           </h2>
 
-          {/* Since 2021 badge */}
+          {/* Since 2023 badge */}
           <div className="mb-8">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--cd-gold-bg)] border border-[var(--cd-gold-dim)]/30 text-[var(--cd-gold)] font-mono text-xs tracking-wider">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--cd-gold)]" />
-              Since 2021
+              Since 2023
             </span>
           </div>
 
           {/* Story Copy */}
           <div className="space-y-5 mb-10">
             <p className="text-[var(--cd-text)] text-lg leading-relaxed">
-              In April 2021, we lost a brother.{' '}
-              <span className="text-[var(--cd-gold)]">Carter</span> was one of
-              three friends from Soshanguve with a shared dream — to trade, to
-              build, to prove that where you come from doesn&apos;t limit where
-              you go.
+              In April 2021, we lost a close friend.{' '}
+              <span className="text-[var(--cd-gold)]">Carter</span> was someone who
+              believed in building something real from nothing.
             </p>
             <p className="text-[var(--cd-text)] text-lg leading-relaxed">
-              He never got to see what we built. But his name is on every
-              project we ship.
+              <span className="text-[var(--cd-gold)]">Carter Digitals</span> is named
+              in tribute to a close friend who passed away in April 2021. The company
+              exists as a living monument to that friendship — and as proof that the
+              dream of building something real from nothing is still possible.
             </p>
             <p className="text-[var(--cd-text)] text-lg leading-relaxed">
               <span className="text-[var(--cd-gold)]">Carter Digitals</span>{' '}

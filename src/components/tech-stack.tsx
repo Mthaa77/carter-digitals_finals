@@ -6,12 +6,12 @@ import { motion, useInView } from 'framer-motion'
 const techItems = [
   { name: 'Next.js', percentage: 95, color: '#C9A84C' },
   { name: 'React', percentage: 95, color: '#E8CA7A' },
-  { name: 'TypeScript', percentage: 90, color: '#7A6330' },
-  { name: 'Google Cloud', percentage: 85, color: '#C9A84C' },
-  { name: 'Tailwind CSS', percentage: 95, color: '#E8CA7A' },
-  { name: 'Prisma', percentage: 80, color: '#7A6330' },
-  { name: 'Figma', percentage: 90, color: '#C9A84C' },
-  { name: 'Vercel', percentage: 85, color: '#E8CA7A' },
+  { name: 'Python / FastAPI', percentage: 85, color: '#7A6330' },
+  { name: 'PostgreSQL', percentage: 80, color: '#E8CA7A' },
+  { name: 'GCP / Vertex AI', percentage: 85, color: '#C9A84C' },
+  { name: 'Vercel', percentage: 90, color: '#E8CA7A' },
+  { name: 'Sanity CMS', percentage: 85, color: '#7A6330' },
+  { name: 'WhatsApp API', percentage: 80, color: '#C9A84C' },
 ]
 
 const containerVariants = {
@@ -52,12 +52,12 @@ export default function TechStack() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14 md:mb-20"
         >
-          <span className="section-label inline-block">Our Stack</span>
+          <span className="section-label inline-block">Tech Stack</span>
           <h2 className="section-heading text-[var(--text-h2)]">
-            Technology We <span className="gold-gradient-text">Trust</span>
+            Technical <span className="gold-gradient-text">Stack</span>
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-xl mx-auto font-sans">
-            Built with modern, battle-tested tools that deliver speed, reliability, and scale.
+            Enterprise-grade tools. Startup-speed delivery.
           </p>
         </motion.div>
 

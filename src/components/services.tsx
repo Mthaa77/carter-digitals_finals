@@ -2,42 +2,75 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Globe, LayoutDashboard, TrendingUp, ChevronDown, Check } from 'lucide-react'
+import { Globe, LayoutDashboard, Settings, Palette, FileImage, Presentation, ChevronDown, Check } from 'lucide-react'
 import { useServiceDetail, ServiceDetailModal } from '@/components/service-detail-modal'
 
 const services = [
   {
-    id: 'sme-websites',
+    id: 'website-development',
     icon: Globe,
-    title: 'SME Websites',
-    tagline: 'Fast, beautiful, built to rank.',
+    title: 'Website Development',
+    tagline: 'Custom, mobile-first websites for every industry.',
     description:
-      'Mobile-first, SEO-optimised websites that load fast and convert visitors into customers. From R7,950.',
+      'Custom, mobile-first websites for schools, SMEs, law firms, medical practices, guesthouses, and institutions. Built on Next.js with Vercel global hosting and built-in SEO from day one.',
     cta: 'Website Packages →',
     href: '#pricing',
-    features: ['Custom Design', 'Mobile-First', 'SEO Setup', 'Contact Form', 'WhatsApp CTA', 'Analytics'],
+    features: ['Next.js', 'Vercel', 'SEO', 'Mobile-First', '5–7 Day Delivery'],
   },
   {
-    id: 'dashboards',
+    id: 'bespoke-web-apps',
     icon: LayoutDashboard,
-    title: 'Dashboards & Internal Tools',
-    tagline: 'Run your business, not just a page.',
+    title: 'Bespoke Web Applications',
+    tagline: 'Custom-built apps for any business challenge.',
     description:
-      'Booking systems, stock trackers, staff portals, and quote generators. Custom tools built around your workflows. From R15,000.',
+      'Custom-built web apps for any business challenge — client portals, booking systems, inventory management, quoting tools, and interactive dashboards. If your team does it manually, we can automate it.',
     cta: 'See What We Build →',
     href: '#portfolio',
-    features: ['Staff Portals', 'Booking Systems', 'Stock Trackers', 'Quote Generators', 'Role-Based Access'],
+    features: ['React', 'FastAPI', 'PostgreSQL', 'Custom Logic'],
   },
   {
-    id: 'seo-growth',
-    icon: TrendingUp,
-    title: 'SEO & Growth',
-    tagline: 'Get found. Stay found.',
+    id: 'internal-tools',
+    icon: Settings,
+    title: 'Internal Business Tools',
+    tagline: 'Built around your exact workflows.',
     description:
-      "Google Ads management, SEO content, and local search optimisation. We don't just build sites — we make sure people find them.",
-    cta: 'Growth Packages →',
-    href: '#pricing',
-    features: ['Google Ads', 'Local SEO', 'Content Strategy', 'Monthly Reports', 'Keyword Research'],
+      'Staff dashboards, invoice trackers, pipeline managers, HR systems, operations consoles, and any internal process that deserves better than a spreadsheet.',
+    cta: 'Discuss Your Project →',
+    href: '#contact',
+    features: ['Operations', 'Dashboards', 'Automation', 'Portals'],
+  },
+  {
+    id: 'logo-brand-identity',
+    icon: Palette,
+    title: 'Logo & Brand Identity',
+    tagline: 'Every element built for digital and print.',
+    description:
+      'Professional logo design, brand colour systems, typography guides, and complete identity packages. Every element built for digital and print use from the start.',
+    cta: 'Get a Quote →',
+    href: '#contact',
+    features: ['Logo Design', 'Brand Kit', 'Style Guide', 'Print-Ready'],
+  },
+  {
+    id: 'flyers-posters-print',
+    icon: FileImage,
+    title: 'Flyers, Posters & Print Media',
+    tagline: 'High-impact promotional materials.',
+    description:
+      'High-impact promotional materials — event flyers, A5/A4 service posters, promotional banners, and social media graphics. Print-ready PDF files delivered with every order.',
+    cta: 'Get a Quote →',
+    href: '#contact',
+    features: ['Flyers', 'Posters', 'Banners', 'Social Graphics', 'Print-Ready'],
+  },
+  {
+    id: 'pitch-decks-profiles',
+    icon: Presentation,
+    title: 'Pitch Decks & Company Profiles',
+    tagline: 'Investor-ready. Tender-ready.',
+    description:
+      'Investor-ready pitch decks and corporate company profiles that open doors. Designed for tenders, funding applications, enterprise meetings, and government procurement.',
+    cta: 'Get a Quote →',
+    href: '#contact',
+    features: ['Pitch Decks', 'Company Profiles', 'Proposals', 'Tenders'],
   },
 ]
 
@@ -87,7 +120,7 @@ export default function Services() {
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
           <p className="mt-5 text-[#C8C8C0] text-lg max-w-xl mx-auto font-sans">
             From your first website to the internal tools that run your
-            business.
+            business — and everything in between.
           </p>
         </motion.div>
 
@@ -97,7 +130,7 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {services.map((service, index) => {
             const Icon = service.icon

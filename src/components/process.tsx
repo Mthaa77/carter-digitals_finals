@@ -6,28 +6,28 @@ import { motion, useInView } from 'framer-motion'
 const phases = [
   {
     number: '01',
-    name: 'Discovery',
-    description: 'We listen. You tell us what your business needs.',
+    name: 'Discovery & Alignment',
+    description: 'We listen. We align on your goals, audience, and business requirements.',
   },
   {
     number: '02',
-    name: 'Design',
-    description: 'Wireframes and mockups. You approve before we code.',
+    name: 'Architecture & Wireflow',
+    description: 'Structure, user flows, and technical architecture — approved before a line of code.',
   },
   {
     number: '03',
-    name: 'Build',
-    description: 'Next.js + GCP. Fast, modern, built to last.',
+    name: 'Design & Build',
+    description: 'Next.js + GCP + Vercel. Fast, modern, built to production standard.',
   },
   {
     number: '04',
-    name: 'Launch',
-    description: 'Testing, optimisation, and go-live.',
+    name: 'QA & Compliance',
+    description: 'Testing, POPIA compliance, accessibility checks, and performance optimisation.',
   },
   {
     number: '05',
-    name: 'Support',
-    description: 'Ongoing updates, analytics, and growth.',
+    name: 'Launch & Enablement',
+    description: 'Go-live, training, handover, and ongoing support if you need it.',
   },
 ]
 

@@ -12,39 +12,41 @@ interface StatItem {
   subtitle: string
   badge?: string
   isDecimal?: boolean
+  isStatic?: boolean
+  staticDisplay?: string
 }
 
 const stats: StatItem[] = [
   {
-    targetValue: 47,
+    targetValue: 135,
     prefix: '',
-    suffix: '+',
-    label: 'Projects Delivered',
-    subtitle: 'From Soshanguve to the world',
+    suffix: '%',
+    label: 'B-BBEE Procurement',
+    subtitle: '135% recognition on your scorecard',
+    badge: 'Level 1',
   },
   {
-    targetValue: 2.3,
-    prefix: 'R',
-    suffix: 'M+',
-    label: 'Client Revenue Generated',
-    subtitle: 'Real economic impact for SA businesses',
-    isDecimal: true,
+    targetValue: 5,
+    prefix: '',
+    suffix: '',
+    label: 'Delivery Time',
+    subtitle: 'Production-ready in under a week',
+    isStatic: true,
+    staticDisplay: '5–7 Days',
   },
   {
     targetValue: 100,
     prefix: '',
     suffix: '%',
     label: 'Black-Owned',
-    subtitle: 'B-BBEE Level 1',
-    badge: 'Level 1',
+    subtitle: 'Also 100% Youth-Owned',
   },
   {
-    targetValue: 4.9,
+    targetValue: 100,
     prefix: '',
-    suffix: '/5',
-    label: 'Client Satisfaction',
-    subtitle: 'Based on client feedback',
-    isDecimal: true,
+    suffix: '%',
+    label: 'CSD Registered',
+    subtitle: 'Ready for government procurement',
   },
 ]
 
@@ -54,7 +56,7 @@ function AnimatedStatCounter({ stat, index }: { stat: StatItem; index: number })
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView || stat.isStatic) return
 
     const duration = 2200
     const startTime = performance.now()
@@ -78,7 +80,7 @@ function AnimatedStatCounter({ stat, index }: { stat: StatItem; index: number })
     }
 
     requestAnimationFrame(animate)
-  }, [isInView, stat.targetValue, stat.isDecimal])
+  }, [isInView, stat.targetValue, stat.isDecimal, stat.isStatic])
 
   return (
     <motion.div
@@ -92,9 +94,10 @@ function AnimatedStatCounter({ stat, index }: { stat: StatItem; index: number })
       {/* Large Gold Number */}
       <div className="relative">
         <span className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-cd-gold text-glow-gold tabular-nums">
-          {stat.prefix}
-          {stat.isDecimal ? count.toFixed(1) : count}
-          {stat.suffix}
+          {stat.isStatic
+            ? stat.staticDisplay
+            : `${stat.prefix}${stat.isDecimal ? count.toFixed(1) : count}${stat.suffix}`
+          }
         </span>
       </div>
 

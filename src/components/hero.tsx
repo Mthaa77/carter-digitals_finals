@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, ExternalLink, Trophy, Zap, ChevronDown } from 'lucide-react'
+import { ArrowRight, Trophy, Shield, CheckCircle, Zap, ChevronDown } from 'lucide-react'
 import HeroTyping from '@/components/hero-typing'
 
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
@@ -42,14 +42,15 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
 
 const badgeItems = [
   { icon: Trophy, label: 'B-BBEE Level 1', emoji: '🏆' },
-  { icon: Zap, label: 'Pretoria-Based', emoji: '🇿🇦' },
-  { icon: ExternalLink, label: 'Next.js + GCP Stack', emoji: '⚡' },
+  { icon: Shield, label: '100% Black-Owned', emoji: '🇿🇦' },
+  { icon: CheckCircle, label: 'CSD Registered', emoji: '✅' },
+  { icon: Zap, label: '5–7 Day Delivery', emoji: '⚡' },
 ]
 
 const counterItems = [
-  { value: 47, suffix: '+', label: 'Projects Built' },
-  { value: 0, prefix: 'R', suffix: '', label: 'Template Costs' },
-  { value: 2, suffix: '+', label: 'Years of Real Work' },
+  { value: 135, suffix: '%', prefix: '', label: 'B-BBEE Procurement Recognition' },
+  { value: 5, suffix: '–7 Days', prefix: '', label: 'Average Delivery Time' },
+  { value: 100, suffix: '%', prefix: '', label: 'Youth-Owned' },
 ]
 
 const containerVariants = {
@@ -142,9 +143,9 @@ export default function Hero() {
             variants={itemVariants}
             className="max-w-2xl mx-auto text-cd-text-muted text-sm sm:text-xl leading-relaxed font-sans"
           >
-            Carter Digitals is a 100% Black-owned B-BBEE Level 1 agency from
-            Soshanguve, Pretoria. Premium websites and business tools for SMEs
-            done waiting to be seen.
+            Carter Digitals is a 100% Black-owned, B-BBEE Level 1 digital services
+            studio from Soshanguve, Pretoria. High-performance websites, bespoke web
+            applications, and strategic brand collateral — delivered in 5–7 business days.
           </motion.p>
 
           {/* CTAs */}
