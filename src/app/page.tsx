@@ -31,6 +31,8 @@ import ScrollToTop from '@/components/scroll-to-top'
 import CookieConsent from '@/components/cookie-consent'
 import Team from '@/components/team'
 import ClientLogos from '@/components/client-logos'
+import NavProgressDots from '@/components/nav-progress-dots'
+import QuickStatsBar from '@/components/quick-stats-bar'
 import SocialProof from '@/components/social-proof'
 import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
@@ -48,6 +50,7 @@ export default function Home() {
       <PageLoader />
       <CustomCursor />
       <Navigation />
+      <NavProgressDots />
       <BackToTopBar />
       <main className="min-h-screen flex flex-col bg-[#080808]">
         <ParticleBg />
@@ -62,6 +65,8 @@ export default function Home() {
         <Team />
         <SectionDivider />
         <StatsTicker />
+        <SectionDivider />
+        <QuickStatsBar />
         <SectionDivider />
         <AnimatedStats />
         <SectionDivider />

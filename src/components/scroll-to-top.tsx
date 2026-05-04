@@ -44,7 +44,7 @@ export default function ScrollToTop() {
           transition={{ duration: 0.25, ease: 'easeInOut' }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-6 left-6 z-[9998] group cursor-pointer"
+          className="fixed bottom-5 sm:bottom-6 left-5 sm:left-6 z-[9998] group cursor-pointer"
         >
           {/* Progress ring SVG */}
           <svg

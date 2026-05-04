@@ -5,13 +5,20 @@ import { ArrowRight } from 'lucide-react'
 
 export default function CarterStory() {
   return (
-    <section id="story" className="relative bg-[#0A0A0A] py-20 md:py-28">
+    <section id="story" className="relative bg-[#0A0A0A] py-20 md:py-28 overflow-hidden">
+      {/* Animated ambient candle glow */}
+      <div
+        className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 w-[600px] h-[600px] rounded-full bg-cd-gold/5 blur-[80px] pointer-events-none"
+        style={{ animation: 'candle-glow 4s ease-in-out infinite' }}
+        aria-hidden="true"
+      />
+
       {/* Subtle gold divider above */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--cd-gold-dim)] to-transparent" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

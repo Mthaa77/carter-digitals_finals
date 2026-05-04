@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 import {
   Accordion,
   AccordionContent,
@@ -88,8 +89,9 @@ export default function FAQ() {
                 value={`item-${index}`}
                 className="glass-card rounded-xl border-0 px-6 data-[state=open]:border-l-4 data-[state=open]:border-l-cd-gold data-[state=open]:bg-[rgba(201,168,76,0.04)] data-[state=open]:shadow-[inset_4px_0_8px_rgba(201,168,76,0.05)] transition-all duration-300 overflow-hidden"
               >
-                <AccordionTrigger className="text-left text-base sm:text-lg font-display font-semibold text-cd-text hover:text-cd-gold hover:no-underline py-5 transition-colors duration-300 [&[data-state=open]>svg]:text-cd-gold">
+                <AccordionTrigger className="text-left text-base sm:text-lg font-display font-semibold text-cd-text hover:text-cd-gold hover:no-underline py-5 transition-colors duration-300 [&[data-state=open]>.faq-chevron]:rotate-180 [&[data-state=open]>.faq-chevron]:text-cd-gold">
                   {faq.question}
+                  <ChevronDown className="faq-chevron size-5 shrink-0 text-cd-text-dim transition-transform duration-300" />
                 </AccordionTrigger>
                 <AccordionContent className="text-cd-text-muted text-sm sm:text-base leading-relaxed font-sans pb-5">
                   {faq.answer}

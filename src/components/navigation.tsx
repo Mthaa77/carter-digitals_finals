@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
+import ThemeToggle from '@/components/theme-toggle'
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -28,7 +29,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const sectionIds = ['home', 'why-carter', 'trust-badges', 'team', 'clients', 'stats', 'achievements', 'services', 'compare', 'showcase-gallery', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'roi-calculator', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
+  const sectionIds = ['home', 'why-carter', 'trust-badges', 'team', 'clients', 'quick-stats', 'stats', 'achievements', 'services', 'compare', 'showcase-gallery', 'portfolio', 'testimonials', 'video-testimonials', 'showcase', 'tools', 'roi-calculator', 'estimator', 'process', 'story', 'timeline', 'pricing', 'faq', 'blog', 'newsletter', 'contact']
 
   useEffect(() => {
     const handleSectionScroll = () => {
@@ -129,6 +130,7 @@ export default function Navigation() {
                   </a>
                 )
               })}
+              <ThemeToggle />
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}

@@ -93,8 +93,15 @@ export default function Process() {
           className="hidden lg:block"
         >
           <div className="relative">
-            {/* Connecting line */}
-            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-cd-gold/70 to-transparent" />
+            {/* Animated connecting line - draws from left to right */}
+            <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-[2px] overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-transparent via-cd-gold/70 to-transparent origin-left"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
+              />
+            </div>
 
             <div className="grid grid-cols-5 gap-4">
               {phases.map((phase, index) => (
@@ -155,9 +162,16 @@ export default function Process() {
                   </div>
                 </div>
 
-                {/* Connecting line */}
+                {/* Animated connecting line - draws from top to bottom */}
                 {index < phases.length - 1 && (
-                  <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-cd-gold/70 to-cd-gold/20" />
+                  <div className="w-px flex-1 min-h-[2rem] overflow-hidden">
+                    <motion.div
+                      className="w-full h-full bg-gradient-to-b from-cd-gold/70 to-cd-gold/20 origin-top"
+                      initial={{ scaleY: 0 }}
+                      animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+                      transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 + index * 0.15 }}
+                    />
+                  </div>
                 )}
               </div>
 

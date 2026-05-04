@@ -7,6 +7,7 @@ export default function BeforeAfter() {
   const [sliderPos, setSliderPos] = useState(50)
   const containerRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)
+  const [isActive, setIsActive] = useState(false)
 
   const handleMove = useCallback(
     (clientX: number) => {
@@ -21,10 +22,12 @@ export default function BeforeAfter() {
 
   const handleMouseDown = useCallback(() => {
     isDragging.current = true
+    setIsActive(true)
   }, [])
 
   const handleMouseUp = useCallback(() => {
     isDragging.current = false
+    setIsActive(false)
   }, [])
 
   const handleMouseMove = useCallback(
@@ -62,7 +65,7 @@ export default function BeforeAfter() {
           className="text-center mb-12"
         >
           <span className="section-label inline-block">Before &amp; After</span>
-          <h2 className="section-heading text-[var(--text-h2)]">
+          <h2 className="section-heading section-heading-bar text-[var(--text-h2)]">
             See the <span className="gold-gradient-text">Difference</span>
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-md mx-auto font-sans">
@@ -198,7 +201,7 @@ export default function BeforeAfter() {
 
               {/* Drag handle */}
               <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-cd-gold bg-cd-bg/90 backdrop-blur-sm flex items-center justify-center cursor-col-resize touch-none shadow-lg shadow-cd-gold/20"
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-cd-gold bg-cd-bg/90 backdrop-blur-sm flex items-center justify-center cursor-col-resize touch-none shadow-lg shadow-cd-gold/20 transition-shadow duration-300 ${isActive ? 'shadow-[0_0_20px_rgba(201,168,76,0.4)]' : 'drag-handle-idle'}`}
                 onMouseDown={handleMouseDown}
                 onTouchStart={handleMouseDown}
               >

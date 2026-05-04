@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { CheckCircle, Mail } from 'lucide-react'
 
 export default function Newsletter() {
@@ -9,6 +9,8 @@ export default function Newsletter() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(sectionRef, { once: true })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,6 +49,7 @@ export default function Newsletter() {
     <section
       id="newsletter"
       className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      ref={sectionRef}
     >
       {/* Subtle gold gradient glow */}
       <div className="absolute inset-0 pointer-events-none">
@@ -66,9 +69,18 @@ export default function Newsletter() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
         >
-          {/* Header */}
+          {/* Header with animated mail icon */}
           <h2 className="font-display font-bold tracking-tight text-[#F0EFE8] mb-4 pb-3" style={{ fontSize: 'var(--text-h2)' }}>
-            <span className="gold-gradient-text">Stay Ahead</span>
+            <span className="inline-flex items-center gap-3">
+              <motion.span
+                animate={isInView ? { y: [0, -6, 0] } : {}}
+                transition={{ duration: 0.6, delay: 0.5, ease: 'easeInOut' }}
+                className="inline-flex"
+              >
+                <Mail className="w-7 h-7 text-cd-gold" />
+              </motion.span>
+              <span className="gold-gradient-text">Stay Ahead</span>
+            </span>
             {/* Gold border-bottom accent */}
             <span className="block mx-auto mt-3 w-16 h-[3px] rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
           </h2>

@@ -43,17 +43,27 @@ const cards: WhyCard[] = [
   },
 ]
 
+const listVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+}
+
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.15,
       duration: 0.7,
       ease: [0.25, 0.46, 0.45, 0.94],
     },
-  }),
+  },
 }
 
 export default function WhyCarter() {
@@ -76,17 +86,19 @@ export default function WhyCarter() {
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          variants={listVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {cards.map((card, i) => {
             const Icon = card.icon
             return (
               <motion.div
                 key={i}
-                custom={i}
                 variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-60px' }}
                 className="glass-card hover-lift rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold hover:shadow-[0_0_24px_rgba(201,168,76,0.1)] transition-all duration-500 cursor-default relative overflow-hidden"
               >
                 {/* Numbered indicator */}
@@ -120,7 +132,7 @@ export default function WhyCarter() {
               </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

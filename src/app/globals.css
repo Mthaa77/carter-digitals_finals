@@ -125,6 +125,44 @@
   --text-xs: 0.75rem;
 }
 
+/* ── Midnight Gold Theme Variant ───────────────────────────── */
+html.midnight-gold {
+  --background: #0F0F0F;
+  --foreground: #F0EFE8;
+  --card: #151515;
+  --card-foreground: #F0EFE8;
+  --popover: #151515;
+  --popover-foreground: #F0EFE8;
+  --border: #2A2A2A;
+  --input: #2A2A2A;
+  --cd-bg: #0F0F0F;
+  --cd-surface: #151515;
+  --cd-elevated: #1E1E1E;
+  --cd-border: #2A2A2A;
+  --cd-border-glow: #404040;
+
+  background-color: #0F0F0F;
+}
+
+html.midnight-gold .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.midnight-gold body {
+  background-color: #0F0F0F;
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 0.4s ease;
+}
+html body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+html .glass-card {
+  transition: background-color 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -169,6 +207,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.2));
 }
 
 /* Glassmorphism card */
@@ -316,6 +355,18 @@
   color: var(--cd-text);
   font-weight: 700;
   line-height: 1.1;
+  position: relative;
+}
+
+/* Gold accent bar below section headings */
+.section-heading-bar::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: 0.75rem;
+  background: linear-gradient(90deg, var(--cd-gold-dim), var(--cd-gold), var(--cd-gold-light));
+  border-radius: 2px;
 }
 
 /* Section heading with gold accent line */
@@ -447,4 +498,30 @@
 }
 .btn-primary-gold:active {
   transform: scale(0.97);
+}
+
+/* Skeleton shimmer loading */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--cd-surface) 25%, var(--cd-elevated) 50%, var(--cd-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Drag handle pulse when idle */
+@keyframes handle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(201, 168, 76, 0); }
+}
+.drag-handle-idle {
+  animation: handle-pulse 2.5s ease-in-out infinite;
+}
+
+/* Ambient candle glow pulse */
+@keyframes candle-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
 }

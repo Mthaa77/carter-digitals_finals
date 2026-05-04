@@ -2,36 +2,23 @@
 
 import { motion } from 'framer-motion'
 
-interface ClientLogo {
-  abbr: string
-  name: string
-}
-
-const clients: ClientLogo[] = [
-  { abbr: 'SOS', name: 'Soshanguve SOS' },
-  { abbr: 'DB', name: 'Direla Bakgatla' },
-  { abbr: 'BLT', name: 'Block L Traders' },
-  { abbr: 'TSM', name: 'Tshwane SMEs' },
-  { abbr: 'GB', name: 'Gauteng Business' },
-  { abbr: 'CD', name: 'Carter Digitals' },
+const clients = [
+  'Soshanguve SOS',
+  'Direla Bakgatla',
+  'Block L Traders',
+  'Tshwane SMEs',
+  'Gauteng Businesses',
+  'Pretoria Startups',
+  'SA Digital Hub',
+  'Maboneng Precinct',
 ]
 
-const cardVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  }),
-}
-
 export default function ClientLogos() {
+  // Duplicate for seamless infinite scroll
+  const marqueeItems = [...clients, ...clients]
+
   return (
-    <section id="clients" className="relative py-20 md:py-28 bg-cd-bg">
+    <section id="clients" className="relative py-20 md:py-28 bg-cd-bg overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <motion.div
@@ -41,40 +28,59 @@ export default function ClientLogos() {
           transition={{ duration: 0.7 }}
           className="text-center mb-14 sm:mb-18"
         >
-          <h2 className="font-display text-cd-text font-bold tracking-tight" style={{ fontSize: 'var(--text-h2)' }}>
+          <span className="section-label">Our Partners</span>
+          <h2 className="section-heading" style={{ fontSize: 'var(--text-h2)' }}>
             Trusted by South African Businesses
           </h2>
-          {/* Gold accent line */}
           <div className="mt-4 mx-auto w-20 h-1 bg-cd-gold rounded-full" />
-          <p className="mt-6 text-[#C8C8C0] text-lg font-sans max-w-2xl mx-auto">
+          <p className="mt-6 text-cd-text-muted text-lg font-sans max-w-2xl mx-auto">
             From Soshanguve to Sandton, businesses choose Carter Digitals.
           </p>
         </motion.div>
+      </div>
 
-        {/* Logo grid */}
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6">
-          {clients.map((client, i) => (
-            <motion.div
-              key={client.abbr}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-              whileHover={{ scale: 1.05 }}
-              className="glass-card rounded-xl aspect-square flex flex-col items-center justify-center cursor-default border border-cd-border hover:border-cd-gold/30 transition-colors duration-300"
-              title={client.name}
-            >
-              <span className="font-display text-xl sm:text-2xl font-bold text-cd-gold select-none">
-                {client.abbr}
-              </span>
-              <span className="mt-2 text-[9px] sm:text-[10px] text-[#9A9A92] font-sans text-center px-1 leading-tight truncate w-full">
-                {client.name}
-              </span>
-            </motion.div>
-          ))}
+      {/* Infinite Marquee Carousel */}
+      <div className="relative w-full">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-cd-bg to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-cd-bg to-transparent z-10 pointer-events-none" />
+
+        <div className="flex overflow-hidden">
+          <div className="flex items-center gap-4 sm:gap-6 animate-client-marquee whitespace-nowrap">
+            {marqueeItems.map((client, index) => (
+              <div
+                key={`${client}-${index}`}
+                className="glass-card rounded-full px-5 sm:px-7 py-2.5 sm:py-3 inline-flex items-center gap-2 hover:border-cd-gold/30 hover:bg-cd-gold/5 transition-all duration-300 cursor-default shrink-0"
+              >
+                <span className="w-2 h-2 rounded-full bg-cd-gold shrink-0" />
+                <span className="font-display text-sm sm:text-base font-medium text-cd-text-muted group-hover:text-cd-gold transition-colors">
+                  {client}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* CSS animation keyframes */}
+      <style jsx>{`
+        @keyframes client-marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-client-marquee {
+          animation: client-marquee 30s linear infinite;
+        }
+
+        .animate-client-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   )
 }

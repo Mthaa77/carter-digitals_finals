@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink, Trophy, Zap, ChevronDown } from 'lucide-react'
 import HeroTyping from '@/components/hero-typing'
@@ -73,6 +73,29 @@ const itemVariants = {
 }
 
 export default function Hero() {
+  const grainRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = useCallback(() => {
+    if (grainRef.current) {
+      grainRef.current.style.transform = `translateY(${window.scrollY * 0.1}px)`
+    }
+  }, [])
+
+  useEffect(() => {
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [handleScroll])
+
   return (
     <section
       id="home"
@@ -82,8 +105,8 @@ export default function Hero() {
       {/* Grid lines */}
       <div className="absolute inset-0 grid-lines" />
 
-      {/* Grain overlay */}
-      <div className="absolute inset-0 grain-overlay" />
+      {/* Grain overlay with parallax */}
+      <div ref={grainRef} className="absolute inset-0 grain-overlay will-change-transform" />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
@@ -181,7 +204,7 @@ export default function Hero() {
           {counterItems.map((item, i) => (
             <div
               key={i}
-              className="glass-card rounded-xl p-6 text-center group hover:border-l-cd-gold hover:border-t-2 hover:border-t-cd-gold transition-[border-color,box-shadow] duration-300"
+              className="glass-card hover-lift rounded-xl p-6 text-center group hover:border-cd-gold/30 hover:shadow-[0_0_20px_rgba(201,168,76,0.12)] transition-[border-color,box-shadow] duration-300"
             >
               <div className="font-display text-3xl sm:text-4xl font-bold text-cd-gold mb-2">
                 <AnimatedCounter
