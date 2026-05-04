@@ -11,6 +11,7 @@ const tools = [
     description:
       'Estimate your website cost based on pages, features, and timeline.',
     cta: 'Use Free Tool →',
+    href: '#website-cost-calc',
     badge: null,
   },
   {
@@ -19,6 +20,7 @@ const tools = [
     description:
       'See how a new website pays for itself with conversion rate improvements.',
     cta: 'Use Free Tool →',
+    href: '#',
     badge: null,
   },
   {
@@ -27,6 +29,7 @@ const tools = [
     description:
       'Get a basic SEO health check for your current website. No signup needed.',
     cta: 'Use Free Tool →',
+    href: '#',
     badge: null,
   },
   {
@@ -35,6 +38,7 @@ const tools = [
     description:
       "South Africa's only B-BBEE supplier score estimator. See what your spend qualifies for.",
     cta: 'Use Free Tool →',
+    href: '#bbbee-calc',
     badge: 'UNIQUE',
   },
 ]
@@ -148,7 +152,7 @@ export default function FreeTools() {
 
                 {/* CTA */}
                 <a
-                  href="#"
+                  href={tool.href}
                   className="inline-flex items-center gap-1.5 text-[var(--cd-gold)] text-sm font-medium group-hover:gap-2.5 transition-all duration-300"
                 >
                   {tool.cta}

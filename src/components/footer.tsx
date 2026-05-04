@@ -23,7 +23,7 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative">
+    <footer className="relative">
       {/* Footer CTA Section */}
       <section className="relative bg-[#080808] py-20 md:py-28 overflow-hidden">
         {/* Subtle background glow */}
