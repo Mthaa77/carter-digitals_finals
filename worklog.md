@@ -1393,3 +1393,241 @@ Unresolved Issues / Next Steps:
 - Contact form API could integrate with email service (Resend/SendGrid)
 - Minor: Cookie banner + floating button proximity on mobile (visual density concern)
 - Minor: Mobile mid-page spacing tightness between stats and badges
+
+---
+Task ID: 15-a
+Agent: Styling Agent
+Task: Apply Comprehensive Styling Improvements
+
+Work Log:
+
+### 1. globals.css — Added 3 new CSS utilities
+- `.scroll-reveal` / `.scroll-reveal.visible` — fade-in + slide-up animation for scroll-triggered reveals (opacity 0→1, translateY 30px→0, 0.6s ease-out)
+- `.hover-lift` — micro-animation that lifts elements 2px on hover with subtle gold glow shadow
+- `@media (max-width: 640px)` mobile rules:
+  - `.section-mobile-compact` (py-14 instead of py-20)
+  - 44px minimum touch targets for buttons, btn-primary-gold, and role="button" elements
+  - `.fixed-bottom-safe` with safe-area-inset-bottom padding
+
+### 2. navigation.tsx — Enhanced glassmorphism effect
+- Added `shadow-[0_2px_20px_rgba(201,168,76,0.06)]` gold glow to scrolled nav state
+
+### 3. services.tsx — Improved service cards (3 enhancements)
+- Added gold gradient bottom border on card hover (via-transparent → via-[#C9A84C])
+- Added `hover:shadow-[0_0_20px_rgba(201,168,76,0.08)]` warm glow
+- Added service number indicators (01, 02, 03) with `group-hover:animate-pulse`
+- Applied `hover-lift` class
+
+### 4. why-carter.tsx — Enhanced WhyCarter cards (2 enhancements)
+- Added 6px gold dot indicator (`w-1.5 h-1.5 rounded-full bg-cd-gold`) before each card title
+- Added `hover:shadow-[0_0_24px_rgba(201,168,76,0.1)]` stronger gold glow on hover
+- Applied `hover-lift` class
+
+### 5. portfolio.tsx — Improved portfolio section (2 enhancements)
+- Added subtle gold border-left accent (`border-l-[3px] border-l-[#C9A84C]/30`) to each card
+- Added `hover:scale-[1.01]` effect
+- Applied `hover-lift` class
+- Fixed syntax error (missing closing backtick on className)
+
+### 6. pricing.tsx — Enhanced pricing section
+- Verified Business tier already has `ring-1 ring-cd-gold/20` and "MOST POPULAR" badge
+- Applied `hover-lift` class to pricing cards
+
+### 7. testimonial-carousel.tsx — Improved testimonials
+- Added subtle gold gradient at bottom of card (`bg-gradient-to-t from-[rgba(201,168,76,0.06)]`)
+- Stars already use Lucide Star with gold fill
+
+### 8. free-tools.tsx — Enhanced free tools section (3 enhancements)
+- Added gold accent bar (3px tall) at top of each tool card on hover
+- Added permanent gold left border (`border-l-[3px] border-l-[var(--cd-gold)]`) to B-BBEE card
+- Applied `hover-lift` class
+
+### 9. contact-form.tsx — Improved contact form visual appeal (2 enhancements)
+- Added gold gradient top border (3px gradient from gold-dim → gold → gold-light) to form card
+- Added gold glow behind submit button (`shadow-[0_0_20px_rgba(201,168,76,0.15)]` → `hover:shadow-[0_0_30px_rgba(201,168,76,0.25)]`)
+
+### 10. newsletter.tsx — Enhanced newsletter section (2 enhancements)
+- Added gold border-bottom accent to section heading (16px wide, 3px tall gradient bar)
+- Added shimmer glow effect on subscribe button hover (`hover:shadow-[0_0_20px_rgba(201,168,76,0.3)]`)
+
+### Verification
+- ESLint: 2 pre-existing errors (back-to-top-bar.tsx, floating-testimonial.tsx) — not related to these changes
+- HTTP 200: Site renders successfully
+- No new lint errors introduced
+- Fixed portfolio.tsx syntax error (missing `} on template literal)
+
+Stage Summary:
+- 12 comprehensive styling improvements applied across 8 component files + globals.css
+- 3 new CSS utility classes added (scroll-reveal, hover-lift, mobile rules)
+- hover-lift applied to: services, why-carter, portfolio, pricing, free-tools cards
+- Gold accents added: dot indicators, gradient borders, glow shadows, border-left accents
+- Mobile improvements: compact section padding, 44px touch targets, safe-area insets
+- ESLint: 0 new errors (2 pre-existing), Site: HTTP 200
+
+---
+Task ID: 15-b
+Agent: Feature Builder Agent
+Task: Build 4 new feature components (Back to Top Bar, Service Detail Modal, Floating Testimonial, Pricing Toggle)
+
+Work Log:
+
+### 1. Back to Top Progress Bar (`src/components/back-to-top-bar.tsx`)
+- Fixed at top of viewport, z-50, replaces ScrollProgress
+- Thin (2px) gold gradient progress bar that fills based on scroll position
+- Clickable — smoothly scrolls to top on click
+- Subtle glow effect that intensifies as progress increases
+- Bar widens to 4px when hovered (interactive feedback)
+- "Back to top ↑" tooltip appears on hover when scrolled past 5%
+- Uses requestAnimationFrame for scroll tracking (throttled via ref)
+- Framer Motion for smooth transitions
+- Keyboard accessible (Enter/Space to scroll)
+- Fixed ESLint error: Used rAF instead of synchronous setState in effect
+
+### 2. Service Detail Modal (`src/components/service-detail-modal.tsx`)
+- Uses shadcn/ui Dialog component with dark theme customization
+- 3 service entries: SME Websites, Dashboards, SEO & Growth
+- Each modal shows:
+  - Service name in gold gradient text (bg-clip-text)
+  - Icon in gold-tinted container
+  - Tagline in gold
+  - 2-3 paragraph detailed descriptions
+  - Feature list in 2-column grid with gold Check icons
+  - Starting price in gold accent box
+  - "Get a Quote" CTA button → #contact
+  - "See Examples" secondary button → #portfolio
+- Gold gradient top accent bar on modal header
+- Glassmorphism styling with #0D0D0D background
+- Framer Motion AnimatePresence for animated entrance
+- Close on overlay click or X button
+- Exports `useServiceDetail` hook (openService, open, setOpen, activeServiceId)
+- Exports `ServiceDetailModal` component (accepts open, onOpenChange, serviceId)
+- Integrated into services.tsx: clicking any service card opens the modal
+- Service cards now have cursor-pointer, "What's Included" toggle uses stopPropagation
+
+### 3. Floating Testimonial Snippet (`src/components/floating-testimonial.tsx`)
+- Fixed position: bottom-left on desktop, bottom-center on mobile
+- Appears 8 seconds after page load
+- Shows one random testimonial (5 options) with name, business, short quote, gold stars
+- Glass card styling with gold left accent border
+- Auto-dismisses after 5 seconds of visibility (13s total)
+- "View All →" link to #testimonials section
+- Framer Motion slide-in and fade-out animation
+- Only shows once per session (localStorage key: 'cd-floating-testimonial-shown')
+- Small close (X) button in top-right corner
+- Uses useMemo for random testimonial selection (avoids setState-in-effect lint error)
+
+### 4. Pricing Toggle — Monthly/Annual (`src/components/pricing.tsx`)
+- Complete rewrite of pricing.tsx with billing toggle
+- Toggle switch at top of pricing section (Monthly / Annual)
+- Annual prices get 15% discount:
+  - Starter: R7,950 → R6,758
+  - Business: R14,500 → R12,325
+  - Growth: R22,000 → R18,700
+  - Dashboard: From R15,000 → From R12,750
+- Smooth sliding gold indicator on toggle (spring animation)
+- "SAVE 15%" badge next to Annual option (gold bg with border)
+- AnimatedPrice component with Framer Motion AnimatePresence for smooth number transitions
+- Strikethrough monthly price shown when annual is selected
+- "MOST POPULAR" badge above Business tier (already existed, preserved)
+- Toggle uses role="switch" and aria-checked for accessibility
+- All other pricing section features preserved (B-BBEE box, add-ons row)
+
+### 5. Integration Updates (`src/app/page.tsx`)
+- Replaced `ScrollProgress` import with `BackToTopBar`
+- Added `FloatingTestimonial` import and placed after `CookieConsent`
+- ServiceDetailModal is integrated directly into `services.tsx` component
+
+### 6. Services Component Updates (`src/components/services.tsx`)
+- Added `id` field to each service data object ('sme-websites', 'dashboards', 'seo-growth')
+- Imported `useServiceDetail` and `ServiceDetailModal` from service-detail-modal
+- Service cards now clickable (onClick → openService)
+- Added cursor-pointer class to cards
+- "What's Included" toggle button uses stopPropagation to prevent modal opening
+- CTA links use stopPropagation as well
+- ServiceDetailModal rendered at bottom of Services component
+
+### Lint Fixes
+- Fixed `react-hooks/set-state-in-effect` error in back-to-top-bar.tsx: Replaced direct handleScroll() call in useEffect with requestAnimationFrame wrapper
+- Fixed `react-hooks/set-state-in-effect` error in floating-testimonial.tsx: Moved random testimonial selection from useEffect+setState to useMemo
+- All ESLint errors resolved: 0 errors
+
+Stage Summary:
+- 4 new feature components built and integrated
+- Back to Top Bar replaces ScrollProgress with interactive click-to-scroll
+- Service Detail Modal provides rich service information in a dialog
+- Floating Testimonial shows social proof after 8 seconds (once per session)
+- Pricing Toggle adds Monthly/Annual billing with 15% annual discount
+- All components use 'use client' directive
+- All follow Soshanguve Steel design system (dark #080808 bg, gold #C9A84C accents, glassmorphism)
+- Framer Motion animations throughout
+- ESLint: 0 errors, Site: HTTP 200
+
+---
+Task ID: 15
+Agent: Cron Review Agent (Round 8)
+Task: QA testing, critical bug fixes, comprehensive styling improvements, and new feature additions
+
+Work Log:
+- Read worklog.md and assessed current project status (30+ sections, VLM score 8.3/10 from Round 7)
+- Performed QA testing via agent-browser with desktop (1440×900) and mobile (375×812) viewports
+- Used VLM to visually analyze hero, mid-page, services, pricing, and footer screenshots
+- Initial VLM score: 7.8/10 — identified critical issues from fresh QA assessment
+- Identified bugs: ParticleBg hydration mismatch causing "1 Issue" dev indicator, mobile cookie banner too large overlapping fixed elements, footer social links too small for touch, secondary CTA barely visible, "R0 Spent on Templates" confusing wording
+- Identified styling gaps: no scroll-reveal animations, weak service card hover, no gold dots on WhyCarter cards, portfolio cards need more visual interest
+- Identified feature gaps: no service detail modal, no pricing toggle, no floating testimonial, no interactive back-to-top bar
+
+### Bug Fixes (7 items):
+1. **ParticleBg hydration mismatch** — Replaced Math.random() with deterministic seeded pseudo-random number generator (seededRandom function). Eliminated SSR/client mismatch that was causing "1 Issue" dev indicator
+2. **Cookie consent too large on mobile** — Redesigned cookie banner with compact mobile layout: smaller padding (p-3), smaller text (text-xs on mobile), compact buttons, cookie icon, single-line design
+3. **Footer social links touch targets** — Changed from plain icons to w-10 h-10 rounded-lg boxes with border, hover effects, and proper 44px touch targets
+4. **Secondary CTA barely visible** — Changed "See Our Work" button from `border-cd-border text-cd-text` to `border-cd-gold/30 text-cd-gold` with `hover:bg-cd-gold/10` for much better visibility
+5. **"R0 Spent on Templates" confusing** — Changed label from "Spent on Templates" to "Template Costs" for clarity
+6. **Image aspect ratio warnings** — Fixed navigation logo (32×24) and footer logo (40×30) to match natural aspect ratio
+7. **ParticleBg lint error** — Fixed react-hooks/set-state-in-effect by removing useState/useEffect approach, using deterministic generation at module level instead
+
+### Styling Improvements (12 items):
+1. **Scroll-reveal animation** — Added `.scroll-reveal` and `.scroll-reveal.visible` utility classes in globals.css (fade-in + slide-up on scroll)
+2. **Hover-lift utility** — Added `.hover-lift` class with translateY(-2px) + gold glow shadow on hover
+3. **Navigation gold glow** — Added `shadow-[0_2px_20px_rgba(201,168,76,0.06)]` when scrolled
+4. **Service cards enhanced** — Gold gradient bottom border on hover, warm glow shadow, group-hover:animate-pulse on number indicators, hover-lift class
+5. **WhyCarter cards enhanced** — 6px gold dot before each card title, stronger gold glow on hover, hover-lift class
+6. **Portfolio cards enhanced** — Gold border-left accent (3px), hover:scale-[1.01], hover-lift class
+7. **Free Tools cards enhanced** — Gold accent bar on top on hover, B-BBEE card permanent gold left border, hover-lift class
+8. **Contact form enhanced** — Gold gradient top border (3px), stronger gold glow behind submit button
+9. **Newsletter enhanced** — Gold border-bottom accent on heading, shimmer glow on subscribe hover
+10. **Testimonial carousel enhanced** — Subtle gold gradient at bottom of each card
+11. **Mobile-specific improvements** — Added `.section-mobile-compact` (py-14), 44px min touch targets, `.fixed-bottom-safe` with safe-area-inset-bottom
+12. **Footer CTA enhanced** — Added btn-glow-gold btn-press classes to "Start Your Project" button
+
+### New Features (4 components):
+1. **Back to Top Progress Bar** (back-to-top-bar.tsx): Interactive gold gradient progress bar at top of viewport, clickable to scroll to top, widens on hover with "Back to top ↑" tooltip, keyboard accessible, replaces old ScrollProgress component
+2. **Service Detail Modal** (service-detail-modal.tsx): shadcn/ui Dialog with full service details (SME Websites, Dashboards, SEO & Growth), gold gradient title, feature grid with Check icons, starting price, "Get a Quote" + "See Examples" CTAs. Exports useServiceDetail hook. Integrated into services.tsx — clicking service cards opens the modal
+3. **Floating Testimonial Snippet** (floating-testimonial.tsx): Appears 8s after page load, bottom-left on desktop / bottom-center on mobile, random testimonial with gold stars, auto-dismisses after 5s, "View All →" link, once per session (localStorage), close button
+4. **Pricing Toggle Monthly/Annual** (pricing.tsx): Toggle switch with gold sliding indicator, annual prices 15% discount with strikethrough monthly price, "SAVE 15%" gold badge, AnimatedPrice component with Framer Motion transitions, accessible toggle (role="switch")
+
+### VLM Quality Score Progression:
+- Round 1: 3/10 → Round 2: 6/10 → Round 3: 7/10 → Round 4: 7.5/10 → Round 7: 8.3/10 → Round 8 (start): 7.8/10 → Round 8 (final): 8.3/10
+
+Stage Summary:
+- 7 bug fixes applied (ParticleBg hydration, cookie banner, footer touch targets, CTA visibility, stat wording, image aspect ratio, lint error)
+- 12 styling improvements across all sections
+- 4 new feature components created and integrated
+- VLM quality score maintained at 8.3/10 (up from 7.8 initial assessment)
+- Desktop: 8.7/10 hero, 8.0/10 footer
+- Mobile: 8.8/10 stats, 7.8/10 footer
+- ESLint: 0 errors, Site: HTTP 200, Zero console errors/warnings
+
+Current Project Status:
+- Website now has 34+ components with rich interactivity and premium styling
+- Full page: PageLoader → Navigation → BackToTopBar → Hero(typing) → ClientMarquee → ClientLogos → WhyCarter → TrustBadges → Team → StatsTicker → AnimatedStats → Services(with modal) → ServiceComparison → ProjectShowcase → Portfolio → Testimonials(carousel) → TestimonialVideo → BeforeAfter → Process → FreeTools → ROICalculator → ProjectEstimator → Calculators → CarterStory → CompanyTimeline → Pricing(toggle) → FAQ → BlogPreview → ContactForm → Newsletter → Footer
+- Interactive features: AI Chat, ROI Calculator, Cost Calculator, B-BBEE Estimator, Project Estimator Wizard, Before/After Slider, Contact Form, Newsletter, FAQ Accordion, Portfolio Modal, Service Detail Modal, Cookie Consent, Scroll-to-Top with Progress, Back-to-Top Progress Bar, Testimonial Carousel, Page Loader, Hero Typing, Ambient Particles, Video Testimonials, Project Showcase Gallery, Floating Testimonial Snippet, Pricing Toggle
+- Zero hydration mismatches, zero console errors
+- VLM Quality Score: 8.3/10
+
+Unresolved Issues / Next Steps:
+- Service card hover glow could be more visible (increase from 0.08 to 0.15 opacity)
+- Could add more prominent scroll-to-explore indicator
+- Contact form API could integrate with email service (Resend/SendGrid) for actual delivery
+- Performance optimization (Lighthouse audit, image optimization, lazy loading)
+- Could add Google Analytics / Tag Manager integration
+- Could add actual blog article pages with dynamic routes

@@ -108,14 +108,17 @@ export default function FreeTools() {
                 key={tool.name}
                 variants={cardVariants}
                 className={`
-                  glass-card rounded-xl p-6 min-w-[280px] md:min-w-0
-                  flex flex-col gap-4 transition-all duration-300 cursor-pointer group
+                  glass-card hover-lift rounded-xl p-6 min-w-[280px] md:min-w-0
+                  flex flex-col gap-4 transition-all duration-300 cursor-pointer group relative overflow-hidden
                   ${isHighlighted
-                    ? 'border-[var(--cd-gold-dim)] shadow-[0_0_24px_rgba(201,168,76,0.08)] hover:border-[var(--cd-gold)] hover:shadow-[0_0_32px_rgba(201,168,76,0.14)]'
+                    ? 'border-l-[3px] border-l-[var(--cd-gold)] border-[var(--cd-gold-dim)] shadow-[0_0_24px_rgba(201,168,76,0.08)] hover:border-[var(--cd-gold)] hover:shadow-[0_0_32px_rgba(201,168,76,0.14)]'
                     : 'hover:border-[#3A3A3A]'
                   }
                 `}
               >
+                {/* Gold accent bar on hover */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+
                 {/* Icon + Badge Row */}
                 <div className="flex items-start justify-between">
                   <div

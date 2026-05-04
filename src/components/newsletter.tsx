@@ -67,8 +67,10 @@ export default function Newsletter() {
           transition={{ duration: 0.7 }}
         >
           {/* Header */}
-          <h2 className="font-display font-bold tracking-tight text-[#F0EFE8] mb-4" style={{ fontSize: 'var(--text-h2)' }}>
+          <h2 className="font-display font-bold tracking-tight text-[#F0EFE8] mb-4 pb-3" style={{ fontSize: 'var(--text-h2)' }}>
             <span className="gold-gradient-text">Stay Ahead</span>
+            {/* Gold border-bottom accent */}
+            <span className="block mx-auto mt-3 w-16 h-[3px] rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
           </h2>
 
           {/* Subtext */}
@@ -100,7 +102,7 @@ export default function Newsletter() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto px-6 py-3 bg-cd-gold text-[#080808] font-bold text-sm rounded-lg hover:bg-cd-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans btn-glow-gold btn-press"
+                className="w-full sm:w-auto px-6 py-3 bg-cd-gold text-[#080808] font-bold text-sm rounded-lg hover:bg-cd-gold-light transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans btn-glow-gold btn-press hover:shadow-[0_0_20px_rgba(201,168,76,0.3)]"
               >
                 {isLoading ? 'Subscribing...' : 'Subscribe'}
               </button>

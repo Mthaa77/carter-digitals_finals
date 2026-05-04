@@ -87,7 +87,7 @@ export default function WhyCarter() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
-                className="glass-card rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold transition-all duration-500 cursor-default relative overflow-hidden"
+                className="glass-card hover-lift rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold hover:shadow-[0_0_24px_rgba(201,168,76,0.1)] transition-all duration-500 cursor-default relative overflow-hidden"
               >
                 {/* Numbered indicator */}
                 <span className="absolute top-4 right-4 font-mono text-xs text-cd-text-dim/40 select-none">
@@ -108,7 +108,8 @@ export default function WhyCarter() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-lg font-semibold text-cd-text mb-3 group-hover:text-cd-gold-light transition-colors duration-300 relative z-10">
+                <h3 className="font-display text-lg font-semibold text-cd-text mb-3 group-hover:text-cd-gold-light transition-colors duration-300 relative z-10 flex items-center gap-2">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-cd-gold shrink-0" />
                   {card.title}
                 </h3>
 

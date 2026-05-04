@@ -21,6 +21,13 @@ const serviceLinks = [
   { label: 'Google Ads', href: '#services' },
 ]
 
+const socialLinks = [
+  { icon: Facebook, label: 'Facebook', href: '#' },
+  { icon: Instagram, label: 'Instagram', href: '#' },
+  { icon: Linkedin, label: 'LinkedIn', href: '#' },
+  { icon: Twitter, label: 'X / Twitter', href: '#' },
+]
+
 export default function Footer() {
   return (
     <footer className="relative">
@@ -51,7 +58,7 @@ export default function Footer() {
           >
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide rounded transition-colors duration-200"
+              className="btn-glow-gold btn-press inline-flex items-center justify-center px-8 py-3.5 bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-200 shadow-lg shadow-cd-gold/15"
             >
               Start Your Project
             </a>
@@ -74,15 +81,15 @@ export default function Footer() {
       {/* Footer Main */}
       <div className="bg-[#0A0A0A] py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {/* Column 1 - Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3 mb-5">
                 <Image
                   src="/carter-digitals-logo.png"
                   alt="Carter Digitals Logo"
                   width={40}
-                  height={40}
+                  height={30}
                   className="shrink-0"
                 />
                 <span className="font-display text-xl font-bold">
@@ -94,20 +101,18 @@ export default function Footer() {
                 Built in Soshanguve. For businesses that refuse to be invisible.
               </p>
 
-              {/* Social media links */}
-              <div className="flex items-center gap-4 mt-5">
-                <a href="#" aria-label="Facebook" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a href="#" aria-label="Instagram" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" aria-label="LinkedIn" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="#" aria-label="X / Twitter" className="text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200">
-                  <Twitter className="w-5 h-5" />
-                </a>
+              {/* Social media links — larger touch targets */}
+              <div className="flex items-center gap-3 mt-6">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    aria-label={social.label}
+                    className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#1A1A1A] border border-[#242424] text-[#C8C8C0] hover:text-[#C9A84C] hover:border-cd-gold/30 hover:bg-cd-gold/5 transition-all duration-200"
+                  >
+                    <social.icon className="w-4 h-4" />
+                  </a>
+                ))}
               </div>
             </div>
 
@@ -150,7 +155,7 @@ export default function Footer() {
             </div>
 
             {/* Column 4 - Contact */}
-            <div>
+            <div className="col-span-2 sm:col-span-1">
               <h3 className="font-display text-sm font-bold text-[#F0EFE8] uppercase tracking-wider mb-5">
                 Contact
               </h3>
@@ -194,7 +199,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
             <p className="text-cd-text-dim font-sans text-sm">
               &copy; 2026 Carter Digitals (Pty) Ltd
             </p>
@@ -204,6 +209,9 @@ export default function Footer() {
               B-BBEE Level 1
             </span>
           </div>
+          <p className="text-cd-text-dim font-sans text-xs">
+            Designed & built in Soshanguve, South Africa 🇿🇦
+          </p>
         </div>
       </div>
     </footer>

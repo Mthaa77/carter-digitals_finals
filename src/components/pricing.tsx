@@ -1,13 +1,33 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
-const plans = [
+type BillingPeriod = 'monthly' | 'annual'
+
+interface Plan {
+  name: string
+  monthlyPrice: string
+  annualPrice: string
+  monthlyNumeric: number | null
+  annualNumeric: number | null
+  bestFor: string
+  features: string[]
+  cta: string
+  highlighted: boolean
+  badge: string | null
+  isOutline?: boolean
+}
+
+const plans: Plan[] = [
   {
     name: 'Starter',
-    price: 'R7,950',
+    monthlyPrice: 'R7,950',
+    annualPrice: 'R6,758',
+    monthlyNumeric: 7950,
+    annualNumeric: 6758,
     bestFor: 'First website',
     features: [
       'Up to 5 pages',
@@ -23,7 +43,10 @@ const plans = [
   },
   {
     name: 'Business',
-    price: 'R14,500',
+    monthlyPrice: 'R14,500',
+    annualPrice: 'R12,325',
+    monthlyNumeric: 14500,
+    annualNumeric: 12325,
     bestFor: 'Established SME',
     features: [
       'Up to 10 pages',
@@ -39,7 +62,10 @@ const plans = [
   },
   {
     name: 'Growth',
-    price: 'R22,000',
+    monthlyPrice: 'R22,000',
+    annualPrice: 'R18,700',
+    monthlyNumeric: 22000,
+    annualNumeric: 18700,
     bestFor: 'Lead generation',
     features: [
       'Up to 15 pages',
@@ -54,7 +80,10 @@ const plans = [
   },
   {
     name: 'Dashboard',
-    price: 'From R15,000',
+    monthlyPrice: 'From R15,000',
+    annualPrice: 'From R12,750',
+    monthlyNumeric: null,
+    annualNumeric: null,
     bestFor: 'Internal tools',
     features: [
       'Custom scope',
@@ -102,7 +131,27 @@ const cardVariants = {
   },
 }
 
+function AnimatedPrice({ monthly, annual, isAnnual }: { monthly: string; annual: string; isAnnual: boolean }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={isAnnual ? 'annual' : 'monthly'}
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 8 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        className="inline-block font-display text-[var(--cd-text)] font-bold text-3xl"
+      >
+        {isAnnual ? annual : monthly}
+      </motion.span>
+    </AnimatePresence>
+  )
+}
+
 export default function Pricing() {
+  const [billing, setBilling] = useState<BillingPeriod>('monthly')
+  const isAnnual = billing === 'annual'
+
   return (
     <section id="pricing" className="py-20 md:py-28 bg-[#080808]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,7 +161,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
+          className="mb-8 md:mb-12"
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-10 bg-[var(--cd-gold)]" />
@@ -126,6 +175,49 @@ export default function Pricing() {
           <p className="text-[var(--cd-text-muted)] text-lg">
             Real prices. Real work. No hidden fees.
           </p>
+        </motion.div>
+
+        {/* Billing Toggle */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex items-center justify-center gap-3 mb-12 md:mb-16"
+        >
+          <span
+            className={`text-sm font-medium transition-colors duration-200 ${
+              !isAnnual ? 'text-[#F0EFE8]' : 'text-[#9A9A92]'
+            }`}
+          >
+            Monthly
+          </span>
+
+          {/* Toggle Switch */}
+          <button
+            onClick={() => setBilling(isAnnual ? 'monthly' : 'annual')}
+            className="relative w-14 h-7 rounded-full bg-[#1A1A1A] border border-[#242424] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/40"
+            role="switch"
+            aria-checked={isAnnual}
+            aria-label="Toggle annual billing"
+          >
+            <motion.div
+              className="absolute top-[3px] w-[20px] h-[20px] rounded-full bg-[#C9A84C] shadow-[0_0_8px_rgba(201,168,76,0.3)]"
+              animate={{ left: isAnnual ? '31px' : '3px' }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            />
+          </button>
+
+          <span
+            className={`text-sm font-medium transition-colors duration-200 flex items-center gap-2 ${
+              isAnnual ? 'text-[#F0EFE8]' : 'text-[#9A9A92]'
+            }`}
+          >
+            Annual
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[rgba(201,168,76,0.12)] text-[#C9A84C] text-[10px] font-bold tracking-wider border border-[#C9A84C]/20">
+              SAVE 15%
+            </span>
+          </span>
         </motion.div>
 
         {/* Pricing Cards Grid */}
@@ -148,8 +240,8 @@ export default function Pricing() {
                 }
               `}
             >
-              {/* Badge */}
-              {plan.badge && (
+              {/* Most Popular Badge */}
+              {plan.highlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge className="bg-[var(--cd-gold)] text-[#080808] font-mono text-[10px] tracking-wider px-3 py-1 border-none font-bold">
                     {plan.badge}
@@ -168,10 +260,21 @@ export default function Pricing() {
               </p>
 
               {/* Price */}
-              <div className="mb-2">
-                <span className="font-display text-[var(--cd-text)] font-bold text-3xl">
-                  {plan.price}
-                </span>
+              <div className="mb-2 min-h-[40px] flex items-baseline">
+                <AnimatedPrice
+                  monthly={plan.monthlyPrice}
+                  annual={plan.annualPrice}
+                  isAnnual={isAnnual}
+                />
+                {isAnnual && plan.monthlyNumeric !== null && (
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="ml-2 text-[#9A9A92] text-sm line-through font-sans"
+                  >
+                    {plan.monthlyPrice}
+                  </motion.span>
+                )}
               </div>
 
               {/* Best Value note for Business plan */}

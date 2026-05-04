@@ -1,26 +1,39 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect } from 'react'
+
+// Deterministic pseudo-random number generator (same on server & client)
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9301 + 49297) * 233280
+  return x - Math.floor(x)
+}
+
+// Round to 4 decimal places to ensure server/client string consistency
+function r4(n: number): number {
+  return Math.round(n * 10000) / 10000
+}
+
+const PARTICLE_COUNT = 35
+
+const particles = Array.from({ length: PARTICLE_COUNT }, (_, i) => {
+  const size = r4(2 + seededRandom(i * 3 + 1) * 2)
+  return {
+    id: i,
+    left: `${r4(seededRandom(i * 3 + 2) * 100)}%`,
+    size,
+    opacity: r4(0.1 + seededRandom(i * 3 + 3) * 0.2),
+    duration: r4(15 + seededRandom(i * 3 + 4) * 25),
+    delay: r4(seededRandom(i * 3 + 5) * 20),
+  }
+})
 
 export default function ParticleBg() {
-  const particles = useMemo(() => {
-    const count = 35
-    return Array.from({ length: count }, (_, i) => {
-      const size = 2 + Math.random() * 2
-      return {
-        id: i,
-        left: `${Math.random() * 100}%`,
-        size,
-        opacity: 0.1 + Math.random() * 0.2,
-        duration: 15 + Math.random() * 25,
-        delay: Math.random() * 20,
-      }
-    })
-  }, [])
-
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 hidden md:block">
-      <style>{`
+  useEffect(() => {
+    const id = 'cd-particle-rise-keyframes'
+    if (!document.getElementById(id)) {
+      const style = document.createElement('style')
+      style.id = id
+      style.textContent = `
         @keyframes cd-particle-rise {
           0% {
             transform: translateY(100vh) translateX(0);
@@ -37,7 +50,13 @@ export default function ParticleBg() {
             opacity: 0;
           }
         }
-      `}</style>
+      `
+      document.head.appendChild(style)
+    }
+  }, [])
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 hidden md:block" aria-hidden="true">
       {particles.map((p) => (
         <span
           key={p.id}

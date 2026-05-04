@@ -384,6 +384,48 @@
   animation: border-glow 3s ease-in-out infinite;
 }
 
+/* ── Scroll Reveal Animation ───────────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hover Lift Micro-animation ─────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 12px rgba(201, 168, 76, 0.08);
+}
+
+/* ── Mobile-specific Improvements ──────────────────────────── */
+@media (max-width: 640px) {
+  .section-mobile-compact {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  /* Ensure all interactive buttons have minimum 44px touch targets */
+  button,
+  a.btn-primary-gold,
+  a[role="button"],
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Safe area inset for fixed bottom elements */
+  .fixed-bottom-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
 /* Primary gold button */
 .btn-primary-gold {
   display: inline-flex;

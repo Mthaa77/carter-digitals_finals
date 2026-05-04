@@ -68,6 +68,8 @@ export default function TestimonialCarousel() {
     <div className="relative w-full max-w-3xl mx-auto">
       {/* Main carousel area */}
       <div className="glass-card rounded-2xl p-8 md:p-12 min-h-[280px] flex flex-col items-center justify-center relative overflow-hidden">
+        {/* Subtle gold gradient at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[rgba(201,168,76,0.06)] to-transparent pointer-events-none" />
         {/* Decorative quote mark */}
         <span
           className="absolute top-4 right-6 text-[#C9A84C]/20 font-serif text-7xl leading-none select-none pointer-events-none"

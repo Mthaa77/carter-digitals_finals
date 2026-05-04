@@ -48,7 +48,7 @@ const badgeItems = [
 
 const counterItems = [
   { value: 47, suffix: '+', label: 'Projects Built' },
-  { value: 0, prefix: 'R', suffix: '', label: 'Spent on Templates' },
+  { value: 0, prefix: 'R', suffix: '', label: 'Template Costs' },
   { value: 2, suffix: '+', label: 'Years of Real Work' },
 ]
 
@@ -139,7 +139,7 @@ export default function Hero() {
             </a>
             <a
               href="#portfolio"
-              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-border text-cd-text font-medium rounded-lg hover:border-cd-gold-dim hover:text-cd-gold hover:bg-cd-gold/5 hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
+              className="btn-press inline-flex items-center gap-2 px-7 py-3.5 border border-cd-gold/30 text-cd-gold font-medium rounded-lg hover:border-cd-gold hover:bg-cd-gold/10 hover:shadow-lg hover:shadow-cd-gold/10 transition-all duration-300 text-base"
             >
               See Our Work
             </a>

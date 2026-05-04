@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Globe, LayoutDashboard, TrendingUp, ChevronDown, Check } from 'lucide-react'
+import { useServiceDetail, ServiceDetailModal } from '@/components/service-detail-modal'
 
 const services = [
   {
+    id: 'sme-websites',
     icon: Globe,
     title: 'SME Websites',
     tagline: 'Fast, beautiful, built to rank.',
@@ -16,6 +18,7 @@ const services = [
     features: ['Custom Design', 'Mobile-First', 'SEO Setup', 'Contact Form', 'WhatsApp CTA', 'Analytics'],
   },
   {
+    id: 'dashboards',
     icon: LayoutDashboard,
     title: 'Dashboards & Internal Tools',
     tagline: 'Run your business, not just a page.',
@@ -26,6 +29,7 @@ const services = [
     features: ['Staff Portals', 'Booking Systems', 'Stock Trackers', 'Quote Generators', 'Role-Based Access'],
   },
   {
+    id: 'seo-growth',
     icon: TrendingUp,
     title: 'SEO & Growth',
     tagline: 'Get found. Stay found.',
@@ -63,6 +67,7 @@ const cardVariants = {
 
 export default function Services() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const { openService, open, setOpen, activeServiceId } = useServiceDetail()
 
   return (
     <section id="services" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
@@ -100,8 +105,17 @@ export default function Services() {
               <motion.div
                 key={service.title}
                 variants={cardVariants}
-                className="glass-card rounded-xl p-6 md:p-8 group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 hover:border-l-[3px] hover:border-l-[#C9A84C] hover:border-t-2 hover:border-t-cd-gold/40"
+                onClick={() => openService(service.id)}
+                className="glass-card hover-lift rounded-xl p-6 md:p-8 group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 hover:border-l-[3px] hover:border-l-[#C9A84C] hover:border-t-2 hover:border-t-cd-gold/40 hover:shadow-[0_0_20px_rgba(201,168,76,0.08)] cursor-pointer"
               >
+                {/* Gold gradient bottom border on hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+
+                {/* Service number indicator */}
+                <span className="absolute top-4 right-4 font-mono text-xs text-cd-text-dim/40 select-none group-hover:animate-pulse">
+                  0{index + 1}
+                </span>
+
                 {/* Icon */}
                 <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-lg bg-[rgba(201,168,76,0.08)] border border-[#242424] group-hover:border-[#7A6330] transition-colors duration-300">
                   <Icon className="w-6 h-6 text-[#C9A84C]" />
@@ -124,7 +138,10 @@ export default function Services() {
 
                 {/* What's Included Toggle */}
                 <button
-                  onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setExpandedIndex(isExpanded ? null : index)
+                  }}
                   className="flex items-center gap-1.5 text-sm font-medium text-[#C8C8C0] hover:text-[#C9A84C] transition-colors duration-200 mb-3 font-sans"
                   aria-expanded={isExpanded}
                 >
@@ -158,6 +175,7 @@ export default function Services() {
                 {/* CTA Link */}
                 <a
                   href={service.href}
+                  onClick={(e) => e.stopPropagation()}
                   className="inline-flex items-center text-sm font-medium text-[#C9A84C] hover:text-[#E8CA7A] transition-colors duration-200 font-sans group/link"
                 >
                   {service.cta}
@@ -170,6 +188,9 @@ export default function Services() {
           })}
         </motion.div>
       </div>
+
+      {/* Service Detail Modal */}
+      <ServiceDetailModal open={open} onOpenChange={setOpen} serviceId={activeServiceId} />
     </section>
   )
 }

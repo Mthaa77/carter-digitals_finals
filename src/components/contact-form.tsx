@@ -130,8 +130,10 @@ export default function ContactForm() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="glass-card rounded-xl p-6 md:p-10"
+            className="glass-card rounded-xl p-6 md:p-10 relative overflow-hidden"
           >
+            {/* Gold gradient top border */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
             {/* Row 1 — Name & Business Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {/* Name */}
@@ -312,7 +314,7 @@ export default function ContactForm() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-press bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="btn-press bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(201,168,76,0.15)] hover:shadow-[0_0_30px_rgba(201,168,76,0.25)]"
               >
                 {isSubmitting ? (
                   <>

@@ -134,7 +134,7 @@ export default function Portfolio() {
               <motion.div
                 key={project.client}
                 variants={cardVariants}
-                className={`group rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 ${
+                className={`group hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 border-l-[3px] border-l-[#C9A84C]/30 hover:border-l-[#C9A84C] hover:scale-[1.01] ${
                   project.isComingSoon
                     ? 'border-2 border-dashed border-[#7A6330]/50 hover:border-[#C9A84C]/60'
                     : 'border border-[#242424] hover:border-[#3A3A3A] cursor-pointer'

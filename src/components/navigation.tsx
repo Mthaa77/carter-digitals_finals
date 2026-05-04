@@ -77,7 +77,7 @@ export default function Navigation() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-cd-surface/90 backdrop-blur-xl border-b border-cd-border shadow-lg shadow-black/20'
+            ? 'bg-cd-surface/90 backdrop-blur-xl border-b border-cd-border shadow-lg shadow-black/20 shadow-[0_2px_20px_rgba(201,168,76,0.06)]'
             : 'bg-transparent'
         }`}
       >
@@ -93,8 +93,8 @@ export default function Navigation() {
                 src="/carter-digitals-logo.png"
                 alt="Carter Digitals Logo"
                 width={32}
-                height={32}
-                className="w-8 h-8 object-contain"
+                height={24}
+                className="object-contain"
               />
               <span className="font-display text-xl sm:text-2xl font-bold tracking-tight">
                 <span className="text-cd-text">Carter</span>{' '}

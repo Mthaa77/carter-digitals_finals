@@ -35,11 +35,12 @@ import SocialProof from '@/components/social-proof'
 import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
 import ParticleBg from '@/components/particle-bg'
-import ScrollProgress from '@/components/scroll-progress'
+import BackToTopBar from '@/components/back-to-top-bar'
 import ROICalculator from '@/components/roi-calculator'
 import TrustBadges from '@/components/trust-badges'
 import AnimatedStats from '@/components/animated-stats'
 import ProjectShowcase from '@/components/project-showcase'
+import FloatingTestimonial from '@/components/floating-testimonial'
 
 export default function Home() {
   return (
@@ -47,7 +48,7 @@ export default function Home() {
       <PageLoader />
       <CustomCursor />
       <Navigation />
-      <ScrollProgress />
+      <BackToTopBar />
       <main className="min-h-screen flex flex-col bg-[#080808]">
         <ParticleBg />
         <Hero />
@@ -109,6 +110,7 @@ export default function Home() {
       <ScrollToTop />
       <SocialProof />
       <CookieConsent />
+      <FloatingTestimonial />
     </>
   )
 }
