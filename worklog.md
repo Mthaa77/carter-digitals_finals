@@ -240,3 +240,227 @@ Stage Summary:
 - Hero: Completely redesigned with cinematic 8-layer visuals + sophisticated animations
 - All animations upgraded to cinematic scale+blur reveals with expo-out easing
 - ESLint: 0 errors | HTTP 200 on both / and /pricing | Dev server compiling clean
+
+---
+
+## Session: Cinematic Animation CSS System (Task ID: 5)
+
+### Project Status
+- globals.css expanded with 10 new cinematic keyframes, 12 utility classes, 5 section transition classes, 3 glass effect enhancements, and 3 pricing-specific styles
+- Build compiles cleanly with 0 errors
+- All new content appended to end of existing file (no overwrites)
+
+### Completed Changes
+
+#### Task 5: Cinematic Animation Keyframes + CSS Effects
+
+**10 New Keyframes:**
+1. `cinematic-reveal` — Fade up from below with slight scale (0.96→1.0) + blur dissolve (6px→0px)
+2. `shimmer-sweep` — Light sweep across element (skewed -15°, translateX -100%→200%)
+3. `rotate-gradient` — Rotating gradient angle (0→360deg) via CSS custom property `--gradient-angle`
+4. `pulse-ring` — Expanding ring effect (scale 0.8→1.3 with opacity fade)
+5. `cursor-blink` — Smooth typewriter cursor blink (visible 0-45%, hidden 50-100%)
+6. `float-gentle` — Subtle floating with micro-rotation (±0.5deg, -10px max lift)
+7. `slide-in-left` — Slide from left with blur dissolve (-60px→0, 4px→0 blur)
+8. `slide-in-right` — Slide from right with blur dissolve (60px→0, 4px→0 blur)
+9. `scale-reveal` — Scale from center with fade + blur (0.85→1.0, 8px→0 blur)
+10. `shake-subtle` — Micro interaction feedback (±2px shake, 4 steps)
+
+**12 New Utility Classes:**
+- `.cinematic-reveal` — Uses cinematic-reveal keyframe (0.9s expo-out)
+- `.shimmer-sweep` — Card shimmer on hover (gold-tinted pseudo-element sweep)
+- `.rotating-gradient-border` — Conic gradient border (gold→cyan→violet→rose) rotating 360°/4s
+- `.pulse-ring` — Expanding gold ring pulse on CTAs
+- `.float-gentle` — 6s gentle floating animation
+- `.slide-in-left` / `.slide-in-right` — 0.8s directional slide reveals
+- `.scale-reveal` — 0.9s scale reveal from center
+- `.premium-card-hover` — Lift (-4px), scale (1.02), gold border glow, deep shadow, 0.4s transition
+- `.magnetic-hover` — Subtle magnetic feel hover (translateY -2px, scale 1.01)
+- `.text-reveal-mask` — Clip-path wipe-in reveal (inset 100%→0%)
+- `.stagger-1` through `.stagger-6` — Animation delays 0.1s→0.6s
+
+**5 Section Transition Classes:**
+- `.section-cinematic-in` — Entrance animation (translateY 40px, scale 0.97, blur 4px → reset, triggered by `.is-visible`)
+- `.section-cinematic-out` — Exit animation (triggered by `.is-exiting`, subtle reverse)
+- `.parallax-slow` / `.parallax-medium` / `.parallax-fast` — will-change: transform, ready for JS parallax
+
+**3 Glass Effect Enhancements:**
+- `.glass-card-premium` — 24px blur, gold tint, animated border on hover, premium shadow
+- `.glass-card-floating` — Glass card with 8s float-gentle animation
+- `.glass-card-highlight` — Gold glow highlight behind card (40px→60px on hover)
+
+**3 Pricing-Specific Styles:**
+- `.pricing-card-featured` — Animated conic gradient border (gold→cyan→violet), scale(1.02) on lg+, premium shadow + gold glow
+- `.pricing-toggle` — Toggle switch styling with role="switch" support, gold accent when active, smooth knob slide
+- `.price-animate` — Smooth price number transition with `.changing` state (opacity 0, translateY -8px, scale 0.95)
+
+**Design Tokens Used:**
+- Color scheme: Dark (#080808) with gold (#C9A84C), emerald (#34D399), cyan (#22D3EE), violet (#A78BFA), rose (#FB7185)
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (expo-out) for all cinematic animations
+- CSS custom property `--gradient-angle` used for conic gradient rotation
+
+Stage Summary:
+- Build: ✓ Compiled successfully, 0 errors, all routes (/, /pricing) generated
+- File: globals.css grew from 887 lines to 1371 lines (+484 lines of new CSS)
+- No existing content was modified or overwritten
+
+---
+
+## Session: Premium Pricing Page Redesign (Task ID: 4)
+
+### Project Status
+- Pricing page completely rewritten with premium, cinematic, sophisticated design
+- pricing-client.tsx: 580+ lines with cinematic hero, toggle, comparison tables, guarantee, FAQ, CTA
+- pricing.tsx: 480+ lines with enhanced PricingCard, animated borders, shimmer badges, price animations, stagger checkmarks, ribbon effect, glass add-ons
+- ESLint: 0 errors | HTTP 200 on /pricing | Dev server compiling clean
+
+### Completed Changes
+
+#### pricing-client.tsx — Premium Pricing Page
+
+**Cinematic Hero Banner:**
+- 4 animated gradient orbs (gold, cyan, violet, emerald) with floating motion using framer-motion
+- Scan lines overlay (repeating-linear-gradient at 4px intervals, 3% opacity)
+- Grain overlay (SVG feTurbulence noise filter, 3.5% opacity)
+- 24 floating sparkle/star particles (random sizes, durations, delays, opacities)
+- Neon line at top of hero
+- Scale-up + blur reveal for heading (0.96→1.0 scale, 8px→0px blur)
+- All animations use cinematic easing [0.16, 1, 0.3, 1]
+
+**Pricing Toggle:**
+- Once-off / Monthly Retainer toggle with animated sliding indicator (layoutId="billingToggle")
+- Spring animation for toggle (stiffness: 300, damping: 25)
+- Contextual label under toggle showing billing mode description
+- billingMode state passed down to Pricing component
+
+**Comparison Table Section:**
+- Side-by-Side Comparison section with glass-card tables
+- Business compare: 15-row table with Vula/Khula/Elevate columns
+- School compare: 15-row table with Presença/Ikredibo/Mastery columns
+- Expandable via AnimatePresence with height animation
+- Color-coded column headers (gold-gradient-text, emerald-gradient-text, cyan-gradient-text)
+- Custom CellValue renderer: green ✓ for true, — dash for false, text for string values
+- Highlighted Khula/Ikredibo column with subtle emerald background
+
+**Money-Back Guarantee Section:**
+- Glass-card-gold container with shimmer sweep overlay
+- Shield icon in gold circle with scale+blur reveal
+- "Money-Back Guarantee" gold-gradient heading
+- Trust messaging with 3 green checkmark items (Full deposit refund, No questions asked, Zero risk)
+- Auraura background
+
+**FAQ Accordion Section:**
+- 8 pricing-specific FAQ items using Radix Accordion
+- Glass-card styling on each item with gold border on open state
+- Questions: payment methods, switching plans, hosting renewal, NGO discounts, delivery time, money-back guarantee, B-BBEE explanation, add-on features
+- Scale+blur reveal for section header
+
+**CTA Section:**
+- "Ready to Get Started?" with heading-shadow-lg
+- Dual CTA: Start Your Project (gold gradient button) + WhatsApp chat link
+- Aurora background with gold glow orb
+
+**Sticky Footer:**
+- mt-auto on Footer wrapper for proper sticky footer behavior
+
+#### pricing.tsx — Enhanced Pricing Component
+
+**Enhanced PricingCard:**
+- Animated gradient border on hover: conic-gradient that rotates using requestAnimationFrame + gradientAngle state
+- Rotating gradient uses accent colors (gold→emerald, emerald→cyan, cyan→violet)
+- Shimmer/shine animation on "MOST POPULAR" badge: gold-shimmer keyframe overlay with 2.5s cycle
+- AnimatedPrice component: AnimatePresence with mode="wait" for smooth price transitions
+  - Enters: opacity 0→1, y 12→0, blur 4px→0px
+  - Exits: opacity 1→0, y 0→-12, blur 0px→4px
+  - Price text enlarged to text-4xl/text-5xl for better visual hierarchy
+- Feature checkmarks with stagger animation (0.06s delay per item, custom variant)
+- Ribbon effect on highlighted card: "BEST VALUE" ribbon with clipPath polygon
+- Star icon next to highlighted plan name with emerald fill
+- Zap icon for "Best Value" note
+
+**Billing Mode Integration:**
+- billingMode prop ('onceoff' | 'retainer') passed from parent
+- AnimatedPrice shows once-off price or retainer price with animated transition
+- Contextual note below price switches between "Optional retainer" and "Once-off alternative"
+- Section subheaders update text based on billing mode
+
+**Better Add-ons Section:**
+- Glass card treatment per add-on (glass-card-gold, -emerald, -cyan, -violet, -rose)
+- Icons for each add-on: Bot, Search, Presentation, Server, Database
+- Icon in colored rounded container (8×8 with bg-[rgba(255,255,255,0.04)])
+- Hover lift effect (-2px translateY + shadow)
+- Staggered entrance animation per card
+
+**B-BBEE Box Enhancement:**
+- Shimmer sweep overlay (8s gold-shimmer animation)
+- Scale+blur reveal animation (0.97→1.0 scale, 6px→0px blur)
+
+**All Animations:**
+- Cinematic easing [0.16, 1, 0.3, 1] throughout
+- Scale+blur reveals for section headers
+- Container stagger (0.12s per child, 0.15s initial delay)
+- Card variants: 40px y-offset, 0.96 scale, 6px blur → reset over 0.8s
+
+Stage Summary:
+- /pricing: Complete premium redesign with 7 new sections (hero, pricing, comparison, guarantee, FAQ, CTA, footer)
+- PricingCard: 6 major enhancements (rotating border, shimmer badge, animated price, stagger checkmarks, ribbon, glass add-ons)
+- All plan data preserved: Vula R3,999/R399, Khula R7,999/R799, Elevate R14,999/R1,199, Presença R4,999/R499, Ikredibo R9,999/R899, Mastery R18,999/R1,499
+- ESLint: 0 errors | HTTP 200 on /pricing | Dev server compiling clean
+
+---
+
+## Session: Hydration Fix + Hero Redesign + Pricing Upgrade + Cinematic Animations (Task IDs: 1-5)
+
+### Project Status
+- Fixed critical hydration mismatch error caused by Math.random() in FloatingParticles (server vs client values)
+- Hero section completely rewritten with deterministic particle system, mouse parallax, cinematic light rays, scan lines
+- Pricing page and component completely rewritten with premium features (toggle, comparison tables, FAQ, guarantee)
+- 484 lines of cinematic CSS animations added to globals.css
+- ESLint: 0 errors | HTTP 200 on / and /pricing | Dev server compiling clean
+
+### Completed Changes
+
+#### Task 1: Fix FloatingParticles Hydration Mismatch
+**Root Cause:** Math.random() calls in hero.tsx FloatingParticles generated different values on server vs client, causing React hydration mismatch warnings.
+
+**Fix Applied:**
+- Replaced all Math.random() with deterministic seeded random (Math.sin formula)
+- Moved particle data to module-level constant for SSR/client consistency
+- Fixed same issue in pricing-client.tsx FloatingSparkles
+- Removed Math.random() from hero-typing.tsx typing delay
+
+#### Task 2: Remove Pricing from Homepage (already done)
+- Confirmed Pricing component not present on homepage
+
+#### Task 3: Hero Section Premium Cinematic Redesign
+- Mouse parallax tracking (spring physics on orb layer)
+- Cinematic Light Rays (central burst + horizontal/vertical streaks)
+- Scan Lines overlay for film effect
+- 5 aurora gradient orbs (added rose orb)
+- 40 deterministic particles (seeded random)
+- Enhanced parallax (4 depth layers)
+- Premium scroll indicator (mouse icon with animated dot)
+- Staggered badge animations
+- Enhanced counter animations with accent lines
+
+#### Task 4: Premium Pricing Page Upgrade
+- Cinematic hero with gradient orbs, scan lines, grain, sparkles
+- Pricing toggle (Once-off / Monthly Retainer) with spring animation
+- Expandable comparison tables (15 rows each)
+- Money-Back Guarantee section
+- FAQ accordion (8 questions)
+- CTA section (Start Project + WhatsApp)
+- Rotating gradient borders on card hover
+- Shimmer badges, animated prices, stagger checkmarks
+- Glass card add-ons with icons
+
+#### Task 5: Cinematic Animation CSS System
+- 10 new keyframes, 12 utility classes, 5 section transitions
+- 3 glass effect enhancements, 3 pricing-specific styles
+- +484 lines appended to globals.css
+
+### Unresolved Issues / Next Phase Recommendations
+- Other pages (/about, /portfolio, /contact, /blog) return 404
+- Consider upgrading other homepage components with new cinematic animation classes
+- Test mobile layout on actual device simulation
+- Consider IntersectionObserver-based scroll animations

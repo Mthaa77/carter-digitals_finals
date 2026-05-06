@@ -66,7 +66,7 @@ export default function HeroTyping({
         scheduleNext(() => {
           // Re-trigger by staying in typing phase
           setPhase('typing')
-        }, typeSpeed + Math.random() * 30)
+        }, typeSpeed + 15)
       } else {
         // Done typing, pause
         phaseRef.current = 'pausing'
