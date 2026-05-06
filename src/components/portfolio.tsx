@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Eye } from 'lucide-react'
+import { ArrowUpRight, Eye, Sparkles } from 'lucide-react'
 import PortfolioModal, { type PortfolioProject } from '@/components/portfolio-modal'
 
 const projects: PortfolioProject[] = [
@@ -103,7 +103,7 @@ export default function Portfolio() {
 
   return (
     <>
-      <section id="portfolio" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section id="portfolio" className="aurora-bg py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -114,7 +114,10 @@ export default function Portfolio() {
             className="text-center mb-14 md:mb-20"
           >
             <span className="section-label inline-block">Portfolio</span>
-            <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
+            <h2
+              className="gold-gradient-text heading-shadow font-display tracking-tight"
+              style={{ fontSize: 'var(--text-h2)' }}
+            >
               Work That Speaks for Itself.
             </h2>
             <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
@@ -131,28 +134,40 @@ export default function Portfolio() {
             viewport={{ once: true, margin: '-60px' }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            {projects.map((project) => (
+            {projects.map((project, idx) => (
               <motion.div
                 key={project.client}
                 variants={cardVariants}
-                className={`group hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-[#131313] to-[#1A1A1A] transition-all duration-300 border-l-[3px] border-l-[#C9A84C]/30 hover:border-l-[#C9A84C] hover:scale-[1.01] max-w-full ${
+                className={`group rounded-xl overflow-hidden transition-all duration-300 max-w-full ${
                   project.isComingSoon
-                    ? 'border-2 border-dashed border-[#7A6330]/50 hover:border-[#C9A84C]/60 coming-soon-shimmer'
-                    : 'border border-[#242424] hover:border-[#3A3A3A] cursor-pointer'
+                    ? 'gradient-border cursor-default'
+                    : 'bg-gradient-to-br from-[#131313] to-[#1A1A1A] border border-[#242424] hover:border-[#3A3A3A] cursor-pointer card-shadow-gold hover-lift'
                 }`}
                 onClick={() => openModal(project)}
               >
                 {/* Image Placeholder */}
-                <div className="relative h-44 bg-[#0D0D0D] overflow-hidden">
+                <div className="relative h-44 md:h-52 bg-[#0D0D0D] overflow-hidden image-overlay-gradient">
                   <GridPattern />
                   {/* Dark overlay gradient at bottom */}
                   <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#131313] to-transparent" />
                   {/* Industry badge */}
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="inline-block px-2.5 py-1 text-xs font-medium text-[#7A6330] border border-[#7A6330]/30 rounded-md bg-[rgba(122,99,48,0.08)] font-sans">
-                      {project.industry}
-                    </span>
+                    {project.isComingSoon ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#C9A84C] border border-[#C9A84C]/30 rounded-md bg-[rgba(201,168,76,0.08)] font-sans">
+                        <Sparkles className="w-3 h-3" />
+                        {project.industry}
+                      </span>
+                    ) : (
+                      <span className="inline-block px-2.5 py-1 text-xs font-medium text-[#7A6330] border border-[#7A6330]/30 rounded-md bg-[rgba(122,99,48,0.08)] font-sans">
+                        {project.industry}
+                      </span>
+                    )}
                   </div>
+
+                  {/* Shimmering gradient border overlay for coming soon card */}
+                  {project.isComingSoon && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C]/5 via-[#22D3EE]/5 to-[#A78BFA]/5 animate-pulse pointer-events-none" />
+                  )}
 
                   {/* Hover overlay with project name and View button */}
                   {!project.isComingSoon && (
@@ -169,9 +184,9 @@ export default function Portfolio() {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6">
+                <div className="p-5 md:p-6">
                   {/* Client Name */}
-                  <h3 className="font-display text-base font-semibold text-[#F0EFE8] mb-3 leading-snug">
+                  <h3 className="font-display text-base md:text-lg font-semibold text-[#F0EFE8] mb-3 leading-snug">
                     {project.client}
                   </h3>
 
@@ -194,9 +209,15 @@ export default function Portfolio() {
 
                   {/* Key Result */}
                   <div className="mb-4">
-                    <span className="text-[#C9A84C] font-display font-semibold text-sm">
-                      {project.keyResult}
-                    </span>
+                    {project.isComingSoon ? (
+                      <span className="rainbow-gradient-text font-display font-semibold text-sm">
+                        {project.keyResult}
+                      </span>
+                    ) : (
+                      <span className="text-[#C9A84C] font-display font-semibold text-sm">
+                        {project.keyResult}
+                      </span>
+                    )}
                   </div>
 
                   {/* View Case Study Link */}
@@ -211,6 +232,18 @@ export default function Portfolio() {
                       View Case Study
                       <ArrowUpRight className="ml-1.5 w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                     </button>
+                  )}
+
+                  {/* Coming Soon CTA */}
+                  {project.isComingSoon && (
+                    <a
+                      href="#contact"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center text-sm font-semibold text-[#C9A84C] hover:text-[#E8CA7A] transition-colors duration-200 font-sans py-1 link-underline"
+                    >
+                      Be Our Next Success Story
+                      <ArrowUpRight className="ml-1.5 w-4 h-4" />
+                    </a>
                   )}
                 </div>
               </motion.div>
@@ -227,7 +260,7 @@ export default function Portfolio() {
           >
             <a
               href="#"
-              className="inline-flex items-center justify-center px-8 py-3 rounded-lg text-sm font-medium text-[#C9A84C] border border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[rgba(201,168,76,0.08)] transition-all duration-300 font-sans"
+              className="btn-secondary inline-flex items-center justify-center px-8 py-3 rounded-lg text-sm font-medium text-[#C9A84C] border border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[rgba(201,168,76,0.08)] transition-all duration-300 font-sans btn-press"
             >
               View All Work →
             </a>

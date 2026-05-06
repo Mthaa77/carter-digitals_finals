@@ -79,7 +79,7 @@ export default function Navigation() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-cd-surface/90 backdrop-blur-xl border-b border-cd-border shadow-lg shadow-black/20 shadow-[0_2px_20px_rgba(201,168,76,0.06)]'
+            ? 'bg-cd-surface/90 backdrop-blur-xl shadow-lg shadow-black/20 shadow-[0_2px_20px_rgba(201,168,76,0.06)]'
             : 'bg-transparent'
         }`}
       >
@@ -100,7 +100,7 @@ export default function Navigation() {
               />
               <span className="font-display text-xl sm:text-2xl font-bold tracking-tight">
                 <span className="text-cd-text">Carter</span>{' '}
-                <span className="text-cd-gold">Digitals</span>
+                <span className="gold-gradient-text">Digitals</span>
               </span>
             </a>
 
@@ -124,7 +124,10 @@ export default function Navigation() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-2 right-2 h-[3px] bg-cd-gold rounded-full"
+                        className="absolute bottom-0 left-2 right-2 h-[3px] rounded-full"
+                        style={{
+                          background: 'linear-gradient(90deg, #C9A84C, #22D3EE)',
+                        }}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -135,7 +138,10 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="btn-press btn-primary ml-4 px-5 py-2.5 bg-cd-gold text-cd-bg text-sm font-semibold rounded-lg hover:bg-cd-gold/90 hover:shadow-cd-gold/25 transition-colors duration-300 shadow-lg shadow-cd-gold/10"
+                className="btn-press btn-glow-gold ml-4 px-5 py-2.5 text-cd-bg text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-cd-gold/10 hover:shadow-cd-gold/25"
+                style={{
+                  background: 'linear-gradient(135deg, #C9A84C, #E8CA7A)',
+                }}
               >
                 Get a Quote
               </a>
@@ -151,6 +157,11 @@ export default function Navigation() {
             </button>
           </div>
         </div>
+
+        {/* Scrolled gradient border at bottom (neon-line concept) */}
+        {scrolled && (
+          <div className="neon-line" />
+        )}
       </motion.nav>
 
       {/* Mobile Menu Overlay */}
@@ -161,11 +172,24 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-cd-bg/95 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-40 md:hidden"
+            style={{
+              background: 'linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(17,17,17,0.97) 50%, rgba(8,8,8,0.98) 100%)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+            }}
           >
-            <div className="flex flex-col items-center justify-center h-full gap-5">
-              {/* Gold accent line at top */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cd-gold-dim via-cd-gold to-cd-gold-dim" />
+            {/* Gradient overlay accent */}
+            <div className="absolute inset-0 pointer-events-none" style={{
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(34,211,238,0.04) 0%, transparent 50%)',
+            }} />
+
+            <div className="flex flex-col items-center justify-center h-full gap-2 relative z-10">
+              {/* Neon gradient line at top */}
+              <div className="absolute top-0 left-0 right-0 neon-line" />
+
+              {/* Gold accent gradient line below top */}
+              <div className="absolute top-[1px] left-0 right-0 h-[2px] bg-gradient-to-r from-cd-gold-dim via-cd-gold to-cd-gold-dim opacity-60" />
 
               {navItems.map((item, i) => {
                 const sectionId = item.href.replace('#', '')
@@ -178,25 +202,40 @@ export default function Navigation() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
-                    transition={{ delay: i * 0.08, duration: 0.4 }}
-                    className={`text-2xl font-display font-semibold py-3 px-8 rounded-lg transition-colors duration-300 ${
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                    className={`relative text-xl sm:text-2xl font-display font-semibold py-3 px-8 rounded-lg transition-colors duration-300 ${
                       isActive
                         ? 'text-cd-gold bg-cd-gold/10'
-                        : 'text-cd-text-muted hover:text-cd-text'
+                        : 'text-cd-text-muted hover:text-cd-text hover:bg-cd-gold/5'
                     }`}
                   >
                     {item.label}
+                    {isActive && (
+                      <span
+                        className="absolute bottom-1 left-6 right-6 h-[2px] rounded-full"
+                        style={{
+                          background: 'linear-gradient(90deg, #C9A84C, #22D3EE)',
+                        }}
+                      />
+                    )}
                   </motion.a>
                 )
               })}
+
+              {/* Separator line */}
+              <div className="w-24 my-3 neon-line" />
+
               <motion.a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: navItems.length * 0.08, duration: 0.4 }}
-                className="mt-4 btn-press btn-primary px-8 py-3.5 bg-cd-gold text-cd-bg text-lg font-semibold rounded-lg hover:bg-cd-gold/90 transition-colors duration-300"
+                transition={{ delay: navItems.length * 0.06, duration: 0.4 }}
+                className="btn-press btn-glow-gold mt-2 px-8 py-3.5 text-cd-bg text-lg font-semibold rounded-lg transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, #C9A84C, #E8CA7A)',
+                }}
               >
                 Get a Quote
               </motion.a>

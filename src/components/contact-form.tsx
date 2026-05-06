@@ -33,12 +33,12 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>
 
-// ── Shared input styles ─────────────────────────────────────────────────────
+// ── Shared input styles — gradient focus borders ─────────────────────────────
 const inputStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus:ring-2 focus:ring-cd-gold/30 focus:border-cd-gold/50 focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus:ring-2 focus:ring-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus-visible:border-[#C9A84C] focus-visible:ring-[rgba(34,211,238,0.2)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_15px_rgba(201,168,76,0.08)]'
 
 const selectTriggerStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus:ring-2 focus:ring-cd-gold/30 focus:border-cd-gold/50 focus-visible:border-[#C9A84C] focus-visible:ring-[#C9A84C]/30 h-11 w-full rounded-md px-4 text-sm font-sans transition-colors duration-200 [&>svg]:text-[#777]'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus:ring-2 focus:ring-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus-visible:border-[#C9A84C] focus-visible:ring-[rgba(34,211,238,0.2)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_15px_rgba(201,168,76,0.08)] [&>svg]:text-[#777]'
 
 // ── Component ───────────────────────────────────────────────────────────────
 export default function ContactForm() {
@@ -95,8 +95,8 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="relative bg-[#080808] py-20 md:py-28 overflow-hidden">
-      {/* Subtle background glow */}
+    <section id="contact" className="aurora-bg relative py-20 md:py-28 overflow-hidden">
+      {/* Additional subtle glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-[#C9A84C] blur-[200px] opacity-[0.04]" />
       </div>
@@ -110,11 +110,14 @@ export default function ContactForm() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="text-center mb-14"
         >
-          <h2 className="font-display text-[var(--text-h2)] font-bold text-[#F0EFE8] mb-4">
+          <h2
+            className="gold-gradient-text heading-shadow font-display font-bold mb-4"
+            style={{ fontSize: 'var(--text-h2)' }}
+          >
             Let&apos;s Build Something.
           </h2>
-          {/* Gold accent line */}
-          <div className="mx-auto mb-6 h-[3px] w-16 rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
+          {/* Gradient accent line */}
+          <div className="mx-auto mb-6 h-[3px] w-16 rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE]" />
           <p className="text-[#C8C8C0] font-sans text-base max-w-md mx-auto">
             Tell us about your project. We reply within 4 business hours.
           </p>
@@ -132,8 +135,9 @@ export default function ContactForm() {
             noValidate
             className="glass-card rounded-xl p-6 md:p-10 relative overflow-hidden"
           >
-            {/* Gold gradient top border */}
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
+            {/* Gradient top border — gold to cyan */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE]" />
+
             {/* Row 1 — Name & Business Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {/* Name */}
@@ -309,12 +313,15 @@ export default function ContactForm() {
               </div>
             </div>
 
-            {/* Submit */}
+            {/* Submit — gradient background */}
             <div className="flex flex-col items-center md:items-start gap-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-press bg-[#C9A84C] hover:bg-[#E8CA7A] text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(201,168,76,0.15)] hover:shadow-[0_0_30px_rgba(201,168,76,0.25)]"
+                className="btn-press btn-glow-gold text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(201,168,76,0.15)] hover:shadow-[0_0_30px_rgba(201,168,76,0.25)]"
+                style={{
+                  background: 'linear-gradient(135deg, #C9A84C, #E8CA7A)',
+                }}
               >
                 {isSubmitting ? (
                   <>
@@ -356,7 +363,7 @@ export default function ContactForm() {
           className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {/* Left — WhatsApp */}
-          <div className="glass-card rounded-xl p-6 flex flex-col justify-center">
+          <div className="glass-card-gold glass-card rounded-xl p-6 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#C9A84C]/10">
                 <MessageCircle className="w-5 h-5 text-[#C9A84C]" />
@@ -379,8 +386,8 @@ export default function ContactForm() {
             </a>
           </div>
 
-          {/* Right — Office Details */}
-          <div className="glass-card rounded-xl p-6">
+          {/* Right — Office Details — colored icons */}
+          <div className="glass-card-cyan glass-card rounded-xl p-6">
             <h3 className="font-display text-lg font-semibold text-[#F0EFE8] mb-5">
               Office Details
             </h3>
@@ -392,7 +399,7 @@ export default function ContactForm() {
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-cd-emerald mt-0.5 shrink-0" />
                 <a
                   href="tel:0724026893"
                   className="text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
@@ -401,7 +408,7 @@ export default function ContactForm() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
+                <Mail className="w-4 h-4 text-cd-cyan mt-0.5 shrink-0" />
                 <a
                   href="mailto:kadiakakabelo4@gmail.com"
                   className="text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-sm transition-colors duration-200"
@@ -410,7 +417,7 @@ export default function ContactForm() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
+                <Clock className="w-4 h-4 text-cd-violet mt-0.5 shrink-0" />
                 <span className="text-[#C8C8C0] font-sans text-sm">
                   We reply within 4 business hours
                 </span>

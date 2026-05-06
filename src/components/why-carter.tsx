@@ -10,6 +10,14 @@ interface WhyCard {
   body: string
   tag: string
   number: string
+  accent: 'emerald' | 'cyan' | 'violet' | 'gold'
+  cardClass: string
+  shadowClass: string
+  borderColor: string
+  iconBg: string
+  iconColor: string
+  tagColor: string
+  dotColor: string
 }
 
 const cards: WhyCard[] = [
@@ -19,6 +27,14 @@ const cards: WhyCard[] = [
     body: "We're 100% Black-owned and B-BBEE Level 1. Your supplier development spend works here. We're on the right list.",
     tag: 'B-BBEE Level 1',
     number: '01',
+    accent: 'emerald',
+    cardClass: 'glass-card-emerald',
+    shadowClass: 'card-shadow-emerald',
+    borderColor: 'border-l-[var(--cd-emerald)]',
+    iconBg: 'bg-emerald-500/10',
+    iconColor: 'text-emerald-400',
+    tagColor: 'text-emerald-400/80',
+    dotColor: 'bg-emerald-400',
   },
   {
     icon: Cloud,
@@ -26,6 +42,14 @@ const cards: WhyCard[] = [
     body: 'Next.js, React, Python/FastAPI, PostgreSQL, GCP/Vertex AI, Vercel. We build for speed, scale, and the future — not whatever a theme builder allows.',
     tag: 'Enterprise Stack',
     number: '02',
+    accent: 'cyan',
+    cardClass: 'glass-card-cyan',
+    shadowClass: 'card-shadow-cyan',
+    borderColor: 'border-l-[var(--cd-cyan)]',
+    iconBg: 'bg-cyan-500/10',
+    iconColor: 'text-cyan-400',
+    tagColor: 'text-cyan-400/80',
+    dotColor: 'bg-cyan-400',
   },
   {
     icon: LayoutDashboard,
@@ -33,6 +57,14 @@ const cards: WhyCard[] = [
     body: 'Booking systems. Stock trackers. Staff portals. Quote generators. We build the internal tools that actually run your business.',
     tag: 'Business Tools',
     number: '03',
+    accent: 'violet',
+    cardClass: 'glass-card-violet',
+    shadowClass: 'card-shadow-violet',
+    borderColor: 'border-l-[var(--cd-violet)]',
+    iconBg: 'bg-violet-500/10',
+    iconColor: 'text-violet-400',
+    tagColor: 'text-violet-400/80',
+    dotColor: 'bg-violet-400',
   },
   {
     icon: MapPin,
@@ -40,6 +72,14 @@ const cards: WhyCard[] = [
     body: "We didn't fly in from Cape Town. We built Carter Digitals in Block L. We know what Pretoria SMEs actually need — because we are one.",
     tag: 'Pretoria Roots',
     number: '04',
+    accent: 'gold',
+    cardClass: 'glass-card-gold',
+    shadowClass: 'card-shadow-gold',
+    borderColor: 'border-l-[var(--cd-gold)]',
+    iconBg: 'bg-cd-gold/10',
+    iconColor: 'text-cd-gold',
+    tagColor: 'text-cd-gold/80',
+    dotColor: 'bg-cd-gold',
   },
 ]
 
@@ -48,7 +88,7 @@ const listVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.12,
       delayChildren: 0.1,
     },
   },
@@ -68,8 +108,25 @@ const cardVariants = {
 
 export default function WhyCarter() {
   return (
-    <section id="why-carter" className="relative py-20 md:py-28 bg-cd-bg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-carter" className="aurora-bg relative py-20 md:py-28 overflow-hidden">
+      {/* Floating ambient orbs */}
+      <div
+        className="absolute top-20 left-10 w-72 h-72 rounded-full bg-emerald-500/[0.04] blur-[100px] pointer-events-none"
+        style={{ animation: 'float-orb-1 12s ease-in-out infinite' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-violet-500/[0.04] blur-[100px] pointer-events-none"
+        style={{ animation: 'float-orb-2 15s ease-in-out infinite' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-cyan-500/[0.03] blur-[120px] pointer-events-none"
+        style={{ animation: 'float-orb-1 18s ease-in-out infinite reverse' }}
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -78,11 +135,17 @@ export default function WhyCarter() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="font-display text-cd-text font-bold tracking-tight" style={{ fontSize: 'var(--text-h2)' }}>
+          <h2
+            className="gold-gradient-text heading-shadow font-display font-bold tracking-tight"
+            style={{ fontSize: 'var(--text-h2)' }}
+          >
             Why Carter Digitals
           </h2>
           {/* Gold accent line */}
           <div className="mt-4 mx-auto w-20 h-1 bg-cd-gold rounded-full" />
+          <p className="mt-4 text-cd-text-muted text-lg max-w-2xl mx-auto">
+            Four reasons South African businesses choose us — from compliance to cutting-edge tech.
+          </p>
         </motion.div>
 
         {/* Cards grid */}
@@ -99,7 +162,7 @@ export default function WhyCarter() {
               <motion.div
                 key={i}
                 variants={cardVariants}
-                className="glass-card hover-lift rounded-xl p-6 group hover:border-l-[3px] hover:border-l-cd-gold hover:shadow-[0_0_24px_rgba(201,168,76,0.1)] transition-all duration-500 cursor-default relative overflow-hidden"
+                className={`glass-card ${card.cardClass} ${card.shadowClass} rounded-xl p-6 group border-l-[3px] ${card.borderColor} cursor-default relative overflow-hidden transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1`}
               >
                 {/* Numbered indicator */}
                 <span className="absolute top-4 right-4 font-mono text-xs text-cd-text-dim/40 select-none">
@@ -107,21 +170,32 @@ export default function WhyCarter() {
                 </span>
 
                 {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-cd-gold/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: card.accent === 'emerald'
+                      ? 'linear-gradient(to top, rgba(52,211,153,0.05), transparent)'
+                      : card.accent === 'cyan'
+                        ? 'linear-gradient(to top, rgba(34,211,238,0.05), transparent)'
+                        : card.accent === 'violet'
+                          ? 'linear-gradient(to top, rgba(167,139,250,0.05), transparent)'
+                          : 'linear-gradient(to top, rgba(201,168,76,0.05), transparent)',
+                  }}
+                />
 
                 {/* Tag */}
-                <span className="inline-block text-xs font-mono font-medium text-cd-gold-dim uppercase tracking-wider mb-4 relative z-10">
+                <span className={`inline-block text-xs font-mono font-medium ${card.tagColor} uppercase tracking-wider mb-4 relative z-10`}>
                   {card.tag}
                 </span>
 
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-lg bg-cd-gold/10 flex items-center justify-center mb-5 group-hover:bg-cd-gold/20 transition-colors duration-300 relative z-10">
-                  <Icon className="w-6 h-6 text-cd-gold" />
+                <div className={`w-12 h-12 rounded-lg ${card.iconBg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 relative z-10`}>
+                  <Icon className={`w-6 h-6 ${card.iconColor}`} />
                 </div>
 
                 {/* Title */}
                 <h3 className="font-display text-lg font-semibold text-cd-text mb-3 group-hover:text-cd-gold-light transition-colors duration-300 relative z-10 flex items-center gap-2">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-cd-gold shrink-0" />
+                  <span className={`inline-block w-1.5 h-1.5 rounded-full ${card.dotColor} shrink-0`} />
                   {card.title}
                 </h3>
 

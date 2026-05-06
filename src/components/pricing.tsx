@@ -13,6 +13,7 @@ interface Plan {
   cta: string
   highlighted: boolean
   badge: string | null
+  accent: 'gold' | 'emerald' | 'cyan'
 }
 
 const smallBusinessPlans: Plan[] = [
@@ -33,6 +34,7 @@ const smallBusinessPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: false,
     badge: null,
+    accent: 'gold',
   },
   {
     name: 'Khula',
@@ -51,6 +53,7 @@ const smallBusinessPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: true,
     badge: 'MOST POPULAR',
+    accent: 'emerald',
   },
   {
     name: 'Elevate',
@@ -69,6 +72,7 @@ const smallBusinessPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: false,
     badge: null,
+    accent: 'cyan',
   },
 ]
 
@@ -89,6 +93,7 @@ const schoolPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: false,
     badge: null,
+    accent: 'gold',
   },
   {
     name: 'Ikredibo',
@@ -106,6 +111,7 @@ const schoolPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: true,
     badge: 'MOST POPULAR',
+    accent: 'emerald',
   },
   {
     name: 'Mastery',
@@ -123,15 +129,16 @@ const schoolPlans: Plan[] = [
     cta: 'Get Started',
     highlighted: false,
     badge: null,
+    accent: 'cyan',
   },
 ]
 
 const addOns = [
-  { label: 'AI Chatbot & WhatsApp Automation', price: 'R4,999 once-off | R499/mo' },
-  { label: 'SEO & Google Setup', price: 'R999 once-off' },
-  { label: 'Company Profile & Pitch Deck', price: 'R1,999 once-off' },
-  { label: 'Hosting & Domain Management', price: 'R1,990/yr | R199/mo' },
-  { label: 'Sanity CMS Setup & Training', price: 'R3,499 once-off | R349/mo' },
+  { label: 'AI Chatbot & WhatsApp Automation', price: 'R4,999 once-off | R499/mo', accent: 'gold' as const },
+  { label: 'SEO & Google Setup', price: 'R999 once-off', accent: 'emerald' as const },
+  { label: 'Company Profile & Pitch Deck', price: 'R1,999 once-off', accent: 'cyan' as const },
+  { label: 'Hosting & Domain Management', price: 'R1,990/yr | R199/mo', accent: 'gold' as const },
+  { label: 'Sanity CMS Setup & Training', price: 'R3,499 once-off | R349/mo', accent: 'emerald' as const },
 ]
 
 const containerVariants = {
@@ -156,22 +163,73 @@ const cardVariants = {
   },
 }
 
+function getAccentClasses(accent: 'gold' | 'emerald' | 'cyan') {
+  switch (accent) {
+    case 'emerald':
+      return {
+        borderClass: 'border-l-[var(--cd-emerald)]',
+        badgeBg: 'bg-[var(--cd-emerald)]',
+        priceGradient: 'emerald-gradient-text',
+        cardShadow: 'card-shadow-emerald',
+        glassCard: 'glass-card-emerald',
+        checkColor: 'text-[var(--cd-emerald)]',
+        dotColor: 'bg-[var(--cd-emerald)]',
+        borderColor: 'border-[var(--cd-emerald)]/20 hover:border-[var(--cd-emerald)]/40',
+        glowBorder: 'border-[var(--cd-emerald)]/30',
+        glowShadow: 'shadow-[0_0_40px_rgba(52,211,153,0.08)]',
+        glowRing: 'ring-1 ring-[var(--cd-emerald)]/20',
+      }
+    case 'cyan':
+      return {
+        borderClass: 'border-l-[var(--cd-cyan)]',
+        badgeBg: 'bg-[var(--cd-cyan)]',
+        priceGradient: 'cyan-gradient-text',
+        cardShadow: 'card-shadow-cyan',
+        glassCard: 'glass-card-cyan',
+        checkColor: 'text-[var(--cd-cyan)]',
+        dotColor: 'bg-[var(--cd-cyan)]',
+        borderColor: 'border-[var(--cd-cyan)]/20 hover:border-[var(--cd-cyan)]/40',
+        glowBorder: 'border-[var(--cd-cyan)]/30',
+        glowShadow: 'shadow-[0_0_40px_rgba(34,211,238,0.08)]',
+        glowRing: 'ring-1 ring-[var(--cd-cyan)]/20',
+      }
+    default:
+      return {
+        borderClass: 'border-l-[var(--cd-gold)]',
+        badgeBg: 'bg-[var(--cd-gold)]',
+        priceGradient: 'gold-gradient-text',
+        cardShadow: 'card-shadow-gold',
+        glassCard: '',
+        checkColor: 'text-[var(--cd-gold)]',
+        dotColor: 'bg-[var(--cd-gold)]',
+        borderColor: 'hover:border-[var(--cd-gold)]/20',
+        glowBorder: '',
+        glowShadow: '',
+        glowRing: '',
+      }
+  }
+}
+
 function PricingCard({ plan }: { plan: Plan }) {
+  const accent = getAccentClasses(plan.accent)
+
   return (
     <motion.div
       variants={cardVariants}
       className={`
-        glass-card rounded-xl p-6 flex flex-col relative transition-all duration-300
+        glass-card rounded-xl p-5 md:p-6 flex flex-col relative transition-all duration-300
+        border-l-[3px] ${accent.borderClass}
         ${plan.highlighted
-          ? 'animated-border-gold border-cd-gold/30 shadow-[0_0_40px_rgba(201,168,76,0.08)] ring-1 ring-cd-gold/20 md:scale-105 md:-mt-3 md:mb-[-12px]'
-          : 'hover:border-cd-gold/20'
+          ? `${accent.glowBorder} ${accent.glowShadow} ${accent.glowRing} md:scale-105 md:-mt-3 md:mb-[-12px]`
+          : accent.borderColor
         }
+        ${accent.cardShadow}
       `}
     >
       {/* Badge */}
       {plan.highlighted && plan.badge && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <Badge className="bg-[var(--cd-gold)] text-[#080808] font-mono text-[10px] tracking-wider px-3 py-1 border-none font-bold">
+          <Badge className={`${accent.badgeBg} text-[#080808] font-mono text-[10px] tracking-wider px-3 py-1 border-none font-bold`}>
             {plan.badge}
           </Badge>
         </div>
@@ -187,9 +245,9 @@ function PricingCard({ plan }: { plan: Plan }) {
         {plan.bestFor}
       </p>
 
-      {/* Once-off Price */}
-      <div className="mb-1 min-h-[40px] flex items-baseline">
-        <span className="font-display text-[var(--cd-text)] font-bold text-3xl">
+      {/* Once-off Price with gradient text */}
+      <div className="mb-1 min-h-[44px] md:min-h-[48px] flex items-baseline">
+        <span className={`font-display font-bold text-3xl md:text-4xl ${accent.priceGradient}`}>
           {plan.onceOffPrice}
         </span>
         <span className="ml-2 text-[var(--cd-text-dim)] text-xs uppercase tracking-wider font-mono">
@@ -199,14 +257,14 @@ function PricingCard({ plan }: { plan: Plan }) {
 
       {/* Optional Retainer */}
       <p className="text-[#C9A84C] text-sm font-medium mb-2 flex items-center gap-1.5">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C9A84C]" />
+        <span className={`inline-block w-1.5 h-1.5 rounded-full ${accent.dotColor}`} />
         Optional retainer: {plan.retainer}
       </p>
 
       {/* Best Value note for highlighted plan */}
       {plan.highlighted && (
-        <p className="text-[#C9A84C] text-xs font-medium mb-4 flex items-center gap-1">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C9A84C]" />
+        <p className="text-[#34D399] text-xs font-medium mb-4 flex items-center gap-1">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34D399]" />
           Best Value — most features per rand
         </p>
       )}
@@ -220,7 +278,7 @@ function PricingCard({ plan }: { plan: Plan }) {
             key={feature}
             className="flex items-start gap-2.5 text-sm"
           >
-            <Check className="w-4 h-4 text-[var(--cd-gold)] shrink-0 mt-0.5" />
+            <Check className={`w-4 h-4 ${accent.checkColor} shrink-0 mt-0.5`} />
             <span className="text-[var(--cd-text-muted)]">
               {feature}
             </span>
@@ -232,8 +290,11 @@ function PricingCard({ plan }: { plan: Plan }) {
       <a
         href="#contact"
         className={`
-          inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--cd-gold)] text-[#080808] font-medium text-sm transition-all duration-300 hover:bg-[var(--cd-gold-light)]
-          ${plan.highlighted ? 'h-11 px-6' : 'h-10 px-4'}
+          inline-flex items-center justify-center gap-2 rounded-lg text-[#080808] font-medium text-sm transition-all duration-300 btn-press
+          ${plan.highlighted
+            ? `h-12 px-6 ${accent.badgeBg} hover:brightness-110`
+            : 'h-10 px-4 bg-[var(--cd-gold)] hover:bg-[var(--cd-gold-light)]'
+          }
         `}
       >
         {plan.cta}
@@ -243,9 +304,27 @@ function PricingCard({ plan }: { plan: Plan }) {
   )
 }
 
+const addOnAccentMap: Record<string, { border: string; dot: string; priceColor: string }> = {
+  gold: {
+    border: 'border-[#C9A84C]/10 hover:border-[#C9A84C]/30',
+    dot: 'bg-[#C9A84C]/60',
+    priceColor: 'text-[#C9A84C]',
+  },
+  emerald: {
+    border: 'border-[#34D399]/10 hover:border-[#34D399]/30',
+    dot: 'bg-[#34D399]/60',
+    priceColor: 'text-[#34D399]',
+  },
+  cyan: {
+    border: 'border-[#22D3EE]/10 hover:border-[#22D3EE]/30',
+    dot: 'bg-[#22D3EE]/60',
+    priceColor: 'text-[#22D3EE]',
+  },
+}
+
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 md:py-28 bg-[#080808]">
+    <section id="pricing" className="aurora-bg py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -256,7 +335,10 @@ export default function Pricing() {
           className="mb-8 md:mb-12"
         >
           <span className="section-label inline-block">Pricing</span>
-          <h2 className="section-heading text-[var(--text-h2)] text-[var(--cd-text)] font-bold leading-tight">
+          <h2
+            className="gold-gradient-text heading-shadow font-display font-bold leading-tight"
+            style={{ fontSize: 'var(--text-h2)' }}
+          >
             Transparent Pricing. No Surprises.
           </h2>
           <p className="text-[var(--cd-text-muted)] text-lg mt-3">
@@ -285,7 +367,7 @@ export default function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16 items-start"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 mb-16 items-start"
         >
           {smallBusinessPlans.map((plan) => (
             <PricingCard key={plan.name} plan={plan} />
@@ -313,7 +395,7 @@ export default function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-12 items-start"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 mb-12 items-start"
         >
           {schoolPlans.map((plan) => (
             <PricingCard key={plan.name} plan={plan} />
@@ -326,7 +408,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="glass-card rounded-xl p-6 md:p-8 border-l-[3px] border-l-[var(--cd-gold)] mb-12"
+          className="glass-card-emerald rounded-xl p-6 md:p-8 border-l-[3px] border-l-[var(--cd-emerald)] card-shadow-emerald mb-12"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
             <div className="flex-1">
@@ -338,7 +420,7 @@ export default function Pricing() {
               </div>
               <p className="text-[var(--cd-text-muted)] text-sm leading-relaxed max-w-2xl">
                 Procuring from Carter Digitals earns your company{' '}
-                <span className="text-[var(--cd-gold)] font-semibold">
+                <span className="emerald-gradient-text font-semibold">
                   135% of the spend value
                 </span>{' '}
                 toward your B-BBEE scorecard.
@@ -346,7 +428,7 @@ export default function Pricing() {
             </div>
             <a
               href="#"
-              className="inline-flex items-center gap-1.5 text-[var(--cd-gold)] text-sm font-medium whitespace-nowrap group hover:gap-2.5 transition-all duration-300"
+              className="inline-flex items-center gap-1.5 text-[var(--cd-emerald)] text-sm font-medium whitespace-nowrap group hover:gap-2.5 transition-all duration-300"
             >
               Use our B-BBEE Score Estimator
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -365,19 +447,23 @@ export default function Pricing() {
             Add-on Services
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {addOns.map((addon) => (
-              <div
-                key={addon.label}
-                className="flex items-center justify-between rounded-lg bg-[rgba(255,255,255,0.02)] border border-[var(--cd-border)] px-4 py-3 transition-colors duration-200 hover:border-[#3A3A3A]"
-              >
-                <span className="text-[var(--cd-text-muted)] text-sm">
-                  {addon.label}
-                </span>
-                <span className="text-[var(--cd-gold)] font-mono text-sm font-medium">
-                  {addon.price}
-                </span>
-              </div>
-            ))}
+            {addOns.map((addon) => {
+              const colors = addOnAccentMap[addon.accent]
+              return (
+                <div
+                  key={addon.label}
+                  className={`flex items-center justify-between rounded-lg bg-[rgba(255,255,255,0.02)] border ${colors.border} px-4 py-3 transition-colors duration-200`}
+                >
+                  <span className="text-[var(--cd-text-muted)] text-sm flex items-center gap-2">
+                    <span className={`inline-block w-1.5 h-1.5 rounded-full ${colors.dot}`} />
+                    {addon.label}
+                  </span>
+                  <span className={`${colors.priceColor} font-mono text-sm font-medium`}>
+                    {addon.price}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </motion.div>
       </div>

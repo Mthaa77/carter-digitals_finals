@@ -30,12 +30,19 @@ const socialLinks = [
   { icon: Twitter, label: 'X / Twitter', href: '#' },
 ]
 
+const contactItems = [
+  { icon: MapPin, label: 'Soshanguve, Pretoria, Gauteng', href: null, color: 'text-[#C9A84C]' },
+  { icon: Phone, label: '072 402 6893', href: 'tel:0724026893', color: 'text-cd-emerald' },
+  { icon: Mail, label: 'kadiakakabelo4@gmail.com', href: 'mailto:kadiakakabelo4@gmail.com', color: 'text-cd-cyan' },
+  { icon: Clock, label: 'We reply within 4 business hours', href: null, color: 'text-cd-violet' },
+]
+
 export default function Footer() {
   return (
     <footer className="relative">
-      {/* Footer CTA Section */}
-      <section className="relative bg-[#080808] py-20 md:py-28 overflow-hidden" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(201, 168, 76, 0.03) 0%, transparent 70%), #080808' }}>
-        {/* Subtle background glow */}
+      {/* Footer CTA Section — Aurora Background */}
+      <section className="aurora-bg relative py-20 md:py-28 overflow-hidden">
+        {/* Additional subtle glow layer */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-[#C9A84C] blur-[150px] opacity-[0.07]" />
         </div>
@@ -46,7 +53,8 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="font-display text-[var(--text-h2)] font-bold text-[#F0EFE8] mb-8"
+            className="gold-gradient-text heading-shadow-lg font-display font-bold mb-8"
+            style={{ fontSize: 'var(--text-h2)' }}
           >
             Let&apos;s Build Something That Works.
           </motion.h2>
@@ -60,7 +68,10 @@ export default function Footer() {
           >
             <a
               href="#contact"
-              className="btn-press btn-primary inline-flex items-center justify-center px-8 py-3.5 bg-[#C9A84C] hover:bg-[#C9A84C]/90 text-[#080808] font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-200 shadow-lg shadow-cd-gold/15"
+              className="btn-press btn-glow-gold inline-flex items-center justify-center px-8 py-3.5 text-[#080808] font-display font-semibold text-sm tracking-wide rounded-lg transition-all duration-300 shadow-lg shadow-cd-gold/15 hover:shadow-cd-gold/30"
+              style={{
+                background: 'linear-gradient(135deg, #C9A84C, #E8CA7A)',
+              }}
             >
               Start Your Project
             </a>
@@ -77,15 +88,15 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Top border - subtle gold tint */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#7A6330]/60 to-transparent" />
+      {/* Neon gradient top border */}
+      <div className="neon-line" />
 
       {/* Footer Main */}
       <div className="bg-[#0A0A0A] py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {/* Column 1 - Brand */}
-            <div className="col-span-2 sm:col-span-2 lg:col-span-1">
+            <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3 mb-5">
                 <Image
                   src="/carter-digitals-logo.png"
@@ -96,23 +107,26 @@ export default function Footer() {
                 />
                 <span className="font-display text-xl font-bold">
                   <span className="text-[#F0EFE8]">Carter</span>{' '}
-                  <span className="text-[#C9A84C]">Digitals</span>
+                  <span className="gold-gradient-text">Digitals</span>
                 </span>
               </div>
               <p className="text-[#C8C8C0] font-sans text-base leading-relaxed max-w-xs">
                 High-agility digital infrastructure &amp; AI-enabled solutions for South Africa&apos;s forward-thinking institutions.
               </p>
 
-              {/* Social media links — larger touch targets */}
+              {/* Social media links — gradient hover effects */}
               <div className="flex items-center gap-3 mt-6">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#1A1A1A] border border-[#242424] text-[#C8C8C0] hover:text-[#C9A84C] hover:border-cd-gold/30 hover:bg-cd-gold/5 transition-all duration-200"
+                    className="group flex items-center justify-center w-10 h-10 rounded-lg bg-[#1A1A1A] border border-[#242424] text-[#C8C8C0] transition-all duration-300 hover:border-cd-gold/30 hover:text-cd-gold hover:bg-cd-gold/5 hover:shadow-[0_0_12px_rgba(201,168,76,0.15)]"
+                    style={{
+                      // On hover, the text color transitions gold→emerald via CSS
+                    }}
                   >
-                    <social.icon className="w-4 h-4" />
+                    <social.icon className="w-4 h-4 transition-colors duration-300 group-hover:text-cd-emerald" />
                   </a>
                 ))}
               </div>
@@ -156,50 +170,38 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 4 - Contact */}
-            <div className="col-span-2 sm:col-span-1">
+            {/* Column 4 - Contact — colored icons */}
+            <div>
               <h3 className="font-display text-sm font-bold text-[#F0EFE8] uppercase tracking-wider mb-5">
                 Contact
               </h3>
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#C8C8C0] font-sans text-base">
-                    Soshanguve, Pretoria, Gauteng
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <a
-                    href="tel:0724026893"
-                    className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
-                  >
-                    072 402 6893
-                  </a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <a
-                    href="mailto:kadiakakabelo4@gmail.com"
-                    className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
-                  >
-                    kadiakakabelo4@gmail.com
-                  </a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span className="text-[#C8C8C0] font-sans text-base">
-                    We reply within 4 business hours
-                  </span>
-                </li>
+                {contactItems.map((item) => (
+                  <li key={item.label} className="flex items-start gap-3">
+                    <item.icon className={`w-4 h-4 mt-0.5 shrink-0 ${item.color}`} />
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="link-underline text-[#C8C8C0] hover:text-[#C9A84C] font-sans text-base transition-colors duration-200"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <span className="text-[#C8C8C0] font-sans text-base">
+                        {item.label}
+                      </span>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
+      {/* Bottom Bar — neon-line style top border */}
+      <div className="neon-line" />
+      <div className="bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <p className="text-cd-text-dim font-sans text-sm">

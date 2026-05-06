@@ -8,26 +8,36 @@ const phases = [
     number: '01',
     name: 'Discovery & Alignment',
     description: 'We listen. We align on your goals, audience, and business requirements.',
+    accent: '#C9A84C',
+    accentBg: 'rgba(201,168,76,0.1)',
   },
   {
     number: '02',
     name: 'Architecture & Wireflow',
     description: 'Structure, user flows, and technical architecture — approved before a line of code.',
+    accent: '#34D399',
+    accentBg: 'rgba(52,211,153,0.1)',
   },
   {
     number: '03',
     name: 'Design & Build',
     description: 'Next.js + GCP + Vercel. Fast, modern, built to production standard.',
+    accent: '#22D3EE',
+    accentBg: 'rgba(34,211,238,0.1)',
   },
   {
     number: '04',
     name: 'QA & Compliance',
     description: 'Testing, POPIA compliance, accessibility checks, and performance optimisation.',
+    accent: '#A78BFA',
+    accentBg: 'rgba(167,139,250,0.1)',
   },
   {
     number: '05',
     name: 'Launch & Enablement',
     description: 'Go-live, training, handover, and ongoing support if you need it.',
+    accent: '#FB7185',
+    accentBg: 'rgba(251,113,133,0.1)',
   },
 ]
 
@@ -73,11 +83,11 @@ export default function Process() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <span className="inline-block text-cd-gold text-sm font-medium tracking-widest uppercase mb-4">
+          <span className="section-label inline-block gold-gradient-text">
             How We Work
           </span>
-          <div className="w-12 h-0.5 bg-cd-gold mx-auto mb-6" />
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cd-text">
+          <div className="mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE] rounded-full mb-6" />
+          <h2 className="font-display heading-shadow" style={{ fontSize: 'var(--text-h2)' }}>
             Our <span className="gold-gradient-text">5-Phase</span> Delivery Process
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-2xl mx-auto font-sans">
@@ -113,18 +123,22 @@ export default function Process() {
                   {/* Numbered circle */}
                   <div className="relative mb-6">
                     <div
-                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500 group-hover:shadow-[0_0_12px_rgba(201,168,76,0.2)]"
+                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)]"
+                      style={{
+                        borderColor: `${phase.accent}66`,
+                        backgroundColor: `${phase.accentBg}`,
+                      }}
                     >
-                      <span className="font-display text-xl font-bold text-cd-gold">
+                      <span className="font-display text-xl font-bold" style={{ color: phase.accent }}>
                         {phase.number}
                       </span>
                     </div>
                     {/* Glow on hover */}
-                    <div className="absolute inset-0 rounded-full bg-cd-gold/0 group-hover:bg-cd-gold/10 blur-xl transition-all duration-500" />
+                    <div className="absolute inset-0 rounded-full blur-xl transition-all duration-500 opacity-0 group-hover:opacity-100" style={{ backgroundColor: `${phase.accent}20` }} />
                   </div>
 
                   {/* Phase name */}
-                  <h3 className="font-display text-lg font-bold text-cd-text mb-2 group-hover:text-cd-gold transition-colors duration-300">
+                  <h3 className="font-display text-lg font-bold text-cd-text mb-2 transition-colors duration-300 group-hover:text-cd-gold">
                     {phase.name}
                   </h3>
 
@@ -155,8 +169,14 @@ export default function Process() {
               <div className="flex flex-col items-center">
                 {/* Numbered circle */}
                 <div className="relative z-10">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-cd-gold/40 bg-cd-bg/80 backdrop-blur-sm group-hover:border-cd-gold group-hover:bg-cd-gold/10 transition-all duration-500 group-hover:shadow-[0_0_12px_rgba(201,168,76,0.2)]">
-                    <span className="font-display text-lg sm:text-xl font-bold text-cd-gold">
+                  <div
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)]"
+                    style={{
+                      borderColor: `${phase.accent}66`,
+                      backgroundColor: `${phase.accentBg}`,
+                    }}
+                  >
+                    <span className="font-display text-lg sm:text-xl font-bold" style={{ color: phase.accent }}>
                       {phase.number}
                     </span>
                   </div>

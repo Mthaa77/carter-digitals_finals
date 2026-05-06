@@ -7,7 +7,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 md:py-28 px-4 sm:px-6 lg:px-8"
+      className="aurora-bg py-20 md:py-28 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
@@ -19,10 +19,16 @@ export default function Testimonials() {
           className="text-center mb-14 md:mb-20"
         >
           <span className="section-label inline-block">Testimonials</span>
-          <h2 className="section-heading text-[var(--text-h2)] tracking-tight">
+          <h2
+            className="gold-gradient-text heading-shadow font-display tracking-tight"
+            style={{ fontSize: 'var(--text-h2)' }}
+          >
             What Our Clients Say
           </h2>
           <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
+          <p className="mt-5 text-[#C8C8C0] text-base md:text-lg max-w-xl mx-auto font-sans">
+            Real feedback from real South African businesses.
+          </p>
         </motion.div>
 
         {/* Testimonial Carousel */}
@@ -38,7 +44,7 @@ export default function Testimonials() {
         >
           <a
             href="#"
-            className="inline-flex items-center justify-center px-8 py-3 rounded-lg text-sm font-medium text-[#C9A84C] border border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[rgba(201,168,76,0.08)] transition-all duration-300 font-sans"
+            className="btn-secondary inline-flex items-center justify-center px-8 py-3 rounded-lg text-sm font-medium text-[#C9A84C] border border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[rgba(201,168,76,0.08)] transition-all duration-300 font-sans btn-press"
           >
             See All Reviews →
           </a>
