@@ -217,11 +217,10 @@ const preHeadingReveal = {
 }
 
 const headingScaleReveal = {
-  hidden: { opacity: 0, scale: 0.78, filter: 'blur(16px)', y: 30 },
+  hidden: { opacity: 0, scale: 0.82, y: 30 },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
     y: 0,
     transition: { duration: 1.6, ease: [0.16, 1, 0.3, 1] },
   },
@@ -333,7 +332,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-start sm:items-center justify-center overflow-x-hidden"
     >
       {/* ── LAYER 0: Hero Banner with Ken Burns ── */}
       <motion.div
@@ -459,7 +458,7 @@ export default function Hero() {
 
       {/* ── MAIN CONTENT (parallax foreground + mouse parallax) ── */}
       <motion.div
-        className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 text-center w-full"
+        className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 sm:py-20 lg:py-28 text-center w-full"
         style={{ opacity: contentOpacity, y: contentY, scale: contentScale }}
       >
         <motion.div
@@ -494,10 +493,10 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* ── H1: Scale-up + Blur Reveal ── */}
+          {/* ── H1: Scale-up Reveal ── */}
           <motion.h1
             variants={headingScaleReveal}
-            className="font-display font-bold leading-[1.05] tracking-tight relative gold-gradient-text heading-shadow-lg"
+            className="font-display font-bold leading-[1.05] tracking-tight relative text-cd-gold heading-shadow-lg"
             style={{ fontSize: 'var(--text-hero)' }}
           >
             {/* Ambient gradient glow behind headline */}

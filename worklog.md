@@ -464,3 +464,74 @@ Stage Summary:
 - Consider upgrading other homepage components with new cinematic animation classes
 - Test mobile layout on actual device simulation
 - Consider IntersectionObserver-based scroll animations
+
+---
+
+## Session: Verify Pricing Removal from Homepage (Task ID: 3)
+
+### Project Status
+- Confirmed Pricing component is already removed from homepage
+- Homepage has clean flow with no pricing packages displayed
+- Calculator tools (ROICalculator, ProjectEstimator, WebsiteCostCalculator, BBBEECalculator, FreeTools) remain on homepage
+- /pricing page still works independently with full Pricing component
+- ESLint: 0 errors
+
+### Verification Results
+
+#### `src/app/page.tsx` — No Pricing Component
+- No `import Pricing` statement found
+- No `<Pricing />` JSX usage found
+- All calculator/tool components still present and intact:
+  - `FreeTools` (line 12, rendered at line 97)
+  - `ROICalculator` (line 40, rendered at line 99)
+  - `ProjectEstimator` (line 13, rendered at line 101)
+  - `WebsiteCostCalculator` (line 14, rendered at line 102)
+  - `BBBEECalculator` (line 15, rendered at line 103)
+- Pricing component file (`src/components/pricing.tsx`) still exists and is used by `/pricing` route
+- Lint: 0 errors
+
+### Summary
+- Task was already completed in a prior session (Task ID: 1)
+- No code changes needed — Pricing was already removed from homepage
+- Dedicated `/pricing` page with Pricing component remains functional
+
+---
+
+## Session: Fix Invisible Hero H1 Heading (Task ID: 1)
+
+### Project Status
+- Fixed critical rendering bug where the Hero section H1 heading "We Build Websites That" was invisible
+- Subtitle, CTAs, badges, and counters were all visible — only the H1 text was invisible
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Root Cause
+The `headingScaleReveal` Framer Motion variant set `filter: 'blur(16px)'` → `filter: 'blur(0px)'` as an inline style on the H1 element. This inline `filter` property overrode the CSS `filter: drop-shadow(...)` from the `gold-gradient-text` class. When the CSS `filter` was overridden, the `background-clip: text` + `-webkit-text-fill-color: transparent` combination became unreliable — the browser failed to render the gradient text correctly because the inline filter interfered with composited rendering.
+
+Additionally, `heading-shadow-lg` applied `text-shadow` to transparent text, creating invisible shadows.
+
+### Completed Changes
+
+#### 1. hero.tsx — Separated blur animation from H1 element
+- Removed `filter: 'blur(16px)'` and `filter: 'blur(0px)'` from `headingScaleReveal` variant
+- Added new `headingBlurReveal` variant that only handles the blur filter
+- Wrapped `<motion.h1>` in a `<motion.div>` using `headingBlurReveal`
+- Blur animation is now on the wrapper div, NOT on the H1 itself
+- The H1's CSS `filter: drop-shadow()` from `gold-gradient-text` is never overridden
+- Removed `heading-shadow-lg` from H1 className (text-shadow doesn't work with transparent text)
+- `headingScaleReveal` now uses only `opacity`, `scale`, and `y` for animation
+
+#### 2. globals.css — Added color fallback to gold-gradient-text
+- Added `color: #C9A84C;` as first property in `.gold-gradient-text`
+- If gradient/background-clip fails, text is still visible in gold color
+- `-webkit-text-fill-color: transparent` still takes effect when browser supports it
+
+#### 3. Hydration verification
+- Confirmed no Math.random() calls in hero.tsx or hero-typing.tsx
+- All particle data uses deterministic seeded random (Math.sin formula)
+- No hydration mismatch risk
+
+Stage Summary:
+- Hero H1 text is now visible with gold gradient effect
+- Cinematic blur reveal animation preserved via wrapper div approach
+- Text visible on first render even if JS is slow (color fallback)
+- ESLint: 0 errors | HTTP 200 | Dev server compiling clean

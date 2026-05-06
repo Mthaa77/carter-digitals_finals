@@ -105,7 +105,7 @@ export default function HeroTyping({
 
   return (
     <span className="inline">
-      <span className="gold-gradient-text text-glow-gold inline">
+      <span className="text-cd-gold-light text-glow-gold inline">
         {displayedText}
       </span>
       <motion.span

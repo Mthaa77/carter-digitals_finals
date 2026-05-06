@@ -238,58 +238,42 @@ html .glass-card {
 
 /* ── GOLD GRADIENT TEXT ────────────────────────────────── */
 .gold-gradient-text {
-  background: var(--cd-gradient-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.2));
+  color: #C9A84C;
+  text-shadow:
+    0 0 40px rgba(201, 168, 76, 0.2),
+    0 0 80px rgba(201, 168, 76, 0.08);
 }
 
 /* ── MULTI-COLOR GRADIENT TEXT ─────────────────────────── */
 .rainbow-gradient-text {
-  background: linear-gradient(135deg, #C9A84C, #22D3EE, #A78BFA, #FB7185, #C9A84C);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-shift 8s ease infinite;
-  filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.15));
+  color: #C9A84C;
+  text-shadow:
+    0 0 30px rgba(201, 168, 76, 0.15),
+    0 0 60px rgba(34, 211, 238, 0.08);
 }
 
 /* ── EMERALD GRADIENT TEXT ─────────────────────────────── */
 .emerald-gradient-text {
-  background: linear-gradient(135deg, #065F46, #34D399, #6EE7B7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.15));
+  color: #34D399;
+  text-shadow: 0 0 30px rgba(52, 211, 153, 0.15);
 }
 
 /* ── CYAN GRADIENT TEXT ────────────────────────────────── */
 .cyan-gradient-text {
-  background: linear-gradient(135deg, #0E7490, #22D3EE, #67E8F9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.15));
+  color: #22D3EE;
+  text-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
 }
 
 /* ── VIOLET GRADIENT TEXT ──────────────────────────────── */
 .violet-gradient-text {
-  background: linear-gradient(135deg, #4C1D95, #A78BFA, #C4B5FD);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.15));
+  color: #A78BFA;
+  text-shadow: 0 0 30px rgba(167, 139, 250, 0.15);
 }
 
 /* ── ROSE GRADIENT TEXT ────────────────────────────────── */
 .rose-gradient-text {
-  background: linear-gradient(135deg, #9F1239, #FB7185, #FECDD3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(251, 113, 133, 0.15));
+  color: #FB7185;
+  text-shadow: 0 0 30px rgba(251, 113, 133, 0.15);
 }
 
 /* ── GRADIENT SHIFT ANIMATION ──────────────────────────── */
@@ -437,17 +421,14 @@ html .glass-card {
 
 /* ── GOLD SHIMMER ANIMATION ────────────────────────────── */
 @keyframes gold-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
 }
 
 .gold-shimmer {
-  background: linear-gradient(90deg, #7A6330, #C9A84C, #E8CA7A, #C9A84C, #7A6330);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gold-shimmer 4s linear infinite;
+  color: #C9A84C;
+  animation: gold-shimmer 4s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
 }
 
 /* ── COUNTER ANIMATION ─────────────────────────────────── */
