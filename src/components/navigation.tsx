@@ -11,8 +11,8 @@ const navItems = [
   { label: 'About', href: '#story' },
   { label: 'Services', href: '#services' },
   { label: 'Process', href: '#process' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Schools', href: '#pricing' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Tools', href: '#tools' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Blog', href: '#blog' },
 ]
@@ -50,6 +50,11 @@ export default function Navigation() {
   }, [sectionIds])
 
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's a full page route (starts with /), let the browser handle it natively
+    if (href.startsWith('/')) {
+      setMobileOpen(false)
+      return
+    }
     e.preventDefault()
     setMobileOpen(false)
     const id = href.replace('#', '')
@@ -100,7 +105,7 @@ export default function Navigation() {
               />
               <span className="font-display text-xl sm:text-2xl font-bold tracking-tight">
                 <span className="text-cd-text">Carter</span>{' '}
-                <span className="gold-gradient-text">Digitals</span>
+                <span className="text-cd-gold">Digitals</span>
               </span>
             </a>
 

@@ -604,3 +604,195 @@ Or manually:
 - GitHub upload pending user authentication
 - Consider adding more micro-interactions and scroll-triggered animations
 - Test on real mobile devices for layout verification
+
+---
+
+## Session: Hero Section Premium Redesign (Task ID: 2)
+
+### Project Status
+- Hero section completely redesigned with premium, more impactful visual design
+- Fixed invisible text issues (no `bg-clip-text` or `background-clip: text` used anywhere)
+- Counter row reduced from 3 heavy glass cards to 2 compact inline items
+- Badge strip made more compact with subtle dot dividers instead of pipes
+- Added gold orbit ring, shimmer sweep, cinematic dust particles, refined scroll indicator
+- Mobile optimization: smaller headings, stacked CTAs, compact badges
+- Subtitle enhanced with highlighted key phrases
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### 1. Hero H1 — More Dramatic with Gold Glow Halo + Animated Underline
+- Kept `text-cd-gold heading-shadow-lg` (confirmed visible, no `background-clip: text`)
+- Enhanced the gold glow halo behind text: larger blur radius (120–160px), wider coverage (90% width × 70% height)
+- Added animated underline accent below "We Build Websites" — a gold-to-gold-light gradient line that grows from 0 to 60% width with box-shadow glow
+- Added shimmer sweep overlay on the entire heading — a subtle gold-tinted light that sweeps across every 12s (4s animation + 8s pause)
+- Hero font size slightly reduced for mobile: `clamp(2.5rem, 6vw + 0.5rem, 6rem)` instead of `var(--text-hero)`
+
+#### 2. Secondary CTA Fix — Solid Colors Instead of Invisible bg-clip-text
+- Replaced `bg-gradient-to-r from-cd-gold via-cd-text-muted to-cd-cyan bg-clip-text text-transparent` with `text-cd-gold group-hover:text-cd-gold-light transition-colors`
+- Added a small Star icon next to "See Our Work" for visual interest
+- Text now clearly visible in gold color on all viewports
+
+#### 3. Counter Row — Compact 2-Item Horizontal Strip
+- Reduced from 3 large glass cards to 2 inline items: "135% B-BBEE Procurement" and "100% Youth-Owned"
+- Removed the "5–7 Days Average Delivery Time" counter (already shown in badge strip)
+- Changed from `grid grid-cols-3` to `flex items-center justify-center gap-6 sm:gap-10`
+- Each item is a compact horizontal layout: large number + small label side by side
+- Vertical gradient divider between items on sm+ screens
+- Removed the radial gradient glow background that was behind the counter row
+
+#### 4. Badge Strip — More Compact & Premium
+- Reduced emoji badge sizes from `w-8 h-8 sm:w-10 sm:h-10` to `w-5 h-5 sm:w-6 sm:h-6`
+- Reduced font sizes from `text-xs sm:text-sm` to `text-[10px] sm:text-xs`
+- Changed divider from `|` pipe character to `•` dot at smaller size (`text-[8px]`)
+- Replaced `glass-card-emerald/violet/cyan/gold` bgClasses with simpler `bg-cd-emerald/5` etc.
+- Replaced gradient text colorClasses (`emerald-gradient-text`, etc.) with solid Tailwind colors (`text-cd-emerald`, etc.)
+- Reduced padding: `px-3 py-2 sm:px-6 sm:py-3` instead of `px-4 py-3 sm:px-8 sm:py-5`
+- Made the strip `inline-flex` instead of block for tighter layout
+- Reduced border opacity: `border-t-cd-gold/15` instead of `border-t-cd-gold/20`
+
+#### 5. Visual Premium Touches
+- **Gold Orbit Ring** (`GoldOrbitRing` component): Two concentric circular borders slowly rotating in opposite directions (120s and 90s cycles). Inner ring 900px, outer ring 650px. Each has a small orbiting dot (gold and cyan) with pulsing opacity.
+- **Shimmer Sweep**: A skewed gold-tinted pseudo-element that sweeps across the H1 text every ~12s, creating a premium "light catch" effect.
+- **Cinematic Dust Particles**: Added 20 additional tiny dust specs (0.5–1.5px, very low opacity 0.04–0.16, slow 20–50s durations) alongside the 25 gold particles. These are subtle, slow-moving specs for depth.
+- **Refined Scroll Indicator**: Smaller mouse icon (w-5 h-8 instead of w-6 h-10), smaller dot (w-0.5 h-1.5), more subtle colors (opacity 0.4–0.6), hover transitions on container and border. Reduced text to 8–9px.
+
+#### 6. Mobile Optimization
+- Hero H1 uses `clamp(2.5rem, 6vw + 0.5rem, 6rem)` — smaller on mobile
+- Content padding reduced: `pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16`
+- Spacing reduced: `space-y-5 sm:space-y-8` instead of `space-y-6 sm:space-y-10`
+- CTAs: `flex-col sm:flex-row` (stacked on mobile, side-by-side on sm+)
+- CTA button sizes: `px-7 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base` (smaller on mobile)
+- Pre-heading label: smaller text (`text-[9px] sm:text-[11px]`), shorter lines (`w-8 sm:w-14`)
+- Badge strip wraps naturally on mobile with `flex-wrap`
+
+#### 7. Subtitle Enhancement
+- Made subtitle responsive: `text-sm sm:text-lg lg:text-xl` (was `text-base sm:text-xl`)
+- Added `text-cd-emerald font-semibold` highlight on "B-BBEE Level 1"
+- Added `text-cd-gold font-semibold` highlight on "5–7 business days"
+- These key phrases now stand out with color and weight contrast
+
+### Technical Notes
+- All particle systems still use deterministic seeded random (Math.sin formula) — no hydration mismatch
+- Mouse parallax and scroll parallax preserved exactly
+- All background layers preserved (banner, overlays, orbs, grid, grain, letterbox bars, neon line)
+- GoldOrbitRing uses Framer Motion `animate={{ rotate: 360 }}` with infinite linear loop
+- No `useMemo` needed for particle arrays since they're module-level constants
+- Counter items use solid Tailwind color classes (`text-cd-emerald`, `text-cd-cyan`) instead of gradient-text classes — no `background-clip: text` risk
+
+Stage Summary:
+- Hero: Premium redesign with 7 major improvements (H1 glow+underline, CTA fix, compact counters, compact badges, gold orbit ring, shimmer sweep, mobile optimization)
+- All text guaranteed visible: zero `background-clip: text` usage in hero
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+---
+
+## Session: Create Dedicated Pages for Each Free Tool (Task ID: 4-5)
+
+### Project Status
+- 5 new tool pages created under `/tools/` route, each with premium dedicated page design
+- New SEO Audit component created (seo-audit.tsx) — the first actual implementation of this tool
+- Homepage (`/`) NOT modified — all tools still render on homepage too
+- All 5 new routes return HTTP 200; ESLint: 0 errors; Dev server compiling clean
+
+### Completed Changes
+
+#### 1. Website Cost Calculator → `/tools/website-cost-calculator`
+- **page.tsx**: Server component with metadata (title, description, openGraph)
+- **website-cost-calculator-client.tsx**: Client component with:
+  - Navigation component
+  - Hero section with aurora-bg, gradient orbs (gold, cyan, violet), scan lines, neon line
+  - Calculator icon in gold accent container
+  - "Free Tool" section label + gold heading "Website Cost Calculator"
+  - Back to Homepage link with arrow
+  - Existing `WebsiteCostCalculator` component imported and rendered
+  - "How It Works" section — 3 steps (Set Pages, Pick Features, Choose Timeline) with colored icons
+  - "Why Use This Calculator" section — 4 benefit cards (Instant & Transparent, Based on Real Packages, No Email Required, South African Context)
+  - CTA section with "Ready to Start Your Project?" + gold button
+  - Footer with mt-auto for sticky footer
+
+#### 2. ROI Calculator → `/tools/roi-calculator`
+- **page.tsx**: Server component with metadata
+- **roi-calculator-client.tsx**: Client component with:
+  - Navigation + Hero with emerald accent color scheme
+  - BarChart3 icon in emerald container
+  - "ROI Calculator" label + emerald heading
+  - Existing `ROICalculator` component rendered
+  - "How It Works" — Enter Revenue, Set Traffic Increase, See Your ROI
+  - "Why Use This Calculator" — Data-Driven Decisions, Realistic Projections, No Signup Required, Proven Methodology
+  - CTA section + Footer
+
+#### 3. B-BBEE Score Estimator → `/tools/bbbee-calculator`
+- **page.tsx**: Server component with metadata
+- **bbbee-calculator-client.tsx**: Client component with:
+  - Navigation + Hero with gold accent (B-BBEE tool = gold theme)
+  - Award icon + "UNIQUE" badge in gold
+  - "B-BBEE Tool" label + gold heading
+  - Existing `BBBEECalculator` component rendered
+  - "How It Works" — Enter Budget, Select Your Level, See Qualifying Spend
+  - "Why Use This Estimator" — Unique in South Africa, Level 1 Verified, 135% Recognition, No Signup Required
+  - CTA: "Start a Project With a Qualifying Supplier" + Footer
+
+#### 4. Project Estimator → `/tools/project-estimator`
+- **page.tsx**: Server component with metadata
+- **project-estimator-client.tsx**: Client component with:
+  - Navigation + Hero with cyan accent color scheme
+  - Layers icon in cyan container
+  - "Estimate Your Project" label + cyan heading
+  - Existing `ProjectEstimator` component rendered
+  - "How It Works" — Select Service, Choose Features, Get Estimate
+  - "Why Use This Estimator" — Step-by-Step Process, Multiple Service Types, Feature-Based Pricing, Timeline Included
+  - CTA section + Footer
+
+#### 5. SEO Audit Tool → `/tools/seo-audit` (NEW)
+- **New component**: `src/components/seo-audit.tsx` (~280 lines)
+  - URL input form with globe icon and "Run SEO Audit" button
+  - Deterministic pseudo-random scoring based on URL (seeded Math.sin)
+  - 5 audit categories: Performance, Mobile-Friendly, SEO Basics, Content Quality, Technical SEO
+  - Each category has score (0–100), animated score bar, and 4–5 tips with status indicators (good/warning/bad)
+  - Loading state with spinner and pulsing dots
+  - Animated circular overall score chart (SVG circle with strokeDashoffset animation)
+  - "Get a Full SEO Audit" CTA card with gold accent
+  - Color-coded scores: green (≥70), gold (45–69), rose (<45)
+- **page.tsx**: Server component with metadata
+- **seo-audit-client.tsx**: Client component with:
+  - Navigation + Hero with violet accent color scheme
+  - Search icon in violet container
+  - "Free SEO Tool" label + violet heading
+  - New `SEOAudit` component rendered
+  - "How It Works" — Enter Your URL, Get Your Score, See Actionable Tips
+  - "Why Use This SEO Audit" — 5 Key Categories, Mobile-First Focus, No Signup Required, Actionable Insights
+  - CTA: "Get a Full SEO Audit" + Footer
+
+### Design Consistency
+- All pages follow the same pattern as `/pricing` page
+- Each page has a unique color accent matching the tool theme:
+  - Website Cost Calculator → gold (#C9A84C)
+  - ROI Calculator → emerald (#34D399)
+  - B-BBEE Score Estimator → gold (#C9A84C) with UNIQUE badge
+  - Project Estimator → cyan (#22D3EE)
+  - SEO Audit → violet (#A78BFA)
+- All use solid Tailwind colors (no `background-clip: text` classes)
+- All use `aurora-bg`, `glass-card`, `neon-line`, `heading-shadow` CSS classes
+- All have Framer Motion animations with cinematic easing [0.16, 1, 0.3, 1]
+- All have `bg-[#080808]` background, sticky footer with `mt-auto`
+- All pages include back-to-homepage link, "How It Works" section, "Why Use This Tool" section, and CTA
+
+### Files Created
+1. `src/app/tools/website-cost-calculator/page.tsx`
+2. `src/app/tools/website-cost-calculator/website-cost-calculator-client.tsx`
+3. `src/app/tools/roi-calculator/page.tsx`
+4. `src/app/tools/roi-calculator/roi-calculator-client.tsx`
+5. `src/app/tools/bbbee-calculator/page.tsx`
+6. `src/app/tools/bbbee-calculator/bbbee-calculator-client.tsx`
+7. `src/app/tools/project-estimator/page.tsx`
+8. `src/app/tools/project-estimator/project-estimator-client.tsx`
+9. `src/app/tools/seo-audit/page.tsx`
+10. `src/app/tools/seo-audit/seo-audit-client.tsx`
+11. `src/components/seo-audit.tsx`
+
+### Verification
+- ESLint: 0 errors
+- All routes HTTP 200: `/`, `/tools/website-cost-calculator`, `/tools/roi-calculator`, `/tools/bbbee-calculator`, `/tools/project-estimator`, `/tools/seo-audit`
+- Homepage NOT modified — confirmed no changes to `src/app/page.tsx`
+- Dev server compiling clean

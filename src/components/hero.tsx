@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowRight, Trophy, Shield, CheckCircle, Zap, ChevronDown, Sparkles, Star } from 'lucide-react'
 import HeroTyping from '@/components/hero-typing'
 
@@ -67,26 +67,41 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
 
 /* ─────────────────────────────────────────────
    DETERMINISTIC FLOATING PARTICLES (hydration-safe)
+   Mix of larger golden particles + tiny cinematic dust specs
    ───────────────────────────────────────────── */
-const PARTICLE_COUNT = 40
+const GOLD_PARTICLE_COUNT = 25
+const DUST_PARTICLE_COUNT = 20
 
-const heroParticles = Array.from({ length: PARTICLE_COUNT }, (_, i) => {
+const goldParticles = Array.from({ length: GOLD_PARTICLE_COUNT }, (_, i) => {
   const x = r4(seededRandom(i * 5 + 1) * 100)
   const y = r4(seededRandom(i * 5 + 2) * 100)
-  const size = r4(1 + seededRandom(i * 5 + 3) * 2.5)
-  const opacity = r4(0.08 + seededRandom(i * 5 + 4) * 0.35)
-  const duration = r4(12 + seededRandom(i * 5 + 5) * 20)
+  const size = r4(1.5 + seededRandom(i * 5 + 3) * 2.5)
+  const opacity = r4(0.1 + seededRandom(i * 5 + 4) * 0.3)
+  const duration = r4(14 + seededRandom(i * 5 + 5) * 20)
   const delay = r4(seededRandom(i * 5 + 6) * 10)
   const drift = r4(seededRandom(i * 5 + 7) * 40 - 20)
   return { id: i, x, y, size, opacity, duration, delay, drift }
 })
 
+const dustParticles = Array.from({ length: DUST_PARTICLE_COUNT }, (_, i) => {
+  const idx = i + GOLD_PARTICLE_COUNT
+  const x = r4(seededRandom(idx * 7 + 1) * 100)
+  const y = r4(seededRandom(idx * 7 + 2) * 100)
+  const size = r4(0.5 + seededRandom(idx * 7 + 3) * 1)
+  const opacity = r4(0.04 + seededRandom(idx * 7 + 4) * 0.12)
+  const duration = r4(20 + seededRandom(idx * 7 + 5) * 30)
+  const delay = r4(seededRandom(idx * 7 + 6) * 15)
+  const drift = r4(seededRandom(idx * 7 + 7) * 20 - 10)
+  return { id: idx, x, y, size, opacity, duration, delay, drift }
+})
+
 function FloatingParticles() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {heroParticles.map((p) => (
+      {/* Gold particles — medium, brighter */}
+      {goldParticles.map((p) => (
         <motion.div
-          key={p.id}
+          key={`gold-${p.id}`}
           className="absolute rounded-full"
           style={{
             left: `${p.x}%`,
@@ -99,6 +114,31 @@ function FloatingParticles() {
             y: [0, -60, -120, -180],
             x: [0, p.drift * 0.3, p.drift * 0.7, 0],
             opacity: [0, p.opacity, p.opacity * 0.7, 0],
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      ))}
+      {/* Cinematic dust specs — tiny, slow, subtle */}
+      {dustParticles.map((p) => (
+        <motion.div
+          key={`dust-${p.id}`}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            background: `rgba(201,168,76,${p.opacity})`,
+          }}
+          animate={{
+            y: [0, -30, -60],
+            x: [0, p.drift * 0.2, 0],
+            opacity: [0, p.opacity, 0],
           }}
           transition={{
             duration: p.duration,
@@ -177,19 +217,59 @@ function ScanLines() {
 }
 
 /* ─────────────────────────────────────────────
+   GOLD ORBIT RING — slowly rotating around center
+   ───────────────────────────────────────────── */
+function GoldOrbitRing() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-[2] flex items-center justify-center" aria-hidden="true">
+      <motion.div
+        className="absolute w-[700px] h-[700px] sm:w-[900px] sm:h-[900px] rounded-full"
+        style={{
+          border: '1px solid rgba(201,168,76,0.04)',
+          boxShadow: '0 0 60px rgba(201,168,76,0.02), inset 0 0 60px rgba(201,168,76,0.01)',
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+      >
+        {/* Orbiting dot */}
+        <motion.div
+          className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cd-gold/30"
+          animate={{ opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </motion.div>
+      <motion.div
+        className="absolute w-[500px] h-[500px] sm:w-[650px] sm:h-[650px] rounded-full"
+        style={{
+          border: '1px solid rgba(201,168,76,0.025)',
+        }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
+      >
+        <motion.div
+          className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cd-cyan/25"
+          animate={{ opacity: [0.2, 0.6, 0.2] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+      </motion.div>
+    </div>
+  )
+}
+
+/* ─────────────────────────────────────────────
    BADGE & COUNTER DATA
    ───────────────────────────────────────────── */
 const badgeItems = [
-  { icon: Trophy, label: 'B-BBEE Level 1', emoji: '🏆', colorClass: 'emerald-gradient-text', bgClass: 'glass-card-emerald' },
-  { icon: Shield, label: '100% Black-Owned', emoji: '🇿🇦', colorClass: 'violet-gradient-text', bgClass: 'glass-card-violet' },
-  { icon: CheckCircle, label: 'CSD Registered', emoji: '✅', colorClass: 'cyan-gradient-text', bgClass: 'glass-card-cyan' },
-  { icon: Zap, label: '5–7 Day Delivery', emoji: '⚡', colorClass: 'gold-gradient-text', bgClass: 'glass-card-gold' },
+  { icon: Trophy, label: 'B-BBEE Level 1', emoji: '🏆', colorClass: 'text-cd-emerald', bgClass: 'bg-cd-emerald/5' },
+  { icon: Shield, label: 'Black-Owned', emoji: '🇿🇦', colorClass: 'text-cd-violet', bgClass: 'bg-cd-violet/5' },
+  { icon: CheckCircle, label: 'CSD Registered', emoji: '✅', colorClass: 'text-cd-cyan', bgClass: 'bg-cd-cyan/5' },
+  { icon: Zap, label: '5–7 Day Delivery', emoji: '⚡', colorClass: 'text-cd-gold', bgClass: 'bg-cd-gold/5' },
 ]
 
+/* Only 2 counter items — compact & elegant */
 const counterItems = [
-  { value: 135, suffix: '%', prefix: '', label: 'B-BBEE Procurement Recognition', colorClass: 'emerald-gradient-text', shadowClass: 'heading-shadow-emerald', accentBg: 'bg-cd-emerald/5', borderAccent: 'hover:border-cd-emerald/30' },
-  { value: 5, suffix: '–7 Days', prefix: '', label: 'Average Delivery Time', colorClass: 'gold-gradient-text', shadowClass: 'heading-shadow', accentBg: 'bg-cd-gold/5', borderAccent: 'hover:border-cd-gold/30' },
-  { value: 100, suffix: '%', prefix: '', label: 'Youth-Owned', colorClass: 'cyan-gradient-text', shadowClass: 'heading-shadow-cyan', accentBg: 'bg-cd-cyan/5', borderAccent: 'hover:border-cd-cyan/30' },
+  { value: 135, suffix: '%', prefix: '', label: 'B-BBEE Procurement', colorClass: 'text-cd-emerald', shadowClass: 'heading-shadow-emerald' },
+  { value: 100, suffix: '%', prefix: '', label: 'Youth-Owned', colorClass: 'text-cd-cyan', shadowClass: 'heading-shadow-cyan' },
 ]
 
 /* ─────────────────────────────────────────────
@@ -429,6 +509,9 @@ export default function Hero() {
       {/* ── LAYER 8: Grain Overlay with Parallax ── */}
       <div ref={grainRef} className="absolute inset-0 grain-overlay will-change-transform z-[6]" />
 
+      {/* ── LAYER 9: Gold Orbit Ring ── */}
+      <GoldOrbitRing />
+
       {/* ── CINEMATIC LETTERBOX BARS ── */}
       <div className="absolute top-0 left-0 right-0 z-[7] pointer-events-none" aria-hidden="true">
         <div className="h-1.5 bg-gradient-to-b from-black/90 to-transparent" />
@@ -458,14 +541,14 @@ export default function Hero() {
 
       {/* ── MAIN CONTENT (parallax foreground + mouse parallax) ── */}
       <motion.div
-        className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 sm:py-20 lg:py-28 text-center w-full"
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16 text-center w-full"
         style={{ opacity: contentOpacity, y: contentY, scale: contentScale }}
       >
         <motion.div
           variants={cinematicContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-6 sm:space-y-10"
+          className="space-y-5 sm:space-y-8"
         >
           {/* ── Pre-heading Label ── */}
           <motion.div
@@ -473,19 +556,19 @@ export default function Hero() {
             className="flex items-center justify-center gap-2"
           >
             <motion.span
-              className="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-cd-gold/70"
+              className="h-px w-8 sm:w-14 bg-gradient-to-r from-transparent to-cd-gold/70"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 1 }}
               style={{ transformOrigin: 'right' }}
             />
-            <span className="text-cd-gold font-mono text-[10px] sm:text-xs tracking-[0.25em] uppercase flex items-center gap-1.5">
-              <Sparkles size={10} className="opacity-60" />
+            <span className="text-cd-gold font-mono text-[9px] sm:text-[11px] tracking-[0.25em] uppercase flex items-center gap-1.5">
+              <Sparkles size={9} className="opacity-60" />
               Soshanguve, Pretoria
-              <Sparkles size={10} className="opacity-60" />
+              <Sparkles size={9} className="opacity-60" />
             </span>
             <motion.span
-              className="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-cd-gold/70"
+              className="h-px w-8 sm:w-14 bg-gradient-to-l from-transparent to-cd-gold/70"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 1 }}
@@ -493,47 +576,73 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* ── H1: Scale-up Reveal ── */}
+          {/* ── H1: Scale-up Reveal with Gold Glow Halo ── */}
           <motion.h1
             variants={headingScaleReveal}
             className="font-display font-bold leading-[1.05] tracking-tight relative text-cd-gold heading-shadow-lg"
-            style={{ fontSize: 'var(--text-hero)' }}
+            style={{ fontSize: 'clamp(2.5rem, 6vw + 0.5rem, 6rem)' }}
           >
-            {/* Ambient gradient glow behind headline */}
+            {/* Subtle gold glow halo behind headline */}
             <span
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
               style={{ animation: 'gradient-glow 4s ease-in-out infinite' }}
               aria-hidden="true"
             >
-              <span className="w-[80%] h-[60%] rounded-full bg-cd-gold blur-[140px] opacity-[0.15]" />
+              <span className="w-[90%] h-[70%] rounded-full bg-cd-gold blur-[120px] sm:blur-[160px] opacity-[0.12]" />
             </span>
             <span className="relative">
-              We Build Websites{' '}
-              <br className="hidden sm:block" />
-              That{' '}
+              We Build Websites
+              {/* Animated underline accent below "We Build Websites" */}
+              <motion.span
+                className="block mx-auto mt-1 h-[2px] rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, #C9A84C, #E8CA7A, #C9A84C, transparent)',
+                  boxShadow: '0 0 12px rgba(201,168,76,0.3)',
+                }}
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: '60%', opacity: 1 }}
+                transition={{ duration: 1.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+              />
+            </span>
+            <span className="relative">
+              {' '}That{' '}
               <HeroTyping />
+            </span>
+
+            {/* Shimmer sweep overlay on the heading */}
+            <span className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+              <motion.span
+                className="absolute top-0 bottom-0 w-[40%] skew-x-[-15deg]"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(232,202,122,0.08), transparent)',
+                }}
+                animate={{ x: ['-100%', '300%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', repeatDelay: 8 }}
+              />
             </span>
           </motion.h1>
 
-          {/* ── Subtitle: Clip-path Reveal (wipe-in) ── */}
+          {/* ── Subtitle: Clip-path Reveal (wipe-in) — Enhanced ── */}
           <motion.p
             variants={subtitleClipReveal}
-            className="max-w-2xl mx-auto text-cd-text-muted text-base sm:text-xl leading-relaxed font-sans"
+            className="max-w-2xl mx-auto text-cd-text-muted text-sm sm:text-lg lg:text-xl leading-relaxed font-sans"
           >
-            Carter Digitals is a 100% Black-owned, B-BBEE Level 1 digital services
-            studio from Soshanguve, Pretoria. High-performance websites, bespoke web
-            applications, and strategic brand collateral — delivered in 5–7 business days.
+            Carter Digitals is a 100% Black-owned,{' '}
+            <span className="text-cd-emerald font-semibold">B-BBEE Level 1</span>{' '}
+            digital services studio from Soshanguve, Pretoria. High-performance websites, bespoke web
+            applications, and strategic brand collateral — delivered in{' '}
+            <span className="text-cd-gold font-semibold">5–7 business days</span>.
           </motion.p>
 
           {/* ── CTAs with Premium Animation ── */}
           <motion.div
             variants={ctaReveal}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5"
           >
             {/* Primary CTA — gold with glow + pulse breathing */}
             <motion.a
               href="#contact"
-              className="btn-press btn-glow-gold group inline-flex items-center gap-2.5 px-8 py-4 sm:px-12 sm:py-5 bg-cd-gold text-cd-bg font-bold rounded-xl hover:bg-cd-gold-light hover:shadow-[0_0_50px_rgba(201,168,76,0.4)] hover:scale-[1.03] transition-all duration-300 shadow-lg shadow-cd-gold/25 text-base sm:text-lg relative"
+              className="btn-press btn-glow-gold group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-10 sm:py-4 bg-cd-gold text-cd-bg font-bold rounded-xl hover:bg-cd-gold-light hover:shadow-[0_0_50px_rgba(201,168,76,0.4)] hover:scale-[1.03] transition-all duration-300 shadow-lg shadow-cd-gold/25 text-sm sm:text-base relative"
               animate={{
                 boxShadow: [
                   '0 8px 30px rgba(201,168,76,0.2), 0 0 0 0 rgba(201,168,76,0)',
@@ -547,128 +656,109 @@ export default function Hero() {
             >
               <span className="relative z-10 flex items-center gap-2.5">
                 Get a Free Quote
-                <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </span>
             </motion.a>
 
-            {/* Secondary CTA — gradient border */}
+            {/* Secondary CTA — solid text colors, NO bg-clip-text */}
             <motion.a
               href="#portfolio"
-              className="btn-press group relative inline-flex items-center gap-2.5 px-8 py-4 sm:px-12 sm:py-5 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300"
+              className="btn-press group relative inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-10 sm:py-4 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-cd-gold/50 via-cd-cyan/40 to-cd-violet/40 p-[1.5px]" aria-hidden="true">
+              <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-cd-gold/30 via-cd-cyan/20 to-cd-violet/20 p-[1px]" aria-hidden="true">
                 <span className="flex h-full w-full items-center justify-center rounded-[10px] bg-cd-bg" />
               </span>
               <span className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_25px_rgba(201,168,76,0.12),0_0_25px_rgba(34,211,238,0.08),0_0_25px_rgba(167,139,250,0.08)]" aria-hidden="true" />
-              <span className="relative flex items-center gap-2 bg-gradient-to-r from-cd-gold via-cd-text-muted to-cd-cyan bg-clip-text text-transparent">
+              <span className="relative flex items-center gap-2 text-cd-gold group-hover:text-cd-gold-light transition-colors duration-300">
                 See Our Work
+                <Star size={14} className="opacity-50 group-hover:opacity-80 transition-opacity duration-300" />
               </span>
             </motion.a>
           </motion.div>
 
-          {/* ── Badge Strip — Spring Slide-in ── */}
+          {/* ── Badge Strip — Compact, single row, subtle dividers ── */}
           <motion.div
             variants={badgeSpringReveal}
-            className="glass-card rounded-2xl px-4 py-3 sm:px-8 sm:py-5 flex flex-wrap items-center justify-center gap-3 sm:gap-6 border-t border-t-cd-gold/20 max-w-3xl mx-auto backdrop-blur-xl"
+            className="glass-card rounded-xl px-3 py-2 sm:px-6 sm:py-3 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-0 border-t border-t-cd-gold/15 max-w-3xl mx-auto backdrop-blur-xl"
           >
             {badgeItems.map((badge, i) => (
               <motion.div
                 key={i}
-                className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium"
-                initial={{ opacity: 0, y: 20 }}
+                className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-medium"
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2 + i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 2 + i * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full ${badge.bgClass} text-base sm:text-lg`}>
+                <span className={`inline-flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${badge.bgClass} text-[10px] sm:text-xs`}>
                   {badge.emoji}
                 </span>
                 <span className={`${badge.colorClass} font-semibold`}>{badge.label}</span>
                 {i < badgeItems.length - 1 && (
-                  <span className="hidden sm:inline text-cd-border/50 ml-3 sm:ml-5">|</span>
+                  <span className="text-cd-border/40 mx-2 sm:mx-3 text-[8px]">•</span>
                 )}
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
-        {/* ── Counter Row — Dramatic Delayed Entrance ── */}
+        {/* ── Counter Row — Compact 2-item horizontal strip ── */}
         <motion.div
           variants={counterCreditsReveal}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ delay: 2, duration: 1.2 }}
-          className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 relative"
+          transition={{ delay: 2.5, duration: 1.2 }}
+          className="mt-8 sm:mt-14 flex items-center justify-center gap-6 sm:gap-10"
         >
-          {/* Radial gradient glow behind counter row */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-            <div className="w-[80%] h-[80%] rounded-full bg-cd-gold blur-[140px] opacity-[0.03]" />
-          </div>
-
           {counterItems.map((item, i) => (
             <motion.div
               key={i}
-              className={`glass-card rounded-2xl p-6 sm:p-8 text-center group ${item.borderAccent} hover:shadow-[0_0_30px_rgba(201,168,76,0.08)] transition-[border-color,box-shadow] duration-500 relative overflow-hidden`}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              className="flex items-center gap-2 sm:gap-3 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: 2.2 + i * 0.25, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 2.7 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Subtle colored top accent line */}
-              <motion.div
-                className="absolute top-0 left-0 right-0 h-[2px]"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 2.5 + i * 0.25 }}
-                style={{
-                  transformOrigin: 'left',
-                  background: i === 0
-                    ? 'linear-gradient(90deg, transparent, #34D399, transparent)'
-                    : i === 1
-                    ? 'linear-gradient(90deg, transparent, #C9A84C, transparent)'
-                    : 'linear-gradient(90deg, transparent, #22D3EE, transparent)',
-                }}
-              />
-              <div className={`font-display text-3xl sm:text-5xl font-bold mb-1 sm:mb-2 ${item.colorClass} ${item.shadowClass}`}>
+              <span className={`font-display text-2xl sm:text-4xl font-bold ${item.colorClass} ${item.shadowClass}`}>
                 <AnimatedCounter
                   target={item.value}
                   suffix={item.suffix}
                   prefix={item.prefix}
                 />
-              </div>
-              <div className="text-cd-text-muted text-sm sm:text-base font-sans">
+              </span>
+              <span className="text-cd-text-dim text-[10px] sm:text-xs font-sans leading-tight max-w-[80px] sm:max-w-[100px] text-left">
                 {item.label}
-              </div>
+              </span>
+              {i < counterItems.length - 1 && (
+                <span className="hidden sm:inline-block w-px h-8 bg-gradient-to-b from-transparent via-cd-border/30 to-transparent" />
+              )}
             </motion.div>
           ))}
         </motion.div>
       </motion.div>
 
-      {/* ── Scroll Indicator ── */}
+      {/* ── Scroll Indicator — Refined & Elegant ── */}
       <motion.div
-        className="absolute bottom-10 sm:bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
+        transition={{ delay: 3.5, duration: 1 }}
       >
         <motion.a
           href="#why-carter"
-          className="flex flex-col items-center gap-1.5 text-cd-gold group"
+          className="flex flex-col items-center gap-1 text-cd-gold/40 group"
           aria-label="Scroll to explore"
         >
-          <span className="text-cd-gold/50 text-[9px] sm:text-[10px] font-mono tracking-[0.3em] uppercase">Explore</span>
+          <span className="text-[8px] sm:text-[9px] font-mono tracking-[0.3em] uppercase group-hover:text-cd-gold/60 transition-colors duration-300">Explore</span>
           <motion.div
-            className="relative w-6 h-10 rounded-full border border-cd-gold/30 flex items-start justify-center p-1.5"
-            animate={{ borderColor: ['rgba(201,168,76,0.2)', 'rgba(201,168,76,0.4)', 'rgba(201,168,76,0.2)'] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            className="relative w-5 h-8 rounded-full border border-cd-gold/20 flex items-start justify-center p-1 group-hover:border-cd-gold/40 transition-colors duration-300"
           >
             <motion.div
-              className="w-1 h-2 rounded-full bg-cd-gold"
-              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-0.5 h-1.5 rounded-full bg-cd-gold/50"
+              animate={{ y: [0, 10, 0], opacity: [0.8, 0.2, 0.8] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
             />
           </motion.div>
         </motion.a>
