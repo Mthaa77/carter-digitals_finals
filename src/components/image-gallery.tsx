@@ -57,7 +57,8 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.15,
+      delayChildren: 0.15,
     },
   },
 }
@@ -66,13 +67,17 @@ const cardVariants = {
   hidden: {
     opacity: 0,
     y: 50,
+    scale: 0.95,
+    filter: 'blur(6px)',
   },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
     transition: {
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      duration: 0.85,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 }

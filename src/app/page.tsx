@@ -15,7 +15,6 @@ import WebsiteCostCalculator from '@/components/website-cost-calculator'
 import BBBEECalculator from '@/components/bbbee-calculator'
 import CarterStory from '@/components/carter-story'
 import CompanyTimeline from '@/components/company-timeline'
-import Pricing from '@/components/pricing'
 import Process from '@/components/process'
 import TestimonialVideo from '@/components/testimonial-video'
 import BeforeAfter from '@/components/before-after'
@@ -106,8 +105,6 @@ export default function Home() {
         <CarterStory />
         <SectionDivider />
         <CompanyTimeline />
-        <SectionDivider />
-        <Pricing />
         <SectionDivider />
         <FAQ />
         <SectionDivider />
