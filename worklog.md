@@ -535,3 +535,72 @@ Stage Summary:
 - Cinematic blur reveal animation preserved via wrapper div approach
 - Text visible on first render even if JS is slow (color fallback)
 - ESLint: 0 errors | HTTP 200 | Dev server compiling clean
+
+---
+
+## Session: Hero Text Fix + GitHub Prep + Cron Job (Task IDs: 1-6)
+
+### Project Status
+- Fixed critical Hero H1 text invisibility — text now clearly visible (9/10 VLM rating)
+- Replaced unreliable `background-clip: text` with solid gold colors + text-shadow glow effects across ALL gradient text classes
+- Fixed hero layout — changed from `items-center` to `items-start sm:items-center` to prevent content overflow clipping
+- GitHub CLI installed, project committed and ready for upload
+- webDevReview cron job created (every 15 minutes)
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Root Cause of Invisible Text
+Two compounding issues:
+
+1. **`background-clip: text` rendering failure**: The `gold-gradient-text` CSS class used `background-clip: text` with `-webkit-text-fill-color: transparent`. This approach is fragile — it fails when ANY `filter` property (even `filter: blur(0px)` or `filter: drop-shadow()`) is applied to the element or an ancestor. Framer Motion's animation variants were setting `filter` as inline styles, which broke the gradient text rendering.
+
+2. **Content overflow + `overflow-hidden`**: The hero section used `h-screen flex items-center overflow-hidden`. On viewports shorter than the content height (577px in headless browser), `items-center` vertically centered the 1207px content, pushing the H1 above the viewport. `overflow-hidden` then clipped it, making it invisible.
+
+### Completed Changes
+
+#### 1. hero.tsx — Layout + Animation Fix
+- Changed `h-screen min-h-[650px] flex items-center overflow-hidden` to `min-h-screen flex items-start sm:items-center overflow-x-hidden`
+- Changed content padding from `py-20 sm:py-32` to `pt-24 pb-12 sm:py-20 lg:py-28`
+- Removed `headingBlurReveal` wrapper div (filter: blur(0px) on parent broke background-clip:text)
+- Changed H1 from `gold-gradient-text` to `text-cd-gold heading-shadow-lg` (solid color + shadow glow)
+- Removed `filter` property from animation variants entirely
+
+#### 2. hero-typing.tsx — Gradient Text Fix
+- Changed `gold-gradient-text text-glow-gold` to `text-cd-gold-light text-glow-gold`
+
+#### 3. globals.css — All Gradient Text Classes Replaced
+- `.gold-gradient-text`: Replaced `background-clip:text` with `color: #C9A84C` + `text-shadow` glow
+- `.rainbow-gradient-text`: Replaced with `color: #C9A84C` + multi-shadow glow
+- `.emerald-gradient-text`: Replaced with `color: #34D399` + green shadow glow
+- `.cyan-gradient-text`: Replaced with `color: #22D3EE` + cyan shadow glow
+- `.violet-gradient-text`: Replaced with `color: #A78BFA` + violet shadow glow
+- `.rose-gradient-text`: Replaced with `color: #FB7185` + rose shadow glow
+- `.gold-shimmer`: Replaced `background-clip:text` shimmer with opacity pulse animation + shadow
+- Removed all `filter: drop-shadow()` from gradient text classes (was causing rendering conflicts)
+
+#### 4. GitHub Preparation
+- Installed GitHub CLI (gh v2.42.1)
+- Added `download/` and `agent-ctx/` to .gitignore
+- Committed all changes: `fix: resolve hero text invisibility`
+- No GitHub remote configured yet — user needs to authenticate with `gh auth login`
+
+#### 5. Cron Job Created
+- webDevReview job (ID: 131443) — every 15 minutes (fixed_rate: 900s)
+- Priority: 10 (high)
+- Includes QA testing, bug fixing, styling improvements, and feature additions
+
+### GitHub Upload Instructions
+To upload to GitHub, the user needs to:
+1. Run `export PATH="$HOME/bin:$PATH"` (or restart terminal)
+2. Run `gh auth login` and follow the prompts
+3. Run `gh repo create carter-digitals --public --source=. --push`
+
+Or manually:
+1. Create a new repo on GitHub.com
+2. Run `git remote add origin https://github.com/USERNAME/REPO.git`
+3. Run `git push -u origin main`
+
+### Unresolved Issues / Next Phase Recommendations
+- Other pages (/about, /portfolio, /contact, /blog) return 404 — need to create these routes
+- GitHub upload pending user authentication
+- Consider adding more micro-interactions and scroll-triggered animations
+- Test on real mobile devices for layout verification
