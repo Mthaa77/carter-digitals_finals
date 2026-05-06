@@ -796,3 +796,88 @@ Stage Summary:
 - All routes HTTP 200: `/`, `/tools/website-cost-calculator`, `/tools/roi-calculator`, `/tools/bbbee-calculator`, `/tools/project-estimator`, `/tools/seo-audit`
 - Homepage NOT modified — confirmed no changes to `src/app/page.tsx`
 - Dev server compiling clean
+
+---
+
+## Session: Hero Redesign + Free Tools Upgrade + Dedicated Tool Pages (Task IDs: 2-5)
+
+### Project Status
+- Hero section redesigned with premium cinematic features — VLM rating 8/10
+- FreeTools component completely upgraded with 5 premium tool cards linking to dedicated pages
+- 5 new dedicated tool pages created under `/tools/` route
+- New SEO Audit tool component created (interactive, with simulated scoring)
+- Navigation updated with "Tools" link and "Pricing" now links to /pricing page
+- Logo text fixed (removed invisible `gold-gradient-text`, now `text-cd-gold`)
+- ESLint: 0 errors | All 7 routes return HTTP 200
+
+### Completed Changes
+
+#### 1. Hero Section Premium Redesign (hero.tsx)
+- **Gold glow halo** behind heading with wider blur (120-160px)
+- **Animated underline accent** below "We Build Websites" — gold gradient line with glow
+- **Shimmer sweep** on heading — gold light sweeps across every ~12s
+- **Secondary CTA fixed** — replaced invisible `bg-clip-text text-transparent` with solid `text-cd-gold`
+- **Counter row compacted** — reduced from 3 heavy glass cards to 2 compact inline items
+- **Badge strip enhanced** — smaller badges, dot dividers, solid colors
+- **Gold orbit ring** — two slowly counter-rotating circular borders with orbiting dots
+- **Cinematic dust particles** — 20 extra tiny slow-moving specs
+- **Refined scroll indicator** — smaller, more elegant
+- **Subtitle highlights** — "B-BBEE Level 1" in emerald, "5–7 business days" in gold
+- **Mobile optimized** — smaller headings, vertical CTAs, natural badge wrapping
+
+#### 2. FreeTools Component Upgrade (free-tools.tsx)
+- Complete rewrite with premium design
+- 5 tool cards: Website Cost Calculator, ROI Calculator, SEO Audit, B-BBEE Estimator, Project Estimator
+- Each card links to its dedicated page via `next/link`
+- Added badges: POPULAR, NEW, UNIQUE
+- Added stats per tool (e.g., "2,400+ estimates generated")
+- Shimmer sweep effect on hover
+- Bottom CTA: "Try Our Most Popular Tool"
+- Trust indicators: 100% Free, No Signup Required, Instant Results
+
+#### 3. Five Dedicated Tool Pages Created
+
+**`/tools/website-cost-calculator`**
+- Server page with metadata + client page with full layout
+- Navigation → Hero (gold accent) → Calculator → How It Works → Why Use → CTA → Footer
+
+**`/tools/roi-calculator`**
+- Navigation → Hero (emerald accent) → ROI Calculator → How It Works → Why Use → CTA → Footer
+
+**`/tools/bbbee-calculator`**
+- Navigation → Hero (gold accent, UNIQUE badge) → B-BBEE Calculator → How It Works → Why Use → CTA → Footer
+
+**`/tools/project-estimator`**
+- Navigation → Hero (cyan accent) → Project Estimator → How It Works → Why Use → CTA → Footer
+
+**`/tools/seo-audit`**
+- Navigation → Hero (violet accent) → SEO Audit Tool → How It Works → Why Use → CTA → Footer
+- **NEW SEO Audit component** (src/components/seo-audit.tsx):
+  - URL input form with "Run SEO Audit" button
+  - Deterministic scoring based on URL (seeded Math.sin)
+  - 5 categories: Performance, Mobile-Friendly, SEO Basics, Content Quality, Technical SEO
+  - Animated circular overall score (SVG), per-category score bars
+  - Actionable tips with green/amber/red status indicators
+  - Loading animation state
+
+#### 4. Navigation Updates
+- Added "Tools" link (scrolls to #tools section)
+- Changed "Pricing" to link to `/pricing` page (full route)
+- Removed "Schools" duplicate link
+- Fixed logo text from `gold-gradient-text` (invisible) to `text-cd-gold`
+- Updated click handler to handle both anchor links and full page routes
+
+### All Routes Verified
+- `/` → 200
+- `/pricing` → 200
+- `/tools/website-cost-calculator` → 200
+- `/tools/roi-calculator` → 200
+- `/tools/bbbee-calculator` → 200
+- `/tools/project-estimator` → 200
+- `/tools/seo-audit` → 200
+
+### Unresolved Issues / Next Phase Recommendations
+- Tool pages could benefit from more interactive features (share results, save as PDF)
+- Consider adding a "Tools" dropdown in navigation with sub-links
+- Mobile testing on actual devices for tool pages
+- The FreeTools section on homepage is long — consider making it a horizontal scroll carousel on mobile
