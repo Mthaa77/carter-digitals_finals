@@ -1171,3 +1171,59 @@ Stage Summary:
 - Homepage: Clean flow - Services → WebsiteCostCalculator → TechStack → ...
 - Tools: 4 tools removed from homepage, still on dedicated /tools/* pages
 - GitHub: Latest commit pushed (7bfa4e9)
+
+---
+
+## Session: Fix Hero Typing Animation + Create Tools Landing Page (Task ID: 1-2)
+
+### Project Status
+- Fixed stuck hero typing animation caused by React 18 state batching bug
+- Created dedicated /tools landing page with detailed tool descriptions and links
+- Updated navigation to point Tools link to /tools page instead of #tools section anchor
+- ESLint: 0 errors | HTTP 200 on /, /tools, /tools/website-cost-calculator | Dev server compiling clean
+
+### Completed Changes
+
+#### Task 1: Fix Hero Animated Text Stuck Bug
+**Root Cause:** The `hero-typing.tsx` component used a phase-based state machine (`waiting` → `typing` → `pausing` → `deleting` → `typing`). When in the `typing` phase, it would call `setPhase('typing')` to re-trigger the next character. However, React 18's automatic batching optimizes away state updates where the new value equals the old value — `setPhase('typing')` when `phase` is already `'typing'` does NOT trigger a re-render, so the effect never re-runs and typing gets stuck after the first character.
+
+**Fix Applied:**
+- Added a `tick` counter state variable that increments each time the typing loop needs to re-trigger
+- Changed `setPhase('typing')` re-triggers to `setTick(t => t + 1)` instead, which always triggers a re-render
+- Added `tick` to the dependency array of the core typing effect
+- Added `mountedRef` to prevent state updates after unmount
+- Added slight random delay variation (`typeSpeed + Math.random() * 20`) for natural typing feel
+- Fixed ESLint warnings by properly listing all dependencies in useEffect arrays
+
+#### Task 2: Create /tools Landing Page
+- Created `/tools/page.tsx` — server component with metadata (title, description, openGraph)
+- Created `/tools/tools-client.tsx` — premium client component with:
+  - **Hero section**: Aurora background, grid lines, grain overlay, neon line, back-to-homepage link, animated heading with gold accent
+  - **Trust badges**: 100% Free, No Signup Required, Instant Results, Under 3 Minutes
+  - **Category filter**: All Tools, Calculators, Audits, Compliance — with animated transitions
+  - **Detailed tool cards**: Each tool has:
+    - Large icon with accent color background
+    - Tool name + tagline
+    - Badge (MOST POPULAR, NEW, UNIQUE)
+    - Detailed multi-sentence description explaining the tool's purpose and value
+    - 5 feature items with icons (per tool)
+    - Stats + time-to-use
+    - Right-side CTA card with icon and link
+  - **"All Tools Are 100% Free" section**: CTA with primary gold button + secondary border button
+  - **"Why Are These Tools Free?" section**: Glass card explanation with link to contact
+  - **Sticky footer** with mt-auto
+
+- Updated navigation: Changed `Tools` link from `#tools` to `/tools` (full page route)
+
+### Tool Pages Available
+- `/tools` — Landing page with all tools (NEW)
+- `/tools/website-cost-calculator` — Website Cost Calculator (MOST POPULAR)
+- `/tools/roi-calculator` — ROI Calculator
+- `/tools/seo-audit` — Free SEO Audit (NEW badge)
+- `/tools/bbbee-calculator` — B-BBEE Score Estimator (UNIQUE badge)
+- `/tools/project-estimator` — Project Estimator
+
+### Unresolved Issues / Next Phase Recommendations
+- Continue polishing tool pages with more features
+- Add more micro-interactions across the site
+- Test mobile layout on actual device simulation

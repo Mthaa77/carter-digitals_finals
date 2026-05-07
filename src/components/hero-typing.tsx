@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const PHRASES = ['Make Money.', 'Get Found.', 'Close Deals.', 'Stand Out.']
 
@@ -28,10 +28,14 @@ export default function HeroTyping({
   const [cursorVisible, setCursorVisible] = useState(true)
   const [lastCharIndex, setLastCharIndex] = useState(-1)
 
+  // Tick counter to force re-renders when re-entering the same phase
+  const [tick, setTick] = useState(0)
+
   const phaseRef = useRef<Phase>('waiting')
   const phraseIndexRef = useRef(0)
   const displayedLenRef = useRef(0)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const mountedRef = useRef(true)
 
   const clearTimeout_ = useCallback(() => {
     if (timerRef.current !== null) {
@@ -45,17 +49,28 @@ export default function HeroTyping({
     timerRef.current = setTimeout(fn, ms)
   }, [clearTimeout_])
 
+  // Mount/unmount tracking
   useEffect(() => {
-    // Start after initial delay
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+      clearTimeout_()
+    }
+  }, [clearTimeout_])
+
+  // Start typing after initial delay
+  useEffect(() => {
     scheduleNext(() => {
+      if (!mountedRef.current) return
       phaseRef.current = 'typing'
       setPhase('typing')
+      setTick(t => t + 1)
     }, initialDelay)
 
     return clearTimeout_
   }, [initialDelay, scheduleNext, clearTimeout_])
 
-  // Core typing/deleting state machine
+  // Core typing/deleting state machine — runs whenever phase or tick changes
   useEffect(() => {
     if (phase === 'waiting') return
 
@@ -63,28 +78,33 @@ export default function HeroTyping({
       const phrase = phrases[phraseIndexRef.current]
       if (displayedLenRef.current < phrase.length) {
         displayedLenRef.current += 1
-        setDisplayedText(phrase.slice(0, displayedLenRef.current))
-        setLastCharIndex(displayedLenRef.current - 1)
+        const newLen = displayedLenRef.current
+        setDisplayedText(phrase.slice(0, newLen))
+        setLastCharIndex(newLen - 1)
         scheduleNext(() => {
-          // Re-trigger by staying in typing phase
-          setPhase('typing')
-        }, typeSpeed + 15)
+          if (!mountedRef.current) return
+          // Use tick to force re-trigger even though phase stays 'typing'
+          setTick(t => t + 1)
+        }, typeSpeed + Math.random() * 20)
       } else {
-        // Done typing, pause
+        // Done typing — pause
         phaseRef.current = 'pausing'
         setPhase('pausing')
       }
     } else if (phase === 'pausing') {
       scheduleNext(() => {
+        if (!mountedRef.current) return
         phaseRef.current = 'deleting'
         setPhase('deleting')
       }, pauseDuration)
     } else if (phase === 'deleting') {
       if (displayedLenRef.current > 0) {
         displayedLenRef.current -= 1
-        setDisplayedText(phrases[phraseIndexRef.current].slice(0, displayedLenRef.current))
+        const newLen = displayedLenRef.current
+        setDisplayedText(phrases[phraseIndexRef.current].slice(0, newLen))
         scheduleNext(() => {
-          setPhase('deleting')
+          if (!mountedRef.current) return
+          setTick(t => t + 1)
         }, deleteSpeed)
       } else {
         // Move to next phrase
@@ -93,9 +113,10 @@ export default function HeroTyping({
         setPhraseIndex(nextIndex)
         phaseRef.current = 'typing'
         setPhase('typing')
+        setTick(t => t + 1)
       }
     }
-  }, [phase, phrases, typeSpeed, deleteSpeed, pauseDuration, scheduleNext])
+  }, [phase, tick, phrases, typeSpeed, deleteSpeed, pauseDuration, scheduleNext])
 
   // Cursor blink
   useEffect(() => {
