@@ -6,13 +6,10 @@ import ClientMarquee from '@/components/client-marquee'
 import WhyCarter from '@/components/why-carter'
 import StatsTicker from '@/components/stats-ticker'
 import Services from '@/components/services'
+import WebsiteCostCalculator from '@/components/website-cost-calculator'
 import ServiceComparison from '@/components/service-comparison'
 import Portfolio from '@/components/portfolio'
 import Testimonials from '@/components/testimonials'
-import FreeTools from '@/components/free-tools'
-import ProjectEstimator from '@/components/project-estimator'
-import WebsiteCostCalculator from '@/components/website-cost-calculator'
-import BBBEECalculator from '@/components/bbbee-calculator'
 import CarterStory from '@/components/carter-story'
 import CompanyTimeline from '@/components/company-timeline'
 import Process from '@/components/process'
@@ -37,7 +34,6 @@ import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
 import ParticleBg from '@/components/particle-bg'
 import BackToTopBar from '@/components/back-to-top-bar'
-import ROICalculator from '@/components/roi-calculator'
 import TrustBadges from '@/components/trust-badges'
 import AnimatedStats from '@/components/animated-stats'
 import ProjectShowcase from '@/components/project-showcase'
@@ -76,6 +72,8 @@ export default function Home() {
         <SectionDivider />
         <Services />
         <SectionDivider />
+        <WebsiteCostCalculator />
+        <SectionDivider />
         <TechStack />
         <SectionDivider />
         <ServiceComparison />
@@ -93,14 +91,6 @@ export default function Home() {
         <BeforeAfter />
         <SectionDivider />
         <Process />
-        <SectionDivider />
-        <FreeTools />
-        <SectionDivider />
-        <ROICalculator />
-        <SectionDivider />
-        <ProjectEstimator />
-        <WebsiteCostCalculator />
-        <BBBEECalculator />
         <SectionDivider />
         <CarterStory />
         <SectionDivider />
