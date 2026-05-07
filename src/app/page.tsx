@@ -32,8 +32,7 @@ import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
 import ParticleBg from '@/components/particle-bg'
 import BackToTopBar from '@/components/back-to-top-bar'
-import TrustBadges from '@/components/trust-badges'
-import AnimatedStats from '@/components/animated-stats'
+
 import ProjectShowcase from '@/components/project-showcase'
 import FloatingTestimonial from '@/components/floating-testimonial'
 import SkipNav from '@/components/skip-nav'
@@ -58,11 +57,7 @@ export default function Home() {
         <SectionDivider />
         <WhyCarter />
         <SectionDivider />
-        <TrustBadges />
-        <SectionDivider />
         <Team />
-        <SectionDivider />
-        <AnimatedStats />
         <SectionDivider />
         <Services />
         <SectionDivider />

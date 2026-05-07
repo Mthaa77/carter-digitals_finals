@@ -33,12 +33,12 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>
 
-// ── Shared input styles — gradient focus borders (gold → emerald) ───────────
+// ── Shared input styles — enhanced with glow effects on focus ───────────
 const inputStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus:ring-2 focus:ring-[rgba(52,211,153,0.2)] focus:border-[rgba(52,211,153,0.5)] focus-visible:border-[#34D399] focus-visible:ring-[rgba(201,168,76,0.15)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_20px_rgba(52,211,153,0.06)]'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] placeholder:text-[#777] focus:ring-2 focus:ring-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus-visible:border-[#C9A84C] focus-visible:ring-[rgba(34,211,238,0.15)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_20px_rgba(201,168,76,0.08),0_0_40px_rgba(34,211,238,0.04)]'
 
 const selectTriggerStyles =
-  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus:ring-2 focus:ring-[rgba(52,211,153,0.2)] focus:border-[rgba(52,211,153,0.5)] focus-visible:border-[#34D399] focus-visible:ring-[rgba(201,168,76,0.15)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_20px_rgba(52,211,153,0.06)] [&>svg]:text-[#777]'
+  'bg-[#1A1A1A] border-[#333] text-[#F0EFE8] data-[placeholder]:text-[#777] focus:ring-2 focus:ring-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus-visible:border-[#C9A84C] focus-visible:ring-[rgba(34,211,238,0.15)] h-11 w-full rounded-md px-4 text-sm font-sans transition-all duration-300 focus:shadow-[0_0_20px_rgba(201,168,76,0.08),0_0_40px_rgba(34,211,238,0.04)] [&>svg]:text-[#777]'
 
 // ── Component ───────────────────────────────────────────────────────────────
 export default function ContactForm() {
@@ -96,13 +96,28 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="relative py-20 md:py-28 overflow-hidden">
-      {/* More vibrant aurora background with rose and teal color washes */}
+      {/* Enhanced gradient mesh background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(34,211,238,0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(167,139,250,0.04) 0%, transparent 50%), radial-gradient(ellipse at 15% 70%, rgba(251,113,133,0.03) 0%, transparent 50%), radial-gradient(ellipse at 85% 60%, rgba(45,212,191,0.03) 0%, transparent 50%)',
+            'radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(34,211,238,0.05) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(167,139,250,0.05) 0%, transparent 50%), radial-gradient(ellipse at 15% 70%, rgba(251,113,133,0.04) 0%, transparent 50%), radial-gradient(ellipse at 85% 60%, rgba(45,212,191,0.04) 0%, transparent 50%)',
         }}
+      />
+
+      {/* Subtle diagonal pattern overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.015]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 50px,
+            rgba(201,168,76,0.3) 50px,
+            rgba(201,168,76,0.3) 51px
+          )`,
+        }}
+        aria-hidden="true"
       />
 
       {/* Decorative gradient orb behind the form */}
@@ -155,11 +170,11 @@ export default function ContactForm() {
           >
             Let&apos;s Build Something.
           </h2>
-          {/* Gradient accent line — gold → emerald */}
+          {/* Multi-color gradient accent line */}
           <div
-            className="mx-auto mb-6 h-[3px] w-16 rounded-full"
+            className="mx-auto mb-6 h-[3px] w-20 rounded-full"
             style={{
-              background: 'linear-gradient(90deg, #C9A84C, #34D399)',
+              background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA)',
             }}
           />
           <p className="text-[#C8C8C0] font-sans text-base max-w-md mx-auto">
@@ -167,7 +182,7 @@ export default function ContactForm() {
           </p>
         </motion.div>
 
-        {/* ── Form Card ───────────────────────────────────────────────── */}
+        {/* ── Form Card with gradient border ───────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -179,11 +194,27 @@ export default function ContactForm() {
             noValidate
             className="glass-card rounded-xl p-6 md:p-10 relative overflow-hidden"
           >
-            {/* Gradient top border — gold → emerald */}
+            {/* Gradient top border — multi-color */}
             <div
               className="absolute top-0 left-0 right-0 h-[3px]"
               style={{
-                background: 'linear-gradient(90deg, #7A6330, #C9A84C, #34D399)',
+                background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+              }}
+            />
+
+            {/* Gradient border glow on left and right */}
+            <div
+              className="absolute top-0 left-0 bottom-0 w-[2px]"
+              style={{
+                background: 'linear-gradient(180deg, #C9A84C, transparent 30%, transparent 70%, #A78BFA)',
+                opacity: 0.3,
+              }}
+            />
+            <div
+              className="absolute top-0 right-0 bottom-0 w-[2px]"
+              style={{
+                background: 'linear-gradient(180deg, #34D399, transparent 30%, transparent 70%, #FB7185)',
+                opacity: 0.3,
               }}
             />
 
@@ -362,12 +393,12 @@ export default function ContactForm() {
               </div>
             </div>
 
-            {/* Submit — animated gradient background */}
+            {/* Submit — enhanced with colored shadow */}
             <div className="flex flex-col items-center md:items-start gap-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-press text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(201,168,76,0.15)] hover:shadow-[0_0_30px_rgba(201,168,76,0.25)] relative overflow-hidden"
+                className="btn-press text-[#080808] font-display font-semibold text-sm tracking-wide px-8 h-12 rounded-md transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden shadow-[0_0_25px_rgba(201,168,76,0.2),0_0_50px_rgba(52,211,153,0.08)] hover:shadow-[0_0_35px_rgba(201,168,76,0.3),0_0_70px_rgba(52,211,153,0.12),0_0_100px_rgba(201,168,76,0.1)]"
                 style={{
                   background: 'linear-gradient(135deg, #C9A84C, #34D399, #C9A84C)',
                   backgroundSize: '200% 200%',
@@ -414,7 +445,15 @@ export default function ContactForm() {
           className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {/* Left — WhatsApp */}
-          <div className="glass-card-gold glass-card rounded-xl p-6 flex flex-col justify-center">
+          <div className="glass-card-gold glass-card rounded-xl p-6 flex flex-col justify-center relative overflow-hidden">
+            {/* Gradient border glow */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[2px]"
+              style={{
+                background: 'linear-gradient(90deg, #C9A84C, #34D399)',
+                opacity: 0.5,
+              }}
+            />
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#C9A84C]/10">
                 <MessageCircle className="w-5 h-5 text-[#C9A84C]" />
@@ -438,7 +477,15 @@ export default function ContactForm() {
           </div>
 
           {/* Right — Office Details — colored icons */}
-          <div className="glass-card-cyan glass-card rounded-xl p-6">
+          <div className="glass-card-cyan glass-card rounded-xl p-6 relative overflow-hidden">
+            {/* Gradient border glow */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[2px]"
+              style={{
+                background: 'linear-gradient(90deg, #22D3EE, #A78BFA)',
+                opacity: 0.5,
+              }}
+            />
             <h3 className="font-display text-lg font-semibold text-[#F0EFE8] mb-5">
               Office Details
             </h3>
@@ -485,7 +532,15 @@ export default function ContactForm() {
           transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
           className="mt-8"
         >
-          <div className="glass-card rounded-xl overflow-hidden">
+          <div className="glass-card rounded-xl overflow-hidden relative">
+            {/* Gradient border on top of map */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[2px] z-10"
+              style={{
+                background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA)',
+                opacity: 0.4,
+              }}
+            />
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57218.97267884841!2d28.08!3d-25.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e8f5e2b3b6f8c4d%3A0x5d3b7e0a1c8f2b4d!2sSoshanguve%2C%20Pretoria!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
               width="100%"

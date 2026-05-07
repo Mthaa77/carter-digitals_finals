@@ -18,6 +18,9 @@ interface WhyCard {
   iconColor: string
   tagColor: string
   dotColor: string
+  hoverShadow: string
+  gradientFrom: string
+  gradientTo: string
 }
 
 const cards: WhyCard[] = [
@@ -35,6 +38,9 @@ const cards: WhyCard[] = [
     iconColor: 'text-emerald-400',
     tagColor: 'text-emerald-400/80',
     dotColor: 'bg-emerald-400',
+    hoverShadow: '0 8px 40px rgba(52,211,153,0.12), 0 0 60px rgba(52,211,153,0.06), 0 0 20px rgba(52,211,153,0.08)',
+    gradientFrom: 'rgba(52,211,153,0.5)',
+    gradientTo: 'rgba(34,211,238,0.3)',
   },
   {
     icon: Cloud,
@@ -50,6 +56,9 @@ const cards: WhyCard[] = [
     iconColor: 'text-cyan-400',
     tagColor: 'text-cyan-400/80',
     dotColor: 'bg-cyan-400',
+    hoverShadow: '0 8px 40px rgba(34,211,238,0.12), 0 0 60px rgba(34,211,238,0.06), 0 0 20px rgba(34,211,238,0.08)',
+    gradientFrom: 'rgba(34,211,238,0.5)',
+    gradientTo: 'rgba(167,139,250,0.3)',
   },
   {
     icon: LayoutDashboard,
@@ -65,6 +74,9 @@ const cards: WhyCard[] = [
     iconColor: 'text-violet-400',
     tagColor: 'text-violet-400/80',
     dotColor: 'bg-violet-400',
+    hoverShadow: '0 8px 40px rgba(167,139,250,0.12), 0 0 60px rgba(167,139,250,0.06), 0 0 20px rgba(167,139,250,0.08)',
+    gradientFrom: 'rgba(167,139,250,0.5)',
+    gradientTo: 'rgba(251,113,133,0.3)',
   },
   {
     icon: MapPin,
@@ -80,6 +92,9 @@ const cards: WhyCard[] = [
     iconColor: 'text-cd-gold',
     tagColor: 'text-cd-gold/80',
     dotColor: 'bg-cd-gold',
+    hoverShadow: '0 8px 40px rgba(201,168,76,0.12), 0 0 60px rgba(201,168,76,0.06), 0 0 20px rgba(201,168,76,0.08)',
+    gradientFrom: 'rgba(201,168,76,0.5)',
+    gradientTo: 'rgba(52,211,153,0.3)',
   },
 ]
 
@@ -128,6 +143,27 @@ export default function WhyCarter() {
         aria-hidden="true"
       />
 
+      {/* Mesh gradient pattern overlay — diagonal lines */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 40px,
+            rgba(201,168,76,0.3) 40px,
+            rgba(201,168,76,0.3) 41px
+          ), repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 40px,
+            rgba(34,211,238,0.2) 40px,
+            rgba(34,211,238,0.2) 41px
+          )`,
+        }}
+        aria-hidden="true"
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section heading */}
         <motion.div
@@ -143,8 +179,13 @@ export default function WhyCarter() {
           >
             Why Carter Digitals
           </h2>
-          {/* Gold accent line */}
-          <div className="mt-4 mx-auto w-20 h-1 bg-cd-gold rounded-full" />
+          {/* Multi-color gradient accent line */}
+          <div
+            className="mt-4 mx-auto w-24 h-1 rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+            }}
+          />
           <p className="mt-4 text-cd-text-muted text-lg max-w-2xl mx-auto">
             Four reasons South African businesses choose us — from compliance to cutting-edge tech.
           </p>
@@ -164,7 +205,16 @@ export default function WhyCarter() {
               <motion.div
                 key={i}
                 variants={cardVariants}
-                className={`glass-card ${card.cardClass} ${card.shadowClass} rounded-xl p-6 group border-l-[3px] ${card.borderColor} cursor-default relative overflow-hidden transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1`}
+                className={`glass-card ${card.cardClass} rounded-xl p-6 group border-l-[3px] ${card.borderColor} cursor-default relative overflow-hidden transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1`}
+                style={{
+                  transition: 'border-color 0.5s, box-shadow 0.5s, transform 0.5s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = card.hoverShadow
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = ''
+                }}
               >
                 {/* Numbered indicator */}
                 <span className="absolute top-4 right-4 font-mono text-xs text-cd-text-dim/40 select-none">
@@ -182,6 +232,19 @@ export default function WhyCarter() {
                         : card.accent === 'violet'
                           ? 'linear-gradient(to top, rgba(167,139,250,0.05), transparent)'
                           : 'linear-gradient(to top, rgba(201,168,76,0.05), transparent)',
+                  }}
+                />
+
+                {/* Animated gradient border on hover */}
+                <div
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(135deg, ${card.gradientFrom}, ${card.gradientTo})`,
+                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    maskComposite: 'exclude',
+                    WebkitMaskComposite: 'xor',
+                    padding: '2px',
+                    borderRadius: '0.75rem',
                   }}
                 />
 

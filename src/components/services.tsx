@@ -27,6 +27,8 @@ const accentConfig: Record<AccentColor, {
   bottomGradientFrom: string
   bottomGradientVia: string
   bottomGradientTo: string
+  hoverGlow: string
+  shimmerColor: string
 }> = {
   gold: {
     glassClass: 'glass-card-gold',
@@ -46,6 +48,8 @@ const accentConfig: Record<AccentColor, {
     bottomGradientFrom: 'from-transparent',
     bottomGradientVia: 'via-[#C9A84C]',
     bottomGradientTo: 'to-transparent',
+    hoverGlow: '0 0 60px rgba(201,168,76,0.1), 0 8px 40px rgba(201,168,76,0.08)',
+    shimmerColor: 'rgba(201,168,76,0.1)',
   },
   emerald: {
     glassClass: 'glass-card-emerald',
@@ -65,6 +69,8 @@ const accentConfig: Record<AccentColor, {
     bottomGradientFrom: 'from-transparent',
     bottomGradientVia: 'via-[#34D399]',
     bottomGradientTo: 'to-transparent',
+    hoverGlow: '0 0 60px rgba(52,211,153,0.1), 0 8px 40px rgba(52,211,153,0.08)',
+    shimmerColor: 'rgba(52,211,153,0.1)',
   },
   cyan: {
     glassClass: 'glass-card-cyan',
@@ -84,6 +90,8 @@ const accentConfig: Record<AccentColor, {
     bottomGradientFrom: 'from-transparent',
     bottomGradientVia: 'via-[#22D3EE]',
     bottomGradientTo: 'to-transparent',
+    hoverGlow: '0 0 60px rgba(34,211,238,0.1), 0 8px 40px rgba(34,211,238,0.08)',
+    shimmerColor: 'rgba(34,211,238,0.1)',
   },
   violet: {
     glassClass: 'glass-card-violet',
@@ -103,6 +111,8 @@ const accentConfig: Record<AccentColor, {
     bottomGradientFrom: 'from-transparent',
     bottomGradientVia: 'via-[#A78BFA]',
     bottomGradientTo: 'to-transparent',
+    hoverGlow: '0 0 60px rgba(167,139,250,0.1), 0 8px 40px rgba(167,139,250,0.08)',
+    shimmerColor: 'rgba(167,139,250,0.1)',
   },
   rose: {
     glassClass: 'glass-card-rose',
@@ -122,6 +132,8 @@ const accentConfig: Record<AccentColor, {
     bottomGradientFrom: 'from-transparent',
     bottomGradientVia: 'via-[#FB7185]',
     bottomGradientTo: 'to-transparent',
+    hoverGlow: '0 0 60px rgba(251,113,133,0.1), 0 8px 40px rgba(251,113,133,0.08)',
+    shimmerColor: 'rgba(251,113,133,0.1)',
   },
 }
 
@@ -243,8 +255,36 @@ export default function Services() {
   const { openService, open, setOpen, activeServiceId } = useServiceDetail()
 
   return (
-    <section id="services" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated gradient mesh background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 15% 30%, rgba(201,168,76,0.05) 0%, transparent 50%), radial-gradient(ellipse at 85% 20%, rgba(34,211,238,0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(167,139,250,0.04) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(251,113,133,0.03) 0%, transparent 50%)',
+        }}
+      />
+      {/* Floating orb for depth */}
+      <div
+        className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(201,168,76,0.03) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'float-orb-1 20s ease-in-out infinite',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(34,211,238,0.03) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'float-orb-2 18s ease-in-out infinite',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* ── Section Header ──────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(8px)' }}
@@ -262,7 +302,13 @@ export default function Services() {
           >
             What We Build
           </h2>
-          <div className="mt-5 mx-auto w-20 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
+          {/* Multi-color gradient underline */}
+          <div
+            className="mt-5 mx-auto w-24 h-[3px] rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+            }}
+          />
           <p className="mt-6 text-[#C8C8C0] text-lg max-w-xl mx-auto font-sans">
             From your first website to the internal tools that run your
             business — and everything in between.
@@ -287,8 +333,25 @@ export default function Services() {
                 key={service.title}
                 variants={cardVariants}
                 onClick={() => openService(service.id)}
-                className={`glass-card ${accent.glassClass} ${accent.cardShadow} hover-lift rounded-xl group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 cursor-pointer border-t-2 ${accent.topBorder}`}
+                className={`glass-card ${accent.glassClass} ${accent.cardShadow} hover-lift shimmer-sweep rounded-xl group relative overflow-hidden transition-[border-color,box-shadow,transform] duration-300 cursor-pointer border-t-2 ${accent.topBorder}`}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = accent.hoverGlow
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = ''
+                }}
               >
+                {/* Gradient shimmer sweep on hover — uses shimmer-sweep CSS class */}
+
+                {/* Colored glow behind card */}
+                <div
+                  className="absolute -inset-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse at center, ${accent.shimmerColor} 0%, transparent 70%)`,
+                    filter: 'blur(30px)',
+                  }}
+                />
+
                 {/* ── Image area (only for cards with images) ── */}
                 {service.image && (
                   <div className="image-overlay-gradient relative w-full aspect-[16/9] sm:aspect-[2/1]">

@@ -201,8 +201,36 @@ export default function WebsiteCostCalculator() {
   }, [calculation.packageName])
 
   return (
-    <section id="website-cost-calc" className="py-20 md:py-28 bg-[var(--cd-bg)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="website-cost-calc" className="py-20 md:py-28 bg-[var(--cd-bg)] relative overflow-hidden">
+      {/* Subtle animated gradient mesh background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 20% 30%, rgba(201,168,76,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(34,211,238,0.03) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.02) 0%, transparent 60%)',
+        }}
+      />
+      {/* Dot pattern overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.015]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(201,168,76,0.5) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
+        aria-hidden="true"
+      />
+      {/* Floating orb */}
+      <div
+        className="absolute top-1/4 right-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(201,168,76,0.03) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'float-orb-2 25s ease-in-out infinite',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -215,6 +243,13 @@ export default function WebsiteCostCalculator() {
           <h2 className="section-heading text-[var(--text-h2)] text-cd-text font-bold leading-tight">
             Website Cost Calculator
           </h2>
+          {/* Multi-color gradient accent line */}
+          <div
+            className="mt-3 w-20 h-[3px] rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA)',
+            }}
+          />
           <p className="text-cd-text-muted text-lg max-w-2xl mt-3">
             Get an instant estimate based on your requirements. No email required — just honest numbers.
           </p>
@@ -276,7 +311,17 @@ export default function WebsiteCostCalculator() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <div className="glass-card rounded-xl p-6">
+                  <div className="glass-card rounded-xl p-6 relative overflow-hidden"
+                    style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.2), 0 0 40px rgba(201,168,76,0.04)' }}
+                  >
+                    {/* Gradient left accent */}
+                    <div
+                      className="absolute top-0 left-0 bottom-0 w-[2px]"
+                      style={{
+                        background: 'linear-gradient(180deg, #C9A84C, #34D399)',
+                        opacity: 0.4,
+                      }}
+                    />
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-cd-gold/8">
@@ -329,7 +374,17 @@ export default function WebsiteCostCalculator() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 }}
                 >
-                  <div className="glass-card rounded-xl p-6">
+                  <div className="glass-card rounded-xl p-6 relative overflow-hidden"
+                    style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.2), 0 0 40px rgba(52,211,153,0.04)' }}
+                  >
+                    {/* Gradient left accent */}
+                    <div
+                      className="absolute top-0 left-0 bottom-0 w-[2px]"
+                      style={{
+                        background: 'linear-gradient(180deg, #34D399, #22D3EE)',
+                        opacity: 0.4,
+                      }}
+                    />
                     <div className="flex items-center gap-3 mb-5">
                       <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-cd-gold/8">
                         <Sparkles className="w-4 h-4 text-cd-gold" strokeWidth={1.8} />
@@ -385,7 +440,17 @@ export default function WebsiteCostCalculator() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 }}
                 >
-                  <div className="glass-card rounded-xl p-6">
+                  <div className="glass-card rounded-xl p-6 relative overflow-hidden"
+                    style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.2), 0 0 40px rgba(34,211,238,0.04)' }}
+                  >
+                    {/* Gradient left accent */}
+                    <div
+                      className="absolute top-0 left-0 bottom-0 w-[2px]"
+                      style={{
+                        background: 'linear-gradient(180deg, #22D3EE, #A78BFA)',
+                        opacity: 0.4,
+                      }}
+                    />
                     <div className="flex items-center gap-3 mb-5">
                       <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-cd-gold/8">
                         <Clock className="w-4 h-4 text-cd-gold" strokeWidth={1.8} />
@@ -463,7 +528,17 @@ export default function WebsiteCostCalculator() {
                     >
                       <div className="grid sm:grid-cols-2 gap-4">
                         {/* Included */}
-                        <div className="glass-card rounded-xl p-5 border-t-2 border-t-cd-emerald">
+                        <div className="glass-card rounded-xl p-5 border-t-2 border-t-cd-emerald relative overflow-hidden"
+                          style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15), 0 0 30px rgba(52,211,153,0.04)' }}
+                        >
+                          {/* Gradient left accent */}
+                          <div
+                            className="absolute top-0 left-0 bottom-0 w-[2px]"
+                            style={{
+                              background: 'linear-gradient(180deg, #34D399, transparent)',
+                              opacity: 0.4,
+                            }}
+                          />
                           <h4 className="text-cd-emerald font-display font-semibold text-sm mb-3 flex items-center gap-2">
                             <CheckCircle2 className="w-4 h-4" />
                             Included in {calculation.packageName}
@@ -478,7 +553,17 @@ export default function WebsiteCostCalculator() {
                           </ul>
                         </div>
                         {/* Excluded */}
-                        <div className="glass-card rounded-xl p-5 border-t-2 border-t-cd-rose/50">
+                        <div className="glass-card rounded-xl p-5 border-t-2 border-t-cd-rose/50 relative overflow-hidden"
+                          style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15), 0 0 30px rgba(251,113,133,0.04)' }}
+                        >
+                          {/* Gradient left accent */}
+                          <div
+                            className="absolute top-0 left-0 bottom-0 w-[2px]"
+                            style={{
+                              background: 'linear-gradient(180deg, #FB7185, transparent)',
+                              opacity: 0.4,
+                            }}
+                          />
                           <h4 className="text-cd-rose font-display font-semibold text-sm mb-3 flex items-center gap-2">
                             <span className="w-4 h-4 flex items-center justify-center text-cd-rose">&times;</span>
                             Not included
@@ -508,7 +593,27 @@ export default function WebsiteCostCalculator() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="glass-card rounded-xl p-6 lg:sticky lg:top-24 space-y-6">
+            <div className="glass-card rounded-xl p-6 lg:sticky lg:top-24 space-y-6 relative overflow-hidden"
+              style={{
+                boxShadow: '0 8px 40px rgba(0,0,0,0.25), 0 0 60px rgba(201,168,76,0.06)',
+              }}
+            >
+              {/* Gradient border on result card */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[3px]"
+                style={{
+                  background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+                }}
+              />
+              {/* Gradient left border */}
+              <div
+                className="absolute top-0 left-0 bottom-0 w-[2px]"
+                style={{
+                  background: 'linear-gradient(180deg, #C9A84C, transparent 40%, transparent 60%, #A78BFA)',
+                  opacity: 0.3,
+                }}
+              />
+
               {/* Estimation Header */}
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-cd-gold/8">
@@ -519,21 +624,36 @@ export default function WebsiteCostCalculator() {
                 </span>
               </div>
 
-              {/* Price Display with Animated Counter */}
-              <div className="text-center py-4">
-                <div className="font-mono text-sm text-cd-text-dim mb-2 tracking-wide">
+              {/* Price Display with Animated Counter — gradient accent */}
+              <div className="text-center py-4 relative">
+                {/* Glow behind price */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)',
+                  }}
+                />
+                <div className="font-mono text-sm text-cd-text-dim mb-2 tracking-wide relative">
                   Estimated
                 </div>
-                <div className="font-mono text-3xl md:text-4xl font-bold text-cd-gold tabular-nums">
+                <div className="font-mono text-3xl md:text-4xl font-bold text-cd-gold tabular-nums relative"
+                  style={{
+                    textShadow: '0 0 30px rgba(201,168,76,0.15), 0 0 60px rgba(201,168,76,0.06)',
+                  }}
+                >
                   R{formatCurrency(animatedLower)} – R{formatCurrency(animatedUpper)}
                 </div>
-                <div className="text-cd-text-dim text-xs font-mono mt-2">
+                <div className="text-cd-text-dim text-xs font-mono mt-2 relative">
                   &plusmn;15% range &middot; Midpoint: R{formatCurrency(animatedTotal)}
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-cd-border" />
+              {/* Divider — gradient */}
+              <div className="h-px"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.2), rgba(34,211,238,0.15), transparent)',
+                }}
+              />
 
               {/* Breakdown */}
               <div className="space-y-2.5">
@@ -577,8 +697,12 @@ export default function WebsiteCostCalculator() {
                 )}
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-cd-border" />
+              {/* Divider — gradient */}
+              <div className="h-px"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.2), rgba(34,211,238,0.15), transparent)',
+                }}
+              />
 
               {/* Package Match with Badge */}
               <div className="flex items-center justify-between">
@@ -597,6 +721,9 @@ export default function WebsiteCostCalculator() {
                       flex items-center gap-2 px-3 py-1.5 rounded-full border
                       ${calculation.packageBorderClass} ${calculation.packageBgClass}
                     `}
+                    style={{
+                      boxShadow: '0 0 20px rgba(201,168,76,0.06)',
+                    }}
                   >
                     <span className={`font-display font-bold text-sm ${calculation.packageColor}`}>
                       {calculation.packageName}
@@ -608,8 +735,12 @@ export default function WebsiteCostCalculator() {
                 </AnimatePresence>
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-cd-border" />
+              {/* Divider — gradient */}
+              <div className="h-px"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.2), rgba(34,211,238,0.15), transparent)',
+                }}
+              />
 
               {/* Share & Email Actions */}
               <div className="grid grid-cols-2 gap-3">
@@ -638,13 +769,13 @@ export default function WebsiteCostCalculator() {
                 </a>
               </div>
 
-              {/* CTA */}
+              {/* CTA — enhanced gradient accent */}
               <a
                 href="#contact"
                 className="group flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-lg
                   bg-cd-gold text-cd-bg font-display font-semibold text-sm
                   hover:bg-cd-gold-light transition-all duration-300
-                  shadow-[0_0_20px_rgba(201,168,76,0.15)] hover:shadow-[0_0_30px_rgba(201,168,76,0.25)]"
+                  shadow-[0_0_25px_rgba(201,168,76,0.2),0_0_50px_rgba(201,168,76,0.06)] hover:shadow-[0_0_35px_rgba(201,168,76,0.3),0_0_70px_rgba(201,168,76,0.1)]"
               >
                 Get exact quote
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

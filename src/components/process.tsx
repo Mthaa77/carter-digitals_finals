@@ -10,6 +10,11 @@ const phases = [
     description: 'We listen. We align on your goals, audience, and business requirements.',
     accent: '#C9A84C',
     accentBg: 'rgba(201,168,76,0.1)',
+    accentBgGradient: 'linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05))',
+    circleShadow: '0 0 30px rgba(201,168,76,0.15), 0 0 60px rgba(201,168,76,0.06)',
+    hoverShadow: '0 0 40px rgba(201,168,76,0.25), 0 0 80px rgba(201,168,76,0.1)',
+    lineGradient: 'linear-gradient(90deg, rgba(201,168,76,0.6), rgba(52,211,153,0.6))',
+    lineGradientVertical: 'linear-gradient(180deg, rgba(201,168,76,0.6), rgba(52,211,153,0.6))',
   },
   {
     number: '02',
@@ -17,6 +22,11 @@ const phases = [
     description: 'Structure, user flows, and technical architecture — approved before a line of code.',
     accent: '#34D399',
     accentBg: 'rgba(52,211,153,0.1)',
+    accentBgGradient: 'linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.05))',
+    circleShadow: '0 0 30px rgba(52,211,153,0.15), 0 0 60px rgba(52,211,153,0.06)',
+    hoverShadow: '0 0 40px rgba(52,211,153,0.25), 0 0 80px rgba(52,211,153,0.1)',
+    lineGradient: 'linear-gradient(90deg, rgba(52,211,153,0.6), rgba(34,211,238,0.6))',
+    lineGradientVertical: 'linear-gradient(180deg, rgba(52,211,153,0.6), rgba(34,211,238,0.6))',
   },
   {
     number: '03',
@@ -24,6 +34,11 @@ const phases = [
     description: 'Next.js + GCP + Vercel. Fast, modern, built to production standard.',
     accent: '#22D3EE',
     accentBg: 'rgba(34,211,238,0.1)',
+    accentBgGradient: 'linear-gradient(135deg, rgba(34,211,238,0.2), rgba(34,211,238,0.05))',
+    circleShadow: '0 0 30px rgba(34,211,238,0.15), 0 0 60px rgba(34,211,238,0.06)',
+    hoverShadow: '0 0 40px rgba(34,211,238,0.25), 0 0 80px rgba(34,211,238,0.1)',
+    lineGradient: 'linear-gradient(90deg, rgba(34,211,238,0.6), rgba(167,139,250,0.6))',
+    lineGradientVertical: 'linear-gradient(180deg, rgba(34,211,238,0.6), rgba(167,139,250,0.6))',
   },
   {
     number: '04',
@@ -31,6 +46,11 @@ const phases = [
     description: 'Testing, POPIA compliance, accessibility checks, and performance optimisation.',
     accent: '#A78BFA',
     accentBg: 'rgba(167,139,250,0.1)',
+    accentBgGradient: 'linear-gradient(135deg, rgba(167,139,250,0.2), rgba(167,139,250,0.05))',
+    circleShadow: '0 0 30px rgba(167,139,250,0.15), 0 0 60px rgba(167,139,250,0.06)',
+    hoverShadow: '0 0 40px rgba(167,139,250,0.25), 0 0 80px rgba(167,139,250,0.1)',
+    lineGradient: 'linear-gradient(90deg, rgba(167,139,250,0.6), rgba(251,113,133,0.6))',
+    lineGradientVertical: 'linear-gradient(180deg, rgba(167,139,250,0.6), rgba(251,113,133,0.6))',
   },
   {
     number: '05',
@@ -38,6 +58,11 @@ const phases = [
     description: 'Go-live, training, handover, and ongoing support if you need it.',
     accent: '#FB7185',
     accentBg: 'rgba(251,113,133,0.1)',
+    accentBgGradient: 'linear-gradient(135deg, rgba(251,113,133,0.2), rgba(251,113,133,0.05))',
+    circleShadow: '0 0 30px rgba(251,113,133,0.15), 0 0 60px rgba(251,113,133,0.06)',
+    hoverShadow: '0 0 40px rgba(251,113,133,0.25), 0 0 80px rgba(251,113,133,0.1)',
+    lineGradient: 'linear-gradient(90deg, rgba(251,113,133,0.6), rgba(201,168,76,0.6))',
+    lineGradientVertical: 'linear-gradient(180deg, rgba(251,113,133,0.6), rgba(201,168,76,0.6))',
   },
 ]
 
@@ -77,6 +102,26 @@ export default function Process() {
         }}
       />
 
+      {/* Subtle dot pattern overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(201,168,76,0.5) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Additional ambient glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(167,139,250,0.03) 0%, transparent 60%)',
+          filter: 'blur(60px)',
+        }}
+        aria-hidden="true"
+      />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -88,7 +133,13 @@ export default function Process() {
           <span className="section-label inline-block gold-gradient-text">
             How We Work
           </span>
-          <div className="mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE] rounded-full mb-6" />
+          {/* Multi-color gradient line */}
+          <div
+            className="mx-auto w-20 h-[3px] rounded-full mb-6"
+            style={{
+              background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+            }}
+          />
           <h2 className="font-display heading-shadow" style={{ fontSize: 'var(--text-h2)' }}>
             Our <span className="gold-gradient-text">5-Phase</span> Delivery Process
           </h2>
@@ -105,13 +156,27 @@ export default function Process() {
           className="hidden lg:block"
         >
           <div className="relative">
-            {/* Animated connecting line - draws from left to right */}
+            {/* Gradient connecting line */}
             <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-[2px] overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-transparent via-cd-gold/70 to-transparent origin-left"
+                className="h-full origin-left"
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
+                style={{
+                  background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA, #FB7185)',
+                  opacity: 0.5,
+                }}
+              />
+              {/* Animated shimmer on connecting line */}
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={isInView ? { x: '200%' } : { x: '-100%' }}
+                transition={{ duration: 4, ease: 'easeInOut', delay: 2, repeat: Infinity, repeatDelay: 6 }}
+                className="absolute inset-0 w-1/4"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)',
+                }}
               />
             </div>
 
@@ -122,13 +187,23 @@ export default function Process() {
                   variants={itemVariants}
                   className="relative flex flex-col items-center text-center group"
                 >
-                  {/* Numbered circle */}
+                  {/* Numbered circle with gradient background */}
                   <div className="relative mb-6">
                     <div
-                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)]"
+                      className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500"
                       style={{
                         borderColor: `${phase.accent}66`,
-                        backgroundColor: `${phase.accentBg}`,
+                        background: phase.accentBgGradient,
+                        boxShadow: phase.circleShadow,
+                        transition: 'border-color 0.5s, box-shadow 0.5s, transform 0.5s',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = phase.hoverShadow
+                        e.currentTarget.style.transform = 'scale(1.08)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = phase.circleShadow
+                        e.currentTarget.style.transform = 'scale(1)'
                       }}
                     >
                       <span className="font-display text-xl font-bold" style={{ color: phase.accent }}>
@@ -169,13 +244,14 @@ export default function Process() {
             >
               {/* Left: Number + connecting line */}
               <div className="flex flex-col items-center">
-                {/* Numbered circle */}
+                {/* Numbered circle with gradient */}
                 <div className="relative z-10">
                   <div
-                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)]"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 bg-cd-bg/80 backdrop-blur-sm transition-all duration-500"
                     style={{
                       borderColor: `${phase.accent}66`,
-                      backgroundColor: `${phase.accentBg}`,
+                      background: phase.accentBgGradient,
+                      boxShadow: phase.circleShadow,
                     }}
                   >
                     <span className="font-display text-lg sm:text-xl font-bold" style={{ color: phase.accent }}>
@@ -184,14 +260,18 @@ export default function Process() {
                   </div>
                 </div>
 
-                {/* Animated connecting line - draws from top to bottom */}
+                {/* Gradient connecting line */}
                 {index < phases.length - 1 && (
                   <div className="w-px flex-1 min-h-[2rem] overflow-hidden">
                     <motion.div
-                      className="w-full h-full bg-gradient-to-b from-cd-gold/70 to-cd-gold/20 origin-top"
+                      className="w-full h-full origin-top"
                       initial={{ scaleY: 0 }}
                       animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
                       transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 + index * 0.15 }}
+                      style={{
+                        background: phase.lineGradientVertical,
+                        opacity: 0.5,
+                      }}
                     />
                   </div>
                 )}

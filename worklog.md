@@ -1375,3 +1375,103 @@ Hero → ClientMarquee → ClientLogos → WhyCarter → TrustBadges → Team �
 - Continue polishing with more micro-interactions
 - Add more dynamic content and features
 - Test mobile layout on device simulation
+
+---
+
+Task ID: 2-3
+Agent: Homepage Improver
+
+## Task 1: Remove Redundant Stats Components
+
+### Problem
+The homepage had THREE components at the top showing the same stats:
+1. Hero — badge strip + counter row (KEEP)
+2. TrustBadges — showing same B-BBEE/CSD/Youth-Owned info (REMOVE)
+3. AnimatedStats — showing same B-BBEE/Days/Black-Owned/CSD info (REMOVE)
+
+### Changes Made to `/src/app/page.tsx`
+- Removed `import TrustBadges from '@/components/trust-badges'` line
+- Removed `import AnimatedStats from '@/components/animated-stats'` line
+- Removed `<TrustBadges />` and its surrounding `<SectionDivider />`
+- Removed `<AnimatedStats />` and its surrounding `<SectionDivider />`
+- Verified no double `<SectionDivider />` elements remain
+- Clean flow: WhyCarter → SectionDivider → Team → SectionDivider → Services
+
+## Task 2: Add More Colors, Gradient Patterns, and Shadow Effects
+
+### 2a. SectionDivider (`section-divider.tsx`)
+- Center diamond enlarged from `w-2 h-2` to `w-3.5 h-3.5`
+- Added pulsing glow ring behind diamond (radial gradient with scale/opacity animation)
+- Diamond gradient enhanced from 2-color to 3-color (gold → cyan → violet)
+- Added secondary thin line above (rose → violet gradient)
+- Added secondary thin line below (emerald → gold gradient)
+- Added animated shimmer overlays on both left and right main lines
+- Added `py-2` wrapper for breathing room
+
+### 2b. WhyCarter (`why-carter.tsx`)
+- Added diagonal mesh gradient pattern overlay (cross-hatch pattern with gold + cyan lines)
+- Added animated gradient border on card hover (using CSS mask composite for gradient border effect)
+- Added prominent colored box-shadows on hover per card (emerald, cyan, violet, gold)
+- Changed heading accent line from single gold to multi-color gradient (gold → emerald → cyan → violet → rose)
+- Each card now has custom `hoverShadow` and `gradientFrom/To` properties
+
+### 2c. Services (`services.tsx`)
+- Added animated gradient mesh background to section (5 radial gradients with floating orbs)
+- Added `shimmer-sweep` CSS class to each service card for hover shimmer effect
+- Added colored glow behind each card on hover (radial gradient using accent color)
+- Added `hoverGlow` property to accentConfig with color-specific shadow values
+- Changed heading underline from gold-only to multi-color gradient (gold → emerald → cyan → violet → rose)
+- Added `shimmerColor` property per accent for custom glow effects
+
+### 2d. Process (`process.tsx`)
+- Added gradient backgrounds to each phase circle (`accentBgGradient` property)
+- Added colored shadow effects per phase (`circleShadow` + `hoverShadow` properties)
+- Phase circles now scale up on hover with enhanced shadows
+- Replaced single-color connecting line with multi-color gradient (gold → emerald → cyan → violet → rose)
+- Added animated shimmer on the connecting line (moves from left to right periodically)
+- Mobile vertical connecting lines now use per-phase gradient colors (`lineGradientVertical`)
+- Added dot pattern overlay to section background
+- Added ambient violet glow orb to section center
+
+### 2e. FAQ (`faq.tsx`)
+- Existing gradient left borders enhanced with hover accent glow per item
+- Added colored accent shadow on hover per FAQ item (using faqShadowColors array)
+- Enhanced mesh gradient background (5 radial gradients instead of 3)
+- Added dot pattern overlay to section
+- Added gradient icon accents (HelpCircle icon per FAQ item with matching accent color)
+- Container now has gradient border glow overlay
+- Changed heading line to multi-color gradient
+
+### 2f. ContactForm (`contact-form.tsx`)
+- Added gradient border on form container: multi-color top border (gold → emerald → cyan → violet → rose)
+- Added gradient side borders (left: gold/violet, right: emerald/rose) at 30% opacity
+- Enhanced submit button shadow: gold + emerald glow with wider spread on hover
+- Added diagonal pattern overlay to section background
+- Enhanced input focus glow: gold ring + cyan secondary glow
+- Added gradient accent lines on WhatsApp card (gold → emerald) and Office card (cyan → violet)
+- Added gradient accent line on Google Maps embed
+- Changed heading accent line to multi-color gradient
+
+### 2g. WebsiteCostCalculator (`website-cost-calculator.tsx`)
+- Added gradient mesh background to section (3 radial gradients + dot pattern overlay)
+- Added floating orb for depth
+- Added gradient left accent borders on each step card (gold→emerald, emerald→cyan, cyan→violet)
+- Added colored box-shadows per step card
+- Result card enhanced with: multi-color top border, gradient left border, gradient dividers, radial glow behind price
+- Price display enhanced with text-shadow glow effect
+- Package badge enhanced with subtle box-shadow
+- CTA button shadow enhanced with wider spread
+- Added multi-color gradient accent line under section heading
+- Comparison cards enhanced with gradient left accents and colored shadows
+
+### Design Rules Followed
+- NO `background-clip: text` or `-webkit-text-fill-color: transparent` used anywhere
+- All gradient text uses solid colors with text-shadow glow effects
+- Color palette: gold (#C9A84C), emerald (#34D399), cyan (#22D3EE), violet (#A78BFA), rose (#FB7185), amber (#FBBF24)
+- Framer Motion animations preserved consistently
+- No new npm packages added
+
+### Verification
+- ESLint: 0 errors
+- Dev server: Compiling clean (HTTP 200 on /)
+- No hydration mismatch risks
