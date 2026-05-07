@@ -1133,3 +1133,41 @@ Stage Summary:
 - SEO Audit: sub-scores, priority actions, before/after simulation, competitor comparison, copy report
 - FreeTools: category filter, hover previews, time estimates, "MOST POPULAR" badge
 - ESLint: 0 errors | All routes HTTP 200 | Dev server compiling clean
+
+---
+Task ID: 1-4
+Agent: main
+Task: Redesign hero with 3D elements + restructure homepage tools
+
+Work Log:
+- Installed @react-three/fiber, @react-three/drei, three, @types/three
+- Completely rewrote hero.tsx with React Three Fiber 3D scene:
+  - Gold wireframe icosahedron (main centerpiece)
+  - Cyan wireframe octahedron (off to the right)
+  - Violet wireframe smaller icosahedron (off to the left)
+  - Gold torus ring orbiting center
+  - Cyan secondary torus ring (counter-rotating)
+  - 150 gold particles + 40 cyan particles in 3D space
+  - Mouse parallax in 3D (scene shifts with cursor)
+  - Scroll-linked fade/zoom on 3D canvas
+- Removed cinematic intro overlay (no blocked content)
+- Removed FilmSlateBar (unnecessary clutter)
+- Removed scroll indicator button (natural scroll flow)
+- Content visible immediately on page load
+- Subtle chevron hint at bottom instead of button
+- Updated homepage page.tsx:
+  - Removed FreeTools section
+  - Removed ROICalculator
+  - Removed ProjectEstimator
+  - Removed BBBEECalculator
+  - Kept only WebsiteCostCalculator on homepage
+  - Moved WebsiteCostCalculator to after Services section (line 75)
+- All 6 routes return HTTP 200
+- ESLint: 0 errors
+- Pushed to GitHub: Mthaa77/carter-digitals_finals
+
+Stage Summary:
+- Hero: 3D R3F scene with wireframe polyhedra, particles, mouse parallax
+- Homepage: Clean flow - Services → WebsiteCostCalculator → TechStack → ...
+- Tools: 4 tools removed from homepage, still on dedicated /tools/* pages
+- GitHub: Latest commit pushed (7bfa4e9)
