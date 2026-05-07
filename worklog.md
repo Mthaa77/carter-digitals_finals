@@ -881,3 +881,255 @@ Stage Summary:
 - Consider adding a "Tools" dropdown in navigation with sub-links
 - Mobile testing on actual devices for tool pages
 - The FreeTools section on homepage is long — consider making it a horizontal scroll carousel on mobile
+
+---
+
+## Session: Hero Premium Cinematic Upgrade (Task ID: 2)
+
+### Project Status
+- Hero section upgraded with 8 major cinematic enhancements
+- Added cinematic intro sequence (black screen → gold line sweep → fade out)
+- H1 now uses character-by-character reveal animation
+- Mouse-follow spotlight effect added
+- Floating 3D geometric wireframe shapes added (triangle, hexagon, diamond)
+- Film slate status bar at bottom with live clock and progress indicator
+- Film-inspired scroll indicator
+- Hero typing enhanced with per-character scale/glow pop
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### 1. globals.css — New Cinematic Keyframes + Utilities
+- `hero-line-sweep` — Gold line sweeps horizontally across center (translateX -100% → 200%)
+- `hero-curtain-out` — Black overlay fades out (opacity 1 → 0)
+- `gold-glow-pulse` — Persistent gold glow pulse behind heading (opacity 0.08→0.18, scale 1→1.08)
+- `geo-rotate-cw` / `geo-rotate-ccw` — Geometric shape slow rotation (0→360deg)
+- `geo-float-1` / `geo-float-2` / `geo-float-3` — Gentle floating with micro-rotation for shapes
+- `film-progress` — Progress bar animation (width 0%→100%)
+- `film-reel-spin` — Film reel icon rotation (0→360deg)
+- `char-pop` — Typing character pop effect (scale 1→1.06→1, text-shadow glow)
+- `.hero-intro-overlay` — Fixed full-screen black overlay that fades out at 1.8s
+- `.hero-line-sweep` — Gold gradient line that sweeps across at 0.6s
+- `.gold-glow-pulse` — Gold glow pulse utility class
+- `.geo-shape` — Base class for floating geometric shapes (opacity 0.06)
+- `.film-slate-bar` — Film slate bar with JetBrains Mono font
+- `.typing-char-pop` — Character pop animation class
+
+#### 2. hero-typing.tsx — Per-Character Scale/Glow Enhancement
+- Each character now wrapped in `<motion.span>` with `inline-block` display
+- New character gets `initial={{ scale: 1.12 }}` → `animate={{ scale: 1 }}` pop effect
+- Last typed character gets enhanced `text-shadow: 0 0 30px rgba(201,168,76,0.5), 0 0 60px rgba(201,168,76,0.25)` glow
+- Space characters use `\u00A0` (non-breaking space) for consistent inline display
+- `lastCharIndex` state tracks which character was just typed for targeted glow
+- Uses `AnimatePresence` from framer-motion for potential exit animations
+- Phrases still cycle: "Make Money." → "Get Found." → "Close Deals." → "Stand Out."
+
+#### 3. hero.tsx — Complete Premium Cinematic Upgrade
+
+**New Component: CinematicIntro**
+- Full-screen fixed black overlay (z-index 9999)
+- Gold line sweeps horizontally across center at 0.6s delay
+- Black curtain fades out at 1.8s with cubic-bezier(0.7, 0, 0.84, 0) easing
+- Creates dramatic "film opening" feel when page loads
+
+**New Component: MouseSpotlight**
+- Radial gradient that follows the mouse cursor position
+- Uses `radial-gradient(circle 400px at X% Y%, rgba(201,168,76,0.04) → transparent)`
+- Creates subtle flashlight/spotlight effect on dark background
+- Passive mousemove listener for performance
+- Transition-none for instant response
+
+**New Component: FloatingGeometricShapes**
+- 4 wireframe SVG shapes floating in the background:
+  - Triangle (top-right, gold stroke, 120px, geo-float-1 + rotate-cw 80s)
+  - Hexagon (bottom-left, cyan stroke, 100px, geo-float-2 + rotate-ccw 100s)
+  - Diamond (mid-right, violet stroke, 80px, geo-float-3 + rotate-cw 70s)
+  - Small triangle (bottom-right, gold stroke, 60px, opacity 0.04, geo-float-1 + rotate-ccw 90s)
+- All shapes at opacity 0.06 for subtle background depth
+- Slow rotation (70-100s full cycle) + gentle floating with micro-rotation
+
+**New Component: FilmSlateBar**
+- Bottom status bar with film slate aesthetic
+- Left: Film icon + "CARTER DIGITALS" in 8-9px mono tracking text
+- Center: Animated progress bar (0%→100% over 12s, repeating)
+- Right: Live clock (HH:MM:SS updating every second) + green "Live" indicator
+- Gold accent line above the bar
+- Appears after 4s delay with fade-in animation
+- Backdrop blur for glass effect
+
+**Enhanced H1: Character-by-Character Reveal**
+- "We Build Websites" split into individual characters
+- Each character animated with `headingCharReveal` variant (opacity 0, y 40, scale 0.5 → 1)
+- Stagger: 0.04s between each character
+- Characters reveal starts at delayChildren: 2.2s (after cinematic intro)
+- Origin set to center-bottom (originX: 0.5, originY: 1) for natural bottom-up reveal
+- Persistent `gold-glow-pulse` class on wrapper div (opacity oscillates 0.08→0.18)
+- Underline now grows to 65% width (was 60%) with enhanced box-shadow glow
+- Shimmer sweep preserved
+
+**Enhanced Scroll Indicator: Film-Inspired**
+- Replaced mouse icon with film reel design
+- Circular container (w-6 h-6 sm:w-7 sm:h-7) with dashed border that rotates
+- Center dot bounces vertically
+- ChevronDown arrow below
+- Appears after 4.5s delay
+
+**Optimized Animation Sequence**
+- cinematicContainer: staggerChildren 0.18s, delayChildren 2.2s (synced with intro)
+- Badge items: delay starts at 3.5s (was 2s)
+- Counter items: delay starts at 4s (was 2.5s)
+- All timing choreographed to follow the cinematic intro
+
+**Preserved Components (unchanged)**
+- FloatingParticles (25 gold + 20 dust, deterministic)
+- CinematicRays (central burst + horizontal/vertical streaks)
+- ScanLines (film scan line effect)
+- GoldOrbitRing (2 concentric rotating rings with orbiting dots)
+- AnimatedCounter (intersection observer-based count-up)
+- All background layers (banner, gradients, aurora, orbs, grid, grain, letterbox bars, neon line)
+- Mouse parallax (spring physics)
+- Scroll parallax (3-layer: bg 200px, orbs 100px, content 80px)
+- Content fade-out on scroll
+- Ken Burns on banner image
+
+**Layout Adjustments**
+- Content padding: `pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-24` (more bottom padding for film slate bar)
+- Film slate bar replaces bottom letterbox bar area
+- Scroll indicator positioned at `bottom-14 sm:bottom-16` (above film slate bar)
+
+### Technical Notes
+- NO `background-clip: text` or `-webkit-text-fill-color: transparent` anywhere
+- NO `filter: blur()` in Framer Motion animation variants on text elements
+- All particles use deterministic seeded random (Math.sin formula)
+- No Math.random() calls
+- All new components are self-contained and use `'use client'` directive
+- FilmSlateBar uses `setInterval` for live clock with proper cleanup
+- MouseSpotlight uses passive event listener
+- Geometric shapes use pure CSS animations (no Framer Motion) for performance
+
+Stage Summary:
+- Hero: 8 major cinematic upgrades (intro sequence, character reveal, mouse spotlight, geometric shapes, film slate bar, enhanced typing, film scroll indicator, optimized animation timing)
+- All text guaranteed visible: solid Tailwind colors + text-shadow glow
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+
+---
+
+## Session: Premium Tools Upgrade (Task ID: 3)
+
+### Project Status
+- All 5 free tool components upgraded with premium features and enhanced UX
+- FreeTools homepage section enhanced with category filter, hover previews, time estimates
+- ESLint: 0 errors | All routes return HTTP 200 | Dev server compiling clean
+
+### Completed Changes
+
+#### 1. Website Cost Calculator (`src/components/website-cost-calculator.tsx`)
+
+**New Features:**
+- **Progress Indicator**: 3-step visual progress bar (Pages → Features → Timeline) with numbered circles, icons, step labels, and completion checkmarks. Steps are clickable for easy navigation.
+- **Animated Price Counter**: `useAnimatedNumber` hook with ease-out cubic interpolation smoothly transitions displayed price numbers when calculations change (600ms duration).
+- **Package Recommendation Badge**: Package match now shown as an animated pill/badge with border, background, tagline (e.g., "Growing business", "Full power"), and spring animation on change.
+- **Share Quote Button**: Copies a formatted summary to clipboard including pages, features, timeline, price range, and package recommendation. Shows "Copied!" confirmation with green checkmark for 2.5s.
+- **Email Quote Button**: Opens mailto: link with pre-filled subject and body containing the full estimate summary.
+- **Comparison View**: Toggle button reveals a side-by-side "Included vs Excluded" view for the recommended package, with emerald (included) and rose (excluded) color-coded sections.
+- **Progressive Disclosure**: Steps reveal progressively — Step 1 (Pages) always visible, Step 2 (Features) appears after setting pages, Step 3 (Timeline) appears after features.
+
+**Technical:**
+- Uses solid Tailwind color classes (`text-cd-gold`, `text-cd-emerald`) — no `background-clip: text`
+- All animations use Framer Motion AnimatePresence
+- useCallback for share handler, useMemo for calculations
+- No Math.random() — all deterministic
+
+#### 2. ROI Calculator (`src/components/roi-calculator.tsx`)
+
+**New Features:**
+- **Visual ROI Bar Chart**: CSS-based bar chart showing the ROI percentage as a filled gradient bar (from gold-dim to gold), with the percentage displayed inside. Industry average (~280%) shown as a cyan dot marker below.
+- **12-Month Revenue Projection Bar Chart**: Visual CSS bar chart with 12 bars representing monthly additional revenue. Bars animate with staggered delays. Color changes from gold to emerald once the investment is recovered. Includes investment line marker.
+- **Monthly Breakdown Table**: Expandable table showing Month, Additional Revenue, Cumulative Revenue, and Recovery Status (green checkmark when investment recovered). Max height with scroll overflow.
+- **Industry Benchmarks**: Expandable section comparing user's projected ROI against 5 South African industry averages (Retail/E-commerce 320%, Professional Services 280%, Hospitality 250%, Construction 200%, Education 180%). Animated bar visualization.
+- **Break-even Timeline**: Shows exact number of months until the website investment pays for itself. Includes a visual progress bar from Month 0 to Month 12.
+- **Share ROI Summary**: Copy-to-clipboard button that captures all key metrics including break-even timeline and monthly projections.
+
+**Technical:**
+- Monthly growth curve uses deterministic 2% monthly growth factor
+- All seeded random replaced with deterministic calculations
+- No external chart library — pure CSS bars with Framer Motion animations
+
+#### 3. B-BBEE Score Estimator (`src/components/bbbee-calculator.tsx`)
+
+**New Features:**
+- **Visual B-BBEE Scorecard**: Shows all 5 B-BBEE scorecard elements (Ownership, Management Control, Skills Development, Enterprise & Supplier Development, Socio-Economic Development) with animated progress bars. The ESD element (where procurement spend applies) is highlighted in gold with "your spend" label, showing estimated points earned.
+- **Multi-Year Projection**: 3-year projection cards showing cumulative spend, qualifying spend value, and procurement points earned (out of 25). Each year has an animated progress bar and point indicator.
+- **Procurement Tips Section**: 5 actionable tips for maximising B-BBEE procurement points, displayed in a 3-column grid with emoji icons. Expandable via toggle button.
+- **FAQ Section**: 6 frequently asked questions about B-BBEE procurement, displayed as an accordion with animated expand/collapse. Covers: what is procurement recognition, why Carter qualifies at 135%, differences between procurement elements, how it affects scores, claiming previous years, and CSD registration.
+- **Share/Copy Results**: Copies a formatted summary including budget, multiplier, qualifying spend, additional value, and 3-year projections.
+
+**Technical:**
+- Scorecard uses color-coded bars matching the element (gold, emerald, cyan, violet, rose)
+- Procurement points calculated based on qualifying spend / R1,000,000 × 25 (simplified)
+- AnimatePresence for all expandable sections
+
+#### 4. Project Estimator (`src/components/project-estimator.tsx`)
+
+**New Features:**
+- **Enhanced 3-Step Wizard**: Improved progress bar with numbered circles that show completion checkmarks. Step indicators include icons.
+- **Feature Descriptions & Week Costs**: Each feature now shows a brief description and the number of additional weeks it adds to the timeline.
+- **Running Total Summary**: Shows current running total and feature count (X/Y selected) as you toggle features in Step 2.
+- **Timeline Gantt Chart**: Visual Gantt-like chart in Step 3 showing project phases (Discovery & Planning, Design, Development, Feature Integration, Testing & Launch) as colored horizontal bars. Width proportional to weeks. Hover tooltips show phase name and duration. Color-coded legend below.
+- **Summary Card**: Step 3 displays a comprehensive summary with price range, timeline, selected features as tags (with individual prices), and a visual timeline.
+- **Share Estimate**: Copy-to-clipboard with service type, features, price, and timeline.
+
+**Technical:**
+- Each service defines `baseWeeks` and each feature defines `weekCost` for accurate timeline calculation
+- Timeline phases dynamically adjust based on selected features
+- Gantt chart uses percentage-based widths with motion.div animations
+
+#### 5. SEO Audit (`src/components/seo-audit.tsx`)
+
+**New Features:**
+- **Sub-scores Within Categories**: Each of the 5 categories now has 3-4 sub-scores (e.g., Performance has FCP, LCP, CLS, TBT). Displayed as small progress bars with numeric values in a grid layout.
+- **Impact Badges**: Each tip now has a HIGH/MED/LOW impact badge, color-coded (rose for high, gold for medium, dim for low).
+- **Priority Actions Section**: Top 3 highest-impact tips that are NOT "good" status, displayed prominently with numbered circles and impact badges.
+- **Before/After Simulation**: Side-by-side comparison showing Current SEO Score vs. "After Implementing Fixes" score. The simulated after score is calculated as `min(95, overallScore + (100 - overallScore) * 0.55)`. Both shown as animated circular SVG gauges.
+- **Competitor Comparison**: Expandable section with URL input. Generates deterministic scores for the competitor URL and shows a side-by-side bar comparison for each category. Your site shown in gold, competitor in cyan.
+- **Copy Report**: Copies a full text-based audit report to clipboard including all scores, tips with status/impact, sub-scores, priority actions, and simulated improvement.
+- **Expandable Category Cards**: Categories are collapsed by default with just name and score visible. Click to expand and see sub-scores, tips with impact badges, and progress bars.
+
+**Technical:**
+- Sub-scores generated deterministically from the same URL seed with slight variations
+- Competitor scores also deterministic (seeded by competitor URL)
+- Impact levels assigned based on importance of each tip
+- No Math.random() — all seeded via Math.sin formula
+
+#### 6. FreeTools Homepage Section (`src/components/free-tools.tsx`)
+
+**New Features:**
+- **Category Filter**: 4 filter buttons (All Tools, Calculators, Audits, Compliance) with icon and count badge. Active filter has gold border/background. Filters the tool grid with AnimatePresence.
+- **Hover Preview**: When hovering over a tool card, a preview strip appears showing the tool's key enhancement (e.g., "Pages, features & timeline estimator with share & email quote").
+- **Time Estimate**: Each tool shows estimated usage time (e.g., "~2 min", "~1 min", "~3 min"). Shown with a Clock icon.
+- **"MOST POPULAR" Badge**: Changed from "POPULAR" to "MOST POPULAR" for the Website Cost Calculator.
+- **Animated Filter Transition**: When switching categories, the grid smoothly animates with container variants and staggered card reveals.
+
+**Technical:**
+- `ToolCategory` type for type-safe filtering
+- `hoveredTool` state for hover preview
+- AnimatePresence with mode="wait" for filter transitions
+- All cards maintain shimmer sweep, premium-card-hover, and gradient accent effects
+
+### Compliance Notes
+- Zero `background-clip: text` or `-webkit-text-fill-color: transparent` usage across all modified files
+- Zero `Math.random()` calls — all random systems use deterministic seeded random (Math.sin formula)
+- All text uses solid Tailwind color classes (`text-cd-gold`, `text-cd-emerald`, etc.)
+- All components are responsive and mobile-friendly
+- All components use Framer Motion for animations
+
+Stage Summary:
+- 6 component files enhanced with 30+ new features across all tools
+- Website Cost Calculator: progress indicator, animated counter, share, email, comparison view, package badge
+- ROI Calculator: visual ROI bar, 12-month chart, monthly breakdown, industry benchmarks, break-even timeline
+- B-BBEE Calculator: visual scorecard, multi-year projection, procurement tips, FAQ section, share
+- Project Estimator: enhanced wizard, feature descriptions, Gantt timeline, summary card, share
+- SEO Audit: sub-scores, priority actions, before/after simulation, competitor comparison, copy report
+- FreeTools: category filter, hover previews, time estimates, "MOST POPULAR" badge
+- ESLint: 0 errors | All routes HTTP 200 | Dev server compiling clean

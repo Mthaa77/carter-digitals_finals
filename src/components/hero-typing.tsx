@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const PHRASES = ['Make Money.', 'Get Found.', 'Close Deals.', 'Stand Out.']
 
@@ -26,6 +26,7 @@ export default function HeroTyping({
   const [phase, setPhase] = useState<Phase>('waiting')
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [cursorVisible, setCursorVisible] = useState(true)
+  const [lastCharIndex, setLastCharIndex] = useState(-1)
 
   const phaseRef = useRef<Phase>('waiting')
   const phraseIndexRef = useRef(0)
@@ -63,6 +64,7 @@ export default function HeroTyping({
       if (displayedLenRef.current < phrase.length) {
         displayedLenRef.current += 1
         setDisplayedText(phrase.slice(0, displayedLenRef.current))
+        setLastCharIndex(displayedLenRef.current - 1)
         scheduleNext(() => {
           // Re-trigger by staying in typing phase
           setPhase('typing')
@@ -106,7 +108,22 @@ export default function HeroTyping({
   return (
     <span className="inline">
       <span className="text-cd-gold-light text-glow-gold inline">
-        {displayedText}
+        {displayedText.split('').map((char, i) => (
+          <motion.span
+            key={`${phraseIndex}-${i}`}
+            className="inline-block"
+            initial={i === lastCharIndex && phase === 'typing' ? { scale: 1.12 } : undefined}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              textShadow: i === lastCharIndex && phase === 'typing'
+                ? '0 0 30px rgba(201, 168, 76, 0.5), 0 0 60px rgba(201, 168, 76, 0.25)'
+                : undefined,
+            }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </motion.span>
+        ))}
       </span>
       <motion.span
         className="inline-block w-[3px] ml-1 align-middle rounded-[1px]"

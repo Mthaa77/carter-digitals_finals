@@ -1,9 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Calculator, BarChart3, Search, Award, ArrowRight, Zap, Globe, TrendingUp, ShieldCheck, Layers, Star, ExternalLink } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Calculator, BarChart3, Search, Award, ArrowRight, Zap, Globe,
+  TrendingUp, ShieldCheck, Layers, Star, Clock, Eye, Filter
+} from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
+
+type ToolCategory = 'all' | 'calculator' | 'audit' | 'compliance'
 
 const tools = [
   {
@@ -13,10 +19,13 @@ const tools = [
       'Get an instant estimate based on pages, features, and timeline. See exactly what your website will cost — no surprises.',
     cta: 'Use Calculator',
     href: '/tools/website-cost-calculator',
-    badge: 'POPULAR',
+    badge: 'MOST POPULAR',
     badgeColor: 'text-cd-gold border-cd-gold-dim bg-cd-gold/5',
     accentColor: 'gold',
     stats: '2,400+ estimates generated',
+    category: 'calculator' as ToolCategory,
+    timeToUse: '~2 min',
+    preview: 'Pages, features & timeline estimator with share & email quote',
   },
   {
     icon: TrendingUp,
@@ -29,6 +38,9 @@ const tools = [
     badgeColor: '',
     accentColor: 'emerald',
     stats: 'Average ROI: +347%',
+    category: 'calculator' as ToolCategory,
+    timeToUse: '~1 min',
+    preview: 'Revenue projection with 12-month chart & industry benchmarks',
   },
   {
     icon: Search,
@@ -41,6 +53,9 @@ const tools = [
     badgeColor: 'text-cd-violet border-cd-violet-dim bg-cd-violet/5',
     accentColor: 'violet',
     stats: '5-category deep analysis',
+    category: 'audit' as ToolCategory,
+    timeToUse: '~3 min',
+    preview: '5-category scoring with priority actions & competitor comparison',
   },
   {
     icon: Award,
@@ -53,6 +68,9 @@ const tools = [
     badgeColor: 'text-cd-gold border-cd-gold-dim bg-cd-gold/5',
     accentColor: 'gold',
     stats: '135% procurement recognition',
+    category: 'compliance' as ToolCategory,
+    timeToUse: '~1 min',
+    preview: 'Scorecard impact, multi-year projection & procurement tips',
   },
   {
     icon: Layers,
@@ -65,7 +83,17 @@ const tools = [
     badgeColor: '',
     accentColor: 'cyan',
     stats: '3-step instant estimate',
+    category: 'calculator' as ToolCategory,
+    timeToUse: '~2 min',
+    preview: '3-step wizard with timeline Gantt chart & share estimate',
   },
+]
+
+const CATEGORIES: { value: ToolCategory; label: string; icon: React.ElementType }[] = [
+  { value: 'all', label: 'All Tools', icon: Filter },
+  { value: 'calculator', label: 'Calculators', icon: Calculator },
+  { value: 'audit', label: 'Audits', icon: Search },
+  { value: 'compliance', label: 'Compliance', icon: ShieldCheck },
 ]
 
 const containerVariants = {
@@ -92,6 +120,13 @@ const cardVariants = {
 }
 
 export default function FreeTools() {
+  const [activeCategory, setActiveCategory] = useState<ToolCategory>('all')
+  const [hoveredTool, setHoveredTool] = useState<string | null>(null)
+
+  const filteredTools = activeCategory === 'all'
+    ? tools
+    : tools.filter(t => t.category === activeCategory)
+
   return (
     <section id="tools" className="py-20 md:py-28 bg-[#080808] relative overflow-hidden">
       {/* Background accents */}
@@ -140,91 +175,160 @@ export default function FreeTools() {
           </div>
         </motion.div>
 
-        {/* Tools Grid */}
+        {/* Category Filter */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-center gap-2 mb-10 flex-wrap"
         >
-          {tools.map((tool) => {
-            const Icon = tool.icon
-            const isHighlighted = tool.badge === 'UNIQUE' || tool.badge === 'POPULAR'
-
+          {CATEGORIES.map((cat) => {
+            const Icon = cat.icon
+            const isActive = activeCategory === cat.value
             return (
-              <motion.div
-                key={tool.name}
-                variants={cardVariants}
-                className="group"
+              <button
+                key={cat.value}
+                onClick={() => setActiveCategory(cat.value)}
+                className={`
+                  flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium
+                  transition-all duration-300 border
+                  ${isActive
+                    ? 'bg-cd-gold/10 border-cd-gold/30 text-cd-gold'
+                    : 'bg-cd-surface border-cd-border text-cd-text-dim hover:border-cd-border-glow hover:text-cd-text'}
+                `}
               >
-                <Link
-                  href={tool.href}
-                  className={`
-                    glass-card rounded-xl p-6 flex flex-col gap-4 transition-all duration-500 cursor-pointer relative overflow-hidden block h-full
-                    premium-card-hover
-                    ${isHighlighted
-                      ? 'border-l-[3px] border-l-cd-gold border-cd-gold-dim/40 shadow-[0_0_24px_rgba(201,168,76,0.06)]'
-                      : ''
-                    }
-                  `}
-                >
-                  {/* Gold accent bar on hover */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cd-gold to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
-
-                  {/* Shimmer sweep on hover */}
-                  <div className="absolute inset-0 pointer-events-none shimmer-sweep" />
-
-                  {/* Icon + Badge Row */}
-                  <div className="flex items-start justify-between">
-                    <div
-                      className={`flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 ${
-                        isHighlighted
-                          ? 'bg-cd-gold/10 group-hover:bg-cd-gold/20'
-                          : 'bg-white/[0.04] group-hover:bg-white/[0.06]'
-                      }`}
-                    >
-                      <Icon
-                        className="w-5 h-5 text-cd-gold group-hover:scale-110 transition-transform duration-300"
-                        strokeWidth={1.8}
-                      />
-                    </div>
-                    {tool.badge && (
-                      <Badge
-                        variant="outline"
-                        className={`${tool.badgeColor} text-[10px] font-mono tracking-wider px-2.5 py-0.5`}
-                      >
-                        {tool.badge}
-                      </Badge>
-                    )}
-                  </div>
-
-                  {/* Name */}
-                  <h3 className="font-display text-cd-text font-semibold text-base leading-snug group-hover:text-cd-gold transition-colors duration-300">
-                    {tool.name}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-cd-text-muted text-sm leading-relaxed flex-1">
-                    {tool.description}
-                  </p>
-
-                  {/* Stat */}
-                  <div className="flex items-center gap-2 text-xs text-cd-text-dim font-mono">
-                    <div className="w-1 h-1 rounded-full bg-cd-gold/40" />
-                    {tool.stats}
-                  </div>
-
-                  {/* CTA */}
-                  <div className="inline-flex items-center gap-2 text-cd-gold text-sm font-semibold group-hover:gap-3 transition-all duration-300">
-                    {tool.cta}
-                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </div>
-                </Link>
-              </motion.div>
+                <Icon className="w-3.5 h-3.5" />
+                {cat.label}
+                {cat.value !== 'all' && (
+                  <span className="text-[10px] font-mono ml-1 opacity-60">
+                    ({tools.filter(t => t.category === cat.value).length})
+                  </span>
+                )}
+              </button>
             )
           })}
         </motion.div>
+
+        {/* Tools Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
+            {filteredTools.map((tool) => {
+              const Icon = tool.icon
+              const isHighlighted = tool.badge === 'UNIQUE' || tool.badge === 'MOST POPULAR'
+              const isHovered = hoveredTool === tool.name
+
+              return (
+                <motion.div
+                  key={tool.name}
+                  variants={cardVariants}
+                  className="group"
+                  onMouseEnter={() => setHoveredTool(tool.name)}
+                  onMouseLeave={() => setHoveredTool(null)}
+                >
+                  <Link
+                    href={tool.href}
+                    className={`
+                      glass-card rounded-xl p-6 flex flex-col gap-4 transition-all duration-500 cursor-pointer relative overflow-hidden block h-full
+                      premium-card-hover
+                      ${isHighlighted
+                        ? 'border-l-[3px] border-l-cd-gold border-cd-gold-dim/40 shadow-[0_0_24px_rgba(201,168,76,0.06)]'
+                        : ''}
+                    `}
+                  >
+                    {/* Gold accent bar on hover */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cd-gold to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
+
+                    {/* Shimmer sweep on hover */}
+                    <div className="absolute inset-0 pointer-events-none shimmer-sweep" />
+
+                    {/* Icon + Badge Row */}
+                    <div className="flex items-start justify-between">
+                      <div
+                        className={`flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 ${
+                          isHighlighted
+                            ? 'bg-cd-gold/10 group-hover:bg-cd-gold/20'
+                            : 'bg-white/[0.04] group-hover:bg-white/[0.06]'
+                        }`}
+                      >
+                        <Icon
+                          className="w-5 h-5 text-cd-gold group-hover:scale-110 transition-transform duration-300"
+                          strokeWidth={1.8}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {/* Time estimate */}
+                        <span className="text-[10px] text-cd-text-dim font-mono flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <Clock className="w-3 h-3" />
+                          {tool.timeToUse}
+                        </span>
+                        {tool.badge && (
+                          <Badge
+                            variant="outline"
+                            className={`${tool.badgeColor} text-[10px] font-mono tracking-wider px-2.5 py-0.5`}
+                          >
+                            {tool.badge}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Name */}
+                    <h3 className="font-display text-cd-text font-semibold text-base leading-snug group-hover:text-cd-gold transition-colors duration-300">
+                      {tool.name}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-cd-text-muted text-sm leading-relaxed flex-1">
+                      {tool.description}
+                    </p>
+
+                    {/* Hover Preview */}
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="bg-cd-gold/5 rounded-lg px-3 py-2 border border-cd-gold/10 flex items-center gap-2"
+                        >
+                          <Eye className="w-3.5 h-3.5 text-cd-gold shrink-0" />
+                          <span className="text-cd-gold text-xs">{tool.preview}</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Stat + Time */}
+                    <div className="flex items-center justify-between text-xs text-cd-text-dim font-mono">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full bg-cd-gold/40" />
+                        {tool.stats}
+                      </div>
+                      <span className="flex items-center gap-1 sm:hidden">
+                        <Clock className="w-3 h-3" />
+                        {tool.timeToUse}
+                      </span>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="inline-flex items-center gap-2 text-cd-gold text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+                      {tool.cta}
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Bottom CTA */}
         <motion.div
