@@ -113,7 +113,7 @@ export default function ROICalculator() {
         >
           <span className="section-label inline-block">ROI Calculator</span>
           <h2 className="section-heading text-[var(--text-h2)]">
-            See Your <span className="text-cd-gold">Return on Investment</span>
+            See Your <span className="gold-gradient-text">Return on Investment</span>
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-2xl mx-auto">
             A professional website isn&apos;t an expense &mdash; it&apos;s an investment that pays for itself. Calculate your potential return.

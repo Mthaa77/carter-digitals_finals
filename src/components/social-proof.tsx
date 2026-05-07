@@ -81,10 +81,10 @@ export default function SocialProof() {
           >
             <span className="text-lg flex-shrink-0">{shuffled[currentIndex].emoji}</span>
             <div className="flex flex-col min-w-0">
-              <p className="text-sm text-[#C8C8C0] leading-snug truncate">
+              <p className="text-sm text-cd-text leading-snug truncate">
                 {shuffled[currentIndex].text}
               </p>
-              <span className="text-[10px] text-[#9A9A92] font-mono mt-0.5">
+              <span className="text-[10px] text-cd-text-muted font-mono mt-0.5">
                 Just now
               </span>
             </div>

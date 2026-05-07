@@ -1475,3 +1475,198 @@ The homepage had THREE components at the top showing the same stats:
 - ESLint: 0 errors
 - Dev server: Compiling clean (HTTP 200 on /)
 - No hydration mismatch risks
+
+---
+
+## Session: Website Cost Calculator Onboarding Redesign (Task ID: 2)
+
+### Project Status
+- WebsiteCostCalculator completely rewritten with 4-step onboarding flow + results page
+- WhatsApp integration added with pre-filled message (wa.me/27724026893)
+- Each step has unique color accent (gold → emerald → cyan → violet)
+- Results page features sparkle burst, animated reveal, package inclusions
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### Complete Rewrite: website-cost-calculator.tsx
+
+**4-Step Onboarding Flow:**
+
+1. **Step 1: Business Type** (Gold accent #C9A84C)
+   - 5 radio card options: Small Business, School/Institution, Startup, Professional Services, Other
+   - Each with icon (Building2, GraduationCap, Rocket, Briefcase, HelpCircle) and description
+   - Selected state shows gold border + CheckCircle2 indicator + scale animation
+   - Cannot proceed without selecting a business type
+
+2. **Step 2: Website Pages** (Emerald accent #34D399)
+   - Same slider logic (1-20 pages) with visual "PageStack" component
+   - PageStack renders up to 10 stacked cards that grow with slide
+   - Extra pages shown as "+N more" badge
+   - Large emerald page count number with glow
+   - Shows extra page cost calculation in real-time
+
+3. **Step 3: Features Needed** (Cyan accent #22D3EE)
+   - Same 6 features as toggle cards with icons and descriptions
+   - Each feature has: icon (BookOpen, CalendarCheck, ShoppingCart, Users, MessageCircle, Target), label, price, description
+   - Toggle circle indicator (filled when active)
+   - Real-time feature count and total cost display
+
+4. **Step 4: Timeline** (Violet accent #A78BFA)
+   - Same 3 options as beautiful full-width cards
+   - Each with icon (Zap, Clock, ShieldCheck), label, sublabel, description, and multiplier badge
+   - "Most Popular" badge on Standard option
+   - Radio indicator with animated fill dot
+
+**Results Page (Step 5):**
+- **SparkleBurst** component: 30 deterministic colored sparkle particles with staggered fade-in
+- Animated celebratory header with PartyPopper icon
+- **Estimated Total** in large gold text (text-4xl to text-6xl) with text-shadow glow
+- ±15% range + midpoint display
+- **Summary grid**: 4 color-coded cards showing Business Type, Pages, Features, Timeline
+- **Cost Breakdown**: Base, extra pages, features, timeline adjustment
+- **Recommended Package**: Package badge + inclusions/exclusions grid
+- **Two action buttons**:
+  1. "Send to WhatsApp" (PRIMARY - gold bg, large, prominent) → opens wa.me/27724026893 with pre-filled message
+  2. "Get Exact Quote" (SECONDARY - outline style) → links to #contact
+
+**WhatsApp Message Format:**
+```
+🌟 Website Cost Estimate — Carter Digitals
+
+📋 Business Type: [selected]
+📄 Pages: [number]
+✨ Features: [list or "None"]
+⏱️ Timeline: [selected]
+
+💰 Cost Breakdown:
+  • Base (4 pages): R3,999
+  • Extra pages (N × R800): R[amount]
+  • Features: R[amount]
+  • Timeline adjustment: ±R[amount]
+
+📊 Estimated Total: R[lower] – R[upper]
+📦 Recommended Package: [name]
+
+🤝 I'd like to discuss this further. Please get back to me!
+
+—
+Generated at carterdigitals.co.za
+```
+
+**Navigation:**
+- Step indicator at top showing 1→2→3→4→✓ with connecting lines
+- Each step number colored by its accent; completed steps show checkmarks
+- "Back" and "Next" buttons at bottom
+- Next button is disabled until Step 1 has a selection
+- "Start Over" button on results page resets to Step 1
+- AnimatePresence with directional slide transitions between steps
+
+**Visual Design:**
+- Single card layout (max-w-4xl, centered) instead of 2-column
+- Glass-card styling with per-step colored top gradient bar
+- Each step card has unique box-shadow tint matching its accent color
+- No `background-clip: text` or `-webkit-text-fill-color: transparent` anywhere
+- Solid colors + text-shadow glow for all text effects
+- Responsive: grid columns adjust for mobile (single column) vs desktop (2-column)
+
+**Preserved from Original:**
+- All data structures: FEATURES, TIMELINE_OPTIONS, PACKAGES, BUSINESS_TYPES
+- formatCurrency and useAnimatedNumber utilities
+- getPackage function
+- Calculation logic: base R3,999, R800 per extra page, feature costs, timeline multiplier
+- Package inclusions/exclusions logic
+- Animated counter for price numbers
+
+Stage Summary:
+- Calculator: Complete onboarding redesign with 4 steps + results + WhatsApp integration
+- All original calculation logic preserved
+- No lint errors, clean compilation
+- WhatsApp: Pre-filled message to 27724026893 with full cost breakdown
+
+---
+
+## Session: CSS/Color Consistency Fixes (Task ID: 1)
+
+### Agent: CSS Fix Specialist
+### Date: 2026-03-05
+
+### Project Status
+- Fixed 8 CSS/color consistency issues identified by VLM analysis
+- All z-index and positioning conflicts between bottom-fixed elements resolved
+- Navigation active states now use consistent gold gradient
+- Section headings and interactive elements use consistent gold (#C9A84C) accent
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### 1. Navigation Active State — Gold Underline Fix
+**File:** `src/components/navigation.tsx`
+- Changed desktop active nav underline from `linear-gradient(90deg, #C9A84C, #22D3EE)` (gold→cyan) to `linear-gradient(90deg, #C9A84C, #E8CA7A)` (gold→gold-light)
+- Changed mobile menu active underline from same gold→cyan to gold→gold-light
+- The cyan (#22D3EE) was appearing as a "light blue underline" inconsistent with brand
+- All nav active indicators now use pure gold gradient
+
+#### 2. Cookie Banner Z-Index Fix
+**File:** `src/components/cookie-consent.tsx`
+- Increased z-index from `z-50` to `z-[60]` to ensure cookie banner appears above all other bottom-fixed elements
+- Cookie banner now properly layers above chat widget (z-[45]), WhatsApp (z-[42]), and social proof (z-40)
+- Accept button already uses `bg-cd-gold` (#C9A84C) — consistent with brand
+
+#### 3. Chat Widget Overlap Fix
+**File:** `src/components/ai-chat-widget.tsx`
+- Moved chat widget container from `bottom-20 sm:bottom-24` to `bottom-40 sm:bottom-44`
+- Chat widget button is now clearly above the WhatsApp button, eliminating overlap
+- z-index remains at z-[45] (above WhatsApp z-[42], below cookie banner z-[60])
+
+#### 4. WhatsApp Button Z-Index Fix
+**File:** `src/components/whatsapp-button.tsx`
+- Reduced z-index from `z-[9999]` (excessively high) to `z-[42]`
+- Previous z-index caused WhatsApp button to appear above all overlays including modals
+- Now properly layered: cookie banner (60) > chat widget (45) > WhatsApp (42) > social proof (40)
+
+#### 5. NavProgressDots — More Subtle
+**File:** `src/components/nav-progress-dots.tsx`
+- Reduced active dot size from 12px to 10px (width/height)
+- Reduced inactive dot size from 8px to 6px
+- Changed inactive dot color from solid `#3A3A3A` to `rgba(58,58,58,0.5)` with `opacity: 0.4`
+- Active dot has `opacity: 0.9` for subtle but visible indication
+- Container padding reduced (px-2 py-4 → px-1.5 py-3), gap reduced (gap-3 → gap-2.5)
+- Container background more transparent (0.6 → 0.4), border opacity reduced (0.5 → 0.3)
+- Hover color softened (hover:bg-cd-gold/60 → hover:bg-cd-gold/40)
+
+#### 6. Activity Feed — "Recent Activity" Contrast Fix
+**File:** `src/components/activity-feed.tsx`
+- Changed "Recent Activity" label from `text-cd-text-dim` (#9A9A92) to `text-cd-gold/80`
+- Gold at 80% opacity provides much better contrast on dark background while staying on-brand
+- The label is now clearly readable
+
+#### 7. Social Proof — Text Contrast Fix
+**File:** `src/components/social-proof.tsx`
+- Changed notification text from `text-[#C8C8C0]` to `text-cd-text` (#F0EFE8) for better readability
+- Changed "Just now" timestamp from `text-[#9A9A92]` to `text-cd-text-muted` (#C8C8C0)
+- Uses design system tokens instead of hardcoded hex values for consistency
+
+#### 8. Section Headings — gold-gradient-text Consistency
+**Files:** `src/components/project-estimator.tsx`, `src/components/roi-calculator.tsx`, `src/components/image-gallery.tsx`
+- Changed `<span className="text-cd-gold">Instant</span>` to `<span className="gold-gradient-text">Instant</span>` in project-estimator.tsx
+- Changed `<span className="text-cd-gold">Return on Investment</span>` to `<span className="gold-gradient-text">Return on Investment</span>` in roi-calculator.tsx
+- Changed image-gallery decorative line from `from-[#7A6330] via-[#C9A84C] to-[#22D3EE]` to `from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]` (gold-to-gold-light instead of gold-to-cyan)
+- Most section headings already used `gold-gradient-text`; these were the exceptions
+
+### Verification
+- ESLint: 0 errors
+- Dev server: Compiling clean, HTTP 200 on /
+- No `background-clip: text` or `-webkit-text-fill-color: transparent` added
+- All colors use brand palette: gold (#C9A84C), emerald (#34D399), cyan (#22D3EE), violet (#A78BFA), rose (#FB7185)
+- No random blue or yellow shades introduced
+
+### Z-Index Layering Summary (Bottom-Fixed Elements)
+| Element | Z-Index | Position |
+|---------|---------|----------|
+| Cookie Banner | z-[60] | bottom-0, full width |
+| AI Chat Widget | z-[45] | bottom-40 sm:bottom-44, right |
+| WhatsApp Button | z-[42] | bottom-24 sm:bottom-20, right |
+| Social Proof | z-40 | bottom-24, left |
+| Activity Feed | z-40 | bottom-16, left |
+| NavProgressDots | z-40 | right-6, centered |

@@ -100,7 +100,7 @@ export default function ImageGallery() {
           <h2 className="section-heading heading-shadow" style={{ fontSize: 'var(--text-h2)' }}>
             Project <span className="gold-gradient-text">Gallery</span>
           </h2>
-          <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE] rounded-full" />
+          <div className="mt-4 mx-auto w-16 h-[3px] bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A] rounded-full" />
           <p className="mt-5 text-cd-text-muted text-lg max-w-xl mx-auto font-sans">
             A snapshot of the digital experiences we&apos;ve crafted for South African businesses.
           </p>

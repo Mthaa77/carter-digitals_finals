@@ -200,7 +200,7 @@ export default function ProjectEstimator() {
         >
           <span className="section-label inline-block">Estimate Your Project</span>
           <h2 className="section-heading text-[var(--text-h2)]">
-            Get an <span className="text-cd-gold">Instant</span> Estimate
+            Get an <span className="gold-gradient-text">Instant</span> Estimate
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-xl mx-auto">
             Select your service, choose features, and see a price range — no commitment needed.

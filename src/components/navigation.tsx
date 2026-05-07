@@ -131,7 +131,7 @@ export default function Navigation() {
                         layoutId="activeNavIndicator"
                         className="absolute bottom-0 left-2 right-2 h-[3px] rounded-full"
                         style={{
-                          background: 'linear-gradient(90deg, #C9A84C, #22D3EE)',
+                          background: 'linear-gradient(90deg, #C9A84C, #E8CA7A)',
                         }}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
@@ -219,7 +219,7 @@ export default function Navigation() {
                       <span
                         className="absolute bottom-1 left-6 right-6 h-[2px] rounded-full"
                         style={{
-                          background: 'linear-gradient(90deg, #C9A84C, #22D3EE)',
+                          background: 'linear-gradient(90deg, #C9A84C, #E8CA7A)',
                         }}
                       />
                     )}

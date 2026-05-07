@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className="fixed bottom-24 sm:bottom-20 right-5 sm:right-6 z-[9999]">
+    <div className="fixed bottom-24 sm:bottom-20 right-5 sm:right-6 z-[42]">
       <a
         href="https://wa.me/27724026893?text=Hi%20Carter%20Digitals%2C%20I%27d%20like%20to%20discuss%20a%20project"
         target="_blank"

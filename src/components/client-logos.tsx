@@ -39,7 +39,7 @@ export default function ClientLogos() {
         >
           <span className="section-label">Our Partners</span>
           <h2 className="section-heading heading-shadow" style={{ fontSize: 'var(--text-h2)' }}>
-            Trusted by <span className="text-cd-gold">South African</span> Businesses
+            Trusted by <span className="gold-gradient-text">South African</span> Businesses
           </h2>
           {/* Multi-color gradient line */}
           <div

@@ -47,7 +47,7 @@ export default function NavProgressDots() {
 
   return (
     <div className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center">
-      <div className="flex flex-col items-center gap-3 bg-[rgba(17,17,17,0.6)] backdrop-blur-md rounded-full px-2 py-4 border border-[#242424]/50">
+      <div className="flex flex-col items-center gap-2.5 bg-[rgba(17,17,17,0.4)] backdrop-blur-md rounded-full px-1.5 py-3 border border-[#242424]/30">
         {sections.map((section) => {
           const isActive = activeSection === section.id
           const isHovered = hoveredDot === section.id
@@ -79,16 +79,17 @@ export default function NavProgressDots() {
               >
                 <motion.div
                   animate={{
-                    width: isActive ? 12 : 8,
-                    height: isActive ? 12 : 8,
-                    backgroundColor: isActive ? '#C9A84C' : '#3A3A3A',
+                    width: isActive ? 10 : 6,
+                    height: isActive ? 10 : 6,
+                    backgroundColor: isActive ? '#C9A84C' : 'rgba(58,58,58,0.5)',
+                    opacity: isActive ? 0.9 : 0.4,
                   }}
                   transition={{
                     type: 'spring',
                     stiffness: 400,
                     damping: 25,
                   }}
-                  className="rounded-full cursor-pointer hover:bg-cd-gold/60 transition-colors duration-200"
+                  className="rounded-full cursor-pointer hover:bg-cd-gold/40 transition-colors duration-200"
                 />
               </button>
             </div>

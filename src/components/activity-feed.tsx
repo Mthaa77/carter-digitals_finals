@@ -87,7 +87,7 @@ export default function ActivityFeed() {
                 </p>
                 <div className="mt-1.5 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-cd-gold animate-pulse" />
-                  <span className="text-[10px] font-mono text-cd-text-dim uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-cd-gold/80 uppercase tracking-wider">
                     Recent Activity
                   </span>
                 </div>
