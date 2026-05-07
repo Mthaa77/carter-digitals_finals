@@ -51,16 +51,60 @@ export default function Newsletter() {
       className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden"
       ref={sectionRef}
     >
-      {/* Subtle gold gradient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-[0.04]"
-          style={{
-            background:
-              'radial-gradient(ellipse at center, #C9A84C 0%, transparent 70%)',
-          }}
-        />
-      </div>
+      {/* Vibrant multi-color mesh gradient background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 20%, rgba(34,211,238,0.05) 0%, transparent 50%), radial-gradient(ellipse at 50% 70%, rgba(52,211,153,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(201,168,76,0.04) 0%, transparent 50%)',
+        }}
+      />
+
+      {/* Floating gradient orb — left */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '20%',
+          left: '-5%',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          animation: 'float-orb-1 20s ease-in-out infinite',
+        }}
+      />
+
+      {/* Floating gradient orb — right */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: '10%',
+          right: '-5%',
+          width: '250px',
+          height: '250px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          animation: 'float-orb-2 25s ease-in-out infinite',
+        }}
+      />
+
+      {/* Floating gradient orb — center */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(52,211,153,0.04) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'float-orb-3 18s ease-in-out infinite',
+        }}
+      />
 
       <div className="relative max-w-2xl mx-auto text-center">
         <motion.div
@@ -69,8 +113,8 @@ export default function Newsletter() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
         >
-          {/* Header with animated mail icon */}
-          <h2 className="font-display font-bold tracking-tight text-[#F0EFE8] mb-4 pb-3" style={{ fontSize: 'var(--text-h2)' }}>
+          {/* Header with animated mail icon + heading-shadow-lg */}
+          <h2 className="font-display font-bold tracking-tight text-[#F0EFE8] mb-4 pb-3 heading-shadow-lg" style={{ fontSize: 'var(--text-h2)' }}>
             <span className="inline-flex items-center gap-3">
               <motion.span
                 animate={isInView ? { y: [0, -6, 0] } : {}}
@@ -82,7 +126,7 @@ export default function Newsletter() {
               <span className="gold-gradient-text">Stay Ahead</span>
             </span>
             {/* Gold border-bottom accent */}
-            <span className="block mx-auto mt-3 w-16 h-[3px] rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#E8CA7A]" />
+            <span className="block mx-auto mt-3 w-16 h-[3px] rounded-full bg-gradient-to-r from-[#7A6330] via-[#C9A84C] to-[#22D3EE]" />
           </h2>
 
           {/* Subtext */}
@@ -98,23 +142,35 @@ export default function Newsletter() {
               className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto"
             >
               <div className="relative flex-1 w-full">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666] pointer-events-none" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                    setError('')
+                {/* Gradient border wrapper for input */}
+                <div
+                  className="absolute -inset-[1px] rounded-lg opacity-0 focus-within:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: 'linear-gradient(135deg, #C9A84C, #22D3EE)',
                   }}
-                  placeholder="your@email.com"
-                  className="w-full h-12 bg-[#131313] border border-[#242424] rounded-lg pl-10 pr-4 text-sm text-[#F0EFE8] placeholder:text-[#666] focus:outline-none focus:border-cd-gold/50 focus:ring-2 focus:ring-cd-gold/30 transition-colors duration-200 font-sans"
-                  disabled={isLoading}
                 />
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666] pointer-events-none z-10" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                      setError('')
+                    }}
+                    placeholder="your@email.com"
+                    className="w-full h-12 bg-[#131313] border border-[#242424] rounded-lg pl-10 pr-4 text-sm text-[#F0EFE8] placeholder:text-[#666] focus:outline-none focus:border-transparent transition-colors duration-200 font-sans relative z-[1]"
+                    disabled={isLoading}
+                  />
+                </div>
               </div>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto px-6 py-3 bg-cd-gold text-[#080808] font-bold text-sm rounded-lg hover:bg-cd-gold-light transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans btn-glow-gold btn-press hover:shadow-[0_0_20px_rgba(201,168,76,0.3)]"
+                className="w-full sm:w-auto px-6 py-3 text-[#080808] font-bold text-sm rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-sans btn-press hover:shadow-[0_0_30px_rgba(201,168,76,0.35)] shadow-[0_0_20px_rgba(201,168,76,0.2)]"
+                style={{
+                  background: 'linear-gradient(135deg, #C9A84C, #FBBF24)',
+                }}
               >
                 {isLoading ? 'Subscribing...' : 'Subscribe'}
               </button>

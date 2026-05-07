@@ -20,10 +20,10 @@ const members: TeamMember[] = [
 ]
 
 const founderStats = [
-  { icon: Shield, label: 'B-BBEE', value: 'Level 1' },
-  { icon: CheckCircle, label: 'SCORE', value: '135%' },
-  { icon: Zap, label: 'DELIVERY', value: '5–7 Days' },
-  { icon: Calendar, label: 'FOUNDED', value: '2023' },
+  { icon: Shield, label: 'B-BBEE', value: 'Level 1', accent: '#34D399', accentBg: 'rgba(52,211,153,0.08)', accentBorder: 'rgba(52,211,153,0.2)' },
+  { icon: CheckCircle, label: 'SCORE', value: '135%', accent: '#C9A84C', accentBg: 'rgba(201,168,76,0.08)', accentBorder: 'rgba(201,168,76,0.2)' },
+  { icon: Zap, label: 'DELIVERY', value: '5–7 Days', accent: '#22D3EE', accentBg: 'rgba(34,211,238,0.08)', accentBorder: 'rgba(34,211,238,0.2)' },
+  { icon: Calendar, label: 'FOUNDED', value: '2023', accent: '#A78BFA', accentBg: 'rgba(167,139,250,0.08)', accentBorder: 'rgba(167,139,250,0.2)' },
 ]
 
 const cardVariants = {
@@ -41,8 +41,17 @@ const cardVariants = {
 
 export default function Team() {
   return (
-    <section id="team" className="relative py-20 md:py-28 bg-cd-bg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="team" className="relative py-20 md:py-28 bg-cd-bg overflow-hidden">
+      {/* Gradient mesh background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(167,139,250,0.03) 0%, transparent 50%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -51,11 +60,14 @@ export default function Team() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="font-display text-cd-text font-bold tracking-tight" style={{ fontSize: 'var(--text-h2)' }}>
+          <h2 className="font-display text-cd-text font-bold tracking-tight heading-shadow-lg" style={{ fontSize: 'var(--text-h2)' }}>
             The Person Behind <span className="text-cd-gold">The Work</span>
           </h2>
-          {/* Gold accent line */}
-          <div className="mt-4 mx-auto w-20 h-1 bg-cd-gold rounded-full" />
+          {/* Multi-color gradient accent line */}
+          <div
+            className="mt-4 mx-auto w-24 h-1 rounded-full"
+            style={{ background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE)' }}
+          />
           <p className="mt-6 text-[#C8C8C0] text-lg font-sans max-w-2xl mx-auto">
             AI-Augmented. Human-Driven. Built to Deliver.
           </p>
@@ -71,17 +83,32 @@ export default function Team() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              className="glass-card glass-card-hover rounded-xl p-8 sm:p-10 flex flex-col items-center text-center group cursor-default"
+              className="glass-card glass-card-hover rounded-xl p-8 sm:p-10 flex flex-col items-center text-center group cursor-default relative overflow-hidden"
             >
-              {/* Avatar circle with gold gradient */}
-              <div className="w-24 h-24 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-cd-gold to-cd-gold-dim shadow-lg shadow-cd-gold/15">
+              {/* Gradient top border */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px]"
+                style={{ background: 'linear-gradient(90deg, #C9A84C, #34D399, #22D3EE, #A78BFA)' }}
+              />
+
+              {/* Shimmer sweep on hover */}
+              <div className="absolute inset-0 pointer-events-none shimmer-sweep" />
+
+              {/* Avatar circle with gradient */}
+              <div
+                className="w-24 h-24 rounded-full flex items-center justify-center mb-6 relative"
+                style={{
+                  background: 'linear-gradient(135deg, #C9A84C, #34D399)',
+                  boxShadow: '0 8px 32px rgba(201,168,76,0.15), 0 0 40px rgba(52,211,153,0.08)',
+                }}
+              >
                 <span className="font-display text-2xl font-bold text-cd-bg">
                   {member.initials}
                 </span>
               </div>
 
               {/* Name */}
-              <h3 className="font-display text-xl sm:text-2xl font-semibold text-cd-text mb-1">
+              <h3 className="font-display text-xl sm:text-2xl font-semibold text-cd-text mb-1 group-hover:text-cd-gold transition-colors duration-300">
                 {member.name}
               </h3>
 
@@ -98,7 +125,7 @@ export default function Team() {
           ))}
         </div>
 
-        {/* Founder Stats Row */}
+        {/* Founder Stats Row — color-coded */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -111,12 +138,24 @@ export default function Team() {
             return (
               <div
                 key={stat.label}
-                className="glass-card rounded-lg px-5 py-3 flex items-center gap-3 transition-[border-color,box-shadow] duration-300 hover:border-cd-gold/30 hover:shadow-[0_0_12px_rgba(201,168,76,0.08)]"
+                className="rounded-lg px-5 py-3 flex items-center gap-3 transition-all duration-300 border cursor-default"
+                style={{
+                  background: stat.accentBg,
+                  borderColor: stat.accentBorder,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = `0 0 20px ${stat.accent}15, 0 0 40px ${stat.accent}06`
+                  e.currentTarget.style.borderColor = `${stat.accent}40`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = ''
+                  e.currentTarget.style.borderColor = stat.accentBorder
+                }}
               >
-                <Icon className="w-4 h-4 text-cd-gold shrink-0" />
+                <Icon className="w-4 h-4 shrink-0" style={{ color: stat.accent }} />
                 <div className="flex items-center gap-2">
-                  <span className="text-[#C8C8C0] text-xs font-mono uppercase tracking-wider">{stat.label}</span>
-                  <span className="text-cd-gold font-display text-sm font-bold">{stat.value}</span>
+                  <span className="text-cd-text-dim text-xs font-mono uppercase tracking-wider">{stat.label}</span>
+                  <span className="font-display text-sm font-bold" style={{ color: stat.accent }}>{stat.value}</span>
                 </div>
               </div>
             )

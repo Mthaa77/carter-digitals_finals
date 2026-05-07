@@ -1,29 +1,46 @@
 'use client'
 
 const clients = [
-  'Soshanguve SOS',
-  'Direla Bakgatla',
-  'Block L Traders',
-  'Tshwane SMEs',
-  'Gauteng Businesses',
+  { name: 'Soshanguve SOS', color: '#34D399' },
+  { name: 'Direla Bakgatla', color: '#C9A84C' },
+  { name: 'Block L Traders', color: '#22D3EE' },
+  { name: 'Tshwane SMEs', color: '#A78BFA' },
+  { name: 'Gauteng Businesses', color: '#FB7185' },
 ]
 
 const trustIndicators = [
-  'B-BBEE Level 1',
-  'Google Cloud',
-  'Next.js',
-  '100% Black-Owned',
+  { name: 'B-BBEE Level 1', color: '#34D399' },
+  { name: 'Google Cloud', color: '#22D3EE' },
+  { name: 'Next.js', color: '#C8C8C0' },
+  { name: '100% Black-Owned', color: '#A78BFA' },
 ]
 
 // Combine clients and trust indicators for a single marquee strip
-const allItems = [...clients, '•', ...trustIndicators]
+const allItems: ({ name: string; color: string } | null)[] = [...clients, null, ...trustIndicators]
 
 export default function ClientMarquee() {
   // Duplicate items for seamless infinite scroll
   const marqueeItems = [...allItems, ...allItems, ...allItems, ...allItems]
 
   return (
-    <section className="relative py-10 sm:py-14 overflow-hidden border-y border-cd-border/30">
+    <section className="relative py-10 sm:py-14 overflow-hidden">
+      {/* Gradient border at top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[1px]"
+        style={{
+          background: 'linear-gradient(90deg, transparent 5%, #C9A84C 30%, #34D399 50%, #22D3EE 70%, transparent 95%)',
+          opacity: 0.4,
+        }}
+      />
+      {/* Gradient border at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[1px]"
+        style={{
+          background: 'linear-gradient(90deg, transparent 5%, #A78BFA 30%, #FB7185 50%, #FBBF24 70%, transparent 95%)',
+          opacity: 0.3,
+        }}
+      />
+
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -43,7 +60,7 @@ export default function ClientMarquee() {
             className="flex items-center gap-8 sm:gap-12 animate-marquee whitespace-nowrap"
           >
             {marqueeItems.map((item, index) => {
-              if (item === '•') {
+              if (!item) {
                 return (
                   <span
                     key={`dot-${index}`}
@@ -54,20 +71,39 @@ export default function ClientMarquee() {
                 )
               }
 
-              const isTrust = trustIndicators.includes(item)
+              const isTrust = trustIndicators.some(t => t.name === item.name)
 
               return (
                 <span
-                  key={`${item}-${index}`}
+                  key={`${item.name}-${index}`}
                   className={`
-                    font-display text-sm sm:text-base tracking-wide transition-opacity duration-300 hover:opacity-100 cursor-default
+                    font-display text-sm sm:text-base tracking-wide transition-all duration-300 cursor-default
                     ${isTrust
-                      ? 'text-cd-gold/50 font-semibold border border-cd-gold/15 rounded-full px-4 py-1.5'
-                      : 'text-[#9A9A92] opacity-60 font-medium'
+                      ? 'font-semibold rounded-full px-4 py-1.5'
+                      : 'opacity-60 font-medium'
                     }
                   `}
+                  style={isTrust ? {
+                    color: `${item.color}99`,
+                    border: `1px solid ${item.color}25`,
+                    background: `${item.color}08`,
+                  } : {
+                    color: '#9A9A92',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (isTrust) {
+                      e.currentTarget.style.borderColor = `${item.color}50`
+                      e.currentTarget.style.boxShadow = `0 0 12px ${item.color}15`
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (isTrust) {
+                      e.currentTarget.style.borderColor = `${item.color}25`
+                      e.currentTarget.style.boxShadow = ''
+                    }
+                  }}
                 >
-                  {item}
+                  {item.name}
                 </span>
               )
             })}

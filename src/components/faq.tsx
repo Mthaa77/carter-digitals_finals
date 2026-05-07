@@ -43,16 +43,27 @@ const faqs = [
   },
 ]
 
+const faqBorderColors = [
+  'linear-gradient(180deg, #C9A84C, rgba(201,168,76,0.3))',   // gold
+  'linear-gradient(180deg, #34D399, rgba(52,211,153,0.3))',    // emerald
+  'linear-gradient(180deg, #22D3EE, rgba(34,211,238,0.3))',    // cyan
+  'linear-gradient(180deg, #A78BFA, rgba(167,139,250,0.3))',   // violet
+  'linear-gradient(180deg, #FB7185, rgba(251,113,133,0.3))',   // rose
+  'linear-gradient(180deg, #C9A84C, rgba(201,168,76,0.3))',    // gold (repeat)
+]
+
 export default function FAQ() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
     <section id="faq" className="relative py-20 md:py-28 overflow-hidden" ref={ref}>
+      {/* Aurora/mesh gradient background with emerald + violet + gold */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.03) 0%, transparent 50%)',
+          background:
+            'radial-gradient(ellipse at 20% 40%, rgba(52,211,153,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(167,139,250,0.04) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(201,168,76,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.03) 0%, transparent 50%)',
         }}
       />
 
@@ -68,7 +79,7 @@ export default function FAQ() {
             FAQ
           </span>
           <div className="w-12 h-0.5 bg-cd-gold mx-auto mb-6" />
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cd-text">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cd-text heading-shadow-lg">
             Got <span className="gold-gradient-text">Questions?</span>
           </h2>
           <p className="mt-4 text-cd-text-muted text-lg max-w-xl mx-auto font-sans">
@@ -76,19 +87,32 @@ export default function FAQ() {
           </p>
         </motion.div>
 
-        {/* Accordion */}
+        {/* Accordion with glass-card-gold container */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, delay: 0.2 }}
+          className="glass-card-gold glass-card rounded-2xl p-4 sm:p-6"
         >
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass-card rounded-xl border-0 px-6 data-[state=open]:border-l-4 data-[state=open]:border-l-cd-gold data-[state=open]:bg-[rgba(201,168,76,0.04)] data-[state=open]:shadow-[inset_4px_0_8px_rgba(201,168,76,0.05)] transition-all duration-300 overflow-hidden"
+                className="rounded-xl border-0 px-6 data-[state=open]:bg-[rgba(201,168,76,0.04)] transition-all duration-300 overflow-hidden relative"
+                style={{
+                  borderLeft: `3px solid transparent`,
+                  backgroundClip: 'padding-box',
+                }}
               >
+                {/* Gradient left border — uses a wrapper approach */}
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl"
+                  style={{
+                    background: faqBorderColors[index % faqBorderColors.length],
+                    opacity: 1,
+                  }}
+                />
                 <AccordionTrigger className="text-left text-base sm:text-lg font-display font-semibold text-cd-text hover:text-cd-gold hover:no-underline py-5 transition-colors duration-300 [&[data-state=open]>.faq-chevron]:rotate-180 [&[data-state=open]>.faq-chevron]:text-cd-gold">
                   {faq.question}
                   <ChevronDown className="faq-chevron size-5 shrink-0 text-cd-text-dim transition-transform duration-300" />

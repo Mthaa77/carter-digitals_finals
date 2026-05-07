@@ -4,7 +4,6 @@ import Navigation from '@/components/navigation'
 import Hero from '@/components/hero'
 import ClientMarquee from '@/components/client-marquee'
 import WhyCarter from '@/components/why-carter'
-import StatsTicker from '@/components/stats-ticker'
 import Services from '@/components/services'
 import WebsiteCostCalculator from '@/components/website-cost-calculator'
 import ServiceComparison from '@/components/service-comparison'
@@ -28,7 +27,6 @@ import CookieConsent from '@/components/cookie-consent'
 import Team from '@/components/team'
 import ClientLogos from '@/components/client-logos'
 import NavProgressDots from '@/components/nav-progress-dots'
-import QuickStatsBar from '@/components/quick-stats-bar'
 import SocialProof from '@/components/social-proof'
 import SectionDivider from '@/components/section-divider'
 import PageLoader from '@/components/page-loader'
@@ -63,10 +61,6 @@ export default function Home() {
         <TrustBadges />
         <SectionDivider />
         <Team />
-        <SectionDivider />
-        <StatsTicker />
-        <SectionDivider />
-        <QuickStatsBar />
         <SectionDivider />
         <AnimatedStats />
         <SectionDivider />

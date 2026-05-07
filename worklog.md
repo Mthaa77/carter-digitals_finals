@@ -1227,3 +1227,151 @@ Stage Summary:
 - Continue polishing tool pages with more features
 - Add more micro-interactions across the site
 - Test mobile layout on actual device simulation
+
+---
+
+## Session: Add More Colors, Gradient Patterns, and Shadow Effects (Task ID: 2)
+
+### Project Status
+- Enhanced 6 homepage components with vibrant colors, gradient backgrounds, shadow effects, and visual richness
+- Site is no longer monochromatic — multi-color gradients, colored shadows, animated gradient borders, and pattern overlays added
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### Component 1: AnimatedStats (`src/components/animated-stats.tsx`)
+- **Color-coded accent numbers**: Replaced single `text-cd-gold text-glow-gold` with unique colors per stat:
+  - B-BBEE: emerald (#34D399) with green glow text-shadow
+  - Delivery: gold (#C9A84C) with gold glow text-shadow
+  - Black-Owned: violet (#A78BFA) with violet glow text-shadow
+  - CSD Registered: cyan (#22D3EE) with cyan glow text-shadow
+- **Mesh gradient background**: Added 4 overlapping radial gradients (emerald at 15%, cyan at 85%, violet at 50%, gold at center) at very low opacity
+- **Colored shadows**: Each stat card section has `boxShadow` matching its accent color (e.g., `0 8px 32px rgba(52,211,153,0.08)`)
+- **Gradient top border**: Added `h-[3px]` gradient bar at top of glass card container (`linear-gradient(90deg, #C9A84C, #22D3EE, #A78BFA)`)
+- **Shimmer sweep**: Added `shimmer-sweep` class to glass card for subtle gold light sweep on hover
+- B-BBEE badge changed to emerald accent (`bg-cd-emerald/10 border-cd-emerald/25 text-cd-emerald`)
+
+#### Component 2: TrustBadges (`src/components/trust-badges.tsx`)
+- **Unique color accents per badge**: emerald (B-BBEE), cyan (CSD), violet (POPIA), rose (Mobile-First), gold (Delivery), amber (Youth-Owned)
+- **Colored left-border**: Each badge pill has a 2px left border in its accent color via `style={{ borderLeft: '2px solid ${borderColor}' }}`
+- **Hover glow effect**: Each badge shows a matching color box-shadow on hover (via `onMouseEnter`/`onMouseLeave` handlers)
+  - emerald: `0 0 20px rgba(52,211,153,0.15)`, cyan: `0 0 20px rgba(34,211,238,0.15)`, etc.
+- **Gradient line divider at top**: `linear-gradient(90deg, transparent 5%, #C9A84C 25%, #34D399 50%, #22D3EE 75%, transparent 95%)` at 0.5 opacity
+
+#### Component 3: FAQ (`src/components/faq.tsx`)
+- **Aurora/mesh gradient background**: 4 overlapping radial gradients with emerald (20% 40%), violet (80% 20%), gold (60% 80%), and gold (80% 20%) at low opacity
+- **Rotating gradient left borders per FAQ item**: Each FAQ item has a gradient left border that cycles through colors:
+  - Item 0: gold gradient, Item 1: emerald gradient, Item 2: cyan gradient, Item 3: violet gradient, Item 4: rose gradient, Item 5: gold gradient
+  - Implemented via absolute-positioned `div` with `background: linear-gradient(180deg, ${color}, ${fadedColor})`
+- **heading-shadow-lg**: Added to section heading H2
+- **glass-card-gold treatment**: Accordion container wrapped in `glass-card-gold glass-card rounded-2xl p-4 sm:p-6`
+
+#### Component 4: BlogPreview (`src/components/blog-preview.tsx`)
+- **Gradient mesh background**: Subtle cyan (20% 30%) + gold (80% 70%) + cyan (50% 50%) radial gradients
+- **Colored top borders per card**: Each blog card has a unique gradient top border:
+  - Pricing card: gold gradient (#C9A84C → #E8CA7A)
+  - B-BBEE card: emerald gradient (#34D399 → #6EE7B7)
+  - Tech card: cyan gradient (#22D3EE → #67E8F9)
+- **heading-shadow**: Added to "Latest Insights" heading
+- **Gradient overlay on hover**: Added `linear-gradient(135deg, rgba(201,168,76,0.03) 0%, rgba(34,211,238,0.02) 100%)` overlay that appears on card hover
+- **Color-coded category badges**: Each card's category badge matches its accent color (gold, emerald, cyan)
+
+#### Component 5: Newsletter (`src/components/newsletter.tsx`)
+- **Vibrant gradient background**: Multi-color mesh with gold (30% 30%), cyan (70% 20%), emerald (50% 70%), gold (80% 60%) radial gradients
+- **Gradient border on input field**: Gold → cyan gradient border appears when input is focused (wrapper div with `linear-gradient(135deg, #C9A84C, #22D3EE)`, opacity 0 → 1 on focus-within)
+- **heading-shadow-lg**: Added to "Stay Ahead" heading
+- **Gradient submit button**: `linear-gradient(135deg, #C9A84C, #FBBF24)` (gold → amber) with enhanced glow shadow (`0 0 30px rgba(201,168,76,0.35)` on hover)
+- **Floating gradient orbs**: 3 animated orbs behind the section:
+  - Left: gold orb (300px, blur 60px, float-orb-1 animation, 20s)
+  - Right: cyan orb (250px, blur 60px, float-orb-2 animation, 25s)
+  - Center: emerald orb (400px, blur 80px, float-orb-3 animation, 18s)
+
+#### Component 6: ContactForm (`src/components/contact-form.tsx`)
+- **Vibrant aurora background with rose + teal**: Added rose radial gradient (15% 70%) and teal radial gradient (85% 60%) in addition to existing gold, cyan, violet washes
+- **Gradient focus borders (gold → emerald)**: Input fields now transition to emerald-focused styling:
+  - `focus:ring-[rgba(52,211,153,0.2)]` + `focus:border-[rgba(52,211,153,0.5)]`
+  - `focus-visible:border-[#34D399]` + `focus-visible:ring-[rgba(201,168,76,0.15)]`
+  - Green glow shadow: `focus:shadow-[0_0_20px_rgba(52,211,153,0.06)]`
+- **Animated gradient submit button**: `linear-gradient(135deg, #C9A84C, #34D399, #C9A84C)` with `backgroundSize: 200% 200%` and `gradient-shift 4s ease infinite` animation
+- **heading-shadow-lg**: Added to "Let's Build Something." heading
+- **Gradient accent line**: Changed from gold→cyan to gold→emerald (`linear-gradient(90deg, #7A6330, #C9A84C, #34D399)`)
+- **Gradient top border on form card**: Changed from gold→cyan to gold→emerald
+- **Decorative gradient orbs**: 2 animated orbs behind the form:
+  - Left: gold+rose orb (350px, blur 80px, float-orb-1 animation, 22s)
+  - Right: teal orb (280px, blur 60px, float-orb-2 animation, 18s)
+
+### Technical Notes
+- No `background-clip: text` used anywhere (avoids Framer Motion filter conflicts)
+- All gradients use inline `style={{ background: '...' }}` for complex CSS that Tailwind can't express
+- Colored shadows use `box-shadow: 0 Xpx Ypx Zpx rgba(color, opacity)` for subtle depth
+- Gradient borders implemented via wrapper div approach (gradient bg on outer div, solid bg on inner)
+- Floating orbs use existing `float-orb-1/2/3` keyframes from globals.css
+- All existing functionality preserved — only visual appearance enhanced
+- `shimmer-sweep` class from existing globals.css used on AnimatedStats glass card
+
+Stage Summary:
+- 6 components enhanced with vibrant multi-color gradients, colored shadows, gradient borders, and visual depth
+- Site now has rich color variety beyond dark+gold monochrome
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+---
+
+## Session: Remove Redundant Stats + Add Colors/Gradients Across Homepage (Task ID: 1-2)
+
+### Project Status
+- Removed 2 redundant stats components from homepage (StatsTicker, QuickStatsBar)
+- Added vibrant multi-color gradients, shadow effects, and pattern enhancements across 8+ components
+- Homepage now flows cleaner without repetitive number sections at the top
+- ESLint: 0 errors | HTTP 200 on / | Dev server compiling clean
+
+### Completed Changes
+
+#### Task 1: Remove Redundant Number Components
+**Components removed from homepage:**
+- `StatsTicker` — duplicated Hero's 135% B-BBEE, 5-7 Day Delivery, 100% Black-Owned stats
+- `QuickStatsBar` — weak/fluff stats (100% Client Satisfaction, 24hr Response, R0 Hidden Fees)
+
+**Kept:**
+- `AnimatedStats` — most detailed version with subtitles, badges, and color-coded accents
+- Hero counters and badges — compact, essential context
+
+**Homepage flow (after Hero) is now:**
+Hero → ClientMarquee → ClientLogos → WhyCarter → TrustBadges → Team → AnimatedStats → Services → ...
+
+#### Task 2: Add More Colors, Gradients, and Shadow Effects
+
+**Component enhancements:**
+
+1. **AnimatedStats** — Color-coded stat numbers (emerald, gold, violet, cyan), mesh gradient background with 4 radial gradients, colored shadows per stat, gradient top border (gold→cyan→violet), shimmer sweep animation
+
+2. **TrustBadges** — 6 unique color accents per badge (emerald, cyan, violet, rose, gold, amber), 2px colored left borders, hover glow effects per accent color, gradient line divider at top (gold→emerald→cyan)
+
+3. **FAQ** — Aurora/mesh gradient background (emerald + violet + gold), rotating gradient left borders per FAQ item (gold, emerald, cyan, violet, rose), heading-shadow-lg, glass-card-gold treatment
+
+4. **BlogPreview** — Gradient mesh background (cyan + gold), colored top borders per card (gold, emerald, cyan), heading-shadow, gradient overlay on hover
+
+5. **Newsletter** — Vibrant multi-color mesh background (gold, cyan, emerald), gradient input border (gold→cyan) on focus, heading-shadow-lg, gold→amber gradient submit button with glow, 3 floating gradient orbs
+
+6. **ContactForm** — Vibrant aurora background with rose + teal radial gradients, gradient focus borders (gold→emerald), animated gradient submit button, heading-shadow-lg, 2 decorative gradient orbs
+
+7. **Team** — Gradient mesh background (gold + violet), multi-color gradient accent line (gold→emerald→cyan), gradient top border on founder card (gold→emerald→cyan→violet), gradient avatar circle (gold→emerald), color-coded founder stat badges (emerald, gold, cyan, violet) with hover glow
+
+8. **ClientLogos** — Subtle gradient mesh background, multi-color gradient line, color-coded marquee pills with hover glow effects per client (emerald, gold, cyan, violet, rose, amber, teal)
+
+9. **ClientMarquee** — Gradient borders at top (gold→emerald→cyan) and bottom (violet→rose→amber), color-coded trust indicator pills with hover glow
+
+10. **Footer** — Added Tools link to quick links (pointing to /tools)
+
+### Color Palette Usage Across Homepage
+- Gold (#C9A84C) — Primary accent, CTAs, key highlights
+- Emerald (#34D399) — B-BBEE, compliance, success states
+- Cyan (#22D3EE) — Tech, CSD, digital features
+- Violet (#A78BFA) — Black-Owned, POPIA, innovation
+- Rose (#FB7185) — Mobile-first, alerts, highlights
+- Amber (#FBBF24) — Youth-Owned, energy
+- Teal (#2DD4BF) — Secondary accents
+
+### Unresolved Issues / Next Phase Recommendations
+- Continue polishing with more micro-interactions
+- Add more dynamic content and features
+- Test mobile layout on device simulation
